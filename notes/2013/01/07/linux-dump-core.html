@@ -1,0 +1,99 @@
+<html>
+<head>
+<meta charset="utf-8" />
+<title> Core Dump总结 | Static Oneplus </title>
+<!--
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap-responsive.min.css">
+-->
+<style>
+.prettyprint ol.linenums > li { list-style-type: decimal; }
+.nav { }
+.nav li { float: left; width: 80px;}
+.content { margin: 0 auto; padding: 0; }
+header { padding: 15px 0; }
+</style>
+</head>
+<body>
+
+<header>
+    <h1>Static Oneplus</h1>
+    <ul class="nav">
+        <li><a href="http://yjliu.net">Home</a></li>
+        <li><a href="/blog">Blog</a></li>
+        <li><a href="/notes">Notes</a></li>
+    </ul>
+</header>
+
+<div class="content">
+
+<div>
+    <h3>查看现在系统dump core的情况</h3>
+
+<pre><code>ulimit -c
+</code></pre>
+
+<p>结果表示core文件的大小。如果显示0，则不会dump core，显示unlimited不限制core文件大小</p>
+
+<h3>打开dump core</h3>
+
+<p>只要指定core文件大小不是0，系统就会打开dump core的功能。通过命令在~/.bash_profic中添加</p>
+
+<div>
+  <pre class="prettyprint linenums 1"><code class='bash'>ulimit -S -c unlimited &gt; /dev/null 2&gt;&amp;1</code></pre>
+</div>
+
+
+<p>就可以指定dump core了。</p>
+
+<h3>指定core文件包含进程pid</h3>
+
+<p>/proc/sys/kernel/core_uses_pid控制core文件是否包含进程pid。cat这个文件，如果是0，则不会包含pid扩展名，否则包含。</p>
+
+<p>我遇到一个问题，即使在root下，用vi无法编辑这个文件。所以在root下用</p>
+
+<div>
+  <pre class="prettyprint linenums 1"><code class='bash'>echo &quot;1&quot; &gt; /proc/sys/kernel/core_uses_pid</code></pre>
+</div>
+
+
+<h3>使core文件花样更多</h3>
+
+<p><code>/proc/sys/kernel/core_pattern</code>这个文件制定了core文件保存位置和文件格式。可以在core文件中添加一些比较友好的信息，比如产生core的进程，core产生的时间等等。
+具体也是在root下。</p>
+
+<div>
+  <pre class="prettyprint linenums 1"><code class='bash'>echo &quot;./core-%e-%p-%t&quot; &gt; /proc/sys/kernel/core_pattern</code></pre>
+</div>
+
+
+<p>至于更多奇怪的play，可以参考最后一个link。</p>
+
+<h3>参考</h3>
+
+<ul>
+<li><a href="http://stblog.baidu-tech.com/?p=1684">Linux上Core Dump文件的形成和分析</a></li>
+<li><a href="http://www.cppblog.com/kongque/archive/2011/03/07/141262.html">linux下生成core dump文件方法及设置</a></li>
+<li><a href="http://www.ms2006.com/archives/151">打开系统core dump及其配置</a></li>
+</ul>
+
+
+</div>
+
+</div>
+
+<div class="footer">
+    This site is build by <a href="">Level0</a>.
+</div>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    TeX: {equationNumbers: {autoNumber: ["AMS"], useLabelIds: true}},
+    "HTML-CSS": {linebreaks: {automatic: true}},
+    SVG: {linebreaks: {automatic: true}}
+});
+</script>
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
+<script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
+</body>
+</html>

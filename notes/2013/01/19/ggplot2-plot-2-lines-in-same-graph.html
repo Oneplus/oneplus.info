@@ -1,0 +1,74 @@
+<html>
+<head>
+<meta charset="utf-8" />
+<title> ggplot2在一幅图上画两条曲线 | Static Oneplus </title>
+<!--
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap-responsive.min.css">
+-->
+<style>
+.prettyprint ol.linenums > li { list-style-type: decimal; }
+.nav { }
+.nav li { float: left; width: 80px;}
+.content { margin: 0 auto; padding: 0; }
+header { padding: 15px 0; }
+</style>
+</head>
+<body>
+
+<header>
+    <h1>Static Oneplus</h1>
+    <ul class="nav">
+        <li><a href="http://yjliu.net">Home</a></li>
+        <li><a href="/blog">Blog</a></li>
+        <li><a href="/notes">Notes</a></li>
+    </ul>
+</header>
+
+<div class="content">
+
+<div>
+    <p>print(data)后的结果是</p>
+
+<div>
+  <pre class="prettyprint linenums 1"><code class='bash'>C     BROWN.P   MI.P
+0     0.9216 0.9282
+30    0.9240 0.9282
+100   0.9255 0.9282</code></pre>
+</div>
+
+
+<p>现想要在一张图中画两条曲线。横轴为C，纵轴分别为BROWN.P和MI.P，如何做？</p>
+
+<p>其实很简单</p>
+
+<div>
+  <pre class="prettyprint linenums 1"><code class='r'>p1&lt;-ggplot(brown.results, aes(x=C)) + 
+            geom_point(aes(y=BROWN.P), ) + 
+            geom_line(aes(y=BROWN.P, , color=&quot;cyan&quot;)) +
+            geom_point(aes(y=MI.P)) + 
+            geom_line(aes(y=MI.P, color=&quot;red&quot;))</code></pre>
+</div>
+
+
+
+
+</div>
+
+</div>
+
+<div class="footer">
+    This site is build by <a href="">Level0</a>.
+</div>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    TeX: {equationNumbers: {autoNumber: ["AMS"], useLabelIds: true}},
+    "HTML-CSS": {linebreaks: {automatic: true}},
+    SVG: {linebreaks: {automatic: true}}
+});
+</script>
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
+<script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
+</body>
+</html>

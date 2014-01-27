@@ -1,0 +1,71 @@
+<html>
+<head>
+<meta charset="utf-8" />
+<title> Automake简明用法 | Static Oneplus </title>
+<!--
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap-responsive.min.css">
+-->
+<style>
+.prettyprint ol.linenums > li { list-style-type: decimal; }
+.nav { }
+.nav li { float: left; width: 80px;}
+.content { margin: 0 auto; padding: 0; }
+header { padding: 15px 0; }
+</style>
+</head>
+<body>
+
+<header>
+    <h1>Static Oneplus</h1>
+    <ul class="nav">
+        <li><a href="http://yjliu.net">Home</a></li>
+        <li><a href="/blog">Blog</a></li>
+        <li><a href="/notes">Notes</a></li>
+    </ul>
+</header>
+
+<div class="content">
+
+<div>
+    <p>Automake的使用方法请遵照以下步骤：</p>
+
+<ol>
+<li>autoscan</li>
+<li>将configure.scan更名为configure.in，并修改内容</li>
+<li>添加NEWS、README、ChangeLog、AUTHORS文件</li>
+<li>将/usr/share/automake-1.X/目录下的depcomp和complie文件拷贝到本目录下</li>
+<li>aclocal</li>
+<li>autoconf</li>
+<li>autoheader（这里原文有错）</li>
+<li>automake -a</li>
+<li>./configure make</li>
+</ol>
+
+
+<h3>参考</h3>
+
+<ul>
+<li><a href="http://www.ibm.com/developerworks/cn/linux/l-makefile/">例解autoconf和automake生成Makefile文件</a></li>
+</ul>
+
+
+</div>
+
+</div>
+
+<div class="footer">
+    This site is build by <a href="">Level0</a>.
+</div>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    TeX: {equationNumbers: {autoNumber: ["AMS"], useLabelIds: true}},
+    "HTML-CSS": {linebreaks: {automatic: true}},
+    SVG: {linebreaks: {automatic: true}}
+});
+</script>
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
+<script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
+</body>
+</html>

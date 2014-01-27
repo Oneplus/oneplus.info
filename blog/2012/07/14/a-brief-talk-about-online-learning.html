@@ -1,0 +1,126 @@
+<html>
+<head>
+<meta charset="utf-8" />
+<title> 浅谈在线机器学习算法 | Static Oneplus </title>
+<!--
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap-responsive.min.css">
+-->
+<style>
+.prettyprint ol.linenums > li { list-style-type: decimal; }
+.nav { }
+.nav li { float: left; width: 80px;}
+.content { margin: 0 auto; padding: 0; }
+header { padding: 15px 0; }
+</style>
+</head>
+<body>
+
+<header>
+    <h1>Static Oneplus</h1>
+    <ul class="nav">
+        <li><a href="http://yjliu.net">Home</a></li>
+        <li><a href="/blog">Blog</a></li>
+        <li><a href="/notes">Notes</a></li>
+    </ul>
+</header>
+
+<div class="content">
+
+<div>
+    <h3>前言</h3>
+
+
+<p>这篇博客的内容基本是我本科毕设论文的第二章。其中包括从毕设开始到现在，关于在线机器学习算法的一些粗浅的理解、算法的一些性质的证明以及算法如何从分类问题迁移到结构化预测问题，有些内容我也比较模糊，还有些内容太过繁琐，读者尽可能选择自己愿意接受的内容看，其他略过就好。</p>
+
+
+<p><a id="more"></a><a id="more-600"></a></p>
+
+<h3>机器学习的回顾</h3>
+
+
+<p>机器学习是人工智能的一个分支。抽象讲，机器学习理论主要是设计和分析一些让计算机可以自动<strong>“学习”</strong>的算法。机器学习算法是一类从数据中自动分析获得规律，并利用规律对未知数据进行预测的算法。</p>
+
+
+<p>通常来讲，机器学习分为<strong>学习</strong>以及<strong>推理</strong>两个阶段。在学习阶段，机器学习算法从数据中自动分析获取规律；在推理阶段，算法利用学习阶段学习到的规律对未知数据进行预测。</p>
+
+
+<h3>序列标注问题</h3>
+
+
+<p>在现实世界中，我们处理的某些机器学习任务，其面对的数据往往是序列性的。在一个已知的类别体系下，算法需要对数据序列中的每个元素标注类别。例如，中文分词任务需要给字序列中的每个字标“词首”、“词中”、“词尾”、“单字成词”四类中的某一类，词性标注任务需要将词序列中每个词标注一个已知词性集合下的词性。</p>
+
+
+<p><p>结合之前关于机器学习的定义，可以将序列标注问题按如下方式定义，根据已知的序列性数据，学习一个假设h，并在这个假设h给定的条件下，预测某些未知序列性数据的序列标注。<p>
+<p>形式化地，在给定一个序列性训练数据的集合$$ (w<em>{[1:n]}^i, t</em>{[1:n]}^i) $$的条件下，算法在学习阶段，从数据中学习一个假设h；在推理阶段，对于一个未知标注的序列$$ w<em>{[1:n]} $$，计算$$ z</em>{[1:n]}=h(w<em>{[1:n]}) $$。下面的讨论都会沿用这里对于序列和标注的形式化定义。</p>
+<h3>在线机器学习</h3>
+<p>(并不是指在网上授课机器学习课程)</p>
+<p>在机器学习领域，在线机器学习(Online learning)指每次通过一个训练实例学习模型的学习方法。Online learning的目的是正确预测训练实例的标注。其最重要的一个特点是当一次预测完成时，其正确结果便被获得，这一结果可直接用来修正模型。通常来讲，一种Online learning算法对于一个序列进行一系列处理可以分为三步：第一步，算法获得一个训练实例；第二步，算法预测训练实例的类别；第三步，算法获得正确类别，并根据预测类别与正确类别更新模型假设。</p>
+<p>下面介绍两种典型在线机器学习算法Perceptron、MIRA，他们都属于线性分类算法族。介绍这两种算法在分类问题中如何从训练实例中学习模型参数，两种算法的收敛性。同时介绍如何将这两种算法应用于解决序列标注问题。</p>
+<h4>线性分类族</h4>
+<p>属于线性分类族的几种机器学习算法具有相同的模型形式。在学习阶段，算法对于每个类别，通过训练数据估计一个参数向量w。在推理阶段，算法在给定一组参数向量w和数据x的条件下，以w和x的乘积作为数据与该类的相似度度量。</p>
+<h4>Perceptron</h4>
+<p>Perceptron一种有监督线性分类算法。算法将输入的实例分为正例、负例两类。在学习结果，算法从训练数据中实例估计w。推理阶段，算法基于特征向量x与参数向量w乘积的符号对于输入数据的类别进行预测。</p>
+<h4>算法流程与收敛性</h4>
+<p><strong>推理阶段</strong>，算法接受一个输入实例x，并根据权向量w确定其类别。设输入x是一个D维实向量，w是模型的权重向量，也是D维实向量。二元感知器按照输出函数$$ w<sup>Tx</sup> $$将输入x分为两类。将$$ w<sup>T</sup> x>0 $$的实例x分为正例；反之，分为负例。</p>
+<strong>学习阶段</strong>，根据给定训练数据，感知器算法所学习的是模型的权重向量w，其学习算法下面所示。</p>
+<p><table><tr><td style="border: 1px solid #000; background:#ddd">初始化权向量w为0，不失一般性，可以假设所有训练实例是单位向量。并置迭代次数t为1。利用感知器模型，对x的类别进行预测。如果$$ w<sup>tx</sup>>0 $$，x是正例；否则，是负例。在判断正负例出错时，
+<ul>
+<li>将正例判成负例时，$$ w</em>{(t+1)}\leftarrow w<em>{(t)}+x $$</li>
+<li>将负例判成正例时，$$ w</em>{(t+1)}\leftarrow w<em>{(t)}-x $$</li>
+</ul>
+</td></tr></table></p>
+<p>训练算法迭代T轮，每轮迭代中枚举所有训练实例，按照推理阶段使用的方法预测训练实例类别。如果预测出错，则更新权重。直观上讲，算法给正确的分类的权向量增加，给错误分类的权向量减少。</p>
+<p>可以证明上面的算法在训练数据线性可分以及线性不可分的情况下都是收敛的。在线性可分情况下，具体证明思路设一个理想的分类界面$$ w^{<em>} $$，再定义一个margin $$ \gamma=\min{\frac{|w^</em>x|}{||x||}} $$。然后证明随着迭代次数的增加，出错次数的下届增长得不是太慢，上届不是增长得不是太快，最后得到出错次数的一个界，也就证明了算法的收敛性。具体可以看<a href="http://www.cs.cmu.edu/~avrim/ML09/lect0126.pdf">这里</a>。</p>
+<p>对于线性不可分的情况，证明方法是把不可分的数据“拉”到符合$$ w^*$$和$$ \gamma$$的位置。由于这个“拉”的代价是一个有界的值$$ TD</em>{\gamma}$$，在推导收敛性时，考虑这个值，其余的模仿线性可分的情况就好了。</p>
+<h4>MIRA</h4>
+<p>如前文所述，线性分类算法可以将实例分为二类。但是，实际问题面对的类别个数往往多于二类，需要将模型从二类问题推广到多类问题。</p>
+<p>一种可行的将二类推广到多类的方法是"one-against-rest strategy"。这一策略将k类分类问题转化为k个二类分类问题。第r个二类分类器完成将训练实例分为是r类和不是r类两类。多于第r个类别的线性分类器，以其权向量$$ w_r$$与训练实例x的乘积作一种相似度度量。如果训练实例x的范数为1，那么，这一乘积可以从几何意义上解释为训练实例到类r的分类面的距离。之前江枫师兄说：“一般认为离分类面r越远的数据点，其属于r类的可能性就越大。”实际使用online算法处理多类问题时，也把和数据点x乘积最大的$$ w_r$$作为x的类别。</p>
+<p>MIRA算法也是一种有监督在线机器学习算法，与perceptron相似，MIRA算法也是一种线性分类算法。在使用MIRA解决分类问题时，算法从训练实例中学习一个k行的参数矩阵M，其中第r行Mr表示第r类的参数向量。</p>
+<h4>算法流程与收敛性</h4>
+<p>在推理阶段，算法计算训练实例x和各类参数向量的乘积，作为该训练实例与该类的相似度。并将相似度最高的一类作为对训练实例类别的预测。</p>
+<p>在学习阶段，算法流程如下
+<table><tr><td style="border: 1px solid #000; background:#ddd">
+<ol>
+<li>对于k类分类问题，设由各类权向量组成的矩阵M。其中M有k行，第r行向量$$ M_r$$对应第r类的分类权向量。</li>
+<li>从1到T循环每个训练实例$$ x<sup>t</sup> $$
+<ul>
+<li>对于每个训练实例$$ x<sup>t</sup>$$，依照$$ y=\arg_r{\max{M_rx}}$$预测$$ x<sup>t</sup>$$的类别。</li>
+<li>依照下面的优化目标和约束条件：
+obj. $$ \min<em>{\tau}{\frac{1}{2}\sum_r||M_r+\tau</em>{r}x^{(t)}||^2} $$<br />
+st.(1)$$ \tau_r\le\sigma<em>{x,y<sup>t</sup>} $$<br />
+(2)$$ \sum{\tau_r}=0$$ </li></ul></li>
+<li>依照$$ M_r^{(t+1)}=M_r^{(t)}+\tau_r x<sup>t</sup>$$更新M</li></ol>
+</td></tr></table></p>
+<p>MIRA的收敛性证明要比perceptron复杂，但是思路也是证明“出错次数的下届增长得不是太慢，上届不是增长得不是太快”。如果感兴趣，可以看Crammer的<a href="http://jmlr.csail.mit.edu/papers/volume3/crammer03a/crammer03a.pdf"><em>Ultraconservation Online Algorithms for Multiclass Problems</em></a></p>
+<h4>从分类问题到序列标注问题</h4>
+<p>如之前对于序列标注问题的描述，假如序列长度为n，有k个类别，那么这个序列就存在$$ n<sup>k</sup>$$种标注。所以，在推理阶段将$$ y=\arg_r{max{M_r x<sup>t</sup>}}$$换成$$ z</em>{[1:n_i]}=\arg{\max<em>{u[1:n_i]\in\mathcal{T}^{n_i}}\sum_s{\alpha_s\Phi_s(w</em>{[1:n_i]}^i,u_{[1:n_i]})}}$$，也就是将用分类面判断类别变成求序列的最优标注。这样序列标注问题就转化为分类问题了。</p>
+<p>当然，对于用perceptron处理序列标注问题来讲，直接用viterbi求一个最优标注并用这个最优标注和标准结果更新参数就好了。但是，我们注意到MIRA在用一个训练实例更新参数时，实际对于各个类别都进行了更新。而序列标注问题的类别数是指数级别，对每个类别都更新显然是不现实的。McDonald在<a href="http://acl.ldc.upenn.edu/eacl2006/main/papers/04_2_mcdonaldpereira_26.pdf"><em>Online Large-Margin Training of Dependency Parsers</em></a>这篇论文中提出这一问题的一个解决方案，即假设影响参数更新的序列只有少数解码过程中分数比较高的序列。所以，用k-best viterbi算法求k个序列标注结果。然后用这k个结果按照mira算法中的二次规划求第r类的更新权重$$ \tau_r$$并更新参数。这里，McDonald也提到，实验表明，k如果过大，算法就很快过拟合训练数据了。</p>
+<hr />
+<p>这篇文章参考了以下论文和资源：
+<ul>
+<li>Discriminative Training Methods for Hidden Markov Models</li>
+<li>Online Large-Margin Training of Dependency Parsers</li>
+<li>Ultraconservative Online Algorithms for Multiclass Problems</li>
+</ul>
+</p></p>
+
+</div>
+
+</div>
+
+<div class="footer">
+    This site is build by <a href="">Level0</a>.
+</div>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    TeX: {equationNumbers: {autoNumber: ["AMS"], useLabelIds: true}},
+    "HTML-CSS": {linebreaks: {automatic: true}},
+    SVG: {linebreaks: {automatic: true}}
+});
+</script>
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
+<script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
+</body>
+</html>

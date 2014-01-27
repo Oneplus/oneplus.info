@@ -1,0 +1,61 @@
+<html>
+<head>
+<meta charset="utf-8" />
+<title> Peer模式的多线程程序例子 | Static Oneplus </title>
+<!--
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap-responsive.min.css">
+-->
+<style>
+.prettyprint ol.linenums > li { list-style-type: decimal; }
+.nav { }
+.nav li { float: left; width: 80px;}
+.content { margin: 0 auto; padding: 0; }
+header { padding: 15px 0; }
+</style>
+</head>
+<body>
+
+<header>
+    <h1>Static Oneplus</h1>
+    <ul class="nav">
+        <li><a href="http://yjliu.net">Home</a></li>
+        <li><a href="/blog">Blog</a></li>
+        <li><a href="/notes">Notes</a></li>
+    </ul>
+</header>
+
+<div class="content">
+
+<div>
+    <p>程序的模型大概是这样的。有一个master()，用来分发任务。有N个多线程的slave用来处理任务。</p>
+
+<script src="https://gist.github.com/Oneplus/7afce62520cb4cd5c926.js"></script>
+
+
+<p>主程序里可以这样调用；</p>
+
+<script src="https://gist.github.com/Oneplus/f6d65430d7fa6c54abb6.js"></script>
+
+
+<p>可以看出，上面这段程序还是依赖于Processor自身的并行能力。总之，现在看来写并行程序实在是一件很复杂的事情。</p>
+
+</div>
+
+</div>
+
+<div class="footer">
+    This site is build by <a href="">Level0</a>.
+</div>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    TeX: {equationNumbers: {autoNumber: ["AMS"], useLabelIds: true}},
+    "HTML-CSS": {linebreaks: {automatic: true}},
+    SVG: {linebreaks: {automatic: true}}
+});
+</script>
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
+<script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
+</body>
+</html>

@@ -1,0 +1,76 @@
+<html>
+<head>
+<meta charset="utf-8" />
+<title> Python sorted list的实现 | Static Oneplus </title>
+<!--
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap-responsive.min.css">
+-->
+<style>
+.prettyprint ol.linenums > li { list-style-type: decimal; }
+.nav { }
+.nav li { float: left; width: 80px;}
+.content { margin: 0 auto; padding: 0; }
+header { padding: 15px 0; }
+</style>
+</head>
+<body>
+
+<header>
+    <h1>Static Oneplus</h1>
+    <ul class="nav">
+        <li><a href="http://yjliu.net">Home</a></li>
+        <li><a href="/blog">Blog</a></li>
+        <li><a href="/notes">Notes</a></li>
+    </ul>
+</header>
+
+<div class="content">
+
+<div>
+    <p>具体思路是用二分保list有序+插入</p>
+
+<div>
+  <pre class="prettyprint linenums 1"><code class='python linenos'>class SortedList(list):
+    K = -1
+
+    def __init__(self, K=-1):
+        list.__init__(self)
+        if K != -1: self.K = K
+
+    def append(self, x):
+        bisect.insort(self, x)
+        if self.K != -1:
+            if len(self)==self.K+1:
+                self.pop(0)</code></pre>
+</div>
+
+
+<p>这里还有一个限size的操作，之前写了一个<code>self=self[1:]</code>，结果不对。还不清楚是为什么，留一个问题在这里。</p>
+
+<h3>参考</h3>
+
+<ul>
+<li><a href="http://stackoverflow.com/questions/5998368/python-sorted-list-of-lists">Python - sorted list of lists</a></li>
+</ul>
+
+
+</div>
+
+</div>
+
+<div class="footer">
+    This site is build by <a href="">Level0</a>.
+</div>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    TeX: {equationNumbers: {autoNumber: ["AMS"], useLabelIds: true}},
+    "HTML-CSS": {linebreaks: {automatic: true}},
+    SVG: {linebreaks: {automatic: true}}
+});
+</script>
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
+<script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<html>
+<head>
+<meta charset="utf-8" />
+<title> 像'printf'一样打印变长参数 | Static Oneplus </title>
+<!--
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap-responsive.min.css">
+-->
+<style>
+.prettyprint ol.linenums > li { list-style-type: decimal; }
+.nav { }
+.nav li { float: left; width: 80px;}
+.content { margin: 0 auto; padding: 0; }
+header { padding: 15px 0; }
+</style>
+</head>
+<body>
+
+<header>
+    <h1>Static Oneplus</h1>
+    <ul class="nav">
+        <li><a href="http://yjliu.net">Home</a></li>
+        <li><a href="/blog">Blog</a></li>
+        <li><a href="/notes">Notes</a></li>
+    </ul>
+</header>
+
+<div class="content">
+
+<div>
+    <h3>动机</h3>
+
+<p>我想实现一个可以像printf一样带参数模板的log打印函数，在调用</p>
+
+<div>
+  <pre class="prettyprint linenums 1"><code class='c'>line_count = 1000;
+write_log(&quot;process %d lines&quot;, line_count);</code></pre>
+</div>
+
+
+<p>打印出</p>
+
+<pre><code>process 1000 lines
+</code></pre>
+
+<h3>方法</h3>
+
+<p>实现方法是使用stdarg.h中提供的变长参数接口。<code>vprintf</code>、<code>vsprintf</code>、<code>vfprintf</code>等等，我们可以用如下的方法实现<code>write_log</code>函数：</p>
+
+<div>
+  <pre class="prettyprint linenums 1"><code class='c linenos'>void write_log(int lvl, char *fmt, ...){
+    ...
+    va_list list;
+    va_start(list, fmt);
+    vfprintf(stderr, fmt, list);
+    va_end(list);
+    ...
+}</code></pre>
+</div>
+
+
+
+
+</div>
+
+</div>
+
+<div class="footer">
+    This site is build by <a href="">Level0</a>.
+</div>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    TeX: {equationNumbers: {autoNumber: ["AMS"], useLabelIds: true}},
+    "HTML-CSS": {linebreaks: {automatic: true}},
+    SVG: {linebreaks: {automatic: true}}
+});
+</script>
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
+<script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
+</body>
+</html>

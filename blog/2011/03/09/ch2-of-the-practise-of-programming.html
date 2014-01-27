@@ -1,0 +1,311 @@
+<html>
+<head>
+<meta charset="utf-8" />
+<title> 程序设计实践一 – 第二课 | Static Oneplus </title>
+<!--
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap-responsive.min.css">
+-->
+<style>
+.prettyprint ol.linenums > li { list-style-type: decimal; }
+.nav { }
+.nav li { float: left; width: 80px;}
+.content { margin: 0 auto; padding: 0; }
+header { padding: 15px 0; }
+</style>
+</head>
+<body>
+
+<header>
+    <h1>Static Oneplus</h1>
+    <ul class="nav">
+        <li><a href="http://yjliu.net">Home</a></li>
+        <li><a href="/blog">Blog</a></li>
+        <li><a href="/notes">Notes</a></li>
+    </ul>
+</header>
+
+<div class="content">
+
+<div>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
+
+
+<script type="text/javascript">     
+$(document).ready(function(){
+$(".text").toggle();
+$(".box").toggle(function(){
+$(this).next(".text").animate({height: 'toggle', opacity: 'toggle'}, "slow");
+} ,function() {$(this).next(".text").animate({height: 'toggle', opacity: 'toggle'}, "slow");});});</script>
+
+
+<h4>课程提纲</h4>
+
+
+<div class="box">请点击<a href="#">这里</a></div>
+
+
+<div class="text"><ul>
+<li>上节课的回归与作业讲解</li>
+<li>分治</li>
+<li>二分算法</li>
+<ul>
+    <li>例一：求x=&radic;9.8</li>
+    <ul>
+        <li>题目描述</li>
+        <li>算法过程演示</li>
+        <li>算法分析</li>
+        <li>伪代码与代码</li>
+    </ul>
+    <li>例二：二分查找</li>
+    <ul>
+        <li>题目描述</li>
+        <li>题目分析</li>
+        <li>伪代码与代码</li>
+        <li>复杂度分析</li>
+    </ul>
+    <li>讨论：整数二分的最好写法</li>
+    <ul>
+        <li>例一</li>
+        <li>例二</li>
+    </ul>
+    <li>例三：求一列有序数中第一个大于等于某数的数</li>
+    <ul>
+        <li>题目描述</li>
+        <li>题目分析</li>
+        <li>伪代码与代码</li>
+        <li>拓展：最大化最小/最小化最大的一般分析方法</li>
+    </ul>
+    <li>教你偷懒：lower_bound、upper_bound</li>
+</ul>
+<li>堆</li>
+<ul>
+    <li>离线算法与在线算法</li>
+    <li>引例：只有添加操作的在线求一列数的最大值</li>
+    <ul>
+        <li>题目描述</li>
+        <li>题目分析</li>
+    </ul>
+    <li>例四：支持添加和删除最大操作的在线求一列数的最大值</li>
+    <ul>
+        <li>题目描述</li>
+        <li>算法一</li>
+        <li>算法二</li>
+        <li>总结算法一二的悲剧之处</li>
+    </ul>
+    <li>堆的性质</li>
+    <li>堆的操作</li>
+    <ul>
+        <li>上浮</li>
+        <li>下沉</li>
+        <li>删除最大</li>
+        <li>添加</li>
+    </ul>
+    <li>伪代码与代码</li>
+    <li>教你偷懒：priority_queue</li>
+</ul>
+</ul>
+</div>
+
+
+<h4>简单的讲义</h4>
+
+
+<p><a id="more"></a><a id="more-125"></a>
+讲义请看<a href="http://acm.hit.edu.cn/~oneplus/design-2011/02-lecture.pdf">这里</a><br />
+PPT请看<a href="http://acm.hit.edu.cn/~oneplus/design-2011/02-ppt.pdf">这里</a></p>
+
+<h4>录了30多分钟的课堂录音</h4>
+
+
+<p>这节课是用自己的笔记本进行的演示，录到了课堂录音。原文件噪音非常多，用Goldwave处理了一下，果然好了不少。
+<embed src="http://acm.hit.edu.cn/~oneplus/design-2011/02-record.wma" autostart="false"></embed></p>
+
+<h4>自我检讨</h4>
+
+
+<ul>
+<li>因为课程录了音，所以对于自己的授课内容有了一个比较清楚的认知。</li>
+<li>从这节课的录音来看，我讲课的一些问题包括：重复冗余严重，二分的算法过程被说了三次、二分复杂度证明说了两次；语气平淡，重点不突出；声音比较小，有点无力。</li>
+<li>而且这节课在多媒体的问题上花的时间有点多。大概有十五分钟都是在调多媒体…</li>
+<li>自己笔记本的时间和8503机器的时间不同步，在课间休息时间的问题上把握得不好。</li>
+<li>现在看，自己的讲义是挺混乱的。课件做得尤其糟糕。</li>
+<li>这里需要向上课的同学道歉，第二课我的准备工作的确有不足。这节课的准备中，把太多时间花在demo上，以至于没有足够的时间去思考要讲什么内容。下节课demo的东西比较少，我会认真准备课程内容的。</li>
+</ul>
+
+
+<h4>浮云一样的heap的demo</h4>
+
+
+<p>其实这个flash动画也是我做的…
+<embed src="http://acm.hit.edu.cn/~oneplus/design-2011/02-heapdemo.swf" width="400" height="400"></embed></p>
+
+<h4>演示二分时用的Java代码</h4>
+
+
+<div class="codeindex">请点击<a href="#">这里</a></div>
+
+
+<div class="codemain">
+[code]
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+import java.awt.Panel;
+import java.io.*;
+import java.text.DecimalFormat;
+
+public class bisearch extends JFrame implements ActionListener {
+    public bisearch() {
+        setLayout(new FlowLayout(FlowLayout.LEFT));
+        setSize(500, 400);
+        setBackground(Color.white);
+        
+        nextButton = new Button( &quot;Next&quot; );
+        nextButton.addActionListener( this );
+        add( nextButton );
+        
+        init();
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    }
+    
+    public void init() {
+        lowerBound = f( leftBound );
+        upperBound = f( rightBound );
+        low = 3.0;
+        high = 4.0;
+        //System.out.println( lowerBound + &quot; &quot; + upperBound );
+    }
+    
+    public void paint( Graphics g ) {
+        point p1 = new point();
+        point p2 = new point();
+        p1 = toPoint(2.7, 0.0 );
+        p2 = toPoint(4.3, 0.0 );
+        x_axis = p1.getY();
+        g.drawLine( p1.getX(), p1.getY(), p2.getX(), p2.getY());
+        g.drawLine( 40, 0, 40, 400);
+        g.drawString( &quot;y axis&quot;, 35, 75 );
+        g.drawString( &quot;x axis&quot;, 450, x_axis );
+        
+        for( double i = leftBound; i &lt;= rightBound; i = i + eps ) {
+            double x = i, xx = i + eps;
+            double y = f( x ), yy = f( xx );
+            
+            p1 = toPoint( x , y );
+            g.drawLine( p1.getX(), p1.getY(), p1.getX(), p1.getY());
+        }
+        p1 = toPoint( 3.0, f(3.0) );
+        p2 = toPoint( 4.0, f(4.0) );
+        g.drawOval( p1.getX() - 3, p1.getY() - 3, 6, 6);
+        g.drawOval( p2.getX() - 3, p2.getY() - 3, 6, 6);
+        g.drawLine( p1.getX(), p1.getY(), p1.getX(), x_axis );
+        g.drawLine( p2.getX(), p2.getY(), p2.getX(), x_axis );
+        new DecimalFormat( &quot;0.00&quot; );
+        g.drawString( Double.toString( 3.0 ), p1.getX(), x_axis + 12);
+        g.drawString( Double.toString( 4.0 ), p2.getX(), x_axis + 12);
+        //System.out.println( p1.getX() + &quot; &quot; + p1.getY() );
+    }
+    
+    public double f( double x ) {
+        return x * x - 9.8;
+    }
+    
+    public point toPoint( double x, double y ) {
+        double xx = ( x - leftBound ) / ( rightBound - leftBound ) * 500.0;
+        double yy = ( y - upperBound ) / ( lowerBound - upperBound ) * 400.0;
+        
+        point ret = new point( (int)xx , (int)yy );
+        return ret;
+    }
+    
+    public void actionPerformed( ActionEvent event ) {
+        if( event.getSource() == nextButton ) {
+            if( high - low &gt; 0.001 ) {
+                mid = ( low + high ) * 0.5;
+                new DecimalFormat( &quot;0.00&quot; );
+                point p1 = toPoint( mid, f(mid) );
+                getGraphics().drawOval( p1.getX() - 3, p1.getY() - 3, 6, 6);
+                getGraphics().drawLine( p1.getX(), p1.getY(), p1.getX(), x_axis );
+                getGraphics().drawString( Double.toString( mid ), p1.getX(), x_axis + 12);
+                double tmp = f( mid );
+                if( f( mid ) &gt; 0 ) {
+                    high = mid;
+                }
+                else {
+                    low = mid;
+                }
+            }
+        }
+    }
+    
+    public static void main(String[] args) throws IOException {
+        bisearch bs = new bisearch();
+        bs.setVisible(true);
+    }
+    
+    private double low, high, mid;
+    private double leftBound = 2.7, rightBound = 4.3, eps = 0.003;
+    private double lowerBound, upperBound;
+    private int x_axis, y_axis;
+    Button nextButton;
+}
+
+class point {
+    public point() {
+        x = 0;
+        y = 0;
+    }
+    public point(int _x, int _y) {
+        x = _x;
+        y = _y;
+    }
+    public int getX() { return x; }
+    public int getY() { return y; }
+    private int x;
+    private int y;
+}
+[/code]
+</div>
+
+
+<script type="text/javascript">     
+$(document).ready(function(){
+$(".codemain").toggle();
+$(".codeindex").toggle(function(){
+$(this).next(".codemain").animate({height: 'toggle', opacity: 'toggle'}, "slow");
+} ,function() {$(this).next(".codemain").animate({height: 'toggle', opacity: 'toggle'}, "slow");});});</script>
+
+
+<p>太懒，不想把这段代码弄成applet了，想看编译后结果的同学点击<a href="http://acm.hit.edu.cn/~oneplus/design-2011/02-bisearch.jar">这里</a>下载可执行程序啊。</p>
+
+<h4>杂碎</h4>
+
+
+<ul>
+<li>cai组队的事纠结了。</li>
+<li>84路换车站了，昨天从教化桥的一头跑到另一头去坐公交，T.T。以后再也不坐84了。</li>
+<li>上周的大概把三天时间花在toolbox源码的调研上，到周日才搞清楚要做的应该是service grid。脑残了…</li>
+<li>事情太多，还需多多努力啊…</li>
+</ul>
+
+
+</div>
+
+</div>
+
+<div class="footer">
+    This site is build by <a href="">Level0</a>.
+</div>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    TeX: {equationNumbers: {autoNumber: ["AMS"], useLabelIds: true}},
+    "HTML-CSS": {linebreaks: {automatic: true}},
+    SVG: {linebreaks: {automatic: true}}
+});
+</script>
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
+<script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
+</body>
+</html>

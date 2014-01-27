@@ -1,0 +1,80 @@
+<html>
+<head>
+<meta charset="utf-8" />
+<title> Python中的动态类 | Static Oneplus </title>
+<!--
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap-responsive.min.css">
+-->
+<style>
+.prettyprint ol.linenums > li { list-style-type: decimal; }
+.nav { }
+.nav li { float: left; width: 80px;}
+.content { margin: 0 auto; padding: 0; }
+header { padding: 15px 0; }
+</style>
+</head>
+<body>
+
+<header>
+    <h1>Static Oneplus</h1>
+    <ul class="nav">
+        <li><a href="http://yjliu.net">Home</a></li>
+        <li><a href="/blog">Blog</a></li>
+        <li><a href="/notes">Notes</a></li>
+    </ul>
+</header>
+
+<div class="content">
+
+<div>
+    <p>有这样一个需求，我有<code>SegmentReader</code>、<code>PostagReader</code>、<code>ConllReader</code>这三个<code>Reader</code>，他们都继承于一个<code>Reader</code>类。在程序运行中，由用户通过<code>segment</code>、<code>postag</code>或<code>conll</code>决定读入哪一种数据，所以<code>XReader</code>的实例化也由用户决定。当然，我们可以写一连串的if判断，但是这往往不够美观。这里有一个python动态创建类的问题。</p>
+
+<p>Python中有个一函数<code>globals()</code>返回当前全局的符号表，如果已经import了这三个类，他们就会出现在全局的符号表中。</p>
+
+<div>
+  <pre class="prettyprint linenums 1"><code class='python linenos'>from corpusproc.io import SegmentReader, PostagReader, ConllReader
+
+def createObject(className, * args):
+    cls = globals()[className]
+
+    if isinstance(cls, type) and isinstance(args[0], file):
+        return cls(args[0])
+    else:
+        raise Exception(&quot;No such class&quot;)</code></pre>
+</div>
+
+
+<p>测试一下</p>
+
+<div>
+  <pre class="prettyprint linenums 1"><code class='python'>format = &quot;segment&quot;
+reader = createObject(format[0].upper() + format[1:])
+
+format = &quot;unknown&quot;
+reader = createObject(format[0].upper() + format[1:])
+# Raise Exception &quot;No such class&quot;</code></pre>
+</div>
+
+
+
+
+</div>
+
+</div>
+
+<div class="footer">
+    This site is build by <a href="">Level0</a>.
+</div>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    TeX: {equationNumbers: {autoNumber: ["AMS"], useLabelIds: true}},
+    "HTML-CSS": {linebreaks: {automatic: true}},
+    SVG: {linebreaks: {automatic: true}}
+});
+</script>
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
+<script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
+</body>
+</html>

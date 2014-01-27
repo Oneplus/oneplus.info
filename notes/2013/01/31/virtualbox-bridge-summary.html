@@ -1,0 +1,63 @@
+<html>
+<head>
+<meta charset="utf-8" />
+<title> Virtualbox网桥方式联网方法 | Static Oneplus </title>
+<!--
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap-responsive.min.css">
+-->
+<style>
+.prettyprint ol.linenums > li { list-style-type: decimal; }
+.nav { }
+.nav li { float: left; width: 80px;}
+.content { margin: 0 auto; padding: 0; }
+header { padding: 15px 0; }
+</style>
+</head>
+<body>
+
+<header>
+    <h1>Static Oneplus</h1>
+    <ul class="nav">
+        <li><a href="http://yjliu.net">Home</a></li>
+        <li><a href="/blog">Blog</a></li>
+        <li><a href="/notes">Notes</a></li>
+    </ul>
+</header>
+
+<div class="content">
+
+<div>
+    <p>Virtualbox虚拟机用网桥模式上网比较好，记录几个情景。</p>
+
+<p><strong>情景一</strong></p>
+
+<p>主机win7 64bit，局域网固定ip接入。Virtualbox中虚拟了一个ubuntu 12.04。</p>
+
+<p>这种情境下，只要把虚拟机的ip设成和真机相同的网段和网关就可以了。</p>
+
+<p><strong>情景二</strong>_</p>
+
+<p>主机win7 64bit，电信宽带pppoe接入。Virtualbox中虚拟了一个ubuntu 12.04。</p>
+
+<p>这种情景要复杂一些。首先选择拨号连接的“属性”，选“共享”选项卡。然后勾选“允许其他用户通过这台电脑的Internet连接”。家庭网络连接选“本地连接”。然后，剩下的两个框也都勾选上。这些设置好后重连一下这个连接，使上面的设置生效。这些都搞定后，看从“本地连接”的“详细属性”中查看IP，再把虚拟机中设置IP为同一网段，网关设为刚刚看到的IP就可以了。</p>
+
+</div>
+
+</div>
+
+<div class="footer">
+    This site is build by <a href="">Level0</a>.
+</div>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    TeX: {equationNumbers: {autoNumber: ["AMS"], useLabelIds: true}},
+    "HTML-CSS": {linebreaks: {automatic: true}},
+    SVG: {linebreaks: {automatic: true}}
+});
+</script>
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
+<script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
+</body>
+</html>

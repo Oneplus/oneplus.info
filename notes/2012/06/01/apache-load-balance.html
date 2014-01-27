@@ -1,0 +1,89 @@
+<html>
+<head>
+<meta charset="utf-8" />
+<title> Apache负载均衡 | Static Oneplus </title>
+<!--
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap-responsive.min.css">
+-->
+<style>
+.prettyprint ol.linenums > li { list-style-type: decimal; }
+.nav { }
+.nav li { float: left; width: 80px;}
+.content { margin: 0 auto; padding: 0; }
+header { padding: 15px 0; }
+</style>
+</head>
+<body>
+
+<header>
+    <h1>Static Oneplus</h1>
+    <ul class="nav">
+        <li><a href="http://yjliu.net">Home</a></li>
+        <li><a href="/blog">Blog</a></li>
+        <li><a href="/notes">Notes</a></li>
+    </ul>
+</header>
+
+<div class="content">
+
+<div>
+    <p>Apache也是可以实现负载均衡的。Apache的负载均衡主要是通过<code>mod_proxy_balancer</code>实现的。那么，apache负载均衡的配置方法是什么样的？</p>
+
+<p>在apache的配置文件<code>httpd.conf</code>中加入</p>
+
+<div>
+  <pre class="prettyprint linenums 1"><code class='bash'>ProxyPass / balancer://proxy/         #注意这里以&quot;/&quot;结尾 
+&lt;Proxy balancer://proxy&gt; 
+    BalancerMember http://192.168.6.37:6888/ 
+    BalancerMember http://192.168.6.38:6888/ 
+&lt;/Proxy&gt;</code></pre>
+</div>
+
+
+<p>这里不一定要在<code>httpd.conf</code>中直接添加<code>ProxyPass / balancer</code>。另一种实现方法是向<code>httpd.conf</code>中添加<code>Include conf/httpd-proxy.conf</code>，然后把<code>ProxyPass</code>写到<code>httpd-proxy.conf</code>中。</p>
+
+<p>下面详细介绍这段配置文件的含义：</p>
+
+<ul>
+<li>其中<code>ProxyPass</code>是配置虚拟服务器命令</li>
+<li>/应该是类于过滤规则，指的是web请求url的后缀（参考网址中说是前缀，不懂）。如果只对<code>/redmine</code>的请求进行负载均衡，那么需要改成<code>/redmine</code>。</li>
+<li><code>balancer://proxy</code>表示要配置负载均衡，<code>proxy</code>表示负载均衡名，也可以改成其他名字，比如说<code>redmine_cluster</code>。</li>
+</ul>
+
+
+<div>
+  <pre class="prettyprint linenums 1"><code class='bash'>BalancerMember http://192.168.6.37:6888/</code></pre>
+</div>
+
+
+<p>表示将<code>http://192.168.6.37:6888/</code>注册到负载均衡中。</p>
+
+<p>上述所示的负载均衡是轮询型负载均衡，除此之外，还有按权重分配负载均衡策略，权重请求响应负载均衡策略。其中，前者按照请求次数分配负载，后者则按照请求负载分配负载。举个例子讲：按照前者，如果有4次请求，3次被分配到机器A、1次被分配到机器B。按照后者，有1000bytes的请求，750bytes被分配给A、250bytes被分配给B。具体参考下面的链接</p>
+
+<h3>参考</h3>
+
+<ul>
+<li><a href="http://blog.csdn.net/paulluo0739/article/details/2269052">apache2.2.4 负载均衡初探</a></li>
+</ul>
+
+
+</div>
+
+</div>
+
+<div class="footer">
+    This site is build by <a href="">Level0</a>.
+</div>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    TeX: {equationNumbers: {autoNumber: ["AMS"], useLabelIds: true}},
+    "HTML-CSS": {linebreaks: {automatic: true}},
+    SVG: {linebreaks: {automatic: true}}
+});
+</script>
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
+<script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
+</body>
+</html>

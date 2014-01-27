@@ -1,0 +1,98 @@
+<html>
+<head>
+<meta charset="utf-8" />
+<title> Python对象的动态成员与__dict__ | Static Oneplus </title>
+<!--
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap-responsive.min.css">
+-->
+<style>
+.prettyprint ol.linenums > li { list-style-type: decimal; }
+.nav { }
+.nav li { float: left; width: 80px;}
+.content { margin: 0 auto; padding: 0; }
+header { padding: 15px 0; }
+</style>
+</head>
+<body>
+
+<header>
+    <h1>Static Oneplus</h1>
+    <ul class="nav">
+        <li><a href="http://yjliu.net">Home</a></li>
+        <li><a href="/blog">Blog</a></li>
+        <li><a href="/notes">Notes</a></li>
+    </ul>
+</header>
+
+<div class="content">
+
+<div>
+    <p>在写一些python脚本时，我很喜欢用optparse module中的OptionParser对象来解析一些命令行参数。一个简单的例子如下，
+[code lang="python"]parser = OptionParser()
+parser.add_option(&quot;-f&quot;, &quot;--file&quot;, dest=&quot;filename&quot;)
+(options, args) = parser.parse_args()[/code]
+然后，使用options.filename可以调用--file指定的参数，这似乎也没什么神奇的。但是，在第一次用OptionParser时，我那个充满C惯性思维的大脑却很严重地shock了。因为，options对象的成员在调用期间才产生，这不科学啊。</p>
+
+
+<p><a id="more"></a><a id="more-530"></a></p>
+
+<p>结果这个问题被搁置了大半年，今天早上又想起来，心血来潮看了一眼optparse的源代码，
+[code lang="python"]self.__dict__.update(dict)[/code]
+然后一下子，我似乎明白了什么。</p>
+
+
+<p>首先，每个python对象中都用一个字典来保存其命名空间，也就是__dict__。举栗来讲，C.x实际上是被翻译成C.__dict__[“x”]。那么，runtime地向C中添加一些成员就是小case了。一个栗子程序如下：
+[code lang="python"]class C:
+    def __init__(self):
+        self.x = 1
+        self.y = 2
+
+    def regist(self, key, val):
+        self.__dict__[key] = val
+
+c = C()
+print c.__dict__
+c.regist(&quot;z&quot;, 3)
+c.regist(&quot;func&quot;, lambda x: &quot;&quot;.join([&quot;=&gt;&quot;, str(x), &quot;&lt;=&quot;]))
+print c.__dict__
+print c.x, c.y, c.z, c.func(&quot;__dict__&quot;)[/code]</p>
+
+
+<p>运行结果是
+[code]{'y': 2, 'x': 1}
+{'y': 2, 'x': 1, 'z': 3, 'func': &lt;function &lt;lambda&gt; at 0x2b55c97de668&gt;}
+1 2 3 =&gt;__dict__&lt;=[/code]</p>
+
+
+<p>不过问题就这样解决了，真是不甘心。所以发个博客吧。</p>
+
+
+<p>P勒个S：这之前，还看过C中实现命令行解析的类库，<a href="http://argtable.sourceforge.net/">argtable</a>。C语言真是好难啊。</p>
+
+
+<p>参考：
+<ul>
+<li><a href="http://docs.python.org/reference/datamodel.html">http://docs.python.org/reference/datamodel.html</a></li></ul>
+</p>
+
+
+</div>
+
+</div>
+
+<div class="footer">
+    This site is build by <a href="">Level0</a>.
+</div>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    TeX: {equationNumbers: {autoNumber: ["AMS"], useLabelIds: true}},
+    "HTML-CSS": {linebreaks: {automatic: true}},
+    SVG: {linebreaks: {automatic: true}}
+});
+</script>
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
+<script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
+</body>
+</html>

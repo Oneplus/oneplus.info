@@ -1,0 +1,90 @@
+<html>
+<head>
+<meta charset="utf-8" />
+<title> 使用cmake构建项目 | Static Oneplus </title>
+<!--
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap-responsive.min.css">
+-->
+<style>
+.prettyprint ol.linenums > li { list-style-type: decimal; }
+.nav { }
+.nav li { float: left; width: 80px;}
+.content { margin: 0 auto; padding: 0; }
+header { padding: 15px 0; }
+</style>
+</head>
+<body>
+
+<header>
+    <h1>Static Oneplus</h1>
+    <ul class="nav">
+        <li><a href="http://yjliu.net">Home</a></li>
+        <li><a href="/blog">Blog</a></li>
+        <li><a href="/notes">Notes</a></li>
+    </ul>
+</header>
+
+<div class="content">
+
+<div>
+    <h3>动机</h3>
+
+<p>不用手写Makefile，够快速构建C/C++项目</p>
+
+<h3>方法</h3>
+
+<p>使用cmake工具可以很方便地构建项目，只需要简单地写几个CMakeLists.txt就可以了。我采用的文件夹构架为：</p>
+
+<div>
+  <pre class="prettyprint linenums 1"><code class='bash'>./
+ |- ./bin/
+ |- ./build/
+ |- ./data/
+ |- ./src/</code></pre>
+</div>
+
+
+<p>在./src下面写CMakeLists.txt。它做的事情只有一件：指定将某些源文件编译成可执行程序，具体内容：</p>
+
+<div>
+  <pre class="prettyprint linenums 1"><code class='bash'>ADD_EXECUTABLE(wordseg, Alphabet.cpp, ...)</code></pre>
+</div>
+
+
+<p>由于要写一堆x.cpp，最好的办法是写一个小脚本:</p>
+
+<div>
+  <pre class="prettyprint linenums 1"><code class='bash linenos'>ls *.cpp | \
+awk 'BEGIN{print &quot;ADD_EXECUTABLE(wordseg,&quot;}{print &quot;\t&quot;$0&quot;;&quot;}'</code></pre>
+</div>
+
+
+<p>同时还要在项目的根目录下写CMakeLists.txt，它做的事情有：</p>
+
+<ol>
+<li>指定./src是项目的子目录，这样cmake就会去./src中找CMakeLists.txt了，语句是：<code>ADD_SUBDIRECTORY(src)</code></li>
+<li>指定编译的可执行程序在./bin，语句是：<code>SET(EXECUTABLE_OUTPUT_PATH,${PROJECT_SOURCE_DIR}/bin)</code></li>
+<li>这里注意两个变量<code>${PROJECT_BINARY_DIR}</code>与<code>${PROJECT_SOURCE_DIR}</code>，第一个是运行cmake的路径，第二个是cmake [path]中的path</li>
+</ol>
+
+
+</div>
+
+</div>
+
+<div class="footer">
+    This site is build by <a href="">Level0</a>.
+</div>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    TeX: {equationNumbers: {autoNumber: ["AMS"], useLabelIds: true}},
+    "HTML-CSS": {linebreaks: {automatic: true}},
+    SVG: {linebreaks: {automatic: true}}
+});
+</script>
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
+<script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
+</body>
+</html>

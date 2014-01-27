@@ -1,0 +1,112 @@
+<html>
+<head>
+<meta charset="utf-8" />
+<title> 程序设计实践一 - 第一课 | Static Oneplus </title>
+<!--
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap-responsive.min.css">
+-->
+<style>
+.prettyprint ol.linenums > li { list-style-type: decimal; }
+.nav { }
+.nav li { float: left; width: 80px;}
+.content { margin: 0 auto; padding: 0; }
+header { padding: 15px 0; }
+</style>
+</head>
+<body>
+
+<header>
+    <h1>Static Oneplus</h1>
+    <ul class="nav">
+        <li><a href="http://yjliu.net">Home</a></li>
+        <li><a href="/blog">Blog</a></li>
+        <li><a href="/notes">Notes</a></li>
+    </ul>
+</header>
+
+<div class="content">
+
+<div>
+    <div>
+<div id="outline">
+<h4>课程提纲</h4>
+<ul>
+<li>课程介绍</li>
+<li>算法复杂度分析</li>
+<li>程序的三种控制结构</li>
+<li>递推</li>
+<li>递归</li>
+</ul>
+</div>
+<a id="more"></a><a id="more-118"></a>
+<div id="summary">
+<h4>简单的讲义</h4>
+本次课程实在是太简单了，所以不计讲义了。课件下载请点<a href="http://acm.hit.edu.cn/~oneplus/design-2011/01.pdf">这里</a>
+</div>
+<div id="comment">
+<h4>有关课程的一些丫丫</h4>
+在开始准备第一课时，我尽力让自己保持一种轻松愉快的心情。结果内容非常不靠谱，或者说是weird。本意是用一些更贴近大一同学的方式使更多的同学对课程产生兴趣，不过反馈效果不明显，下节课还是正经点，多搞点动画什么的吧。<br />
+去二区的时候堵了一路车，无语。下次自己去，还要再早点。<br />
+本来是打算用自己的笔记本作演示，但由于堵车迟到，这件事就只好作罢。结果原来准备的用matlab画Sierpinski triangle的动画泡汤了。这里贴出土鳖的matlab代码，路过轻拍。
+[code language="matlab"]
+function Sierpinski(x, y, l, d)
+if( d == 0 )
+    axis off;
+    hold on;
+    triangle(x, y, l, 1);
+end;
+if( d &lt; 6 )
+    triangle(x, y, l / 2, -1);
+    pause(0.001);
+    Sierpinski(x - l / 4, y - l / 4 * sqrt(3) / 3, l / 2, d + 1 );
+    Sierpinski(x + l / 4, y - l / 4 * sqrt(3) / 3, l / 2, d + 1 );
+    Sierpinski(x, y + l / 2 * sqrt(3) / 3, l / 2, d + 1 );
+end;
+[/code]
+[code]
+function triangle( x, y, l, d )
+x1 = x - l / 2;
+x2 = x + l / 2;
+x3 = x;
+
+y1 = y - d * l / 2 * sqrt(3) / 3;
+y2 = y - d * l / 2 * sqrt(3) / 3;
+y3 = y + d * l * sqrt(3) / 3;
+
+fill([x1 x2 x3], [y1 y2 y3], 'w');
+[/code]
+不能使用笔记本的另一个坏处就是，原计划进行的课程录音杯具了。下节课早点去二区，心平气和地把这件事做清楚吧。<br />
+第一课的难度实在是太简单了，所以我想当然地认为下次课的出勤还应该不错。不过这只是我个人的一些臆想。一周后再看结果吧。<br />
+作为一门选修课，而且是我承诺不点名的选修课，衡量其成败的唯一标准大概就是课程的出勤了。怎样分配难易，一个问题要讲多深才能把握大部分听众的兴趣又让人觉得有一定的趣味，希望我能撞大运把这件事做好吧。<br />
+</div>
+<div id="ps">
+<h4>P勒个S</h4>
+<ul>
+<li>3月1日上午，与班长张晨同学一行前往计算机学院团委办公室上交<a href="http://90.oneplus.info/">“主题教育网站”</a>(张晨习惯称其为：红色网站，不过这总让我想到黄色，- -|||)。上交过程中，受到党委书记孟凡东老师的亲切接待，孟老师根据当前形势对于网站提出了进一步修改意见，并表达了对下一版本的殷切期待。</li>
+<li>-“那么请问，您对本次访问有很感想呢？” -“刘屁民诚惶诚恐，屁滚尿流，不敢草率了事啊。”</li>
+<li>按照车老师的想法，Language Grid的调研工作将要深入到系统的源码中，顿感压力巨大</li>
+<li>本月结束前要将toefl词汇背完一遍，现在还有三十余个list。这不是坑爹吗！</li>
+</div>
+</div>
+
+
+</div>
+
+</div>
+
+<div class="footer">
+    This site is build by <a href="">Level0</a>.
+</div>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    TeX: {equationNumbers: {autoNumber: ["AMS"], useLabelIds: true}},
+    "HTML-CSS": {linebreaks: {automatic: true}},
+    SVG: {linebreaks: {automatic: true}}
+});
+</script>
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
+<script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
+</body>
+</html>

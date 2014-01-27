@@ -1,0 +1,125 @@
+<html>
+<head>
+<meta charset="utf-8" />
+<title> {补作业}基于Bootstrapping的电影名识别实验报告 | Static Oneplus </title>
+<!--
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap-responsive.min.css">
+-->
+<style>
+.prettyprint ol.linenums > li { list-style-type: decimal; }
+.nav { }
+.nav li { float: left; width: 80px;}
+.content { margin: 0 auto; padding: 0; }
+header { padding: 15px 0; }
+</style>
+</head>
+<body>
+
+<header>
+    <h1>Static Oneplus</h1>
+    <ul class="nav">
+        <li><a href="http://yjliu.net">Home</a></li>
+        <li><a href="/blog">Blog</a></li>
+        <li><a href="/notes">Notes</a></li>
+    </ul>
+</header>
+
+<div class="content">
+
+<div>
+    <div id="target">
+<h3>实验目的</h3>
+使用Bootstrapping算法提供一种自动获取领域词汇的方法。从大规模无标注真实语料中，自动获取领域词汇知识，丰富实验室“词脉”。<span style="color:#999;">{其他目标唐国华学长在好几次以前的例会提到过，但是记不清了}</span>
+<p><a id="more"></a><a id="more-206"></a></p>
+</div>
+
+
+<div id="abort">
+<h3>实验原理</h3>
+<h4>基本名词定义</h4>
+<ol>
+<li><strong>电影名</strong>&nbsp;&nbsp;……<span style="color:#999;">{我觉得就没这个必要了吧}</span></li>
+<li><strong>命名实体</strong>&nbsp;&nbsp;所谓的命名实体就是人名、机构名、地名以及其他所有以名称为标识的实体。更广泛的实体还包括数字、日期、货币、地址等等。 （引至百度百科）<span style="color:#999;">{电影名算不算是命名实体，从这段定义上觉得电影名与更严格定义的命名实体还有一些差距。电影名在文本中出现的形式相对地名等具有更规整、结构化的形式。}</span></li>
+<li><strong>Bootstrapping</strong>&nbsp;&nbsp;是一种自学习（self-training）方法。<span style="color:#999;">{昨天实验室例会里，听到对于Active Learning和Self Training的讨论，受用啊。}</span>在本问题中，即为利用少量数据生成学习模型，然后带回语料学习。不断迭代这一过程。</li>
+</ol>
+<h4>本问题中所使用的Bootstrapping算法</h4>
+还是看图说话吧<a href="http://blog.oneplus.info/wp-content/uploads/2011/04/algorithmframe.jpg"><img src="http://blog.oneplus.info/wp-content/uploads/2011/04/algorithmframe.jpg" alt="" title="algorithmframe" width="500" class="aligncenter size-full wp-image-207" /></a>
+Bootstrapping算法的流程大致是：
+<ol>
+<li>用少量人工标注的词作种子词集</li>
+<li>将种子词集带入文本中抽取包含这些种子的模式，形成候选模式集</li>
+<li>采用一定的方法对候选模式进行评估，选择性能较好的模式加入模式集</li>
+<li>将模式集带入文本中寻找匹配的词语，形成新词集</li>
+<li>对新词集进行评估，将比较好的新词加入到种子词集</li>
+<li>重复2直到达到一定迭代次数或不再有新词加入种子集</li>
+</ol>
+之前唐国华的报告中有一个图。印象中，两者是差不多的，但是这里一个比较显著的差别是我处理的文本数据不是全部搜狗语料库，而是用山寨的办法产生一部分只于电影有关的。这么做的原因后面会说。
+</div>
+
+
+<div id="process">
+<h3>实验过程</h3>
+<div><strong>第三周</strong>，在完成了langrid的调研后，开始了这个任务。最早时，拍脑袋想了一组和电影有关的关键词
+[code]
+std::string keyWord[] = {
+    &quot;电影&quot;, &quot;影视&quot;, &quot;上映&quot;,
+    &quot;科幻片&quot;, &quot;喜剧片&quot;, &quot;惊悚片&quot;, &quot;故事片&quot;,
+    &quot;动作片&quot;, &quot;爱情片&quot;, &quot;纪录片&quot;, &quot;伦理片&quot;,
+    &quot;百花奖&quot;, &quot;金鸡奖&quot;, &quot;金鸡百花奖&quot;, &quot;金球奖&quot;, &quot;奥斯卡奖&quot;,
+    &quot;好莱坞&quot;, &quot;票房&quot;, &quot;影院&quot;,
+    &quot;-1&quot;
+};
+[/code]
+然后就在文本集中匹配这些关键词。如果一个文本中关键词出现的次数达到一个阈值就保留，否则丢弃。<span style="color:#999;">{最早在104G上实验时，这个阈值都设得很高，分别蒙了7、10、20、50，后面两组基本把整个生语料都过滤掉了，剩的都是…和更哗的}</span>
+[code]
+最好看的韩国电影，韩国爱情片，喜剧片，伦理片，恐怖片，迅雷下载，BT下载，电影在线观看……
+[/code]
+进行了这项预处理后，用《(.*?)》的正则表达式去匹配书名号。大致挖出来1.4W条。然后随机选了100组<span style="color:#999;">{这个样本选得很土鳖}</span>，人工地看了一下，准确率不到50%。然后就开始写bootstrapping.cpp了。
+</div>
+<div><strong>第五周</strong>，周一做报告。bootstrapping.cpp那时只能挖出一票"《(.*?)》的"、"《(.*?)》是"、"、(.*?)、"这样的模式。而且，从模式的评价上，大量包含功能词的无意义的patten的频率都很高，而像"电影《(.*?)》"这样很好的patten没有优势，甚至不能进入候选集。那时，车老师觉得是我在生成patten上存在问题。我就回去把patten的生成方式改了改，无果。<br />
+那次实验室例会才知道还有一个去重的语料只有14G。就朝唐国华学长要了那个语料，后来的工作就从104G转向了14G。<br />
+第五周的时候看《统计自然语言处理基础》搭配那章，书中提到挖掘搭配的方法一方面采用“停用词表”过滤，另一方面由于搭配的往往遵循某一固定语法规则，就用了一个语法规则过滤了一部分搭配，而书中称，效果很好。当时觉得第二个方法要进行句法分析，不太可能实现。但是第一种应该比较容易。
+</div>
+<div><strong>第六周</strong>，实验室例会后，和唐国华学长说到停用词表过滤patten的问题，他给了我停用词表。但是第六周，我好像精神状态特别不好，面试也被拒。就打酱油了。</div>
+<div><strong>第七周</strong>，纯酱油了。</div>
+<div><strong>第八周</strong>，<span style="color:#999;">{车老师觉得我太拖沓了，定了一周的deadline，顿时有压力了。}</span>这次实验加入了唐国华学长整理的停用词表。同时，将patten的产生模式进行了修改。这里采用的方法是在匹配名词的位置，左右拓展4个字，分别形成左模式和右模式，同时检查左模式的某一前缀是否在停用词表中，如果出现，则放弃这一模式。举例讲，就是将"的电影《(.*?)》"这样的模式去掉，因为"的"是停用词，对于产生模式没有什么价值。对于右模式采用同样的处理办法。但是，由于只处理前缀/后缀，不会抛弃"《(.*?)》的票房"这样的模式。<br />除了修改生成patten的方法，还将之前实验中出现的书名、电视剧名、法规条例名作为反向种子。生成反向patten集，如果某一正向patten出现在反向patten集中，则抛弃这一正向patten。<br />另外一个非常tricky的做法就是将最早先的用关键词过滤文本。这次依旧采用统计关键词在文本中出现频率从而产生某一领域文本的方法。只是降低了阈值为2、3，过滤后的电影领域文本的集大小分别为238M和169M。这样的做法，是考虑将Bootstrapping限制在与电影有一定关系的文本集上。一方面原因是，14G还是太大，在初始种子集大小为30、每轮迭代产生一个patten的条件下，首次迭代就要2个小时左右<span style="color:#999;">{在我的实验机上}</span>，时间上真的是受不起。另一方面原因是，无关文本集对于patten产生照成的影响或者是产生歧义的patten、或者是产生无意义的patten。真正能从中获得多少有用的信息不好估计。<span style="color:#999;">{其实应该做一个实验在14G中统计出现在无关文本中的电影名占总电影名的比例，但是这个没拿出时间做。}</span><br />再一个tricky的做法，是将(.*?)改成(.<span style="color:#999;">{3,45}</span>?)，一方面考虑电影名长度是有一定限度的，另一方面是这样写正则表达式不会因为语料的原因出现表达式不能构造或匹配异常等情况。</div>
+</div>
+
+
+<div id="result">
+<h3>实验参数与实验结果</h3>
+<h4>实验参数</h4>
+这次进行实验的机器是正心楼机房139、147、183三台机器。机器的配置都是Intel E7500 2.93G主频、2G内存。<br />依照阈值2、3生成了三组预处理的语料Del2.txt，Del3.txt。分别对两个文件进行Bootstrapping。设置每轮迭代模式的产生量为1、每轮产生50、100、250、500个种子。<br />结果Del2.txt在50种子的实验中，第9轮<span style="color:#999;">{这个记得不清，没做好实验数据的保存}</span>时出现了畸形的种子。就放弃了Del2.txt上的实验，在Del3.txt修改每次迭代产生的种子的数量。50的实验组大致在2000组名词后出现畸形的种子、100也在2000-3000后出现畸形种子，250则在前5000组种子中都保持了较高的准确率<span style="color:#999;">{昨晚看是96.5%}</span>，500因为刚做出来还没有看。<span style="color:#999;">{验证种子质量的方法就是最土鳖把电影名输入到豆瓣和Google中查询，这里所谓的畸形种子是类似于"演"、"艺"、"黑客帝国》、《指环王"。前两个词直接生成了"女(.<span style="color:#999;">{3,45}</span>?)员"和"张(.<span style="color:#999;">{3,45}</span>?)谋"这两个模式；后一个则是在产生种子时出现了问题，他们属于"《(.<span style="color:#999;">{3,45}</span>?)》"这个模式}</span>
+<h4>实验结果</h4>
+<ul>
+<li><strike>过滤文本的代码：http://blog.oneplus.info/nlp/genheat.cpp</strike></li>
+<li><strike>Bootstrapping的代码：http://blog.oneplus.info/nlp/bootstrapping.cpp</strike></li>
+<li><strike>初始正向种子集：http://blog.oneplus.info/nlp/goodSeeds.dic</strike></li>
+<li><strike>初始逆向种子集：http://blog.oneplus.info/nlp/badSeeds.dic</strike></li>
+<li><strike>停用词表：http://blog.oneplus.info/nlp/stopwords.dic</strike></li>
+<li><strike>每轮迭代产生500组种子的前9500组结果（utf8无bom编码，未人工处理）：http://blog.oneplus.info/nlp/Del3Result500.txt</strike></li>
+<li><strike>每轮迭代产生500组种子的前19个patten：http://blog.oneplus.info/nlp/Del3Test500.txt</strike></li>
+</ul>
+</div>
+
+
+</div>
+
+</div>
+
+<div class="footer">
+    This site is build by <a href="">Level0</a>.
+</div>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    TeX: {equationNumbers: {autoNumber: ["AMS"], useLabelIds: true}},
+    "HTML-CSS": {linebreaks: {automatic: true}},
+    SVG: {linebreaks: {automatic: true}}
+});
+</script>
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
+<script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
+</body>
+</html>
