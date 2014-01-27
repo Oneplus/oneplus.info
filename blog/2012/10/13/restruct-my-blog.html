@@ -1,6 +1,7 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
 <head>
-<meta charset="utf-8" />
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
 <title> 小记博客重组织 | Static Oneplus </title>
 <!--
 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
@@ -88,11 +89,12 @@ header { padding: 15px 0; }
 
 
 <p>这里要用到前面说过的比较麻烦的mod_rewrite。做法是在web根目录下的.htaccess中添加重写条件和重写规则。现在我对feed的重写规则是这样的
-[code]
-RewriteCond %{HTTP_HOST} ^blog.oneplus.info$
+<div>
+  <pre class="prettyprint linenums 1"><code class=''>RewriteCond %{HTTP_HOST} ^blog.oneplus.info$
 RewriteCond %{REQUEST_URI} ^/feed$ [NC]
-RewriteRule .* http://blog.oneplus.info/feed [NC,L,R=301]
-[/code]
+RewriteRule .* http://blog.oneplus.info/feed [NC,L,R=301]</code></pre>
+</div>
+
 它的含义是把所有主机名为blog.oneplus.info，URI为/feed的请求都重定向到blog.oneplus.info/feed下。
 </p>
 
@@ -113,11 +115,11 @@ RewriteRule .* http://blog.oneplus.info/feed [NC,L,R=301]
 
 
 <p>起初，我想了好久如何在query.php上做cache，后来才发现，最应该做cache的是主页这一端。所以在主页中添加了下面的代码：
-[code lang="PHP"]
-$cache = new Cache(3600, &quot;some_path&quot;);
+<div>
+  <pre class="prettyprint linenums 1"><code class='PHP'>$cache = new Cache(3600, &amp;quot;some_path&amp;quot;);
 
-$key = &quot;last_post&quot;;
-$values = $cache-&gt;get( $key );
+$key = &amp;quot;last_post&amp;quot;;
+$values = $cache-&amp;gt;get( $key );
 
 if ($values == false) {
     $page = '';
@@ -129,12 +131,13 @@ if ($values == false) {
     fclose( $handler );
     
     $values = $page;
-    $cache-&gt;put( $key, $values );
+    $cache-&amp;gt;put( $key, $values );
     echo $values;
 } else {
     echo $values;
-}
-[/code]
+}</code></pre>
+</div>
+
 对于主页的请求，先去看看cache过没过期，没过期就直接返回cache的结果，这样可以减少不少网络传输。其中，cache类我是参考<a href="http://www.mangguo.org/the-simple-php-cache-class/">这篇</a>的。
 </p>
 

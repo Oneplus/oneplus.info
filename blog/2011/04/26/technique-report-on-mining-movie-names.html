@@ -1,6 +1,7 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
 <head>
-<meta charset="utf-8" />
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
 <title> {补作业}基于Bootstrapping的电影名识别实验报告 | Static Oneplus </title>
 <!--
 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
@@ -61,20 +62,22 @@ Bootstrapping算法的流程大致是：
 <div id="process">
 <h3>实验过程</h3>
 <div><strong>第三周</strong>，在完成了langrid的调研后，开始了这个任务。最早时，拍脑袋想了一组和电影有关的关键词
-[code]
-std::string keyWord[] = {
-    &quot;电影&quot;, &quot;影视&quot;, &quot;上映&quot;,
-    &quot;科幻片&quot;, &quot;喜剧片&quot;, &quot;惊悚片&quot;, &quot;故事片&quot;,
-    &quot;动作片&quot;, &quot;爱情片&quot;, &quot;纪录片&quot;, &quot;伦理片&quot;,
-    &quot;百花奖&quot;, &quot;金鸡奖&quot;, &quot;金鸡百花奖&quot;, &quot;金球奖&quot;, &quot;奥斯卡奖&quot;,
-    &quot;好莱坞&quot;, &quot;票房&quot;, &quot;影院&quot;,
-    &quot;-1&quot;
-};
-[/code]
+<div>
+  <pre class="prettyprint linenums 1"><code class=''>std::string keyWord[] = {
+    &amp;quot;电影&amp;quot;, &amp;quot;影视&amp;quot;, &amp;quot;上映&amp;quot;,
+    &amp;quot;科幻片&amp;quot;, &amp;quot;喜剧片&amp;quot;, &amp;quot;惊悚片&amp;quot;, &amp;quot;故事片&amp;quot;,
+    &amp;quot;动作片&amp;quot;, &amp;quot;爱情片&amp;quot;, &amp;quot;纪录片&amp;quot;, &amp;quot;伦理片&amp;quot;,
+    &amp;quot;百花奖&amp;quot;, &amp;quot;金鸡奖&amp;quot;, &amp;quot;金鸡百花奖&amp;quot;, &amp;quot;金球奖&amp;quot;, &amp;quot;奥斯卡奖&amp;quot;,
+    &amp;quot;好莱坞&amp;quot;, &amp;quot;票房&amp;quot;, &amp;quot;影院&amp;quot;,
+    &amp;quot;-1&amp;quot;
+};</code></pre>
+</div>
+
 然后就在文本集中匹配这些关键词。如果一个文本中关键词出现的次数达到一个阈值就保留，否则丢弃。<span style="color:#999;">{最早在104G上实验时，这个阈值都设得很高，分别蒙了7、10、20、50，后面两组基本把整个生语料都过滤掉了，剩的都是…和更哗的}</span>
-[code]
-最好看的韩国电影，韩国爱情片，喜剧片，伦理片，恐怖片，迅雷下载，BT下载，电影在线观看……
-[/code]
+<div>
+  <pre class="prettyprint linenums 1"><code class=''>最好看的韩国电影，韩国爱情片，喜剧片，伦理片，恐怖片，迅雷下载，BT下载，电影在线观看……</code></pre>
+</div>
+
 进行了这项预处理后，用《(.*?)》的正则表达式去匹配书名号。大致挖出来1.4W条。然后随机选了100组<span style="color:#999;">{这个样本选得很土鳖}</span>，人工地看了一下，准确率不到50%。然后就开始写bootstrapping.cpp了。
 </div>
 <div><strong>第五周</strong>，周一做报告。bootstrapping.cpp那时只能挖出一票"《(.*?)》的"、"《(.*?)》是"、"、(.*?)、"这样的模式。而且，从模式的评价上，大量包含功能词的无意义的patten的频率都很高，而像"电影《(.*?)》"这样很好的patten没有优势，甚至不能进入候选集。那时，车老师觉得是我在生成patten上存在问题。我就回去把patten的生成方式改了改，无果。<br />

@@ -1,6 +1,7 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
 <head>
-<meta charset="utf-8" />
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
 <title> 访问量神马的最喜欢了 | Static Oneplus </title>
 <!--
 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
@@ -40,322 +41,316 @@ header { padding: 15px 0; }
 <div>输入那么浮云的东西，用一个叫eight.in的文件存一下，空格就画个x就好了。</div>
 
 
-<p><a id="more"></a><a id="more-183"></a>
-[code language="python"]</p>
+<p><a id="more"></a><a id="more-183"></a></p>
 
-<h1>coding=utf-8</h1>
-
-<p>import re
+<div>
+  <pre class="prettyprint linenums 1"><code class='python'># coding=utf-8
+import re
 import os
-import math</p>
+import math
 
-<p>SIZE = 362881
+SIZE = 362881
 f    = range(0, SIZE, 1)
 g    = range(0, SIZE, 1)
 path = range(0, SIZE, 1)
-step = range(0, SIZE, 1)</p>
+step = range(0, SIZE, 1)
 
-<p>sourceNumState = -1
+sourceNumState = -1
 targetNumState = -1
 hashedSourceNumState = -1
-hashedTargetNumState = -1</p>
+hashedTargetNumState = -1
 
-<p>distance = [
+distance = [
     [0 for a in range(10)] for b in range(10)
 ]
 adjancy = [
     [1, 3],
-    [0, 2, 4],
-    [1, 5],
-    [0, 4, 6],
-    [1, 3, 5, 7],
-    [2, 4, 8],
-    [3, 7],
-    [4, 6, 8],
+    [0, 2, 4], 
+    [1, 5], 
+    [0, 4, 6], 
+    [1, 3, 5, 7], 
+    [2, 4, 8], 
+    [3, 7], 
+    [4, 6, 8], 
     [5, 7]
 ]
 moves = [
-    ['r', 'd'],
+    ['r', 'd'], 
     ['l', 'r', 'd'],
-    ['l', 'd'],
+    ['l', 'd'], 
     ['u', 'r', 'd'],
-    ['u', 'l', 'r', 'd'],
+    ['u', 'l', 'r', 'd'], 
     ['u', 'l', 'd'],
-    ['u', 'r'],
-    ['u', 'l', 'r'],
+    ['u', 'r'], 
+    ['u', 'l', 'r'], 
     ['u', 'l']
 ]
 location = [
     [0, 0], [0, 1], [0, 2],
     [1, 0], [1, 1], [1, 2],
     [2, 0], [2, 1], [2, 2]
-]</p>
+]
 
-<p>class node():
+class node():
     key   = -1
-    value = 10000000000</p>
+    value = 10000000000
+    
+    def __init__(self, key, value):
+        self.key   = key
+        self.value = value
+        
+    def lessThan(self, node_t):
+        if self.value &amp;lt; node_t.value or (self.value == node_t.value and self.key &amp;gt; node_t.key):
+            return True
+        else:
+            return False
+            
+    def getKey(self):
+        return self.key
+        
+    def getValue(self):
+        return self.value
 
-<pre><code>def __init__(self, key, value):
-    self.key   = key
-    self.value = value
+class hash():
+    hashTable = range(0, SIZE, 1)
+    
+    def __init__(self):
+        for i in range(0, SIZE, 1):
+            self.hashTable[i] = -1
 
-def lessThan(self, node_t):
-    if self.value &amp;lt; node_t.value or (self.value == node_t.value and self.key &amp;gt; node_t.key):
-        return True
-    else:
-        return False
-
-def getKey(self):
-    return self.key
-
-def getValue(self):
-    return self.value
-</code></pre>
-
-<p>class hash():
-    hashTable = range(0, SIZE, 1)</p>
-
-<pre><code>def __init__(self):
-    for i in range(0, SIZE, 1):
-        self.hashTable[i] = -1
-
-def findHashPosition(self, value):
-    hashID = value % SIZE
-    while self.hashTable[hashID] != -1 and self.hashTable[hashID] != value:
-        # print 'in while', self.hashTable[hashID]
-        hashID = hashID + 1
-        if hashID == SIZE:
-            hashID = 0
-    return hashID
-
-def findHashValue(self, position):
-    if position &amp;gt;= SIZE or position &amp;lt; 0:
-        return -1
-    else:
-        return self.hashTable[position]
-
-def insertHash(self, value):
-    position = self.findHashPosition(value)
-    # print 'insertHash:: hash position :', position
-    self.hashTable[position] = value
-    return position
-</code></pre>
-
-<p>class priority_queue():
+    def findHashPosition(self, value):
+        hashID = value % SIZE
+        while self.hashTable[hashID] != -1 and self.hashTable[hashID] != value:
+            # print 'in while', self.hashTable[hashID]
+            hashID = hashID + 1
+            if hashID == SIZE:
+                hashID = 0
+        return hashID
+            
+    def findHashValue(self, position):
+        if position &amp;gt;= SIZE or position &amp;lt; 0:
+            return -1
+        else:
+            return self.hashTable[position]
+            
+    def insertHash(self, value):
+        position = self.findHashPosition(value)
+        # print 'insertHash:: hash position :', position
+        self.hashTable[position] = value
+        return position
+        
+class priority_queue():
     last = 0
     queue = []
-    # queue save hash id</p>
+    # queue save hash id
 
-<pre><code>def __init__(self):
-    self.last = 0
-    self.queue = [ node(10000000000, 10000000000) ] * SIZE
-    # print type( self.queue[100000] )
-
-def empty(self):
-    if self.last == 0:
-        return True
-    else:
-        return False
-
-def top(self):
-    return self.queue[1]
-
-def pop(self):
-    self.queue[ 1 ] = self.queue[ self.last ]
-    self.last = self.last - 1
-    self.siftDown( 1 )
-
-def push( self, value ):
-    self.last = self.last + 1
-    self.queue[ self.last ] = value
-    self.queue[ 0 ] = value
-    self.siftUp( self.last )
-
-def getF( self, p ):
-    # print self.queue[ p ]
-    return f[ hashTable.findHashPosition(self.queue[ p ]) ]
-
-def siftUp( self, p ):
-    i = p / 2
-    j = p
-    tmp = self.queue[ p ]
-    # print type( tmp )
-
-    while tmp.lessThan(self.queue[ i ]):
-        # print i
-        self.queue[ j ] = self.queue[ i ]
-        j = i
-        i = j / 2
-    self.queue[ j ] = tmp
-
-def siftDown( self, p ):
-    i = p * 2
-    j = p
-    tmp = self.queue[ p ]
-
-    while i &amp;lt;= self.last:
-        if i &amp;lt; self.last and self.queue[ i + 1 ].lessThan(self.queue[ i ]):
-            i = i + 1
-        if self.queue[ i ].lessThan( tmp ) == False:
-            break
+    def __init__(self):
+        self.last = 0
+        self.queue = [ node(10000000000, 10000000000) ] * SIZE
+        # print type( self.queue[100000] )
+    
+    def empty(self):
+        if self.last == 0:
+            return True
         else:
+            return False
+
+    def top(self):
+        return self.queue[1]
+
+    def pop(self):
+        self.queue[ 1 ] = self.queue[ self.last ]
+        self.last = self.last - 1
+        self.siftDown( 1 )
+    
+    def push( self, value ):
+        self.last = self.last + 1
+        self.queue[ self.last ] = value
+        self.queue[ 0 ] = value
+        self.siftUp( self.last )
+    
+    def getF( self, p ):
+        # print self.queue[ p ]
+        return f[ hashTable.findHashPosition(self.queue[ p ]) ]
+    
+    def siftUp( self, p ):
+        i = p / 2
+        j = p
+        tmp = self.queue[ p ]
+        # print type( tmp )
+        
+        while tmp.lessThan(self.queue[ i ]):
+            # print i
             self.queue[ j ] = self.queue[ i ]
             j = i
-            i = j * 2
-    self.queue[ j ] = tmp
-</code></pre>
+            i = j / 2
+        self.queue[ j ] = tmp
 
-<p>openTable = priority_queue()
+    def siftDown( self, p ):
+        i = p * 2
+        j = p
+        tmp = self.queue[ p ]
+        
+        while i &amp;lt;= self.last:
+            if i &amp;lt; self.last and self.queue[ i + 1 ].lessThan(self.queue[ i ]):
+                i = i + 1
+            if self.queue[ i ].lessThan( tmp ) == False:
+                break
+            else:
+                self.queue[ j ] = self.queue[ i ]
+                j = i
+                i = j * 2
+        self.queue[ j ] = tmp
+
+openTable = priority_queue()
 hashTable = hash()
-closeTable = range(0, SIZE, 1)</p>
-
-<p>def convertToNum( arrayState ):
+closeTable = range(0, SIZE, 1)
+        
+def convertToNum( arrayState ):
     ret = 0
     for i in range(0, 9, 1):
         ret = ret * 10
         ret = ret + int(arrayState[i])
-    return ret</p>
-
-<p>def convertToArray( numState ):
+    return ret
+    
+def convertToArray( numState ):
     ret = range(0, 9, 1)
     for i in range(8, -1, -1):
         ret[i]   = numState % 10
         numState = numState / 10
-    return ret</p>
-
-<p>def isSolvable(sourceState, targetState):
+    return ret
+    
+def isSolvable(sourceState, targetState):
     odd = 0
     eve = 0
     for i in range(0, 9, 1):
         for j in range(0, 9, 1):
-            if sourceState[i] &gt; sourceState[j] and sourceState[i] &gt; 0 and sourceState[j] &gt; 0:
+            if sourceState[i] &amp;gt; sourceState[j] and sourceState[i] &amp;gt; 0 and sourceState[j] &amp;gt; 0:
                 odd = odd + 1
-            if targetState[i] &gt; targetState[j] and targetState[i] &gt; 0 and targetState[j] &gt; 0:
+            if targetState[i] &amp;gt; targetState[j] and targetState[i] &amp;gt; 0 and targetState[j] &amp;gt; 0:
                 eve = eve + 1
     if odd % 2 == eve % 2:
         return True
     else:
-        return False</p>
+        return False
 
-<p>def getSourceState():
+def getSourceState():
     fp  = open('eight.in', 'r')
     sourceState = re.split('\n| ', fp.read())
-    fp.close()</p>
-
-<pre><code>for i in range(0, 9, 1):
-    if sourceState[i] == 'x':
-        sourceState[i] = '0'
-return sourceState
-</code></pre>
-
-<p>def getTargetState():
+    fp.close()
+    
+    for i in range(0, 9, 1):
+        if sourceState[i] == 'x':
+            sourceState[i] = '0'
+    return sourceState
+    
+def getTargetState():
     targetState = []
     for i in range(0, 8, 1):
         targetState.append( str(i + 1) )
-    targetState.append('0')</p>
+    targetState.append('0')
+    
+    return targetState
 
-<pre><code>return targetState
-</code></pre>
-
-<p>def getEmptyPositionInArray( arrayState ):
+def getEmptyPositionInArray( arrayState ):
     for i in range(0, 9, 1):
         if arrayState[i] == 0:
-            return i</p>
-
-<p>def getEstimateValue( numState ):
+            return i
+            
+def getEstimateValue( numState ):
     ret = 0
     for i in range(0, 9, 1):
         # print i, numState[i]
         ret = ret + distance[(i + 1) % 9][ int(numState[i]) ]
-    return ret</p>
+    return ret
 
-<p>def solve(srcArrayState, tagArrayState):
+def solve(srcArrayState, tagArrayState):
     for i in range(0, SIZE, 1):
-        closeTable[i] = 0</p>
+        closeTable[i] = 0
+    
+    for i in range(0, 9, 1):
+        for j in range(0, 9, 1):
+            distance[(i + 1) % 9][(j + 1) % 9] = abs(location[i][0] - location[j][0]) + abs(location[i][1] - location[j][1])
+            
+    sourceNumState = convertToNum(srcArrayState)
+    targetNumState = convertToNum(tagArrayState)
+    hashedSourceNumState = hashTable.insertHash(sourceNumState)
+    hashedTargetNumState = hashTable.insertHash(targetNumState)
+    
+    # print 'sourceNumState :', sourceNumState, hashedSourceNumState
+    g[ hashedSourceNumState ] = 0;
+    f[ hashedSourceNumState ] = getEstimateValue(srcArrayState)
+    f[ hashedTargetNumState ] = -1;
+    openTable.push( node(sourceNumState, f[ hashedSourceNumState ]) )
+    
+    while True:
+        currentNumState = openTable.top().key
+        currentArrayState = convertToArray( currentNumState )
+        hashedCurrentNumState = hashTable.insertHash( currentNumState )
+        openTable.pop()
+        # print 'currentNumState :', currentNumState, hashedCurrentNumState
+        # raw_input(&amp;quot;Press ENTER to exit&amp;quot;)
+        
+        if currentNumState == targetNumState:
+            stack = []
+            traceNumState = currentNumState
+            hashedTraceNumState = hashTable.insertHash(traceNumState)
+            while hashedTraceNumState != hashedSourceNumState:
+                stack.append( step[ hashedTraceNumState ] )
+                hashedTraceNumState = path[ hashedTraceNumState ]
 
-<pre><code>for i in range(0, 9, 1):
-    for j in range(0, 9, 1):
-        distance[(i + 1) % 9][(j + 1) % 9] = abs(location[i][0] - location[j][0]) + abs(location[i][1] - location[j][1])
-
-sourceNumState = convertToNum(srcArrayState)
-targetNumState = convertToNum(tagArrayState)
-hashedSourceNumState = hashTable.insertHash(sourceNumState)
-hashedTargetNumState = hashTable.insertHash(targetNumState)
-
-# print 'sourceNumState :', sourceNumState, hashedSourceNumState
-g[ hashedSourceNumState ] = 0;
-f[ hashedSourceNumState ] = getEstimateValue(srcArrayState)
-f[ hashedTargetNumState ] = -1;
-openTable.push( node(sourceNumState, f[ hashedSourceNumState ]) )
-
-while True:
-    currentNumState = openTable.top().key
-    currentArrayState = convertToArray( currentNumState )
-    hashedCurrentNumState = hashTable.insertHash( currentNumState )
-    openTable.pop()
-    # print 'currentNumState :', currentNumState, hashedCurrentNumState
-    # raw_input(&amp;quot;Press ENTER to exit&amp;quot;)
-
-    if currentNumState == targetNumState:
-        stack = []
-        traceNumState = currentNumState
-        hashedTraceNumState = hashTable.insertHash(traceNumState)
-        while hashedTraceNumState != hashedSourceNumState:
-            stack.append( step[ hashedTraceNumState ] )
-            hashedTraceNumState = path[ hashedTraceNumState ]
-
-        for move in reversed( stack ):
-            print move
-        break
-
-    closeTable[ hashedCurrentNumState ] = 2
-    emptyPosition = getEmptyPositionInArray( currentArrayState )
-
-    for nextPosition in adjancy[ emptyPosition ]:
-        nextArrayState = []
-        for ii in currentArrayState:
-            nextArrayState.append(str(ii))
-
-        nextArrayState[ emptyPosition ] = currentArrayState[ nextPosition ]
-        nextArrayState[ nextPosition ]  = '0'
-
-        # print 'nextArrayState :', nextArrayState
-        nextNumState = convertToNum( nextArrayState )
-
-        hashedNextNumState = hashTable.insertHash( nextNumState );
-
-        if closeTable[ hashedNextNumState ] == 0:
-            closeTable[ hashedNextNumState ] = 1;
-            g[ hashedNextNumState ] = g[ hashedCurrentNumState ] + 1
-            f[ hashedNextNumState ] = g[ hashedNextNumState ] + getEstimateValue( currentArrayState )
-            path[ hashedNextNumState ] = hashedCurrentNumState
-            step[ hashedNextNumState ] = moves[ emptyPosition ][ adjancy[ emptyPosition ].index( nextPosition ) ]
-            openTable.push( node(nextNumState, f[hashedNextNumState]) )
-        elif closeTable[ hashedNextNumState ] == 1 and g[ hashedCurrentNumState ] + 1 &amp;lt; g[ hashedNextNumState ]:
-            g[ hashedNextNumState ] = g[ hashedCurrentNumState ] + 1
-            f[ hashedNextNumState ] = g[ hashedNextNumState ] + getEstimateValue( currentArrayState )
-            path[ hashedNextNumState ] = hashedCurrentNumState
-            step[ hashedNextNumState ] = moves[ emptyPosition ][ adjancy[ emptyPosition ].index( nextPosition ) ]
-            openTable.pop()
-</code></pre>
-
-<p>def main():
+            for move in reversed( stack ):
+                print move
+            break
+        
+        closeTable[ hashedCurrentNumState ] = 2
+        emptyPosition = getEmptyPositionInArray( currentArrayState )
+        
+        for nextPosition in adjancy[ emptyPosition ]:
+            nextArrayState = []
+            for ii in currentArrayState:
+                nextArrayState.append(str(ii))
+            
+            nextArrayState[ emptyPosition ] = currentArrayState[ nextPosition ]
+            nextArrayState[ nextPosition ]  = '0'
+            
+            # print 'nextArrayState :', nextArrayState
+            nextNumState = convertToNum( nextArrayState )
+            
+            hashedNextNumState = hashTable.insertHash( nextNumState );
+            
+            if closeTable[ hashedNextNumState ] == 0:
+                closeTable[ hashedNextNumState ] = 1;
+                g[ hashedNextNumState ] = g[ hashedCurrentNumState ] + 1
+                f[ hashedNextNumState ] = g[ hashedNextNumState ] + getEstimateValue( currentArrayState )
+                path[ hashedNextNumState ] = hashedCurrentNumState
+                step[ hashedNextNumState ] = moves[ emptyPosition ][ adjancy[ emptyPosition ].index( nextPosition ) ]
+                openTable.push( node(nextNumState, f[hashedNextNumState]) )
+            elif closeTable[ hashedNextNumState ] == 1 and g[ hashedCurrentNumState ] + 1 &amp;lt; g[ hashedNextNumState ]:
+                g[ hashedNextNumState ] = g[ hashedCurrentNumState ] + 1
+                f[ hashedNextNumState ] = g[ hashedNextNumState ] + getEstimateValue( currentArrayState )
+                path[ hashedNextNumState ] = hashedCurrentNumState
+                step[ hashedNextNumState ] = moves[ emptyPosition ][ adjancy[ emptyPosition ].index( nextPosition ) ]
+                openTable.pop()
+    
+def main():
     sourceArrayState = getSourceState()
     targetArrayState = getTargetState()
     sourceNumState = convertToNum(sourceArrayState)
     targetNumState = convertToNum(targetArrayState)
-    print sourceNumState, targetNumState</p>
+    print sourceNumState, targetNumState
+    
+    if isSolvable(sourceArrayState, targetArrayState) == False:
+        print 'What the Hell!'
+    else:
+        solve(sourceArrayState, targetArrayState)
+        
+if __name__ == '__main__':
+    main()</code></pre>
+</div>
 
-<pre><code>if isSolvable(sourceArrayState, targetArrayState) == False:
-    print 'What the Hell!'
-else:
-    solve(sourceArrayState, targetArrayState)
-</code></pre>
 
-<p>if <strong>name</strong> == '<strong>main</strong>':
-    main()
-[/code]
-<a href="http://blog.oneplus.info/wp-content/uploads/2011/04/haha.jpg"><img src="http://blog.oneplus.info/wp-content/uploads/2011/04/haha.jpg" alt="" title="haha" width="530" height="318" class="aligncenter size-full wp-image-184" /></a></p>
+<p><a href="http://blog.oneplus.info/wp-content/uploads/2011/04/haha.jpg"><img src="http://blog.oneplus.info/wp-content/uploads/2011/04/haha.jpg" alt="" title="haha" width="530" height="318" class="aligncenter size-full wp-image-184" /></a></p>
 
 </div>
 

@@ -1,6 +1,7 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
 <head>
-<meta charset="utf-8" />
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
 <title> HCPC 2011 Spring On-Site Contest 解题报告 | Static Oneplus </title>
 <!--
 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
@@ -67,7 +68,7 @@ header { padding: 15px 0; }
 
 <p><strong>[by jerrybond]</strong>计算各点到中心的距离，按距离大小将点排序，合并距离相等的点。问题转化为最大子段和问题。由于本题有动态更新每点的值，普通动态规划解决这个问题的复杂度为<em>O(QC<sup>2</sup>)</em>，对于本题数据范围不适用。需要线段树进行维护。
 <div>
-  <pre class="prettyprint linenums 1"><code class='cpp'>#include&lt;math.h&gt;
+  <pre class="prettyprint linenums 1"><code class='CPP'>#include&lt;math.h&gt;
 #include&lt;stdio.h&gt;
 #include&lt;string.h&gt;
 #include&lt;stdlib.h&gt;
@@ -111,7 +112,7 @@ void build(int l, int r, int s) {
 }
 
 void insert(int l, int r, int s, int v) {
-    if (l == node[s].l &amp;amp;&amp;amp; node[s].r == r) {
+    if (l == node[s].l &amp; node[s].r == r) {
         node[s].sum = node[s].max = node[s].maxl = node[s].maxr = v;
         return;
     } else if (node[s].r &gt; node[s].l) {
@@ -127,7 +128,7 @@ void insert(int l, int r, int s, int v) {
 }
 
 struct Node check(int l, int r, int s) {
-    if (l == node[s].l &amp;amp;&amp;amp; node[s].r == r)
+    if (l == node[s].l &amp; node[s].r == r)
         return node[s];
     int mid = (node[s].l + node[s].r)&gt;&gt;1;
     if (r &lt;= mid) return check(l, r, s&lt;&lt;1);
@@ -158,9 +159,9 @@ int main(void) {
     int n, m, i, j, d, x;
     char str[10];
 
-    while (scanf(&amp;quot;%d&amp;quot;, &amp;amp;n)==1) {
+    while (scanf(&quot;%d&quot;, n)==1) {
         for (i=1;i&lt;=n;i++) {
-            scanf(&amp;quot;%d %d %d&amp;quot;,&amp;amp;pt[i].x,&amp;amp;pt[i].y,&amp;amp;pt[i].v);
+            scanf(&quot;%d %d %d&quot;,pt[i].x,&amp;pt[i].y,&amp;pt[i].v);
             pt[i].dis=pt[i].x*pt[i].x + pt[i].y*pt[i].y;
             pt[i].id=i;
             p[i]=pt[i].v;
@@ -179,17 +180,17 @@ int main(void) {
         }
 
         build(1,tot,1);
-        scanf(&amp;quot;%d&amp;quot;, &amp;amp;m);
+        scanf(&quot;%d&quot;, m);
         for (i=1;i&lt;=m;i++) {
-            scanf(&amp;quot;%s&amp;quot;, str);
+            scanf(&quot;%s&quot;, str);
             if (str[0]=='C') {
-                scanf (&amp;quot;%d %d&amp;quot;, &amp;amp;d, &amp;amp;x);
+                scanf (&quot;%d %d&quot;, d, &amp;x);
                 pt[id[d]].v=pt[id[d]].v-p[d]+x;
                 p[d]=x;
                 insert(id[d],id[d],1, pt[id[d]].v);
             } else {
                 ans = check(1,tot,1);
-                printf (&amp;quot;%d\n&amp;quot;, ans.max);
+                printf (&quot;%d\n&quot;, ans.max);
             }
         }
     }
@@ -206,7 +207,7 @@ int main(void) {
 <p><strong>[by Darkgt]</strong>此题是求平面点中共线最多的点数，对于一般的情况需要O(n<sup>2</sup>logn)的复杂度，枚举一个点需要O(n)复杂度，验证需要O(nlogn)。<br />
 此题明确所有的点最多只在7条直线上，因此如果随机选取一个点有大于1/7的概率取到最多点数的直线，如果每组数据只随机取30个点用来验证，在最坏的情况下有(6/7)<sup>30</sup>&le;1%的概率算法错误，由于最多只有30组数据，理论上可以跑对全部数据。当然，适当增加或减小枚举的点数，可以影响程序的正确率和速度。
 <div>
-  <pre class="prettyprint linenums 1"><code class='cpp'>#include &lt;stdio.h&gt;
+  <pre class="prettyprint linenums 1"><code class='CPP'>#include &lt;stdio.h&gt;
 #include &lt;algorithm&gt;
 #include &lt;iostream&gt;
 #include &lt;cmath&gt;
@@ -217,7 +218,7 @@ struct tt
     int x;
     int y;
 } a[10001];
-bool cmp(const tt&amp;amp;b,const tt&amp;amp;c)
+bool cmp(const ttb,const tt&amp;c)
 {
     if(b.x==c.x) return b.y &lt; c.y;
     return b.x &lt; c.x;
@@ -267,15 +268,15 @@ int cal(int n)
 int main()
 {
     int n,ca;
-    scanf(&amp;quot;%d&amp;quot;,&amp;amp;ca);
+    scanf(&quot;%d&quot;,ca);
     while(ca--)
     {
-        scanf(&amp;quot;%d&amp;quot;,&amp;amp;n);
+        scanf(&quot;%d&quot;,n);
         for(int i = 0; i &lt; n; i++)
-            scanf(&amp;quot;%d%d&amp;quot;,&amp;amp;a[i].x,&amp;amp;a[i].y);
+            scanf(&quot;%d%d&quot;,a[i].x,&amp;a[i].y);
         int ans=cal(n);
 
-        printf(&amp;quot;%d\n&amp;quot;,ans);
+        printf(&quot;%d\n&quot;,ans);
     }
     return 0;
 }</code></pre>
@@ -289,7 +290,7 @@ int main()
 
 <p><strong>[by Darkgt]</strong>如果用s[i]表示到达第i个位置所需最少步数，可以发现s[i-1]&le;s[i]，具有dp的性质，但dp的复杂度无法解决此题。发现s[i]=p的位置是连续的并且由s[i]=p-1的位置转移到，于是每次可以转移s值相等的一个区间，复杂度O(n)。
 <div>
-  <pre class="prettyprint linenums 1"><code class='cpp'>#include &lt;cstdio&gt;
+  <pre class="prettyprint linenums 1"><code class='CPP'>#include &lt;cstdio&gt;
 #include &lt;algorithm&gt;
 using namespace std;
 const int M = 100005;
@@ -298,25 +299,25 @@ int n;
 int main()
 {
     int ca;
-    scanf(&amp;quot;%d&amp;quot;,&amp;amp;ca);
+    scanf(&quot;%d&quot;,ca);
     while(ca--){
-        scanf(&amp;quot;%d&amp;quot;,&amp;amp;n);
+        scanf(&quot;%d&quot;,n);
         for(int i=0;i&lt;n;i++)
-            scanf(&amp;quot;%d&amp;quot;,&amp;amp;x[i]);
+            scanf(&quot;%d&quot;,x[i]);
         int left=0,right=1,nextright,ans;
         for(ans=0;;ans++){
             if(right&lt;=left) {
                 ans=-1;
                 break;
             }
-            if(left&lt;=n-1&amp;amp;&amp;amp;n-1&lt;right) break;
+            if(left&lt;=n-1&amp;n-1&lt;right) break;
             nextright=-1;
             for(int i=left;i&lt;right;i++)
                 nextright=max(nextright,i+x[i]+1);
             left=right;
             right=nextright;
         }
-        printf(&amp;quot;%d\n&amp;quot;,ans);
+        printf(&quot;%d\n&quot;,ans);
     }
     return 0;
 }</code></pre>
@@ -328,87 +329,77 @@ int main()
 <h4>Power-supply System</h4>
 
 
-<p><p><strong>[by sevenzero]</strong>这题我和Xnozero合出来防AK的，题目是从CF64的E改的，原题是个n<sup>3</sup>的树DP，我想了n<sup>2</sup>的办法于是将原题数据改大了，考虑到刷刷的存在，为了增加难度就加了双连通分量的缩点，好吧，已经基本不可做了。<br />
-先缩点，不会的自己去学，值得一提的是双连通分量的缩点分为基于割和基于桥的两种，本来想出基于割的缩点（参考2010杭州regional的G），最后自己都觉得太恶心就换成基于桥的缩点了。<br />
-DP部分要用3个数组in、out、inm。
+<p><strong>[by sevenzero]</strong>这题我和Xnozero合出来防AK的，题目是从CF64的E改的，原题是个n<sup>3</sup>的树DP，我想了n<sup>2</sup>的办法于是将原题数据改大了，考虑到刷刷的存在，为了增加难度就加了双连通分量的缩点，好吧，已经基本不可做了。</p>
+
+<p>先缩点，不会的自己去学，值得一提的是双连通分量的缩点分为基于割和基于桥的两种，本来想出基于割的缩点（参考2010杭州regional的G），最后自己都觉得太恶心就换成基于桥的缩点了。</p>
+
+<p>DP部分要用3个数组in、out、inm。</p>
+
 <ul><li>in[i][j]为以i为根的子树中有发电站给i供电且与i的距离为j的最小花费，</li>
-<li><code>inm[i]=min(in[i][j])</code> 辅助数组，</li>
+<li>inm[i]=min(in[i][j]) 辅助数组，</li>
 <li>out[i][j]为以i为根的子树外有发电站给i供电且与i的距离为j或者在子树内有发电站给i供电的最小花费。</li></ul>
-对于in[i][j]:
+
+
+<p>对于in[i][j]:</p>
+
 <ul><li>j=0时，说明就在i点建站，in[i][j]=sigma(out[son(i).k][j+1])+cost[i];</li>
 <li>j>0时，说明发电站来自i的某儿子在的子树，对于这个子树来说发电站在这个子树里，其他子树来说在发电站子树外，</li></ul>
-故方程有<code>in[i][j]=min(sigma(out[son(i).k][j+1])+in[son(i).k][j-1]-out[son(i).k][j+1]+f[j]),&lt;br /&gt;sigma(out[son(i).k][j+1])</code>可以提前算出作为常数使用，故这里也只用一重循环就可解决，保证最后算法是n<sup>2</sup>的复杂度。<code>out[i][j]=min(sigma(out[son(i).k][j+1])+f[j],inm[i])。</code>
-<p>inm[root]即为最终答案，整个过程可以用记忆化搜索实现。</p></p>
 
-<p><div>
-  <pre class="prettyprint linenums 1"><code class='cpp'>#include &lt;vector&gt;</p>
 
-<h1>include &lt;list&gt;</h1>
+<p>故方程有<code>in[i][j]=min(sigma(out[son(i).k][j+1])+in[son(i).k][j-1]-out[son(i).k][j+1]+f[j]),&lt;br /&gt;sigma(out[son(i).k][j+1])</code>可以提前算出作为常数使用，故这里也只用一重循环就可解决，保证最后算法是n<sup>2</sup>的复杂度。
+<code>out[i][j]=min(sigma(out[son(i).k][j+1])+f[j],inm[i])。</code>
+inm[root]即为最终答案，整个过程可以用记忆化搜索实现。</p>
 
-<h1>include &lt;map&gt;</h1>
+<div>
+  <pre class="prettyprint linenums 1"><code class='CPP'>#include &lt;vector&gt;
+#include &lt;list&gt;
+#include &lt;map&gt;
+#include &lt;set&gt;
+#include &lt;deque&gt;
+#include &lt;stack&gt;
+#include &lt;bitset&gt;
+#include &lt;algorithm&gt;
+#include &lt;functional&gt;
+#include &lt;numeric&gt;
+#include &lt;utility&gt;
+#include &lt;sstream&gt;
+#include &lt;iostream&gt;
+#include &lt;iomanip&gt;
+#include &lt;cstdio&gt;
+#include &lt;cmath&gt;
+#include &lt;cstdlib&gt;
+#include &lt;ctime&gt;
+#include &lt;cstring&gt;
 
-<h1>include &lt;set&gt;</h1>
+using namespace std;
 
-<h1>include &lt;deque&gt;</h1>
+#define V 1011
+#define E 1000001
 
-<h1>include &lt;stack&gt;</h1>
+int dfn[V], order, anc[V], bridge[V], stk[V], top, cntb, bcc[V], cntbcc;
 
-<h1>include &lt;bitset&gt;</h1>
-
-<h1>include &lt;algorithm&gt;</h1>
-
-<h1>include &lt;functional&gt;</h1>
-
-<h1>include &lt;numeric&gt;</h1>
-
-<h1>include &lt;utility&gt;</h1>
-
-<h1>include &lt;sstream&gt;</h1>
-
-<h1>include &lt;iostream&gt;</h1>
-
-<h1>include &lt;iomanip&gt;</h1>
-
-<h1>include &lt;cstdio&gt;</h1>
-
-<h1>include &lt;cmath&gt;</h1>
-
-<h1>include &lt;cstdlib&gt;</h1>
-
-<h1>include &lt;ctime&gt;</h1>
-
-<h1>include &lt;cstring&gt;</h1>
-
-<p>using namespace std;</p>
-
-<h1>define V 1011</h1>
-
-<h1>define E 1000001</h1>
-
-<p>int dfn[V], order, anc[V], bridge[V], stk[V], top, cntb, bcc[V], cntbcc;</p>
-
-<p>struct ED
+struct ED
 {
     int v;
-    ED <em>next;
-} pool[E], </em>base[V], *topp;</p>
+    ED *next;
+} pool[E], *base[V], *topp;
 
-<p>void init()
+void init()
 {
     topp = pool;
     memset(base, 0, sizeof (base));
-}</p>
+}
 
-<p>void addedge(int i, int j)
+void addedge(int i, int j)
 {
     topp-&gt;v = j;
     topp-&gt;next = base[i];
     base[i] = topp++;
-}</p>
+}
 
-<p>bool vis[V], vise[E];</p>
+bool vis[V], vise[E];
 
-<p>void dfs(int i)
+void dfs(int i)
 {
     dfn[i] = order++;
     vis[i]=1;
@@ -419,13 +410,13 @@ DP部分要用3个数组in、out、inm。
         int j = ip-&gt;v;
         if (vis[j])
         {
-            if (!vise[ip - pool] &amp;amp;&amp;amp; dfn[anc[i]] &gt; dfn[j])
+            if (!vise[ip - pool] &amp; dfn[anc[i]] &gt; dfn[j])
                 anc[i] = j;
         }
         else
         {
             vise[ip - pool] = 1;
-            vise[(ip - pool)<sup>1</sup>] = 1;
+            vise[(ip - pool)^1] = 1;
             dfs(j);
             if (dfn[anc[i]] &gt; dfn[anc[j]])
                 anc[i] = anc[j];
@@ -458,17 +449,17 @@ void bridge_bcc(int n)
                 bcc[stk[--top]]=cntbcc;
             cntbcc++;
         }
-}</p>
+}
 
-<p>vector&lt;int&gt; ed[V];
+vector&lt;int&gt; ed[V];
 int c,d[V],cost[V];
 int in[V][V],inm[V],out[V][V];
 bool vm[V]={0},vi[V][V]={0},vo[V][V]={0};
 int inf(int,int,int);
 int inmf(int,int);
-int outf(int,int,int);</p>
+int outf(int,int,int);
 
-<p>int inmf(int x,int f)
+int inmf(int x,int f)
 {
     if(vm[x])
         return inm[x];
@@ -479,9 +470,9 @@ int outf(int,int,int);</p>
         }
     vm[x]=1;
     return inm[x];
-}</p>
+}
 
-<p>int inf(int i,int j,int f)
+int inf(int i,int j,int f)
 {
     if(vi[i][j]) return in[i][j];
     vi[i][j]=1;
@@ -495,9 +486,9 @@ int outf(int,int,int);</p>
         if(ed[i][k]!=f)
             in[i][j]=min(in[i][j],ret+inf(ed[i][k],j-1,i)-outf(ed[i][k],j+1,i)+d[j]);
     return in[i][j];
-}</p>
+}
 
-<p>int outf(int i,int j,int f)
+int outf(int i,int j,int f)
 {
     if(j&gt;=cntbcc) return outf(i,cntbcc-1,f);
     if(vo[i][j]) return out[i][j];
@@ -508,24 +499,24 @@ int outf(int,int,int);</p>
             ret+=outf(ed[i][k],j+1,i);
     out[i][j]=min(inmf(i,f),ret);
     return out[i][j];
-}</p>
+}
 
-<p>bool mtx[V][V];
+bool mtx[V][V];
 int main()
 {
     int n,m;
-    while(scanf(&amp;quot;%d%d%d&amp;quot;,&amp;amp;n,&amp;amp;m,&amp;amp;c)!=EOF)
+    while(scanf(&quot;%d%d%d&quot;,n,&amp;m,&amp;c)!=EOF)
     {
         init();
         int a,b;
         for(int i=0;i&lt;m;i++)
         {
-            scanf(&amp;quot;%d%d&amp;quot;,&amp;amp;a,&amp;amp;b);
+            scanf(&quot;%d%d&quot;,a,&amp;b);
             addedge(a-1,b-1);
             addedge(b-1,a-1);
         }
         for(int i=0;i&lt;n-1;i++)
-            scanf(&amp;quot;%d&amp;quot;,&amp;amp;d[i+1]);
+            scanf(&quot;%d&quot;,d[i+1]);
         bridge_bcc(n);
         for(int i=0;i&lt;cntbcc;i++) cost[i] = c;
         memset(mtx,0,sizeof(mtx));
@@ -554,23 +545,26 @@ int main()
     }
     return 0;
 }</code></pre>
-</div></p>
+</div>
 
-<p><h4>Play Beans Beans</h4>
+
+
+
+<h4>Play Beans Beans</h4>
+
+
 <p><strong>[by Lambyy]</strong>水题一枚, 题意可能比较绕, 但自认为题意描述很清楚, 基本按题意模拟下来即可, 第一组Sample 数据即蕴含了本题最大的Trick, 即在每一个Round过程中新产生的空白点, 是不会被进行操作的, 否则Sample就得7了, 相信大部分过了的人都考虑到了这种情况.
 定位为简单模拟题, 基本全场题, 没想卡人……
 <div>
-  <pre class="prettyprint linenums 1"><code class='cpp'>#include &lt;cstdio&gt;</p>
+  <pre class="prettyprint linenums 1"><code class='CPP'>#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+const int N = 32;
 
-<h1>include &lt;cstring&gt;</h1>
-
-<p>const int N = 32;</p>
-
-<p>int flag, w, h;
+int flag, w, h;
 char map[N][N];
-bool f[N][N];</p>
+bool f[N][N];
 
-<p>int up (int x, int y, int &amp;amp;t) {
+int up (int x, int y, int t) {
     for (int i = x - 1; i &gt;= 0; i--) {
         if (map[i][y] != '.') {
             t = x - i;
@@ -578,9 +572,9 @@ bool f[N][N];</p>
         }
     }
     return -1;
-}</p>
+}
 
-<p>int down (int x, int y, int &amp;amp;t) {
+int down (int x, int y, int t) {
     for (int i = x + 1; i &lt; h; i++) {
         if (map[i][y] != '.') {
             t = i - x;
@@ -588,9 +582,9 @@ bool f[N][N];</p>
         }
     }
     return -2;
-}</p>
+}
 
-<p>int left (int x, int y, int &amp;amp;t) {
+int left (int x, int y, int t) {
     for (int i = y - 1; i &gt;= 0; i--) {
         if (map[x][i] != '.') {
             t = y - i;
@@ -598,9 +592,9 @@ bool f[N][N];</p>
         }
     }
     return -3;
-}</p>
+}
 
-<p>int right (int x, int y, int &amp;amp;t) {
+int right (int x, int y, int t) {
     for (int i = y + 1; i &lt; w; i++) {
         if (map[x][i] != '.') {
             t = i - y;
@@ -608,108 +602,104 @@ bool f[N][N];</p>
         }
     }
     return -4;
-}</p>
+}
 
-<p>void solve() {
+void solve() {
     int i, j, t = 0;
     int t1, t2, t3, t4, x1, x2, x3, x4;
     for (i = 0; i &lt; h; i++) {
         for (j = 0; j &lt; w; j++) {
             f[i][j] = (map[i][j] == '.');
         }
-    }</p>
+    }
 
-<pre><code>for (i = 0; i &amp;lt; h; i++) {
-    for (j = 0; j &amp;lt; w; j++) {
-        t1 = t2 = t3 = t4 = -5;
-        x1 = x2 = x3 = x4 = 0;
-        if (f[i][j]) {
-            t1 = up(i, j, x1);
-            t2 = down(i, j, x2);
-            t3 = left(i, j, x3);
-            t4 = right(i, j, x4);
-            if (t1 == t2) {
-                t = 1;
-                map[i - x1][j] = '.';
-                map[i + x2][j] = '.';
-            }
-            if (t1 == t3) {
-                t = 1;
-                map[i - x1][j] = '.';
-                map[i][j - x3] = '.';
-            }
+    for (i = 0; i &lt; h; i++) {
+        for (j = 0; j &lt; w; j++) {
+            t1 = t2 = t3 = t4 = -5;
+            x1 = x2 = x3 = x4 = 0;
+            if (f[i][j]) {
+                t1 = up(i, j, x1);
+                t2 = down(i, j, x2);
+                t3 = left(i, j, x3);
+                t4 = right(i, j, x4);
+                if (t1 == t2) {
+                    t = 1;
+                    map[i - x1][j] = '.';
+                    map[i + x2][j] = '.';
+                }
+                if (t1 == t3) {
+                    t = 1;
+                    map[i - x1][j] = '.';
+                    map[i][j - x3] = '.';
+                }
 
-            if (t1 == t4) {
-                t = 1;
-                map[i - x1][j] = '.';
-                map[i][j + x4] = '.';
-            }
+                if (t1 == t4) {
+                    t = 1;
+                    map[i - x1][j] = '.';
+                    map[i][j + x4] = '.';
+                }
 
-            if (t2 == t3) {
-                t = 1;
-                map[i + x2][j] = '.';
-                map[i][j - x3] = '.';
-            }
+                if (t2 == t3) {
+                    t = 1;
+                    map[i + x2][j] = '.';
+                    map[i][j - x3] = '.';
+                }
 
-            if (t2 == t4) {
-                t = 1;
-                map[i + x2][j] = '.';
-                map[i][j + x4] = '.';
-            }
+                if (t2 == t4) {
+                    t = 1;
+                    map[i + x2][j] = '.';
+                    map[i][j + x4] = '.';
+                }
 
-            if (t3 == t4) {
-                t = 1;
-                map[i][j - x3] = '.';
-                map[i][j + x4] = '.';
+                if (t3 == t4) {
+                    t = 1;
+                    map[i][j - x3] = '.';
+                    map[i][j + x4] = '.';
+                }
             }
         }
     }
-}
-if (t == 0) {
-    flag = 1;
+    if (t == 0) {
+        flag = 1;
+        return;
+    }
+    solve();
     return;
 }
-solve();
-return;
-</code></pre>
 
-<p>}</p>
-
-<p>int main() {
+int main() {
     int i, j, cnt;
-    while (scanf(&amp;quot;%d %d&amp;quot;, &amp;amp;h, &amp;amp;w) == 2 &amp;amp;&amp;amp; w + h) {
-        for (i = 0; i &lt; h; i++) scanf(&amp;quot;%s&amp;quot;, map[i]);</p>
+    while (scanf(&quot;%d %d&quot;, h, &amp;w) == 2 &amp;&amp; w + h) {
+        for (i = 0; i &lt; h; i++) scanf(&quot;%s&quot;, map[i]);
 
-<pre><code>    flag = cnt = 0;
-    solve();
-    for (i = 0; i &amp;lt; h; i++)
-        for (j = 0; j &amp;lt; w; j++)
-            cnt += (map[i][j] == '.');
-    printf(&amp;amp;quot;%d\n&amp;amp;quot;, w * h - cnt);
-}
-return 0;
-</code></pre>
+        flag = cnt = 0;
+        solve();
+        for (i = 0; i &lt; h; i++)
+            for (j = 0; j &lt; w; j++)
+                cnt += (map[i][j] == '.');
+        printf(&quot;%d\n&quot;, w * h - cnt);
+    }
+    return 0;
+}</code></pre>
+</div>
 
-<p>}</code></pre>
-</div></p>
+</p>
 
-<p></p>
+
 <h4>Dictionary</h4>
+
+
 <p>处理XML，求到行首距离为Q的标签的属性。可以一边读入一边递归着求。也可以都读入后去掉正文，再递归处理，总之是递归着做，比较简单。校验时觉得属性名有空格太坑又没什么意思，就把有空格的数据去掉。
 <div>
-  <pre class="prettyprint linenums 1"><code class='cpp'>#include &lt;iostream&gt;</p>
+  <pre class="prettyprint linenums 1"><code class='CPP'>#include &lt;iostream&gt;
+#include &lt;sstream&gt;
+#include &lt;cstring&gt;
+#include &lt;vector&gt;
+using namespace std;
 
-<h1>include &lt;sstream&gt;</h1>
-
-<h1>include &lt;cstring&gt;</h1>
-
-<h1>include &lt;vector&gt;</h1>
-
-<p>using namespace std;</p>
-
-<p>vector&lt;string&gt; S, res;
+vector&lt;string&gt; S, res;
 int tag;
-void dfs(int sum, int&amp;amp; now) {
+void dfs(int sum, int now) {
     if(now == S.size())
         return;
     string tmp = S[now];
@@ -722,16 +712,16 @@ void dfs(int sum, int&amp;amp; now) {
         if(tmp[1] == '/') break;
         else dfs(sum + len, now);
     }
-}</p>
+}
 
-<p>int main() {
+int main() {
     int n, m;
-    while( scanf( &amp;quot;%d%d&amp;quot;, &amp;amp;n, &amp;amp;tag ) == 2 ) {
+    while( scanf( &quot;%d%d&quot;, n, &amp;tag ) == 2 ) {
         string buf;
         getchar(); S.clear(); res.clear();
         for( int i = 0; i &lt; n; i ++ ) {
             getline( cin, buf );
-            if(buf[0] == '&lt;' &amp;amp;&amp;amp; buf[buf.size() - 1] == '&gt;')
+            if(buf[0] == '&lt;' &amp; buf[buf.size() - 1] == '&gt;')
                 S.push_back(buf);
         }
         int sum = 0, now = 0;
@@ -740,50 +730,64 @@ void dfs(int sum, int&amp;amp; now) {
     }
     return 0;
 }</code></pre>
-</div></p>
+</div>
 
-<p></p>
+</p>
+
+
 <h4>Find the Fraction</h4>
-<p><strong>[by Lambyy]</strong>这题基本上算是纯数学题吧, 且在ACM数论中针对分数领域题目出的少之又少, 所以此题算是冷门题.<br />
-题目是对n阶Farey Sequence中的第k项, 进行分母不大于m的分数逼近. </br >
-所以第一步需要求待逼近分数. <br />
-对于求Farey Sequence中项有朴素算法, 复杂度是O(n<sup>2</sup>)的. 所以对于此题n 10<sup>5</sup>的数量级是行不通的. <br />
-Farey Sequence性质:
+
+
+<p><strong>[by Lambyy]</strong>这题基本上算是纯数学题吧, 且在ACM数论中针对分数领域题目出的少之又少, 所以此题算是冷门题.</p>
+
+<p>题目是对n阶Farey Sequence中的第k项, 进行分母不大于m的分数逼近.</p>
+
+<p>所以第一步需要求待逼近分数.</p>
+
+<p>对于求Farey Sequence中项有朴素算法, 复杂度是O(n<sup>2</sup>)的. 所以对于此题n 10<sup>5</sup>的数量级是行不通的.</p>
+
+<p>Farey Sequence性质:</p>
+
 <ul>
 <li><strong>性质1</strong>&nbsp;&nbsp;如果a/b,x/y是F<sub>n</sub>中的相邻两项, 那么ay + 1 = bx.<br />
 证明: 此结论可根据Fn的构造过程得出. </li>
 <li><strong>推论1</strong>&nbsp;&nbsp;F<sub>n</sub>中任意相邻两项之差大于等于1/n(n-1).<br />
 证明: 假设这两项顺次分别为a/b和p/q, 则
-故得结论。</li></ul></p>
+故得结论。</li></ul>
+
 
 <p>根据推论1，假设f(i)(1&le;i&le;n<sup>2</sup>)为F<sub>k</sub>中不大于i/n<sup>2</sup>的项数。则f(i+1)-f(i)&le;1。我们只需要在这些值中二分，求出一个满足f(i)=k的i，然后再求出Fn中小于等于i/n<sup>2</sup>的最大分数。先用O(nloglogn)的时间作计算f(i)的预处理，由于每次计算f(i)的时间复杂度为O(n)，二分的次数为O(logn)，最后一次求最大分数时，只要枚举所有分母即可，所以本操作的时间复杂度为O(nlogn)。
-得出待逼近分数之后(方便下文解释，设为a/b)，要进行分数逼近操作。<br/>
-由FareySequence构造方式可知，第m阶Farey数列包含了分母不大于m的所有分数，所以最终所求即是在第m阶Farey数列中最接近a/b的两个数。Farey数列是有序的，我们知道a/b的准确值是出现在第b阶Farey数列中的，利用Farey数列的生成特点，可以从第b阶Farey数列中的a/b准确值反推出第m阶Farey数列中最逼近a/b的两个数，这里b不小于m。<br/>
-接下来便是一个递归逼近的过程.
+得出待逼近分数之后(方便下文解释，设为a/b)，要进行分数逼近操作。</p>
+
+<p>由FareySequence构造方式可知，第m阶Farey数列包含了分母不大于m的所有分数，所以最终所求即是在第m阶Farey数列中最接近a/b的两个数。Farey数列是有序的，我们知道a/b的准确值是出现在第b阶Farey数列中的，利用Farey数列的生成特点，可以从第b阶Farey数列中的a/b准确值反推出第m阶Farey数列中最逼近a/b的两个数，这里b不小于m。</p>
+
+<p>接下来便是一个递归逼近的过程.</p>
+
 <ol>
 <li>对于a/b, 生成在第b阶Farey数列中它的前一项和后一项, c/d和e/f. <br />
 这里根据性质1, 用扩展gcd算法求解.</li>
 <li>如果d和f均不大于m，那么c/d和e/f就是答案。由于c/d和e/f是第b阶Farey数列中最逼近a/b的数，也同时存在于第m阶Farey序列中，而第m阶Farey序列不可能有比第b阶Farey序列更好的逼近，这便是递归过程的结束条件。</li>
 <li>如果d和f均大于m，那么令a/b等于c/d和e/f分母较小的那个，跳到1，继续递归。<br />
-<li>如果d，f中一个大于m，另一个不大于m，这是显然不大于n的是一个答案。不妨设d>m，而f&le;m。我们注意到e/f这一个分数在第m阶Farey数列中就已经存在，而在第d级Farey序列中它与c/d相邻，这里m&lt;d&lt;b，由于Farey数列的特点，c/d左边的那一项与e/f共同生成c/d，因此c/d左边的那一项值为(c-e)/(d-f)，如果d-f值仍然大于n，考虑到c/d生成之前(c-e)/(d-f)是与e/f相邻的，他左边的一项,(c-2<em>e)/(d-2</em>f)，依此类推，我们可以找到k使得(d-k<em>f)&lt;n，这时(c-k</em>e)/(d-k*f) 便是另一个答案。</li>
+<li>如果d，f中一个大于m，另一个不大于m，这是显然不大于n的是一个答案。不妨设d>m，而f&le;m。我们注意到e/f这一个分数在第m阶Farey数列中就已经存在，而在第d级Farey序列中它与c/d相邻，这里m<d<b，由于Farey数列的特点，c/d左边的那一项与e/f共同生成c/d，因此c/d左边的那一项值为(c-e)/(d-f)，如果d-f值仍然大于n，考虑到c/d生成之前(c-e)/(d-f)是与e/f相邻的，他左边的一项,(c-2*e)/(d-2*f)，依此类推，我们可以找到k使得(d-k*f)<n，这时(c-k*e)/(d-k*f) 便是另一个答案。</li>
 </ol>
-这样便可以得到满足题意要求的两个分数。<br /><br />
-关于本题结论 以及更多关于Farey Sequence 的知识, 请参考论文<a href="http://wenku.baidu.com/view/40edb37a32d7375a41780c9.html">《一类分数问题的研究》</a>.<br />
+
+
+<p>这样便可以得到满足题意要求的两个分数。</p>
+
+<p>关于本题结论 以及更多关于Farey Sequence 的知识, 请参考论文<a href="http://wenku.baidu.com/view/40edb37a32d7375a41780c9.html">《一类分数问题的研究》</a>.</p>
+
 <div>
-  <pre class="prettyprint linenums 1"><code class='cpp'>#include &lt;cstdio&gt;</p>
+  <pre class="prettyprint linenums 1"><code class='CPP'>#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;cmath&gt;
+const int N = 100010;
+long long n, A[N], m;
 
-<h1>include &lt;cstring&gt;</h1>
-
-<h1>include &lt;cmath&gt;</h1>
-
-<p>const int N = 100010;
-long long n, A[N], m;</p>
-
-<p>long long gcd(long long a, long long b) {
+long long gcd(long long a, long long b) {
     return b ? gcd(b, a % b) : a;
-}</p>
+}
 
-<p>long long Rank (long long a) {
+long long Rank (long long a) {
     long long q, t, ans = 0;
     for (q = 1; q &lt;= n; ++q)    A[q] = q * a / n;
     for (q = 1, ans = 0; q &lt;= n; ++q) {
@@ -791,9 +795,9 @@ long long n, A[N], m;</p>
         for (t = q * 2; t &lt;= n; t += q) A[t] -= A[q];
     }
     return ans;
-}</p>
+}
 
-<p>long long bsearch(long long k) {
+long long bsearch(long long k) {
     long long t, lt = 0, rt = n, mid;
     while (lt &lt; rt) {
         mid = (lt + rt) &gt;&gt; 1;
@@ -802,11 +806,11 @@ long long n, A[N], m;</p>
         if (t &lt; k)  lt = mid + 1;
         else rt = mid - 1;
     }
-    if (Rank(lt) &gt; k &amp;amp;&amp;amp; Rank(lt - 1) &lt; k)   return lt - 1;
+    if (Rank(lt) &gt; k &amp; Rank(lt - 1) &lt; k)   return lt - 1;
     else return lt;
-}</p>
+}
 
-<p>void search(long long term, long long s, long long p, long long q, long long &amp;amp;t1, long long &amp;amp;t2) {
+void search(long long term, long long s, long long p, long long q, long long t1, long long &amp;t2) {
     long long a, b, c, d, e, f, k, t = 1, i;
     t = gcd(s, n), a = s / t, b = n / t;
     t = gcd(p, q), c = p / t, d = q / t;
@@ -821,9 +825,9 @@ long long n, A[N], m;</p>
     }
     t1 = c, t2 = d;
     return;
-}</p>
+}
 
-<p>long long ext_gcd(long long a, long long b, long long&amp;amp; x, long long&amp;amp; y) {
+long long ext_gcd(long long a, long long b, long long x, long long&amp; y) {
     long long t, ret;
     if (!b) {
         x = 1, y = 0;
@@ -832,25 +836,25 @@ long long n, A[N], m;</p>
     ret = ext_gcd(b, a % b, x, y);
     t = x, x = y, y = t - a / b * y;
     return ret;
-}</p>
+}
 
-<p>void find(long long a,long long b,long long &amp;amp;L1,long long &amp;amp;L2,long long &amp;amp;R1,long long &amp;amp;R2) {
+void find(long long a,long long b,long long L1,long long &amp;L2,long long &amp;R1,long long &amp;R2) {
     long long x, y;
     ext_gcd(a, b, x, y);
     x = (x + b) % b;
     L2 = x, L1 = (L2 * a - 1) / b;
     R2 = (x * (b - 1)) % b, R1 = (R2 * a + 1) / b;
-}</p>
+}
 
-<p>void solve(long long a,long long b,long long &amp;amp;L1,long long &amp;amp;L2,long long &amp;amp;R1,long long &amp;amp;R2) {
+void solve(long long a,long long b,long long L1,long long &amp;L2,long long &amp;R1,long long &amp;R2) {
     if (b &lt;= m) {
         L1 = R1 = a;
         L2 = R2 = b;
         return;
     }
     find (a, b, L1, L2, R1, R2);
-    if (R2 &lt;= m &amp;amp;&amp;amp; L2 &lt;= m)  return;
-    while (R2 &gt; m &amp;amp;&amp;amp; L2 &gt; m) {
+    if (R2 &lt;= m &amp; L2 &lt;= m)  return;
+    while (R2 &gt; m &amp; L2 &gt; m) {
         if (R2 &gt; L2) {
             a = L1, b = L2;
             find (a, b, L1, L2, R1, R2);
@@ -868,15 +872,15 @@ long long n, A[N], m;</p>
         a = R1, b = R2;
         find (a, b, t1, t2, R1, R2);
     }
-}</p>
+}
 
-<p>int main() {
-//    freopen(&amp;quot;F.in&amp;quot;, &amp;quot;r&amp;quot;, stdin);
-//    freopen(&amp;quot;F.out&amp;quot;, &amp;quot;w&amp;quot;, stdout);
+int main() {
+//    freopen(&quot;F.in&quot;, &quot;r&quot;, stdin);
+//    freopen(&quot;F.out&quot;, &quot;w&quot;, stdout);
     long long i, k, a, p, q, po, t1, t2;
     long long t, Up1, Up2, Down1, Down2;
     double mi, tmp;
-    while (scanf (&amp;quot;%lld %lld %lld&amp;quot;, &amp;amp;n, &amp;amp;k, &amp;amp;m) == 3) {
+    while (scanf (&quot;%lld %lld %lld&quot;, n, &amp;k, &amp;m) == 3) {
         a = bsearch(k), mi = 1.00, po = 0;
         for (q = 1; q &lt;= n; q++) {
             p = ((a + 1) * q - 1) / n;
@@ -884,40 +888,39 @@ long long n, A[N], m;</p>
                 tmp = (double) (p) / (double) (q);
                 if (tmp &lt; mi)  mi = tmp, po = q;
             }
-        }</p>
+        }
 
-<pre><code>    if (po != 0) q = po, p = ((a + 1) * q - 1) / n;
-    else q = n, p = a + 1;
+        if (po != 0) q = po, p = ((a + 1) * q - 1) / n;
+        else q = n, p = a + 1;
 
-    search(k - Rank(a), a, p, q, t1, t2);
-    t = gcd(t1, t2);
-    t1 /= t, t2 /= t;
+        search(k - Rank(a), a, p, q, t1, t2);
+        t = gcd(t1, t2);
+        t1 /= t, t2 /= t;
 
-    solve(t1, t2, Down1, Down2, Up1, Up2);
-    printf(&amp;amp;quot;%lld/%lld %lld/%lld\n&amp;amp;quot;, Down1, Down2, Up1, Up2);
-}
-return 0;
-</code></pre>
+        solve(t1, t2, Down1, Down2, Up1, Up2);
+        printf(&quot;%lld/%lld %lld/%lld\n&quot;, Down1, Down2, Up1, Up2);
+    }
+    return 0;
+}</code></pre>
+</div>
 
-<p>}</code></pre>
-</div></p>
 
-<p><h4>Zero Pair</h4>
-<p><strong>[by Xnozero]</strong>将a<em>b=rev(a)</em>rev(b)转化为a/rev(a)=rev(b)/b,预处理出范围内的 rev(a)的值,将a/rev(a)的分子分母约分后存入MAP，再对b进行类似的处理，从MAP中找到对应的值，统计总数即可。</p>
 
-<p><div>
-  <pre class="prettyprint linenums 1"><code class='cpp'>#include&lt;iostream&gt;</p>
 
-<h1>include&lt;map&gt;</h1>
+<h4>Zero Pair</h4>
 
-<h1>include&lt;cstdio&gt;</h1>
 
-<h1>include&lt;cstring&gt;</h1>
+<p><strong>[by Xnozero]</strong>将`a*b=rev(a)*rev(b)`转化为`a/rev(a)=rev(b)/b`,预处理出范围内的 rev(a)的值,将a/rev(a)的分子分母约分后存入MAP，再对b进行类似的处理，从MAP中找到对应的值，统计总数即可。
 
-<p>using namespace std;
-map&lt;pair&lt;int,int&gt;,int&gt; hash;</p>
+<div>
+  <pre class="prettyprint linenums 1"><code class='CPP'>#include&lt;iostream&gt;
+#include&lt;map&gt;
+#include&lt;cstdio&gt;
+#include&lt;cstring&gt;
+using namespace std;
+map&lt;pair&lt;int,int&gt;,int&gt; hash;
 
-<p>int ext(int a, int b, int &amp;amp;x, int &amp;amp;y)
+int ext(int a, int b, int x, int &amp;y)
 {
     int t1, t2;
     if (!b)
@@ -948,46 +951,48 @@ pair&lt;int,int&gt; work(int a,int b)
 pair&lt;int,int&gt; temp;
 int main()
 {
-    // freopen(&amp;quot;in.txt&amp;quot;,&amp;quot;r&amp;quot;,stdin);
+    // freopen(&quot;in.txt&quot;,&quot;r&quot;,stdin);
     int a,b,p;
     int x,y;
     int i,j;
     int ans;
-    while (scanf(&amp;quot;%d %d %d&amp;quot;,&amp;amp;a,&amp;amp;b,&amp;amp;p)==3)
+    while (scanf(&quot;%d %d %d&quot;,a,&amp;b,&amp;p)==3)
     {
         ans=0;
-        hash.clear();</p>
+        hash.clear();
 
-<pre><code>    for (i=1;i&amp;lt;=a;i++)
-    {
-        ext(i,p,x,y);
-        x=((x%p)+p)%p;
-        if(x==0)
-            x=p;
-        hash[work(i,x)]++;
-    }
-    for (i=1;i&amp;lt;=b;i++)
-    {
-        ext(i,p,x,y);
-        x=((x%p)+p)%p;
-        if(x==0)
-            x=p;
-        temp=work(x,i);
-        if (hash.find(temp)!=hash.end())
+        for (i=1;i&lt;=a;i++)
         {
-            ans+=hash[temp];
+            ext(i,p,x,y);
+            x=((x%p)+p)%p;
+            if(x==0)
+                x=p;
+            hash[work(i,x)]++;
         }
+        for (i=1;i&lt;=b;i++)
+        {
+            ext(i,p,x,y);
+            x=((x%p)+p)%p;
+            if(x==0)
+                x=p;
+            temp=work(x,i);
+            if (hash.find(temp)!=hash.end())
+            {
+                ans+=hash[temp];
+            }
+        }
+        printf(&quot;%d\n&quot;,ans);
     }
-    printf(&amp;amp;quot;%d\n&amp;amp;quot;,ans);
-}
-return 0;
-</code></pre>
+    return 0;
+}</code></pre>
+</div>
 
-<p>}</code></pre>
-</div></p>
+</p>
 
-<p></p>
-<p><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><em>解题报告分割线</em></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></p>
+
+<p>_____________________________解题报告分割线_____________________________</p>
+
+
 <p>比赛现场的情况是这样的
 <a href="http://blog.oneplus.info/wp-content/uploads/2011/05/rank2.jpg"><img src="http://blog.oneplus.info/wp-content/uploads/2011/05/rank2.jpg" alt="" title="rank2" width="500" class="aligncenter size-full wp-image-303" /></a>
 <br />比较惊艳的几处:
@@ -998,7 +1003,8 @@ return 0;
 <li>羊那天说了一句，“后生可畏啊”</li>
 <li>刷刷…不说什么了</li>
 </ul>
-就这样子吧。</p></p>
+就这样子吧。</p>
+
 
 </div>
 

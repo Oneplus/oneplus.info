@@ -1,6 +1,7 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
 <head>
-<meta charset="utf-8" />
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
 <title> C++笔记 - 虚函数几个小问题 | Static Oneplus </title>
 <!--
 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
@@ -43,7 +44,8 @@ header { padding: 15px 0; }
 
 
 <p>&nbsp;&nbsp;&nbsp;&nbsp;答案是可以的。通过纯虚析构函数，可以防止抽象类被实例化。但是，这里有一个逻辑上的矛盾。由于抽象类往往与具体类对应，从类的继承关系来看，抽象类往往是某些类的基类，如果有继承关系存在，派生类就需要知道基类的析构函数。所以，类似于
-[code lang="CPP"]class fruit {
+<div>
+  <pre class="prettyprint linenums 1"><code class='CPP'>class fruit {
 public:
     fruit() {}
     //virtual ~fruit() = 0;
@@ -67,8 +69,9 @@ public:
     }
 
     const char *name;
-};
-[/code]
+};</code></pre>
+</div>
+
 的代码不能编译通过。</p>
 
 
@@ -79,14 +82,21 @@ public:
 
 
 <p>&nbsp;&nbsp;&nbsp;&nbsp;假设已经有如同图的设计，现在想用一个vector或者数组将不同种的fruit存储在一起。但是，抽象类不能实例化，所以，类似于
-[code]vector&lt;fruit&gt; fruits;[/code]
+<div>
+  <pre class="prettyprint linenums 1"><code class=''>vector&lt;fruit&gt; fruits;</code></pre>
+</div>
+
 或者
-[code]fruit *fruits = new fruit[3];[/code]
+<div>
+  <pre class="prettyprint linenums 1"><code class=''>fruit *fruits = new fruit[3];</code></pre>
+</div>
+
 的代码都是不能编译通过的。不过，虽然fruit *fruits = new fruit[3]不能编译通过，fruit *fruits = (fruit *)calloc(3, sizeof(fruit));这样的C风格的代码却可以编译通过。只是在运行过程中，一旦调用fruit子类的方法就会出现segment fault。要分析上面问题的原因，就要简单解释一下C++虚函数的实现方法。</p>
 
 
 <p>&nbsp;&nbsp;&nbsp;&nbsp;在没有C++时，C程序员可以在结构体中保存函数指针的方法来实现一些简单的重写(override)，比如一个链表，喜欢面向对象的程序员或许会把它写成：
-[code lang="C"]typedef struct _list_node node_t;
+<div>
+  <pre class="prettyprint linenums 1"><code class='C'>typedef struct _list_node node_t;
 typedef struct _list      list_t;
 
 struct _list_node {
@@ -99,18 +109,23 @@ struct _list {
 
     void (*init)(list_t *list);
     void (*append)(list_t *list, int data);
-};[/code]
+};</code></pre>
+</div>
+
 然后定义一些不同的append的方式把list->append的函数指针指向这些函数名，也从一定程度上实现了面向对象中的封装。</p>
 
 
 <p>&nbsp;&nbsp;&nbsp;&nbsp;而C++对于函数的实现思路与上面大致类似。对于每个类都保存一组函数指针的表。在发生类的继承关系后，由编译器处理各函数指针指向的函数入口。在调用成员函数时，通过这个表找到对应函数的入口地址。对于这段代码：
-[code lang="CPP"]fruit *fruits = (fruit *)calloc(3, sizeof(fruit));
+<div>
+  <pre class="prettyprint linenums 1"><code class='CPP'>fruit *fruits = (fruit *)calloc(3, sizeof(fruit));
 fruits[0] = apple(&quot;ipad&quot;);
-fruits[1] = banana(&quot;what&quot;);
+    fruits[1] = banana(&quot;what&quot;);
 
 for (int i = 0; i &lt; 2; ++ i) {
     (fruits + i)-&gt;taste();
-}[/code]</p>
+}</code></pre>
+</div>
+</p>
 
 
 <p>&nbsp;&nbsp;&nbsp;&nbsp;用VS2008调试，发现fruits变量所指向的内存中，__vfptr(是前面提到的虚指针)的值为0，也就是在调用taste方法时，找不到正确的函数入口，所以出现了segment fault。</p>
@@ -120,9 +135,13 @@ for (int i = 0; i &lt; 2; ++ i) {
 
 
 <p>&nbsp;&nbsp;&nbsp;&nbsp;回到最初讨论的问题，要实现同一抽象类的若干子类的实例用同一结构存储，一种可行的方法是保存fruit类的指针。将代码变为：
-[code lang="CPP"]vector&lt;fruit *&gt; fruits;[/code]
+```
+vector<fruit *> fruits;
+```
 或者
-[code lang="CPP"]fruit **fruits = new fruit *[3];[/code]</p>
+```
+fruit **fruits = new fruit *[3];
+```</p>
 
 
 
@@ -131,11 +150,12 @@ for (int i = 0; i &lt; 2; ++ i) {
 
 
 <p>&nbsp;&nbsp;&nbsp;&nbsp;这个，显然是不能的。比方说，如下代码
-[code lang="CPP"]fruit *app = new apple();
-app-&gt;smell();[/code]
+<div>
+  <pre class="prettyprint linenums 1"><code class='CPP'>fruit *app = new apple();
+app-&gt;smell();</code></pre>
+</div>
+
 编译不过。这也是我觉得C/C++相对于动态语言非常不灵活的一方面。</p>
-
-
 
 
 </div>

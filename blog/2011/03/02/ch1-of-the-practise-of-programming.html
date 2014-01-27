@@ -1,6 +1,7 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
 <head>
-<meta charset="utf-8" />
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
 <title> 程序设计实践一 - 第一课 | Static Oneplus </title>
 <!--
 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
@@ -49,23 +50,24 @@ header { padding: 15px 0; }
 在开始准备第一课时，我尽力让自己保持一种轻松愉快的心情。结果内容非常不靠谱，或者说是weird。本意是用一些更贴近大一同学的方式使更多的同学对课程产生兴趣，不过反馈效果不明显，下节课还是正经点，多搞点动画什么的吧。<br />
 去二区的时候堵了一路车，无语。下次自己去，还要再早点。<br />
 本来是打算用自己的笔记本作演示，但由于堵车迟到，这件事就只好作罢。结果原来准备的用matlab画Sierpinski triangle的动画泡汤了。这里贴出土鳖的matlab代码，路过轻拍。
-[code language="matlab"]
-function Sierpinski(x, y, l, d)
+<div>
+  <pre class="prettyprint linenums 1"><code class='matlab'>function Sierpinski(x, y, l, d)
 if( d == 0 )
     axis off;
     hold on;
     triangle(x, y, l, 1);
 end;
-if( d &lt; 6 )
+if( d &amp;lt; 6 )
     triangle(x, y, l / 2, -1);
     pause(0.001);
     Sierpinski(x - l / 4, y - l / 4 * sqrt(3) / 3, l / 2, d + 1 );
     Sierpinski(x + l / 4, y - l / 4 * sqrt(3) / 3, l / 2, d + 1 );
     Sierpinski(x, y + l / 2 * sqrt(3) / 3, l / 2, d + 1 );
-end;
-[/code]
-[code]
-function triangle( x, y, l, d )
+end;</code></pre>
+</div>
+
+<div>
+  <pre class="prettyprint linenums 1"><code class=''>function triangle( x, y, l, d )
 x1 = x - l / 2;
 x2 = x + l / 2;
 x3 = x;
@@ -74,8 +76,9 @@ y1 = y - d * l / 2 * sqrt(3) / 3;
 y2 = y - d * l / 2 * sqrt(3) / 3;
 y3 = y + d * l * sqrt(3) / 3;
 
-fill([x1 x2 x3], [y1 y2 y3], 'w');
-[/code]
+fill([x1 x2 x3], [y1 y2 y3], 'w');</code></pre>
+</div>
+
 不能使用笔记本的另一个坏处就是，原计划进行的课程录音杯具了。下节课早点去二区，心平气和地把这件事做清楚吧。<br />
 第一课的难度实在是太简单了，所以我想当然地认为下次课的出勤还应该不错。不过这只是我个人的一些臆想。一周后再看结果吧。<br />
 作为一门选修课，而且是我承诺不点名的选修课，衡量其成败的唯一标准大概就是课程的出勤了。怎样分配难易，一个问题要讲多深才能把握大部分听众的兴趣又让人觉得有一定的趣味，希望我能撞大运把这件事做好吧。<br />

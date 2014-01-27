@@ -1,6 +1,7 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
 <head>
-<meta charset="utf-8" />
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
 <title> Language Grid调研结果[iii]{补作业完结篇+番外篇} | Static Oneplus </title>
 <!--
 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
@@ -81,8 +82,8 @@ Service调研
 <h4>Atomic Service的调研</h4>
 Atomic Service完成一些Service Grid和语言资源、软件API的交互，是Service Grid最靠外的一层。Atomic Service的方法由AbstractSerive及其子类描述。其中包括AbstractAdjacencyPairService、AbstractMorphologicalAnalysisService等。<br />
 其中，类的继承关系如下
-[code]
-AbstractService
+<div>
+  <pre class="prettyprint linenums 1"><code class=''>AbstractService
     AbstractLanguageService
         AbstractAdjacencyPairService // 机器问答
         AbstractConceptDictionaryService // 概念词典
@@ -98,8 +99,9 @@ AbstractService
         AbstractBilingualDictionaryService 
         AbstractDictionaryService
         AbstractParallelTextService
-        AbstractTranslationService
-[/code]
+        AbstractTranslationService</code></pre>
+</div>
+
 对于上述AbstractService，Service Grid源码中不提供该项服务的解决方案，而是要求通过重载运算来实机器问答、机器翻译等功能。<br />
 各项AbstractService提供重载的接口如下
 <ul>

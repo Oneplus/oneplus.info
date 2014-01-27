@@ -1,7 +1,8 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
 <head>
-<meta charset="utf-8" />
-<title> 程序设计实践一 – 第二课 | Static Oneplus </title>
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+<title> 程序设计实践一 - 第二课 | Static Oneplus </title>
 <!--
 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap-responsive.min.css">
@@ -147,8 +148,8 @@ PPT请看<a href="http://acm.hit.edu.cn/~oneplus/design-2011/02-ppt.pdf">这里<
 
 
 <div class="codemain">
-[code]
-import javax.swing.*;
+<div>
+  <pre class="prettyprint linenums 1"><code class=''>import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.Panel;
@@ -161,7 +162,7 @@ public class bisearch extends JFrame implements ActionListener {
         setSize(500, 400);
         setBackground(Color.white);
         
-        nextButton = new Button( &quot;Next&quot; );
+        nextButton = new Button( &amp;quot;Next&amp;quot; );
         nextButton.addActionListener( this );
         add( nextButton );
         
@@ -174,7 +175,7 @@ public class bisearch extends JFrame implements ActionListener {
         upperBound = f( rightBound );
         low = 3.0;
         high = 4.0;
-        //System.out.println( lowerBound + &quot; &quot; + upperBound );
+        //System.out.println( lowerBound + &amp;quot; &amp;quot; + upperBound );
     }
     
     public void paint( Graphics g ) {
@@ -185,10 +186,10 @@ public class bisearch extends JFrame implements ActionListener {
         x_axis = p1.getY();
         g.drawLine( p1.getX(), p1.getY(), p2.getX(), p2.getY());
         g.drawLine( 40, 0, 40, 400);
-        g.drawString( &quot;y axis&quot;, 35, 75 );
-        g.drawString( &quot;x axis&quot;, 450, x_axis );
+        g.drawString( &amp;quot;y axis&amp;quot;, 35, 75 );
+        g.drawString( &amp;quot;x axis&amp;quot;, 450, x_axis );
         
-        for( double i = leftBound; i &lt;= rightBound; i = i + eps ) {
+        for( double i = leftBound; i &amp;lt;= rightBound; i = i + eps ) {
             double x = i, xx = i + eps;
             double y = f( x ), yy = f( xx );
             
@@ -201,10 +202,10 @@ public class bisearch extends JFrame implements ActionListener {
         g.drawOval( p2.getX() - 3, p2.getY() - 3, 6, 6);
         g.drawLine( p1.getX(), p1.getY(), p1.getX(), x_axis );
         g.drawLine( p2.getX(), p2.getY(), p2.getX(), x_axis );
-        new DecimalFormat( &quot;0.00&quot; );
+        new DecimalFormat( &amp;quot;0.00&amp;quot; );
         g.drawString( Double.toString( 3.0 ), p1.getX(), x_axis + 12);
         g.drawString( Double.toString( 4.0 ), p2.getX(), x_axis + 12);
-        //System.out.println( p1.getX() + &quot; &quot; + p1.getY() );
+        //System.out.println( p1.getX() + &amp;quot; &amp;quot; + p1.getY() );
     }
     
     public double f( double x ) {
@@ -221,15 +222,15 @@ public class bisearch extends JFrame implements ActionListener {
     
     public void actionPerformed( ActionEvent event ) {
         if( event.getSource() == nextButton ) {
-            if( high - low &gt; 0.001 ) {
+            if( high - low &amp;gt; 0.001 ) {
                 mid = ( low + high ) * 0.5;
-                new DecimalFormat( &quot;0.00&quot; );
+                new DecimalFormat( &amp;quot;0.00&amp;quot; );
                 point p1 = toPoint( mid, f(mid) );
                 getGraphics().drawOval( p1.getX() - 3, p1.getY() - 3, 6, 6);
                 getGraphics().drawLine( p1.getX(), p1.getY(), p1.getX(), x_axis );
                 getGraphics().drawString( Double.toString( mid ), p1.getX(), x_axis + 12);
                 double tmp = f( mid );
-                if( f( mid ) &gt; 0 ) {
+                if( f( mid ) &amp;gt; 0 ) {
                     high = mid;
                 }
                 else {
@@ -264,8 +265,9 @@ class point {
     public int getY() { return y; }
     private int x;
     private int y;
-}
-[/code]
+}</code></pre>
+</div>
+
 </div>
 
 

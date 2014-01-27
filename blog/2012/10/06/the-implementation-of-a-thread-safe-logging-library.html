@@ -1,6 +1,7 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
 <head>
-<meta charset="utf-8" />
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
 <title> 实现一个线程安全的logging库 | Static Oneplus </title>
 <!--
 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
@@ -51,21 +52,22 @@ Log是用来记录程序事件的一系列打印信息，和调试时的printf�
 
 <p>
 首先把设计模式书上的代码抄一遍：
-[code lang="CPP"]
-class Singleton {
+<div>
+  <pre class="prettyprint linenums 1"><code class='CPP'>class Singleton {
    public:
        static Singleton* getInstance( );
    private:
        Singleton( );
        static Singleton* instance;
-};
-[/code]
+};</code></pre>
+</div>
+
 </p>
 
 
 <p>然后，要做的就是往里面填一个打印log的函数，这个也是很容易实现的。实现后的效果如下。
-[code lang="CPP"]
-class logger {
+<div>
+  <pre class="prettyprint linenums 1"><code class='CPP'>class logger {
 public:
     static logger * get_logger() {
         if (_instance == NULL) { _instance = new logger(); }
@@ -87,8 +89,9 @@ logger * logger::_instance = NULL;
 int main() {
     logger::get_logger()-&gt;write_log(10);
     return 0;
-}
-[/code]</p>
+}</code></pre>
+</div>
+</p>
 
 
 <p>当然也可以用变长参数和宏函数配合把这个做得有点酷，不过那些也不是本文要讨论的。</p>
@@ -103,14 +106,15 @@ int main() {
 <p>相比解释线程安全(Threads Safety)的概念，我觉得说明线程不安全更加容易。就拿前面说到的logger做例子。如果我开若干个线程，每个线程调用logger::get_logger()->write_log(tid);搞不好就会出现如下图的情况，
 <a href="http://blog.oneplus.info/wp-content/uploads/2012/10/thread_safety.png"><img src="http://blog.oneplus.info/wp-content/uploads/2012/10/thread_safety.png" alt="" title="thread_safety" width="266" height="52" class="aligncenter size-full wp-image-728" /></a>
 这里就出现两个线程都向stderr打印，导致打印信息混乱了。如果write_log函数中做更复杂的操作，出现这种混乱的可能性会变得更大。造成这一现象的原因就是多个线程抢占同一文件句柄，是生产者消费者问题的一个具体情境。解决方法就是给write_log上互斥锁。把write_log函数改成下面的样子就好了。
-[code lang="CPP"]
-void write_log(int i) {
+<div>
+  <pre class="prettyprint linenums 1"><code class='CPP'>void write_log(int i) {
     EnterCriticalSection();
     fprintf(stderr, &quot;%%levelname%% &quot;);
     fprintf(stderr, &quot;log: %d\n&quot;, i);
     LeaveCriticalSection();
-}
-[/code]
+}</code></pre>
+</div>
+
 </p>
 
 
@@ -118,14 +122,15 @@ void write_log(int i) {
 
 
 <p><a href="http://www.codeproject.com/Articles/96942/Singleton-Design-Pattern-and-Thread-Safety">这里</a>提供了三种解决方法，第一种是直接在判断单件是否被实例化前加锁，代码如下：
-[code lang="CPP"]
-static logger * get_logger() {
+<div>
+  <pre class="prettyprint linenums 1"><code class='CPP'>static logger * get_logger() {
     EnterCriticalSection();
     if (_instance == NULL) { _instance = new logger(); }
     LeaveCriticalSection();
     return _instance;
-}
-[/code]
+}</code></pre>
+</div>
+
 由于加互斥锁是一件比较耗时的工作，每次get_logger时都调用会加锁，解锁，程序的速度会受到影响。总之，这种方法是比较不赞的。</p>
 
 
@@ -133,16 +138,17 @@ static logger * get_logger() {
 
 
 <p>第三种方法在第一种方法上进行改进，把加锁放在if判断里面，或者说在加锁外放一层if判断，代码是这样的：
-[code lang="CPP"]
-static logger * get_logger() {
+<div>
+  <pre class="prettyprint linenums 1"><code class='CPP'>static logger * get_logger() {
     if (_instance == NULL) {
         EnterCriticalSection();
         if (_instance == NULL) {_instance = new logger(); }
         LeaveCriticalSection();
     }
     return _instance;
-}
-[/code]
+}</code></pre>
+</div>
+
 这种方法的好处是避免了每次get_logger都加锁，不过在某些情景上和第一种方法是一样的。</p>
 
 

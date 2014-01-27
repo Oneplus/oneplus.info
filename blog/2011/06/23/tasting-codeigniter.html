@@ -1,6 +1,7 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
 <head>
-<meta charset="utf-8" />
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
 <title> 使用CodeIgniter框架编写Web应用 | Static Oneplus </title>
 <!--
 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
@@ -84,20 +85,22 @@ ZF不可靠，只好重新规划。搜索“敏捷开发、PHP、轻量级框架
     <ol>
         <li>准备一个button，再准备一个不能显示的&lt;input id="file" type="file"&gt;</li>
         <li>给button添加一个监听器。如果按下按钮，就$("#file").trigger('click')，这下就弹出那个文件上传的框了。效果就好像是按button后弹出来的一样。</li>
-        <li>然后，其实我也不知道然后怎么弄。就用firebug和alert胡乱调试，居然看到一条"data:text/plain;base64,"接着就是乱码。然后我就觉得可能是搞了base64加密，所以就写了一段我也说不清的非常鬼畜的代码，完全搞不懂他是怎么对的。[code]
-    $(&quot;#load_button&quot;).click(function(){
-        $(&quot;#load_box&quot;).trigger('click').change(function(){
-            var fobj = document.getElementById(&quot;load_box&quot;);
+        <li>然后，其实我也不知道然后怎么弄。就用firebug和alert胡乱调试，居然看到一条"data:text/plain;base64,"接着就是乱码。然后我就觉得可能是搞了base64加密，所以就写了一段我也说不清的非常鬼畜的代码，完全搞不懂他是怎么对的。<div>
+  <pre class="prettyprint linenums 1"><code class=''>$(&amp;quot;#load_button&amp;quot;).click(function(){
+        $(&amp;quot;#load_box&amp;quot;).trigger('click').change(function(){
+            var fobj = document.getElementById(&amp;quot;load_box&amp;quot;);
             if(fobj) {
                 var file = fobj.files.item(0);
                 if(file) {
                     var filename = file.getAsDataURL();
                     filename = filename.substring(23, filename.lenght);
-                    $(&quot;#edit_area&quot;).val($.base64Decode(filename));
+                    $(&amp;quot;#edit_area&amp;quot;).val($.base64Decode(filename));
                 }
             }
         });
-    });[/code]</li>
+    });</code></pre>
+</div>
+</li>
     </ol>
 话说回来，好像整个开发中，纠结了的、花了时间的地方全在前端上，界面还那么难看…
     </li>

@@ -1,6 +1,7 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
 <head>
-<meta charset="utf-8" />
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
 <title> 实现一个更快一点的hashmap | Static Oneplus </title>
 <!--
 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
@@ -30,7 +31,7 @@ header { padding: 15px 0; }
 <div>
     <p>这段时间在写parser，难免又碰到了特征映射的问题。去年毕设做分词、词性标注时，这部分是用__gnu_cxx::hash_map<string,int>来实现的。下表显示了几种数据集条件下的特征字典规模。
 <table width="100%" border="1">
-<tr><td>数据集</td><td>CTB5</td><td>CTB7</td><td>People’s Daily</td></tr>
+<tr><td>数据集</td><td>Ctb5</td><td>Ctb7</td><td>People’s Daily</td></tr>
 <tr><td>数据规模</td><td>1.8W sent.</td><td>4.7W sent.</td><td>18.4W sent.</td></tr>
 <tr><td>分词特征规模</td><td>203.1W</td><td>334.8W</td><td>774.9W</td></tr>
 <tr><td>词性标注特征规模</td><td>158.7W</td><td>274.2W</td><td>751.3W</td></tr>
@@ -59,12 +60,12 @@ header { padding: 15px 0; }
 <p>池子固然是好想法，但我们考虑数据结构的动态性还要大于其性能考虑。想让池子变得动态基本就要用到stl中的allocator的技术了。维护一个池子长度上限以及当前长度，如果新加入的元素的规模大于池子上限，就将上限翻倍，重新给池子分配一段空间，把旧空间拷贝过去。</p>
 <p>这样的话，数据固化的问题基本可以沿着这个思路解决。简单的代码可以写成这样
 <div>
-  <pre class="prettyprint linenums 1"><code class='cpp'>if (pool_cap &amp;lt;= (new_size=(pool_size+element_size))) {
-  pool_cap=((new_size)&lt;&lt;1);
-  Element_type * new_pool = new Element_type[pool_cap];
-  std::copy(pool, pool + pool_size, new_pool);
-  delete <a href="pool"></a>;
-  pool = new_pool;
+  <pre class="prettyprint linenums 1"><code class='cpp'>if (pool_cap &lt;= (new_size=(pool_size+element_size))) {
+    pool_cap=((new_size)&lt;&lt;1);
+    Element_type * new_pool = new Element_type[pool_cap];
+    std::copy(pool, pool + pool_size, new_pool);
+    delete <a href="pool"></a>;
+    pool = new_pool;
 }</code></pre>
 </div></p>
 
@@ -83,14 +84,15 @@ header { padding: 15px 0; }
 <p>为了实现这一机制，用开链的方式显得要比其他几种容易。比方说保证高频key靠前，就只要保证在插入元素的时候维护链的有序性。因为每个链中都不会有很多元素，所以直接用类似于交换排序的思想就好了。维护有序性的时机主要是在某个key被重复插入后，这个key的频率增加，只要看一看这个key在链表中的前一个key是不是已经小于这个key了，如果是，就往前交换就好了。因为每个链都比较小，而且在频率增加前这个链是有序的，所以可以在极小时间复杂度内求出算某个key的正确位置时。</p>
 <p>到这里基本上整个数据结构的设计就出来了。Hash node设计成
 <div>
-  <pre class="prettyprint linenums 1"><code class='cpp'>struct hash_node_t {
+  <pre class="prettyprint linenums 1"><code class='CPP'>struct hash_node_t {
 public:
-  unsigned int <strong>key_off; // 存key在key_pool中的偏移量
-  unsigned int </strong>val_off; // 存value在value_pool中的偏移量
-  unsigned int <strong>freq; // 存频次
-  unsigned int </strong>hash_val; // 存hashvalue，用于加速
-  int __next_off; // 存后继节点在node_pool中的偏移量
-};</code></pre>
+        unsigned int <strong>key_off; // 存key在key_pool中的偏移量
+        unsigned int </strong>val_off; // 存value在value_pool中的偏移量
+        unsigned int <strong>freq; // 存频次
+        unsigned int </strong>hash_val; // 存hashvalue，用于加速
+        int __next_off; // 存后继节点在node_pool中的偏移量</p>
+
+<p>};</code></pre>
 </div></p>
 
 <p></p>
@@ -108,10 +110,11 @@ public:
 </table>
 </p>
 <p>参与对比的hashmap有__gnu_cxx::hash_map，google_sparse_hash，google_dense_hash，几种hashtable都做了类似的封装。benchmark用到的代码地址在<a href="https://github.com/Oneplus/libutilities/tree/master/benchmark/smartmap">这里</a>。运行的时候用
-<code>
-nice -n-20 ionice -c1 -n0 python bench.py
-</code>
-保证了进程的优先级。
+<div>
+  <pre class="prettyprint linenums 1"><code class=''>nice -n-20 ionice -c1 -n0 python bench.py</code></pre>
+</div></p>
+
+<p>保证了进程的优先级。
 </p>
 <p>实验在xeon5650 2.67GHz的服务器上进行，gcc版本是比较老的4.1.2。</p>
 <p>在实验数据集上，时间效率和内存效率分别如下表显示。</p>
