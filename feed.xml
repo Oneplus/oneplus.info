@@ -1,10 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
 <channel>
-    <title></title>
-    <description></description>
+    <title>Static Oneplus</title>
+    <description>不可控制论</description>
     <link>http://yjliu.net</link>
     <atom:link href="http://yjliu.net/feed" rel="self" type="application/rss+xml" />
+    
+    <item>
+        <title>写点什么吧</title>
+        <description><![CDATA[ <p>在年轻而且精力旺盛的那几年，我们都多多少对写博客有那么点兴趣。
+我刚开始维护独立博客的那段时间，基本是以每周一篇的速度更新。
+相比现在，变成了半年一篇，产量大幅度降低质量却没有明显提升。
+由此我知道我在退步。</p>
+
+<p>去年末，larrylv学长朝我说linode应该不会续租了。
+但后来又拖了半年，所以oneplus.info还在正常运转。
+感谢学长的照顾。</p>
+
+<p>曾经想过要接着学长的主机租下去。
+但是一想到维护的成本，或许一两年还可以接受，时间长了可能就难了。</p>
+
+<p>现在我已经没有精力去维护复杂的博客系统。
+没心思考虑用什么样的主题，什么样的插件。
+不想在CSS上花一分钟时间。</p>
+
+<p>所以Static Oneplus变成了现在这样。</p>
+
+<p>我在Jekyll非常早期的版本的基础上开发了一个可以把日志和技术笔记合并到一个站点的静态页生成工具。
+然后用他来生成网站。
+分类、标签、分页这些功能都没有开发。
+旧的主题也完全弃用。
+所谓新的主题就是在整个网站上加了一个bootstrap.css的container。</p>
+
+<p>我也不想考虑博客的访问速度，稳定性。
+这些都交给github吧。</p>
+
+<p>曾经对于写博客这件事充满热情与幻想。
+也终于3年后逐渐慢下了脚步。</p>
+
+<blockquote><p>有些事我们无法改变啊
+在一个变幻的年代</p></blockquote>
+
+<p>所以最后我们输给的都是时间。</p>
+ ]]></description>
+        <pubDate>Wed, 05 Feb 2014 00:00:00 +0800</pubDate>
+        <link>http://yjliu.net/blog/2014/02/05/write-something.html</link>
+        <guid isPermaLink="true">http://yjliu.net/blog/2014/02/05/write-something.html</guid>
+    </item>
     
     <item>
         <title>研一这一年吧</title>
@@ -680,7 +722,7 @@ int main() {
 
 <p>结合之前关于机器学习的定义，可以将序列标注问题按如下方式定义，根据已知的序列性数据，学习一个假设h，并在这个假设h给定的条件下，预测某些未知序列性数据的序列标注。</p>
 
-<p>形式化地，在给定一个序列性训练数据的集合 $(w<em>{[1:n]}^i, t</em>{[1:n]}^i)$的条件下，算法在学习阶段，从数据中学习一个假设h；在推理阶段，对于一个未知标注的序列$ w<em>{[1:n]} $，计算$ z</em>{[1:n]}=h(w_{[1:n]}) $。下面的讨论都会沿用这里对于序列和标注的形式化定义。</p>
+<p>形式化地，在给定一个序列性训练数据的集合 $(w_{[1:n]}^i, t_{[1:n]}^i)$的条件下，算法在学习阶段，从数据中学习一个假设h；在推理阶段，对于一个未知标注的序列$ w_{[1:n]} $，计算$ z_{[1:n]}=h(w_{[1:n]}) $。下面的讨论都会沿用这里对于序列和标注的形式化定义。</p>
 
 <h3>在线机器学习</h3>
 
@@ -916,79 +958,6 @@ st.(1)$ \tau_r\le\sigma_{x,y^t} $<br />
         <pubDate>Wed, 13 Jun 2012 00:00:00 +0800</pubDate>
         <link>http://yjliu.net/blog/2012/06/13/report-on-sex-ratio-in-hit.html</link>
         <guid isPermaLink="true">http://yjliu.net/blog/2012/06/13/report-on-sex-ratio-in-hit.html</guid>
-    </item>
-    
-    <item>
-        <title>Python对象的动态成员与__dict__</title>
-        <description><![CDATA[ 
-
-<p>在写一些python脚本时，我很喜欢用optparse module中的OptionParser对象来解析一些命令行参数。一个简单的例子如下，
-<div>
-  <pre class="prettyprint linenums 1"><code class='python'>parser = OptionParser()
-parser.add_option(&quot;-f&quot;, &quot;--file&quot;, dest=&quot;filename&quot;)
-(options, args) = parser.parse_args()</code></pre>
-</div>
-
-然后，使用options.filename可以调用--file指定的参数，这似乎也没什么神奇的。但是，在第一次用OptionParser时，我那个充满C惯性思维的大脑却很严重地shock了。因为，options对象的成员在调用期间才产生，这不科学啊。</p>
-
-
-
-
-<p>结果这个问题被搁置了大半年，今天早上又想起来，心血来潮看了一眼optparse的源代码，
-```
-self.__dict__.update(dict)
-```
-然后一下子，我似乎明白了什么。</p>
-
-
-<p>首先，每个python对象中都用一个字典来保存其命名空间，也就是`__dict__`。举栗来讲，C.x实际上是被翻译成`C.__dict__["x"]`。那么，runtime地向C中添加一些成员就是小case了。一个栗子程序如下：
-<div>
-  <pre class="prettyprint linenums 1"><code class='python'>class C:
-    def __init__(self):
-        self.x = 1
-        self.y = 2
-
-    def regist(self, key, val):
-        self.__dict__[key] = val
-
-c = C()
-print c.__dict__
-c.regist(&quot;z&quot;, 3)
-c.regist(&quot;func&quot;, lambda x: &quot;&quot;.join([&quot;=&gt;&quot;, str(x), &quot;&lt;=&quot;]))
-print c.__dict__
-print c.x, c.y, c.z, c.func(&quot;__dict__&quot;)</code></pre>
-</div>
-
-</p>
-
-
-<p>运行结果是
-<div>
-  <pre class="prettyprint linenums 1"><code class=''>{'y': 2, 'x': 1}
-{'y': 2, 'x': 1, 'z': 3, 'func': &lt;function &lt;lambda&gt; at 0x2b55c97de668&gt;}
-1 2 3 =&gt;__dict__&lt;=</code></pre>
-</div>
-
-</p>
-
-
-
-
-<p>不过问题就这样解决了，真是不甘心。所以发个博客吧。</p>
-
-
-<p>P勒个S：这之前，还看过C中实现命令行解析的类库，<a href="http://argtable.sourceforge.net/">argtable</a>。C语言真是好难啊。</p>
-
-
-<p>参考：
-<ul>
-<li><a href="http://docs.python.org/reference/datamodel.html">http://docs.python.org/reference/datamodel.html</a></li></ul>
-</p>
-
- ]]></description>
-        <pubDate>Sun, 29 Apr 2012 00:00:00 +0800</pubDate>
-        <link>http://yjliu.net/blog/2012/04/29/dynamic-member-in-python-class.html</link>
-        <guid isPermaLink="true">http://yjliu.net/blog/2012/04/29/dynamic-member-in-python-class.html</guid>
     </item>
     
 </channel>
