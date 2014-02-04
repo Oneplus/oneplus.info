@@ -3,32 +3,36 @@
 <head>
 <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
 <title>  Python中的动态类 |  Static Oneplus </title>
-<!--
 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap-responsive.min.css">
--->
 <style type="text/css">
 .prettyprint ol.linenums > li { list-style-type: decimal; }
 .nav { }
-.nav li { float: left; width: 80px;}
+.nav li { float: left; width: 70px; }
 .content { padding: 30px 0; }
 header { width: 100%; }
 </style>
 </head>
 <body>
 
+<div class="container">
 <header class="header">
-    <h1>Static Oneplus</h1>
+    <h1>Static Oneplus <small>不可控制论</small></h1>
     <ul class="nav">
         <li><a href="http://yjliu.net">Home</a></li>
         <li><a href="/cv">CV</a></li>
         <li><a href="/blog">Blog</a></li>
         <li><a href="/notes">Notes</a></li>
+        <li><a href="/feed.xml">RSS</a></li>
     </ul>
 </header>
 
 <div class="content">
 
+<div>
+    by  Oneplus </div>
+<h2>Python中的动态类</h2>
+<hr />
 <div>
     <p>有这样一个需求，我有<code>SegmentReader</code>、<code>PostagReader</code>、<code>ConllReader</code>这三个<code>Reader</code>，他们都继承于一个<code>Reader</code>类。在程序运行中，由用户通过<code>segment</code>、<code>postag</code>或<code>conll</code>决定读入哪一种数据，所以<code>XReader</code>的实例化也由用户决定。当然，我们可以写一连串的if判断，但是这往往不够美观。这里有一个python动态创建类的问题。</p>
 
@@ -82,12 +86,13 @@ reader = createObject(format[0].upper() + format[1:])
     &copy; <a href="#">Static Oneplus</a> 2014 | 
     This site is built by <a href="">Level0</a>.
 </footer>
-
+</div>
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
     tex2jax: {
         inlineMath: [ ['$','$'], ['\\(','\\)'] ]
-    }
+    },
+    "HTML-CSS": { linebreaks: { automatic: true } },
 });
 </script>
 <script type="text/javascript"

@@ -7,26 +7,6 @@
     <atom:link href="http://yjliu.net/feed" rel="self" type="application/rss+xml" />
     
     <item>
-        <title>Learning CRF</title>
-        <description><![CDATA[ <h3>对序列数据建模</h3>
-
-<p>词性标注、分词等等问题都可以认为是对序列问题进行建模。
-下面这个词性标注的例子将作为例子贯穿全篇。</p>
-
-<h3>The Model</h3>
-
-<p>$ p(y|x) = \frac{1}{Z} \exp{ \sum_{k=1}^K{ \lambda_k f_k ( y_t, y_{t-1}, x_t ) } }$</p>
-
-<h3>The Likelihood</h3>
-
-<p>$ L(\theta) = \sum_{i=1}^N \sum_{t=1}^T \sum_{k=1}^K{ \lambda_k f_k (y_t^{(i)}, y_{t-1}^{(i)}, x_t^{(i)}) } $</p>
- ]]></description>
-        <pubDate>Tue, 28 Jan 2014 00:00:00 +0800</pubDate>
-        <link>http://yjliu.net/blog/2014/01/28/learning-crf.html</link>
-        <guid isPermaLink="true">http://yjliu.net/blog/2014/01/28/learning-crf.html</guid>
-    </item>
-    
-    <item>
         <title>研一这一年吧</title>
         <description><![CDATA[ <p>给这一年列一个时间表吧，这篇文章想写很久了，虽然有预感写出来又是满满的负能量。</p>
 
@@ -936,6 +916,79 @@ st.(1)$ \tau_r\le\sigma_{x,y^t} $<br />
         <pubDate>Wed, 13 Jun 2012 00:00:00 +0800</pubDate>
         <link>http://yjliu.net/blog/2012/06/13/report-on-sex-ratio-in-hit.html</link>
         <guid isPermaLink="true">http://yjliu.net/blog/2012/06/13/report-on-sex-ratio-in-hit.html</guid>
+    </item>
+    
+    <item>
+        <title>Python对象的动态成员与__dict__</title>
+        <description><![CDATA[ 
+
+<p>在写一些python脚本时，我很喜欢用optparse module中的OptionParser对象来解析一些命令行参数。一个简单的例子如下，
+<div>
+  <pre class="prettyprint linenums 1"><code class='python'>parser = OptionParser()
+parser.add_option(&quot;-f&quot;, &quot;--file&quot;, dest=&quot;filename&quot;)
+(options, args) = parser.parse_args()</code></pre>
+</div>
+
+然后，使用options.filename可以调用--file指定的参数，这似乎也没什么神奇的。但是，在第一次用OptionParser时，我那个充满C惯性思维的大脑却很严重地shock了。因为，options对象的成员在调用期间才产生，这不科学啊。</p>
+
+
+
+
+<p>结果这个问题被搁置了大半年，今天早上又想起来，心血来潮看了一眼optparse的源代码，
+```
+self.__dict__.update(dict)
+```
+然后一下子，我似乎明白了什么。</p>
+
+
+<p>首先，每个python对象中都用一个字典来保存其命名空间，也就是`__dict__`。举栗来讲，C.x实际上是被翻译成`C.__dict__["x"]`。那么，runtime地向C中添加一些成员就是小case了。一个栗子程序如下：
+<div>
+  <pre class="prettyprint linenums 1"><code class='python'>class C:
+    def __init__(self):
+        self.x = 1
+        self.y = 2
+
+    def regist(self, key, val):
+        self.__dict__[key] = val
+
+c = C()
+print c.__dict__
+c.regist(&quot;z&quot;, 3)
+c.regist(&quot;func&quot;, lambda x: &quot;&quot;.join([&quot;=&gt;&quot;, str(x), &quot;&lt;=&quot;]))
+print c.__dict__
+print c.x, c.y, c.z, c.func(&quot;__dict__&quot;)</code></pre>
+</div>
+
+</p>
+
+
+<p>运行结果是
+<div>
+  <pre class="prettyprint linenums 1"><code class=''>{'y': 2, 'x': 1}
+{'y': 2, 'x': 1, 'z': 3, 'func': &lt;function &lt;lambda&gt; at 0x2b55c97de668&gt;}
+1 2 3 =&gt;__dict__&lt;=</code></pre>
+</div>
+
+</p>
+
+
+
+
+<p>不过问题就这样解决了，真是不甘心。所以发个博客吧。</p>
+
+
+<p>P勒个S：这之前，还看过C中实现命令行解析的类库，<a href="http://argtable.sourceforge.net/">argtable</a>。C语言真是好难啊。</p>
+
+
+<p>参考：
+<ul>
+<li><a href="http://docs.python.org/reference/datamodel.html">http://docs.python.org/reference/datamodel.html</a></li></ul>
+</p>
+
+ ]]></description>
+        <pubDate>Sun, 29 Apr 2012 00:00:00 +0800</pubDate>
+        <link>http://yjliu.net/blog/2012/04/29/dynamic-member-in-python-class.html</link>
+        <guid isPermaLink="true">http://yjliu.net/blog/2012/04/29/dynamic-member-in-python-class.html</guid>
     </item>
     
 </channel>

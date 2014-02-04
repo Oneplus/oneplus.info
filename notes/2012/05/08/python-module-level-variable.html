@@ -3,32 +3,36 @@
 <head>
 <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
 <title>  Python module中的全局变量 |  Static Oneplus </title>
-<!--
 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap-responsive.min.css">
--->
 <style type="text/css">
 .prettyprint ol.linenums > li { list-style-type: decimal; }
 .nav { }
-.nav li { float: left; width: 80px;}
+.nav li { float: left; width: 70px; }
 .content { padding: 30px 0; }
 header { width: 100%; }
 </style>
 </head>
 <body>
 
+<div class="container">
 <header class="header">
-    <h1>Static Oneplus</h1>
+    <h1>Static Oneplus <small>不可控制论</small></h1>
     <ul class="nav">
         <li><a href="http://yjliu.net">Home</a></li>
         <li><a href="/cv">CV</a></li>
         <li><a href="/blog">Blog</a></li>
         <li><a href="/notes">Notes</a></li>
+        <li><a href="/feed.xml">RSS</a></li>
     </ul>
 </header>
 
 <div class="content">
 
+<div>
+    by  Oneplus </div>
+<h2>Python module中的全局变量</h2>
+<hr />
 <div>
     <p>我想要实现一个python module，这个module中有一些配置项，这些配置项可以被读取，被修改。一个可行的方案是把这些配置项写到一个叫settings.py的文件中。</p>
 
@@ -119,12 +123,13 @@ zz.wake_up()</code></pre>
     &copy; <a href="#">Static Oneplus</a> 2014 | 
     This site is built by <a href="">Level0</a>.
 </footer>
-
+</div>
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
     tex2jax: {
         inlineMath: [ ['$','$'], ['\\(','\\)'] ]
-    }
+    },
+    "HTML-CSS": { linebreaks: { automatic: true } },
 });
 </script>
 <script type="text/javascript"
