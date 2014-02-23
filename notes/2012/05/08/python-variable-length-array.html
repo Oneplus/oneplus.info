@@ -35,56 +35,53 @@ blockquote p { font-size: 14px; }
     <div style="color:#999;">
   <small>2012/05/08 - by
     
-      
-  
+
+    
+      &bull; <a href="/notes/tags/python.html">Python</a>
+    
   </small>
 </div>
 <h2>Python的变长参数</h2>
 <hr />
 <div>
-  <p>{% highlight python linenos %}
-def foo1(*args):
-    for arg in args: print arg</p>
+  <pre class="highlight python"><span class="k">def</span> <span class="nf">foo1</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">args</span><span class="p">:</span> <span class="k">print</span> <span class="n">arg</span>
 
-<p>def foo2(**kargs):
-    for key in kargs:
-        print key, kargs[key]</p>
+<span class="k">def</span> <span class="nf">foo2</span><span class="p">(</span><span class="o">**</span><span class="n">kargs</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">kargs</span><span class="p">:</span>
+        <span class="k">print</span> <span class="n">key</span><span class="p">,</span> <span class="n">kargs</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
 
-<p>def foo3(<em>args, *</em>kargs):
-    print &ldquo;args:&rdquo;
-    for arg in args:
-        print arg</p>
-<pre class="highlight plaintext">print "kargs":
-for key in kargs:
-    print key, kargs[key]
+<span class="k">def</span> <span class="nf">foo3</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kargs</span><span class="p">):</span>
+    <span class="k">print</span> <span class="s">"args:"</span>
+    <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">args</span><span class="p">:</span>
+        <span class="k">print</span> <span class="n">arg</span>
+
+    <span class="k">print</span> <span class="s">"kargs"</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">kargs</span><span class="p">:</span>
+        <span class="k">print</span> <span class="n">key</span><span class="p">,</span> <span class="n">kargs</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
 </pre>
-<p>{% endhighlight %}</p>
-
 <p>这里面有<code>*args</code>,<code>**kargs</code>并存的问题</p>
 
-<p>调用一下试试看
-{% highlight python linenos %}
-if <strong>name</strong>==&ldquo;<strong>main</strong>&rdquo;:
-    foo1(&ldquo;a&rdquo;, &ldquo;b&rdquo;, &ldquo;c&rdquo;)
-    print &ldquo;===========&rdquo;
-    foo2(a=1,b=2,c=3)
-    print &ldquo;===========&rdquo;
-    foo3(&ldquo;a&rdquo;, &ldquo;b&rdquo;, &ldquo;c&rdquo;, a=1, b=2, c=3)
-{% endhighlight %}</p>
+<p>调用一下试试看</p>
 
-<p>得到结果是
-{% highlight bash %}
-a
-b</p>
+<pre class="highlight python"><span class="k">if</span> <span class="n">__name__</span><span class="o">==</span><span class="s">"__main__"</span><span class="p">:</span>
+    <span class="n">foo1</span><span class="p">(</span><span class="s">"a"</span><span class="p">,</span> <span class="s">"b"</span><span class="p">,</span> <span class="s">"c"</span><span class="p">)</span>
+    <span class="k">print</span> <span class="s">"==========="</span>
+    <span class="n">foo2</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">b</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">c</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+    <span class="k">print</span> <span class="s">"==========="</span>
+    <span class="n">foo3</span><span class="p">(</span><span class="s">"a"</span><span class="p">,</span> <span class="s">"b"</span><span class="p">,</span> <span class="s">"c"</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+</pre>
+<p>得到结果是</p>
 
-<h1>c</h1>
-
-<p>a 1
-c 3</p>
-
-<h1>b 2</h1>
-
-<p>args:
+<pre class="highlight shell">a
+b
+c
+<span class="o">=========</span>
+a 1
+c 3
+b 2
+<span class="o">=========</span>
+args:
 a
 b
 c
@@ -92,8 +89,7 @@ kargs:
 a 1
 c 3
 b 2
-{% endhighlight %}</p>
-
+</pre>
 </div>
 
 <div id="disqus_thread"></div>

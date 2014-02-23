@@ -35,8 +35,14 @@ blockquote p { font-size: 14px; }
     <div style="color:#999;">
   <small>2012/12/03 - by
     
-      
-  
+
+    
+      &bull; <a href="/notes/tags/server.html">Server</a>
+    
+      &bull; <a href="/notes/tags/mysql.html">MySQL</a>
+    
+      &bull; <a href="/notes/tags/php.html">PHP</a>
+    
   </small>
 </div>
 <h2>在没有Root权限的情况下安装Mysql和PHP</h2>
@@ -46,8 +52,8 @@ blockquote p { font-size: 14px; }
 现在的服务器环境配置如下：</p>
 
 <ul>
-<li>ubuntu 12.04</li>
-<li>nginx 1.14</li>
+  <li>ubuntu 12.04</li>
+  <li>nginx 1.14</li>
 </ul>
 
 <p>无Mysql、无PHP。
@@ -55,6 +61,7 @@ blockquote p { font-size: 14px; }
 
 <p>首先，高版本MySQL使用CMake编译工具构建，构建之前需要安装CMake。
 CMake的安装方法如下：</p>
+
 <pre class="highlight shell"><span class="nb">cd</span> ~
 mkdir -p <span class="nb">local</span>/cmake/.src
 <span class="nb">cd local</span>/cmake/.src
@@ -65,6 +72,7 @@ tar zxvf cmake-2.8.4.tar.gz
 make &amp; make install
 </pre>
 <p>安装了CMake之后，开始编译安装MySQL。</p>
+
 <pre class="highlight shell"><span class="nv">PORT</span><span class="o">=</span>12345 <span class="c"># 找一个没有人用的端口</span>
 <span class="nb">cd</span> ~
 mkdir -p <span class="nb">local</span>/mysql/.src
@@ -83,24 +91,26 @@ make &amp; make install
 MySQL服务是一种daemon服务，简单讲就是运行在后台监听某些端口的服务。
 运行MySQL服务的命令是mysqld。
 在运行服务之前，首先需要将mysql的一系列命令添加到$PATH中，方法是
-<code>bash
-echo export PATH=$HOME/local/mysql/bin:$HOME/local/mysql/scripts:$PATH &gt;&gt; ~/.bash_profile
+~~~bash
+echo export PATH=$HOME/local/mysql/bin:$HOME/local/mysql/scripts:$PATH » ~/.bash_profile
 source ~/.bash_profile
-</code></p>
+~~~</p>
 
 <p>这里，添加了$HOME/local/mysql/bin和$HOME/local/mysql/scripts两个path到系统。</p>
 
-<p>然后用mysql中提供的mysql<em>install</em>db脚本创建mysql数据库</p>
+<p>然后用mysql中提供的mysql_install_db脚本创建mysql数据库</p>
+
 <pre class="highlight shell">mysql_install_db --basedir<span class="o">=</span><span class="nv">$HOME</span>/local/mysql <span class="se">\</span>
 --datadir<span class="o">=</span><span class="nv">$HOME</span>/local/mysql/data <span class="se">\</span>
 --tmpdir<span class="o">=</span><span class="nv">$HOME</span>/local/mysql/tmp <span class="se">\</span>
 --user<span class="o">=</span><span class="nv">$USER</span>
 </pre>
 <p>然后创建mysqld，首先将mysql的配置文件拷贝到$HOME/.my.cnf，命令是：</p>
+
 <pre class="highlight shell">cp <span class="nv">$HOME</span>/mysql/support-files/my-small.cnf <span class="nv">$HOME</span>/.my.cnf
 </pre>
 <p>其中，
-&ldquo;`bash
+~~~bash
 [client]
 port=3306 # 指定端口
 socket=$HOME/local/mysql/my.sock</p>
@@ -117,9 +127,10 @@ datadir=$HOME/local/mysql/data</p>
 <p>[mysql.server]
 user=yjliu
 basedir=$HOME/local/mysql
-&rdquo;`</p>
+~~~</p>
 
 <p>然后就是启动mysql服务</p>
+
 <pre class="highlight shell">mysqld_safe --defaults-file<span class="o">=</span><span class="nv">$HOME</span>/.my.cnf --socket<span class="o">=</span><span class="nv">$HOME</span>/local/mysql/my.sock &amp;
 </pre>
 <p>接下来就可以mysql测试一下是否成功了。</p>
@@ -127,6 +138,7 @@ basedir=$HOME/local/mysql
 <p>关于mysql，还有一些需要注意的是：当在本地上链接MySQL时，如果指定mysql通过localhost访问，那么mysql并不是通过web端口127.0.0.1:port进行访问的，而是通过一种名为mysql.sock的socket文件进行访问。
 如果在web服务中将mysql链接配成localhost，可能会出现一些麻烦事就是不能读写/tmp/mysql.sock而链接数据库不成功（发生在PHP中）。
 一个解决方法是使用127.0.0.1:port代替localhost，另一种解决方法是通过配置php.ini，将php.ini的如下字段进行设置然后在启动php监听时加载这个php.ini就OK了。</p>
+
 <pre class="highlight shell"><span class="o">[</span>MySQL]
 mysql.default_socket <span class="o">=</span> /home/yjliu/local/mysql/my.sock
 mysql.default_port <span class="o">=</span> 47389
@@ -134,8 +146,8 @@ mysql.default_port <span class="o">=</span> 47389
 <p>参考：</p>
 
 <ul>
-<li>http://community.webfaction.com/questions/3838/compiling-a-private-mysql-installation-in-your-home-directory</li>
-<li>http://www.tech-recipes.com/rx/762/solve-cant-connect-to-local-mysql-server-through-socket-tmpmysqlsock/</li>
+  <li>http://community.webfaction.com/questions/3838/compiling-a-private-mysql-installation-in-your-home-directory</li>
+  <li>http://www.tech-recipes.com/rx/762/solve-cant-connect-to-local-mysql-server-through-socket-tmpmysqlsock/</li>
 </ul>
 
 <p>安装了mysql，下一步是安装PHP。</p>
@@ -143,6 +155,7 @@ mysql.default_port <span class="o">=</span> 47389
 <p>同样，我们没有root权限，我们尝试把他安装在$HOME下面，这个难度要比mysql小很多。但是，这里也有一个限制，就是我们能够使用的服务器脚本组合是nginx+php。</p>
 
 <p>下载PHP，编译安装就完成了：</p>
+
 <pre class="highlight shell"><span class="nb">cd</span> ~
 mkdir -p <span class="nb">local</span>/php5/.src
 <span class="nb">cd local</span>/php5/.src
@@ -159,12 +172,13 @@ make &amp; make install
 </pre>
 <p>这里重要的一步是在configure中指定mysql位置和开启fpm支持。
 这些都完成后，就可以启动php服务了。</p>
+
 <pre class="highlight shell">./sbin/php-fpm
 </pre>
 <p>如果我们想指定一些配置文件的位置，就可以用
-<code>bash
+~~~bash
 ./sbin/php-fpm -c ./lib/php-easy.ini
-</code></p>
+~~~</p>
 
 <p>参考：
 * http://www.cnblogs.com/jsckdao/archive/2011/05/05/2038265.html</p>
@@ -173,6 +187,7 @@ make &amp; make install
 
 <p>下一步就是配置nginx，这个在nginx的example配置文件中已经非常清晰地体现了。
 只要在某个server中添加如下location就OK了。</p>
+
 <pre class="highlight shell">location ~ <span class="se">\p</span>hp <span class="o">{</span>
     root  /home/yjliu/www/main;
     fastcgi_pass 127.0.0.1:47388;

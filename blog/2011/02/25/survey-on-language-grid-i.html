@@ -34,104 +34,135 @@ blockquote p { font-size: 14px; }
   <div class="content">
     <div style="color:#999;">
   <small>2011/02/25 - by
+    Oneplus
+
     
-      Oneplus
-  
+      &bull; <a href="/blog/tags/cir.html">CIR</a>
+    
+      &bull; <a href="/blog/tags/language-grid.html">Language Grid</a>
+    
   </small>
 </div>
 <h2>Language Grid调研结果[i]</h2>
 <hr />
 <div>
   <style>
-    #eng {
-        color:#999999;
-    }
-    #content {
-        color:#555555;
-    }
-    #note {
-        color:#222222;
-    }
+  #eng {
+    color:#999999;
+  }
+  #content {
+    color:#555555;
+  }
+  #note {
+    color:#222222;
+  }
 </style>
 
-<div id="top">
-        Language Grid工具箱<span id="eng">Language Grid Toolbox</span>提供四项主要的服务是:
-    <ul>
-        <li>翻译</li>
-        <li>创建语言资源</li>
-        <li>社区</li>
-        <li>多语言论坛</li>
-    </ul>
-<a id="more"></a><a id="more-105"></a>
-    <h4>翻译<span id="eng">(Translation)</span></h4>
-    Toolbox提供的翻译功能是机器翻译结果。翻译功能由两个子功能组成，分别是
-    <ul>
-        <li>文本翻译</li>
-        <li>网页翻译</li>
-    </ul>
-    这两项功能和我们常见的Google Translation，或者翻译软件是相似的。不同之处是，文本翻译除了提供翻译功能之外，还提供回译<span id="eng">(back translation)</span>功能。按照帮助文档上提供的信息，回译的主要用于检查翻译的结果是否正确。
-    <h4>创建语言资源<span id="eng">(Language Resource Creation)</span></h4>
-    Toolbox提供的创建语言资源的功能。介绍文档上说明这一功能的用途是，“Toolbox的用户可以创建自己的多语言词典，并且和机器翻译结合，以提高机器翻译结果的质量”<span id="eng">(community members can create their
-    multilingual dictionaries, and combine them with machine translators to improve the translation quality.)</span><br />
-    创建语言资源主要包括以下子功能
-    <ul>
-        <li>词典<span id="eng">(dictionary)</span></li>
-        <li>平行文本<span id="eng">(parallel text)</span></li>
-        <li>网页<span id="eng">(web)</span></li>
-        <li>术语<span id="eng">(glossary)</span></li>
-    </ul>
-    <ul>
-        <li>DICTIONARY - 词典资源创建</li>
-        词典的功能和通常意义上的词典是一样的。词典相当于一张表，其结构如下：
-            <table width="100%">
-                <tr><td></td><td>Language<sub>1</sub></td><td>Language<sub>2</sub></td><td>&hellip;(可以添加)</td></tr>
-                <tr><td>Record<sub>1</sub></td><td>&hellip;</td><td>&hellip;</td><td>&hellip;</td>
-                <tr><td>Record<sub>2</sub></td><td>&hellip;</td><td>&hellip;</td><td>&hellip;</td>
-                <tr><td>&hellip;(可以添加)</td></td><td>&hellip;</td><td>&hellip;</td><td>&hellip;</td>
-            </table>
-        用户可以创建一个词典，向其中添加/编辑/删除 语言或记录。同时，词典可以设置修改级别。
-        <li>PARALLEL_TEXT - 平行文本资源创建</li>
-        可以进行整句翻译或者是整段翻译，其组织形式与Dictionary类似。
-        <li>WEB - 网页资源创建</li>
-        从试用的过程来看，网页这一功能大概的工作过程如下：
-        <ol>
-            <li>将用户输入的网址的内容趴下来</li>
-            <li>将标签间的内容一条一条呈现出来</li>
-            <li>提供机器翻译结果</li>
-            <li>用户可以修改机器翻译的结果</li>
-        </ol>
-        其具体使用方法和dictionary还有parallel_text是很像的。
-        <li>GLOSSARY - 术语翻译创建</li>
-        除了像dictionary那样有多语言翻译。glossary功能中，每个record还有属性列。每个record的属性可能是term,categories,define。而term属于categories，并且被一条或多条define定义。
-        <li>TEMPLATE - 模板翻译创建</li>
-        模板翻译是针对下面例子中的翻译需求，
-        <table width="100%">
-            <tr><td></td><td>zh</td><td>en</td></tr>
-            <tr><td>例句一</td><td>很多<u>树懒</u>栖息在同伴周围</td><td>Many <u>sloth</u> inhabit in his neighborhood</td></tr>
-            <tr><td>例句二</td><td>很多<u>黑猩猩</u>栖息在同伴周围</td><td>Many <u>gorilla</u> inhabit in his neighborhood</td></tr>
-        </table>
-        例句一二的翻译，只需要调换一下两种动物。<br />
-        在TEMPLATE中，每个record的属性可能是parallel_text,categories,parament,word。word属于pararment，对应例句中的sloth和gorilla，parament包含于parallel_text，是模板中可替换的内容的符号化表示。parallel_text对应翻译模板，属于categories。<br />
-        <strong>模板翻译</strong>
-        <table width="100%">
-            <td>zh</td><td>en</td></tr>
-            <td>很多<u>[1]</u>栖息在同伴周围</td><td>Many <u>[1]</u> inhabit in his neighborhood</td></tr>
-        </table>
-        <strong>词汇翻译</strong>
-        <table width="100%">
-            <td>参数</td><td>zh</td><td>en</td></tr>
-            <td>[1]</td><td>树懒</td><td>sloth</td></tr>
-            <td>[1]</td><td>黑猩猩</td><td>gorilla</td></tr>
-        </table>
-    </ul>
-    <h4>社区<span id="eng">(Community)</span></h4>
-    社区这一功能提供的各项服务可以很好地用其各自的名称来描述，其大致的目标是构建一个用户之间的协作平台。
-    <ul>
-        <li>文件共享<span id="eng">File sharing</span></li>
-        <li>任务管理<span id="eng">Task Management</span></li>
-        <li>共同翻译<span id="eng">Collaborative Translation</span></li>
-    </ul>
-</div>
+<p>Language Grid工具箱<span id="eng">Language Grid Toolbox</span>提供四项主要的服务是:</p>
+
+<ul>
+  <li>翻译</li>
+  <li>创建语言资源</li>
+  <li>社区</li>
+  <li>多语言论坛</li>
+</ul>
+
+<h3 id="span-idengtranslationspan">翻译<span id="eng">(Translation)</span></h3>
+
+<p>Toolbox提供的翻译功能是机器翻译结果。翻译功能由两个子功能组成，分别是</p>
+
+<ul>
+  <li>文本翻译</li>
+  <li>网页翻译</li>
+</ul>
+
+<p>这两项功能和我们常见的Google Translation，或者翻译软件是相似的。不同之处是，文本翻译除了提供翻译功能之外，还提供回译<span id="eng">(back translation)</span>功能。按照帮助文档上提供的信息，回译的主要用于检查翻译的结果是否正确。</p>
+
+<h3 id="span-idenglanguage-resource-creationspan">创建语言资源<span id="eng">(Language Resource Creation)</span></h3>
+
+<p>Toolbox提供的创建语言资源的功能。介绍文档上说明这一功能的用途是，“Toolbox的用户可以创建自己的多语言词典，并且和机器翻译结合，以提高机器翻译结果的质量”<span id="eng">(community members can create their multilingual dictionaries, and combine them with machine translators to improve the translation quality.)</span></p>
+
+<p>创建语言资源主要包括以下子功能</p>
+
+<ul>
+  <li>词典<span id="eng">(dictionary)</span></li>
+  <li>平行文本<span id="eng">(parallel text)</span></li>
+  <li>网页<span id="eng">(web)</span></li>
+  <li>术语<span id="eng">(glossary)</span></li>
+</ul>
+
+<h4 id="dictionary---">DICTIONARY - 词典资源创建</h4>
+
+<p>词典的功能和通常意义上的词典是一样的。词典相当于一张表，其结构如下：</p>
+
+<table class="table" width="100%">
+  <tr><td></td><td>Language<sub>1</sub></td><td>Language<sub>2</sub></td><td>...(可以添加)</td></tr>
+  <tr><td>Record<sub>1</sub></td><td>...</td><td>...</td><td>...</td></tr>
+  <tr><td>Record<sub>2</sub></td><td>...</td><td>...</td><td>...</td></tr>
+  <tr><td>...(可以添加)</td><td>...</td><td>...</td><td>...</td></tr>
+</table>
+
+<p>用户可以创建一个词典，向其中添加/编辑/删除 语言或记录。同时，词典可以设置修改级别。</p>
+
+<h4 id="paralleltext---">PARALLEL_TEXT - 平行文本资源创建</h4>
+
+<p>可以进行整句翻译或者是整段翻译，其组织形式与Dictionary类似。</p>
+
+<h4 id="web---">WEB - 网页资源创建</h4>
+
+<p>从试用的过程来看，网页这一功能大概的工作过程如下：</p>
+
+<ol>
+  <li>将用户输入的网址的内容趴下来</li>
+  <li>将标签间的内容一条一条呈现出来</li>
+  <li>提供机器翻译结果</li>
+  <li>用户可以修改机器翻译的结果</li>
+</ol>
+
+<p>其具体使用方法和dictionary还有parallel_text是很像的。</p>
+
+<h4 id="glossary---">GLOSSARY - 术语翻译创建</h4>
+
+<p>除了像dictionary那样有多语言翻译。glossary功能中，每个record还有属性列。每个record的属性可能是term,categories,define。而term属于categories，并且被一条或多条define定义。</p>
+
+<h4 id="template---">TEMPLATE - 模板翻译创建</h4>
+
+<p>模板翻译是针对下面例子中的翻译需求，</p>
+
+<table class="table" width="100%">
+  <tr><td></td><td>zh</td><td>en</td></tr>
+  <tr><td>例句一</td><td>很多<u>树懒</u>栖息在同伴周围</td><td>Many <u>sloth</u> inhabit in his neighborhood</td></tr>
+  <tr><td>例句二</td><td>很多<u>黑猩猩</u>栖息在同伴周围</td><td>Many <u>gorilla</u> inhabit in his neighborhood</td></tr>
+</table>
+
+<p>例句一二的翻译，只需要调换一下两种动物。</p>
+
+<p>在TEMPLATE中，每个record的属性可能是parallel_text,categories,parament,word。word属于pararment，对应例句中的sloth和gorilla，parament包含于parallel_text，是模板中可替换的内容的符号化表示。parallel_text对应翻译模板，属于categories。</p>
+
+<h5 id="section">模板翻译</h5>
+
+<table class="table" width="100%">
+  <tr><td>zh</td><td>en</td></tr>
+  <tr><td>很多<u>[1]</u>栖息在同伴周围</td><td>Many <u>[1]</u> inhabit in his neighborhood</td></tr>
+</table>
+
+<h5 id="section-1">词汇翻译</h5>
+
+<table class="table" width="100%">
+  <tr><td>参数</td><td>zh</td><td>en</td></tr>
+  <tr><td>[1]</td><td>树懒</td><td>sloth</td></tr>
+  <tr><td>[1]</td><td>黑猩猩</td><td>gorilla</td></tr>
+</table>
+
+<h4 id="span-idengcommunityspan">社区<span id="eng">(Community)</span></h4>
+
+<p>社区这一功能提供的各项服务可以很好地用其各自的名称来描述，其大致的目标是构建一个用户之间的协作平台。</p>
+
+<ul>
+  <li>文件共享<span id="eng">File sharing</span></li>
+  <li>任务管理<span id="eng">Task Management</span></li>
+  <li>共同翻译<span id="eng">Collaborative Translation</span></li>
+</ul>
 
 <p>完整结果请点击<a href="http://blog.oneplus.info/nlp/langrid.html">这里</a></p>
 

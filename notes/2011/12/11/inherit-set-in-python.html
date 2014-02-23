@@ -35,22 +35,22 @@ blockquote p { font-size: 14px; }
     <div style="color:#999;">
   <small>2011/12/11 - by
     
-      
-  
+
+    
+      &bull; <a href="/notes/tags/python.html">Python</a>
+    
   </small>
 </div>
 <h2>Python对象继承set类型</h2>
 <hr />
 <div>
-  <pre>
-class Feature(set):
-    def __init__(self):
-        set.__init__(self)
-    # 这里演示将Feature类的加号重载成set.add方法
-    def __add__(self, feature):
-        set.add(self, feature)
+  <pre class="highlight python"><span class="k">class</span> <span class="nc">Feature</span><span class="p">(</span><span class="nb">set</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">set</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+    <span class="c"># 这里演示将Feature类的加号重载成set.add方法</span>
+    <span class="k">def</span> <span class="nf">__add__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">feature</span><span class="p">):</span>
+        <span class="nb">set</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">feature</span><span class="p">)</span>
 </pre>
-
 </div>
 
 <div id="disqus_thread"></div>

@@ -34,246 +34,249 @@ blockquote p { font-size: 14px; }
   <div class="content">
     <div style="color:#999;">
   <small>2011/03/09 - by
+    Oneplus
+
     
-      Oneplus
-  
+      &bull; <a href="/blog/tags/acm-group.html">ACM Group</a>
+    
+      &bull; <a href="/blog/tags/程序设计实践.html">程序设计实践</a>
+    
+      &bull; <a href="/blog/tags/哈尔滨公交系统.html">哈尔滨公交系统</a>
+    
   </small>
 </div>
 <h2>程序设计实践一 - 第二课</h2>
 <hr />
 <div>
-  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
+  <h3 id="section">课程提纲</h3>
 
-<script type="text/javascript">     
-$(document).ready(function(){
-$(".text").toggle();
-$(".box").toggle(function(){
-$(this).next(".text").animate({height: 'toggle', opacity: 'toggle'}, "slow");
-} ,function() {$(this).next(".text").animate({height: 'toggle', opacity: 'toggle'}, "slow");});});</script>
-
-<h4>课程提纲</h4>
-
-<div class="box">请点击<a href="#">这里</a></div>
-
-<div class="text"><ul>
-<li>上节课的回归与作业讲解</li>
-<li>分治</li>
-<li>二分算法</li>
 <ul>
-    <li>例一：求x=&radic;9.8</li>
+  <li>上节课的回归与作业讲解</li>
+  <li>分治</li>
+  <li>二分算法
     <ul>
-        <li>题目描述</li>
-        <li>算法过程演示</li>
-        <li>算法分析</li>
-        <li>伪代码与代码</li>
+      <li>例一：求x=√9.8
+        <ul>
+          <li>题目描述</li>
+          <li>算法过程演示</li>
+          <li>算法分析</li>
+          <li>伪代码与代码</li>
+        </ul>
+      </li>
+      <li>例二：二分查找
+        <ul>
+          <li>题目描述</li>
+          <li>题目分析</li>
+          <li>伪代码与代码</li>
+          <li>复杂度分析</li>
+        </ul>
+      </li>
+      <li>讨论：整数二分的最好写法
+        <ul>
+          <li>例一</li>
+          <li>例二</li>
+        </ul>
+      </li>
+      <li>例三：求一列有序数中第一个大于等于某数的数
+        <ul>
+          <li>题目描述</li>
+          <li>题目分析</li>
+          <li>伪代码与代码</li>
+          <li>拓展：最大化最小/最小化最大的一般分析方法</li>
+        </ul>
+      </li>
+      <li>教你偷懒：lower_bound、upper_bound</li>
     </ul>
-    <li>例二：二分查找</li>
+  </li>
+  <li>堆
     <ul>
-        <li>题目描述</li>
-        <li>题目分析</li>
-        <li>伪代码与代码</li>
-        <li>复杂度分析</li>
+      <li>离线算法与在线算法</li>
+      <li>引例：只有添加操作的在线求一列数的最大值
+        <ul>
+          <li>题目描述</li>
+          <li>题目分析</li>
+        </ul>
+      </li>
+      <li>例四：支持添加和删除最大操作的在线求一列数的最大值
+        <ul>
+          <li>题目描述</li>
+          <li>算法一</li>
+          <li>算法二</li>
+          <li>总结算法一二的悲剧之处</li>
+        </ul>
+      </li>
+      <li>堆的性质</li>
+      <li>堆的操作
+        <ul>
+          <li>上浮</li>
+          <li>下沉</li>
+          <li>删除最大</li>
+          <li>添加</li>
+        </ul>
+      </li>
+      <li>伪代码与代码</li>
+      <li>教你偷懒：priority_queue</li>
     </ul>
-    <li>讨论：整数二分的最好写法</li>
-    <ul>
-        <li>例一</li>
-        <li>例二</li>
-    </ul>
-    <li>例三：求一列有序数中第一个大于等于某数的数</li>
-    <ul>
-        <li>题目描述</li>
-        <li>题目分析</li>
-        <li>伪代码与代码</li>
-        <li>拓展：最大化最小/最小化最大的一般分析方法</li>
-    </ul>
-    <li>教你偷懒：lower_bound、upper_bound</li>
+  </li>
 </ul>
-<li>堆</li>
+
+<h3 id="section-1">简单的讲义</h3>
+
+<p>讲义请看<a href="http://acm.hit.edu.cn/~oneplus/design-2011/02-lecture.pdf">这里</a><br /></p>
+
+<p>PPT请看<a href="http://acm.hit.edu.cn/~oneplus/design-2011/02-ppt.pdf">这里</a></p>
+
+<h3 id="section-2">录了30多分钟的课堂录音</h3>
+
+<p>这节课是用自己的笔记本进行的演示，录到了课堂录音。原文件噪音非常多，用Goldwave处理了一下，果然好了不少。
+<embed src="http://acm.hit.edu.cn/~oneplus/design-2011/02-record.wma" autostart="false" />&lt;/embed&gt;</p>
+
+<h3 id="section-3">自我检讨</h3>
+
 <ul>
-    <li>离线算法与在线算法</li>
-    <li>引例：只有添加操作的在线求一列数的最大值</li>
-    <ul>
-        <li>题目描述</li>
-        <li>题目分析</li>
-    </ul>
-    <li>例四：支持添加和删除最大操作的在线求一列数的最大值</li>
-    <ul>
-        <li>题目描述</li>
-        <li>算法一</li>
-        <li>算法二</li>
-        <li>总结算法一二的悲剧之处</li>
-    </ul>
-    <li>堆的性质</li>
-    <li>堆的操作</li>
-    <ul>
-        <li>上浮</li>
-        <li>下沉</li>
-        <li>删除最大</li>
-        <li>添加</li>
-    </ul>
-    <li>伪代码与代码</li>
-    <li>教你偷懒：priority_queue</li>
+  <li>因为课程录了音，所以对于自己的授课内容有了一个比较清楚的认知。</li>
+  <li>从这节课的录音来看，我讲课的一些问题包括：重复冗余严重，二分的算法过程被说了三次、二分复杂度证明说了两次；语气平淡，重点不突出；声音比较小，有点无力。</li>
+  <li>而且这节课在多媒体的问题上花的时间有点多。大概有十五分钟都是在调多媒体…</li>
+  <li>自己笔记本的时间和8503机器的时间不同步，在课间休息时间的问题上把握得不好。</li>
+  <li>现在看，自己的讲义是挺混乱的。课件做得尤其糟糕。</li>
+  <li>这里需要向上课的同学道歉，第二课我的准备工作的确有不足。这节课的准备中，把太多时间花在demo上，以至于没有足够的时间去思考要讲什么内容。下节课demo的东西比较少，我会认真准备课程内容的。</li>
 </ul>
-</ul>
-</div>
 
-<h4>简单的讲义</h4>
+<h3 id="heapdemo">浮云一样的heap的demo</h3>
 
-<p><a id="more"></a><a id="more-125"></a>
-讲义请看<a href="http://acm.hit.edu.cn/~oneplus/design-2011/02-lecture.pdf">这里</a><br />
-PPT请看<a href="http://acm.hit.edu.cn/~oneplus/design-2011/02-ppt.pdf">这里</a>
-<h4>录了30多分钟的课堂录音</h4>
-这节课是用自己的笔记本进行的演示，录到了课堂录音。原文件噪音非常多，用Goldwave处理了一下，果然好了不少。
-<embed src="http://acm.hit.edu.cn/~oneplus/design-2011/02-record.wma" autostart="false"></embed>
-<h4>自我检讨</h4>
-<ul>
-<li>因为课程录了音，所以对于自己的授课内容有了一个比较清楚的认知。</li>
-<li>从这节课的录音来看，我讲课的一些问题包括：重复冗余严重，二分的算法过程被说了三次、二分复杂度证明说了两次；语气平淡，重点不突出；声音比较小，有点无力。</li>
-<li>而且这节课在多媒体的问题上花的时间有点多。大概有十五分钟都是在调多媒体…</li>
-<li>自己笔记本的时间和8503机器的时间不同步，在课间休息时间的问题上把握得不好。</li>
-<li>现在看，自己的讲义是挺混乱的。课件做得尤其糟糕。</li>
-<li>这里需要向上课的同学道歉，第二课我的准备工作的确有不足。这节课的准备中，把太多时间花在demo上，以至于没有足够的时间去思考要讲什么内容。下节课demo的东西比较少，我会认真准备课程内容的。</li>
-</ul>
-<h4>浮云一样的heap的demo</h4>
-其实这个flash动画也是我做的…
-<embed src="http://acm.hit.edu.cn/~oneplus/design-2011/02-heapdemo.swf" width="400" height="400"></embed>
-<h4>演示二分时用的Java代码</h4>
-<div class="codeindex">请点击<a href="#">这里</a></div>
-<div class="codemain">
-{% highlight %}
-import javax.swing.<em>;
-import java.awt.</em>;
-import java.awt.event.<em>;
-import java.awt.Panel;
-import java.io.</em>;
-import java.text.DecimalFormat;</p>
+<p>其实这个flash动画也是我做的…</p>
 
-<p>public class bisearch extends JFrame implements ActionListener {
-    public bisearch() {
-        setLayout(new FlowLayout(FlowLayout.LEFT));
-        setSize(500, 400);
-        setBackground(Color.white);</p>
-<pre class="highlight plaintext">    nextButton = new Button( &amp;quot;Next&amp;quot; );
-    nextButton.addActionListener( this );
-    add( nextButton );
+<h3 id="java">演示二分时用的Java代码</h3>
 
-    init();
-    this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-}
+<pre class="highlight java"><span class="kn">import</span> <span class="nn">javax.swing.*</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.awt.*</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.awt.event.*</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.awt.Panel</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.io.*</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.text.DecimalFormat</span><span class="o">;</span>
 
-public void init() {
-    lowerBound = f( leftBound );
-    upperBound = f( rightBound );
-    low = 3.0;
-    high = 4.0;
-    //System.out.println( lowerBound + &amp;quot; &amp;quot; + upperBound );
-}
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">bisearch</span> <span class="kd">extends</span> <span class="n">JFrame</span> <span class="kd">implements</span> <span class="n">ActionListener</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="n">bisearch</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">setLayout</span><span class="o">(</span><span class="k">new</span> <span class="n">FlowLayout</span><span class="o">(</span><span class="n">FlowLayout</span><span class="o">.</span><span class="na">LEFT</span><span class="o">));</span>
+        <span class="n">setSize</span><span class="o">(</span><span class="mi">500</span><span class="o">,</span> <span class="mi">400</span><span class="o">);</span>
+        <span class="n">setBackground</span><span class="o">(</span><span class="n">Color</span><span class="o">.</span><span class="na">white</span><span class="o">);</span>
+        
+        <span class="n">nextButton</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Button</span><span class="o">(</span> <span class="s">"Next"</span> <span class="o">);</span>
+        <span class="n">nextButton</span><span class="o">.</span><span class="na">addActionListener</span><span class="o">(</span> <span class="k">this</span> <span class="o">);</span>
+        <span class="n">add</span><span class="o">(</span> <span class="n">nextButton</span> <span class="o">);</span>
+        
+        <span class="n">init</span><span class="o">();</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">setDefaultCloseOperation</span><span class="o">(</span><span class="n">JFrame</span><span class="o">.</span><span class="na">EXIT_ON_CLOSE</span><span class="o">);</span>
+    <span class="o">}</span>
+    
+    <span class="kd">public</span> <span class="kt">void</span> <span class="n">init</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">lowerBound</span> <span class="o">=</span> <span class="n">f</span><span class="o">(</span> <span class="n">leftBound</span> <span class="o">);</span>
+        <span class="n">upperBound</span> <span class="o">=</span> <span class="n">f</span><span class="o">(</span> <span class="n">rightBound</span> <span class="o">);</span>
+        <span class="n">low</span> <span class="o">=</span> <span class="mf">3.0</span><span class="o">;</span>
+        <span class="n">high</span> <span class="o">=</span> <span class="mf">4.0</span><span class="o">;</span>
+        <span class="c1">//System.out.println( lowerBound + " " + upperBound );</span>
+    <span class="o">}</span>
+    
+     <span class="kd">public</span> <span class="kt">void</span> <span class="n">paint</span><span class="o">(</span> <span class="n">Graphics</span> <span class="n">g</span> <span class="o">)</span> <span class="o">{</span>
+         <span class="n">point</span> <span class="n">p1</span> <span class="o">=</span> <span class="k">new</span> <span class="n">point</span><span class="o">();</span>
+         <span class="n">point</span> <span class="n">p2</span> <span class="o">=</span> <span class="k">new</span> <span class="n">point</span><span class="o">();</span>
+         <span class="n">p1</span> <span class="o">=</span> <span class="n">toPoint</span><span class="o">(</span><span class="mf">2.7</span><span class="o">,</span> <span class="mf">0.0</span> <span class="o">);</span>
+         <span class="n">p2</span> <span class="o">=</span> <span class="n">toPoint</span><span class="o">(</span><span class="mf">4.3</span><span class="o">,</span> <span class="mf">0.0</span> <span class="o">);</span>
+         <span class="n">x_axis</span> <span class="o">=</span> <span class="n">p1</span><span class="o">.</span><span class="na">getY</span><span class="o">();</span>
+         <span class="n">g</span><span class="o">.</span><span class="na">drawLine</span><span class="o">(</span> <span class="n">p1</span><span class="o">.</span><span class="na">getX</span><span class="o">(),</span> <span class="n">p1</span><span class="o">.</span><span class="na">getY</span><span class="o">(),</span> <span class="n">p2</span><span class="o">.</span><span class="na">getX</span><span class="o">(),</span> <span class="n">p2</span><span class="o">.</span><span class="na">getY</span><span class="o">());</span>
+        <span class="n">g</span><span class="o">.</span><span class="na">drawLine</span><span class="o">(</span> <span class="mi">40</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">40</span><span class="o">,</span> <span class="mi">400</span><span class="o">);</span>
+        <span class="n">g</span><span class="o">.</span><span class="na">drawString</span><span class="o">(</span> <span class="s">"y axis"</span><span class="o">,</span> <span class="mi">35</span><span class="o">,</span> <span class="mi">75</span> <span class="o">);</span>
+        <span class="n">g</span><span class="o">.</span><span class="na">drawString</span><span class="o">(</span> <span class="s">"x axis"</span><span class="o">,</span> <span class="mi">450</span><span class="o">,</span> <span class="n">x_axis</span> <span class="o">);</span>
+         
+         <span class="k">for</span><span class="o">(</span> <span class="kt">double</span> <span class="n">i</span> <span class="o">=</span> <span class="n">leftBound</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">rightBound</span><span class="o">;</span> <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="n">eps</span> <span class="o">)</span> <span class="o">{</span>
+             <span class="kt">double</span> <span class="n">x</span> <span class="o">=</span> <span class="n">i</span><span class="o">,</span> <span class="n">xx</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="n">eps</span><span class="o">;</span>
+             <span class="kt">double</span> <span class="n">y</span> <span class="o">=</span> <span class="n">f</span><span class="o">(</span> <span class="n">x</span> <span class="o">),</span> <span class="n">yy</span> <span class="o">=</span> <span class="n">f</span><span class="o">(</span> <span class="n">xx</span> <span class="o">);</span>
+             
+             <span class="n">p1</span> <span class="o">=</span> <span class="n">toPoint</span><span class="o">(</span> <span class="n">x</span> <span class="o">,</span> <span class="n">y</span> <span class="o">);</span>
+             <span class="n">g</span><span class="o">.</span><span class="na">drawLine</span><span class="o">(</span> <span class="n">p1</span><span class="o">.</span><span class="na">getX</span><span class="o">(),</span> <span class="n">p1</span><span class="o">.</span><span class="na">getY</span><span class="o">(),</span> <span class="n">p1</span><span class="o">.</span><span class="na">getX</span><span class="o">(),</span> <span class="n">p1</span><span class="o">.</span><span class="na">getY</span><span class="o">());</span>
+         <span class="o">}</span>
+         <span class="n">p1</span> <span class="o">=</span> <span class="n">toPoint</span><span class="o">(</span> <span class="mf">3.0</span><span class="o">,</span> <span class="n">f</span><span class="o">(</span><span class="mf">3.0</span><span class="o">)</span> <span class="o">);</span>
+         <span class="n">p2</span> <span class="o">=</span> <span class="n">toPoint</span><span class="o">(</span> <span class="mf">4.0</span><span class="o">,</span> <span class="n">f</span><span class="o">(</span><span class="mf">4.0</span><span class="o">)</span> <span class="o">);</span>
+         <span class="n">g</span><span class="o">.</span><span class="na">drawOval</span><span class="o">(</span> <span class="n">p1</span><span class="o">.</span><span class="na">getX</span><span class="o">()</span> <span class="o">-</span> <span class="mi">3</span><span class="o">,</span> <span class="n">p1</span><span class="o">.</span><span class="na">getY</span><span class="o">()</span> <span class="o">-</span> <span class="mi">3</span><span class="o">,</span> <span class="mi">6</span><span class="o">,</span> <span class="mi">6</span><span class="o">);</span>
+         <span class="n">g</span><span class="o">.</span><span class="na">drawOval</span><span class="o">(</span> <span class="n">p2</span><span class="o">.</span><span class="na">getX</span><span class="o">()</span> <span class="o">-</span> <span class="mi">3</span><span class="o">,</span> <span class="n">p2</span><span class="o">.</span><span class="na">getY</span><span class="o">()</span> <span class="o">-</span> <span class="mi">3</span><span class="o">,</span> <span class="mi">6</span><span class="o">,</span> <span class="mi">6</span><span class="o">);</span>
+         <span class="n">g</span><span class="o">.</span><span class="na">drawLine</span><span class="o">(</span> <span class="n">p1</span><span class="o">.</span><span class="na">getX</span><span class="o">(),</span> <span class="n">p1</span><span class="o">.</span><span class="na">getY</span><span class="o">(),</span> <span class="n">p1</span><span class="o">.</span><span class="na">getX</span><span class="o">(),</span> <span class="n">x_axis</span> <span class="o">);</span>
+         <span class="n">g</span><span class="o">.</span><span class="na">drawLine</span><span class="o">(</span> <span class="n">p2</span><span class="o">.</span><span class="na">getX</span><span class="o">(),</span> <span class="n">p2</span><span class="o">.</span><span class="na">getY</span><span class="o">(),</span> <span class="n">p2</span><span class="o">.</span><span class="na">getX</span><span class="o">(),</span> <span class="n">x_axis</span> <span class="o">);</span>
+         <span class="k">new</span> <span class="n">DecimalFormat</span><span class="o">(</span> <span class="s">"0.00"</span> <span class="o">);</span>
+         <span class="n">g</span><span class="o">.</span><span class="na">drawString</span><span class="o">(</span> <span class="n">Double</span><span class="o">.</span><span class="na">toString</span><span class="o">(</span> <span class="mf">3.0</span> <span class="o">),</span> <span class="n">p1</span><span class="o">.</span><span class="na">getX</span><span class="o">(),</span> <span class="n">x_axis</span> <span class="o">+</span> <span class="mi">12</span><span class="o">);</span>
+         <span class="n">g</span><span class="o">.</span><span class="na">drawString</span><span class="o">(</span> <span class="n">Double</span><span class="o">.</span><span class="na">toString</span><span class="o">(</span> <span class="mf">4.0</span> <span class="o">),</span> <span class="n">p2</span><span class="o">.</span><span class="na">getX</span><span class="o">(),</span> <span class="n">x_axis</span> <span class="o">+</span> <span class="mi">12</span><span class="o">);</span>
+         <span class="c1">//System.out.println( p1.getX() + " " + p1.getY() );</span>
+    <span class="o">}</span>
+     
+    <span class="kd">public</span> <span class="kt">double</span> <span class="n">f</span><span class="o">(</span> <span class="kt">double</span> <span class="n">x</span> <span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span> <span class="o">-</span> <span class="mf">9.8</span><span class="o">;</span>
+    <span class="o">}</span>
+    
+    <span class="kd">public</span> <span class="n">point</span> <span class="n">toPoint</span><span class="o">(</span> <span class="kt">double</span> <span class="n">x</span><span class="o">,</span> <span class="kt">double</span> <span class="n">y</span> <span class="o">)</span> <span class="o">{</span>
+        <span class="kt">double</span> <span class="n">xx</span> <span class="o">=</span> <span class="o">(</span> <span class="n">x</span> <span class="o">-</span> <span class="n">leftBound</span> <span class="o">)</span> <span class="o">/</span> <span class="o">(</span> <span class="n">rightBound</span> <span class="o">-</span> <span class="n">leftBound</span> <span class="o">)</span> <span class="o">*</span> <span class="mf">500.0</span><span class="o">;</span>
+        <span class="kt">double</span> <span class="n">yy</span> <span class="o">=</span> <span class="o">(</span> <span class="n">y</span> <span class="o">-</span> <span class="n">upperBound</span> <span class="o">)</span> <span class="o">/</span> <span class="o">(</span> <span class="n">lowerBound</span> <span class="o">-</span> <span class="n">upperBound</span> <span class="o">)</span> <span class="o">*</span> <span class="mf">400.0</span><span class="o">;</span>
+        
+        <span class="n">point</span> <span class="n">ret</span> <span class="o">=</span> <span class="k">new</span> <span class="n">point</span><span class="o">(</span> <span class="o">(</span><span class="kt">int</span><span class="o">)</span><span class="n">xx</span> <span class="o">,</span> <span class="o">(</span><span class="kt">int</span><span class="o">)</span><span class="n">yy</span> <span class="o">);</span>
+        <span class="k">return</span> <span class="n">ret</span><span class="o">;</span>
+    <span class="o">}</span>
+    
+    <span class="kd">public</span> <span class="kt">void</span> <span class="n">actionPerformed</span><span class="o">(</span> <span class="n">ActionEvent</span> <span class="n">event</span> <span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span><span class="o">(</span> <span class="n">event</span><span class="o">.</span><span class="na">getSource</span><span class="o">()</span> <span class="o">==</span> <span class="n">nextButton</span> <span class="o">)</span> <span class="o">{</span>
+            <span class="k">if</span><span class="o">(</span> <span class="n">high</span> <span class="o">-</span> <span class="n">low</span> <span class="o">&gt;</span> <span class="mf">0.001</span> <span class="o">)</span> <span class="o">{</span>
+                <span class="n">mid</span> <span class="o">=</span> <span class="o">(</span> <span class="n">low</span> <span class="o">+</span> <span class="n">high</span> <span class="o">)</span> <span class="o">*</span> <span class="mf">0.5</span><span class="o">;</span>
+                <span class="k">new</span> <span class="n">DecimalFormat</span><span class="o">(</span> <span class="s">"0.00"</span> <span class="o">);</span>
+                <span class="n">point</span> <span class="n">p1</span> <span class="o">=</span> <span class="n">toPoint</span><span class="o">(</span> <span class="n">mid</span><span class="o">,</span> <span class="n">f</span><span class="o">(</span><span class="n">mid</span><span class="o">)</span> <span class="o">);</span>
+                <span class="n">getGraphics</span><span class="o">().</span><span class="na">drawOval</span><span class="o">(</span> <span class="n">p1</span><span class="o">.</span><span class="na">getX</span><span class="o">()</span> <span class="o">-</span> <span class="mi">3</span><span class="o">,</span> <span class="n">p1</span><span class="o">.</span><span class="na">getY</span><span class="o">()</span> <span class="o">-</span> <span class="mi">3</span><span class="o">,</span> <span class="mi">6</span><span class="o">,</span> <span class="mi">6</span><span class="o">);</span>
+                <span class="n">getGraphics</span><span class="o">().</span><span class="na">drawLine</span><span class="o">(</span> <span class="n">p1</span><span class="o">.</span><span class="na">getX</span><span class="o">(),</span> <span class="n">p1</span><span class="o">.</span><span class="na">getY</span><span class="o">(),</span> <span class="n">p1</span><span class="o">.</span><span class="na">getX</span><span class="o">(),</span> <span class="n">x_axis</span> <span class="o">);</span>
+                 <span class="n">getGraphics</span><span class="o">().</span><span class="na">drawString</span><span class="o">(</span> <span class="n">Double</span><span class="o">.</span><span class="na">toString</span><span class="o">(</span> <span class="n">mid</span> <span class="o">),</span> <span class="n">p1</span><span class="o">.</span><span class="na">getX</span><span class="o">(),</span> <span class="n">x_axis</span> <span class="o">+</span> <span class="mi">12</span><span class="o">);</span>
+                <span class="kt">double</span> <span class="n">tmp</span> <span class="o">=</span> <span class="n">f</span><span class="o">(</span> <span class="n">mid</span> <span class="o">);</span>
+                <span class="k">if</span><span class="o">(</span> <span class="n">f</span><span class="o">(</span> <span class="n">mid</span> <span class="o">)</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">)</span> <span class="o">{</span>
+                    <span class="n">high</span> <span class="o">=</span> <span class="n">mid</span><span class="o">;</span>
+                <span class="o">}</span>
+                <span class="k">else</span> <span class="o">{</span>
+                    <span class="n">low</span> <span class="o">=</span> <span class="n">mid</span><span class="o">;</span>
+                <span class="o">}</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+    
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="n">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">IOException</span> <span class="o">{</span>
+        <span class="n">bisearch</span> <span class="n">bs</span> <span class="o">=</span> <span class="k">new</span> <span class="n">bisearch</span><span class="o">();</span>
+        <span class="n">bs</span><span class="o">.</span><span class="na">setVisible</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
+    <span class="o">}</span>
+    
+    <span class="kd">private</span> <span class="kt">double</span> <span class="n">low</span><span class="o">,</span> <span class="n">high</span><span class="o">,</span> <span class="n">mid</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kt">double</span> <span class="n">leftBound</span> <span class="o">=</span> <span class="mf">2.7</span><span class="o">,</span> <span class="n">rightBound</span> <span class="o">=</span> <span class="mf">4.3</span><span class="o">,</span> <span class="n">eps</span> <span class="o">=</span> <span class="mf">0.003</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kt">double</span> <span class="n">lowerBound</span><span class="o">,</span> <span class="n">upperBound</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kt">int</span> <span class="n">x_axis</span><span class="o">,</span> <span class="n">y_axis</span><span class="o">;</span>
+    <span class="n">Button</span> <span class="n">nextButton</span><span class="o">;</span>
+<span class="o">}</span>
 
-public void paint( Graphics g ) {
-    point p1 = new point();
-    point p2 = new point();
-    p1 = toPoint(2.7, 0.0 );
-    p2 = toPoint(4.3, 0.0 );
-    x_axis = p1.getY();
-    g.drawLine( p1.getX(), p1.getY(), p2.getX(), p2.getY());
-    g.drawLine( 40, 0, 40, 400);
-    g.drawString( &amp;quot;y axis&amp;quot;, 35, 75 );
-    g.drawString( &amp;quot;x axis&amp;quot;, 450, x_axis );
-
-    for( double i = leftBound; i &amp;lt;= rightBound; i = i + eps ) {
-        double x = i, xx = i + eps;
-        double y = f( x ), yy = f( xx );
-
-        p1 = toPoint( x , y );
-        g.drawLine( p1.getX(), p1.getY(), p1.getX(), p1.getY());
-    }
-    p1 = toPoint( 3.0, f(3.0) );
-    p2 = toPoint( 4.0, f(4.0) );
-    g.drawOval( p1.getX() - 3, p1.getY() - 3, 6, 6);
-    g.drawOval( p2.getX() - 3, p2.getY() - 3, 6, 6);
-    g.drawLine( p1.getX(), p1.getY(), p1.getX(), x_axis );
-    g.drawLine( p2.getX(), p2.getY(), p2.getX(), x_axis );
-    new DecimalFormat( &amp;quot;0.00&amp;quot; );
-    g.drawString( Double.toString( 3.0 ), p1.getX(), x_axis + 12);
-    g.drawString( Double.toString( 4.0 ), p2.getX(), x_axis + 12);
-    //System.out.println( p1.getX() + &amp;quot; &amp;quot; + p1.getY() );
-}
-
-public double f( double x ) {
-    return x * x - 9.8;
-}
-
-public point toPoint( double x, double y ) {
-    double xx = ( x - leftBound ) / ( rightBound - leftBound ) * 500.0;
-    double yy = ( y - upperBound ) / ( lowerBound - upperBound ) * 400.0;
-
-    point ret = new point( (int)xx , (int)yy );
-    return ret;
-}
-
-public void actionPerformed( ActionEvent event ) {
-    if( event.getSource() == nextButton ) {
-        if( high - low &amp;gt; 0.001 ) {
-            mid = ( low + high ) * 0.5;
-            new DecimalFormat( &amp;quot;0.00&amp;quot; );
-            point p1 = toPoint( mid, f(mid) );
-            getGraphics().drawOval( p1.getX() - 3, p1.getY() - 3, 6, 6);
-            getGraphics().drawLine( p1.getX(), p1.getY(), p1.getX(), x_axis );
-            getGraphics().drawString( Double.toString( mid ), p1.getX(), x_axis + 12);
-            double tmp = f( mid );
-            if( f( mid ) &amp;gt; 0 ) {
-                high = mid;
-            }
-            else {
-                low = mid;
-            }
-        }
-    }
-}
-
-public static void main(String[] args) throws IOException {
-    bisearch bs = new bisearch();
-    bs.setVisible(true);
-}
-
-private double low, high, mid;
-private double leftBound = 2.7, rightBound = 4.3, eps = 0.003;
-private double lowerBound, upperBound;
-private int x_axis, y_axis;
-Button nextButton;
+<span class="kd">class</span> <span class="nc">point</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="n">point</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="kd">public</span> <span class="n">point</span><span class="o">(</span><span class="kt">int</span> <span class="n">_x</span><span class="o">,</span> <span class="kt">int</span> <span class="n">_y</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">_x</span><span class="o">;</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">_y</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="n">getX</span><span class="o">()</span> <span class="o">{</span> <span class="k">return</span> <span class="n">x</span><span class="o">;</span> <span class="o">}</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="n">getY</span><span class="o">()</span> <span class="o">{</span> <span class="k">return</span> <span class="n">y</span><span class="o">;</span> <span class="o">}</span>
+    <span class="kd">private</span> <span class="kt">int</span> <span class="n">x</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kt">int</span> <span class="n">y</span><span class="o">;</span>
+<span class="o">}</span>
 </pre>
-<p>}</p>
+<p>太懒，不想把这段代码弄成applet了，想看编译后结果的同学点击<a href="http://acm.hit.edu.cn/~oneplus/design-2011/02-bisearch.jar">这里</a>下载可执行程序啊。</p>
 
-<p>class point {
-    public point() {
-        x = 0;
-        y = 0;
-    }
-    public point(int _x, int _y) {
-        x = _x;
-        y = _y;
-    }
-    public int getX() { return x; }
-    public int getY() { return y; }
-    private int x;
-    private int y;
-}
-{% endhighlight %}
-</div>
-<script type="text/javascript"><br>
-$(document).ready(function(){
-$(&quot;.codemain&quot;).toggle();
-$(&quot;.codeindex&quot;).toggle(function(){
-$(this).next(&quot;.codemain&quot;).animate({height: &#39;toggle&#39;, opacity: &#39;toggle&#39;}, &quot;slow&quot;);
-} ,function() {$(this).next(&quot;.codemain&quot;).animate({height: &#39;toggle&#39;, opacity: &#39;toggle&#39;}, &quot;slow&quot;);});});</script>
-太懒，不想把这段代码弄成applet了，想看编译后结果的同学点击<a href="http://acm.hit.edu.cn/~oneplus/design-2011/02-bisearch.jar">这里</a>下载可执行程序啊。
-<h4>杂碎</h4>
+<h3 id="section-4">杂碎</h3>
+
 <ul>
-<li>cai组队的事纠结了。</li>
-<li>84路换车站了，昨天从教化桥的一头跑到另一头去坐公交，T.T。以后再也不坐84了。</li>
-<li>上周的大概把三天时间花在toolbox源码的调研上，到周日才搞清楚要做的应该是service grid。脑残了…</li>
-<li>事情太多，还需多多努力啊…</li>
-</ul></p>
+  <li>cai组队的事纠结了。</li>
+  <li>84路换车站了，昨天从教化桥的一头跑到另一头去坐公交，T.T。以后再也不坐84了。</li>
+  <li>上周的大概把三天时间花在toolbox源码的调研上，到周日才搞清楚要做的应该是service grid。脑残了…</li>
+  <li>事情太多，还需多多努力啊…</li>
+</ul>
+
 
 </div>
 

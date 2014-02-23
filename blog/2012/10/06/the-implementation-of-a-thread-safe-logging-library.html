@@ -34,115 +34,124 @@ blockquote p { font-size: 14px; }
   <div class="content">
     <div style="color:#999;">
   <small>2012/10/06 - by
+    Oneplus
+
     
-      Oneplus
-  
+      &bull; <a href="/blog/tags/c.html">C++</a>
+    
+      &bull; <a href="/blog/tags/设计模式.html">设计模式</a>
+    
   </small>
 </div>
 <h2>实现一个线程安全的logging库</h2>
 <hr />
 <div>
-  <h4>Introduction</h4>
+  <h3 id="introduction">Introduction</h3>
 
-<p>
-Log是用来记录程序事件的一系列打印信息，和调试时的printf大法有点像。Log和我所接触的工作关系还是比较密切的。比方说，打印一下模型的加载时间、句子的解析速度、开发集上准确率什么的。由于接下来一段时间的工作需要写多线程，网上的logging库又不怎么习惯，所以计划造一个Log库的轮子。这篇文章中大概会讨论下面两方面内容：
-<ul><li>用singleton模式实现logging库</li>
-<li>Singleton模式的线程安全</li></ul>
-</p>
+<p>Log是用来记录程序事件的一系列打印信息，和调试时的printf大法有点像。Log和我所接触的工作关系还是比较密切的。比方说，打印一下模型的加载时间、句子的解析速度、开发集上准确率什么的。由于接下来一段时间的工作需要写多线程，网上的logging库又不怎么习惯，所以计划造一个Log库的轮子。这篇文章中大概会讨论下面两方面内容：</p>
 
-<p><a id="more"></a><a id="more-726"></a>
-<h4>Singleton</h4>
-<p>单件(Singleton)是设计模式的一种。如果你的程序中有某个类在程序整个的生命周期中只能被实例化一次，那么这个类就可以用单件模式来实现。直白一点说，有时候单件扮演了和全局变量类似的角色。在实际应用场景中，我们的程序中只被实例化的例子有很多，比如说：存储配置项的类。但实际并不是所有符合单件模式情景的类都要用单件来实现，不过这个已经超出本文讨论范围了。</p>
-<p>从OO的视角看打印log的对象(Logger)也具有只被实例化一次的特点。所以，用单件模式来实现Logger问题不大。</p>
-<p>
-首先把设计模式书上的代码抄一遍：
-{% highlight CPP %}
-class Singleton {
-   public:
-       static Singleton* getInstance( );
-   private:
-       Singleton( );
-       static Singleton* instance;
-};
-{% endhighlight %}
-</p>
-<p>然后，要做的就是往里面填一个打印log的函数，这个也是很容易实现的。实现后的效果如下。
-{% highlight CPP %}
-class logger {
-public:
-    static logger * get<em>logger() {
-        if (</em>instance == NULL) { _instance = new logger(); }
-        return _instance;
-    }</p>
-<pre class="highlight plaintext">void write_log(int i) {
-    fprintf(stderr, "%%levelname%% ");
-    fprintf(stderr, "log: %d\n", i);
-}
+<ul>
+  <li>用singleton模式实现logging库</li>
+  <li>Singleton模式的线程安全</li>
+</ul>
+
+<h3 id="singleton">Singleton</h3>
+
+<p>单件(Singleton)是设计模式的一种。如果你的程序中有某个类在程序整个的生命周期中只能被实例化一次，那么这个类就可以用单件模式来实现。直白一点说，有时候单件扮演了和全局变量类似的角色。在实际应用场景中，我们的程序中只被实例化的例子有很多，比如说：存储配置项的类。但实际并不是所有符合单件模式情景的类都要用单件来实现，不过这个已经超出本文讨论范围了。
+从OO的视角看打印log的对象(Logger)也具有只被实例化一次的特点。所以，用单件模式来实现Logger问题不大。</p>
+
+<p>首先把设计模式书上的代码抄一遍：</p>
+
+<pre class="highlight cpp"><span class="k">class</span> <span class="nc">Singleton</span> <span class="p">{</span>
+   <span class="k">public</span><span class="o">:</span>
+       <span class="k">static</span> <span class="n">Singleton</span><span class="o">*</span> <span class="n">getInstance</span><span class="p">(</span> <span class="p">);</span>
+   <span class="k">private</span><span class="o">:</span>
+       <span class="n">Singleton</span><span class="p">(</span> <span class="p">);</span>
+       <span class="k">static</span> <span class="n">Singleton</span><span class="o">*</span> <span class="n">instance</span><span class="p">;</span>
+<span class="p">};</span>
 </pre>
-<p>private:
-    static logger * _instance;
-protected:
-    logger() { }
-};</p>
+<p>然后，要做的就是往里面填一个打印log的函数，这个也是很容易实现的。实现后的效果如下。</p>
 
-<p>logger * logger::_instance = NULL;</p>
+<pre class="highlight cpp"><span class="k">class</span> <span class="nc">logger</span> <span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="k">static</span> <span class="n">logger</span> <span class="o">*</span> <span class="n">get_logger</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">_instance</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span> <span class="n">_instance</span> <span class="o">=</span> <span class="k">new</span> <span class="n">logger</span><span class="p">();</span> <span class="p">}</span>
+        <span class="k">return</span> <span class="n">_instance</span><span class="p">;</span>
+    <span class="p">}</span>
 
-<p>int main() {
-    logger::get<em>logger()-&gt;write</em>log(10);
-    return 0;
-}
-{% endhighlight %}</p>
-<p>当然也可以用变长参数和宏函数配合把这个做得有点酷，不过那些也不是本文要讨论的。</p>
-<p>到这里，使用Singleton实现logger的任务已经完成得差不多了。接下来要做的是使上面的代码线程安全。</p>
-<h4>线程安全</h4>
-<p>相比解释线程安全(Threads Safety)的概念，我觉得说明线程不安全更加容易。就拿前面说到的logger做例子。如果我开若干个线程，每个线程调用logger::get<em>logger()-&gt;write</em>log(tid);搞不好就会出现如下图的情况，
-<a href="http://blog.oneplus.info/wp-content/uploads/2012/10/thread_safety.png"><img src="http://blog.oneplus.info/wp-content/uploads/2012/10/thread_safety.png" alt="" title="thread_safety" width="266" height="52" class="aligncenter size-full wp-image-728" /></a>
-这里就出现两个线程都向stderr打印，导致打印信息混乱了。如果write<em>log函数中做更复杂的操作，出现这种混乱的可能性会变得更大。造成这一现象的原因就是多个线程抢占同一文件句柄，是生产者消费者问题的一个具体情境。解决方法就是给write</em>log上互斥锁。把write<em>log函数改成下面的样子就好了。
-{% highlight CPP %}
-void write</em>log(int i) {
-    EnterCriticalSection();
-    fprintf(stderr, &ldquo;%%levelname%% &rdquo;);
-    fprintf(stderr, &ldquo;log: %d\n&rdquo;, i);
-    LeaveCriticalSection();
-}
-{% endhighlight %}
-</p>
-<p>不过，给write<em>log上锁也并不能完全保证logger线程安全，另一个非常隐蔽资源抢占会发生在单件实例化的那个时间上。如果logger并没被初始化，并且又有多个线程同时要去初始化它，而在初始化时发生上下文切换，那么这个logger就会被实例化多次。</p>
-<p><a href="http://www.codeproject.com/Articles/96942/Singleton-Design-Pattern-and-Thread-Safety">这里</a>提供了三种解决方法，第一种是直接在判断单件是否被实例化前加锁，代码如下：
-{% highlight CPP %}
-static logger * get</em>logger() {
-    EnterCriticalSection();
-    if (<em>instance == NULL) { _instance = new logger(); }
-    LeaveCriticalSection();
-    return _instance;
-}
-{% endhighlight %}
-由于加互斥锁是一件比较耗时的工作，每次get</em>logger时都调用会加锁，解锁，程序的速度会受到影响。总之，这种方法是比较不赞的。</p>
+    <span class="kt">void</span> <span class="n">write_log</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span> <span class="s">"%%levelname%% "</span><span class="p">);</span>
+        <span class="n">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span> <span class="s">"log: %d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">i</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="k">private</span><span class="o">:</span>
+    <span class="k">static</span> <span class="n">logger</span> <span class="o">*</span> <span class="n">_instance</span><span class="p">;</span>
+<span class="k">protected</span><span class="o">:</span>
+    <span class="n">logger</span><span class="p">()</span> <span class="p">{</span> <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="n">logger</span> <span class="o">*</span> <span class="n">logger</span><span class="o">::</span><span class="n">_instance</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">logger</span><span class="o">::</span><span class="n">get_logger</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">write_log</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre>
+<p>当然也可以用变长参数和宏函数配合把这个做得有点酷，不过那些也不是本文要讨论的。
+到这里，使用Singleton实现logger的任务已经完成得差不多了。接下来要做的是使上面的代码线程安全。</p>
+
+<h3 id="section">线程安全</h3>
+
+<p>相比解释线程安全(Threads Safety)的概念，我觉得说明线程不安全更加容易。就拿前面说到的logger做例子。如果我开若干个线程，每个线程调用<code>logger::get_logger()-&gt;write_log(tid);</code>搞不好就会出现如下图的情况</p>
+
+<p><a href="http://blog.oneplus.info/wp-content/uploads/2012/10/thread_safety.png"><img src="http://blog.oneplus.info/wp-content/uploads/2012/10/thread_safety.png" alt="" title="thread_safety" width="266" height="52" class="aligncenter size-full wp-image-728" /></a></p>
+
+<p>这里就出现两个线程都向stderr打印，导致打印信息混乱了。如果write_log函数中做更复杂的操作，出现这种混乱的可能性会变得更大。造成这一现象的原因就是多个线程抢占同一文件句柄，是生产者消费者问题的一个具体情境。解决方法就是给write_log上互斥锁。把write_log函数改成下面的样子就好了。</p>
+
+<pre class="highlight cpp"><span class="kt">void</span> <span class="nf">write_log</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">EnterCriticalSection</span><span class="p">();</span>
+    <span class="n">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span> <span class="s">"%%levelname%% "</span><span class="p">);</span>
+    <span class="n">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span> <span class="s">"log: %d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">i</span><span class="p">);</span>
+    <span class="n">LeaveCriticalSection</span><span class="p">();</span>
+<span class="p">}</span>
+</pre>
+<p>不过，给write_log上锁也并不能完全保证logger线程安全，另一个非常隐蔽资源抢占会发生在单件实例化的那个时间上。如果logger并没被初始化，并且又有多个线程同时要去初始化它，而在初始化时发生上下文切换，那么这个logger就会被实例化多次。</p>
+
+<p><a href="http://www.codeproject.com/Articles/96942/Singleton-Design-Pattern-and-Thread-Safety">这里</a>提供了三种解决方法，第一种是直接在判断单件是否被实例化前加锁，代码如下：</p>
+
+<pre class="highlight cpp"><span class="k">static</span> <span class="n">logger</span> <span class="o">*</span> <span class="nf">get_logger</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">EnterCriticalSection</span><span class="p">();</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">_instance</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span> <span class="n">_instance</span> <span class="o">=</span> <span class="k">new</span> <span class="n">logger</span><span class="p">();</span> <span class="p">}</span>
+    <span class="n">LeaveCriticalSection</span><span class="p">();</span>
+    <span class="k">return</span> <span class="n">_instance</span><span class="p">;</span>
+<span class="p">}</span>
+</pre>
+<p>由于加互斥锁是一件比较耗时的工作，每次get_logger时都调用会加锁，解锁，程序的速度会受到影响。总之，这种方法是比较不赞的。</p>
+
 <p>第二种是在程序一开始就将它实例化（这种方法给人感觉也不怎么好）。弊端是如果这个单件在整个程序生命中都没有被调用，那么这次实例化就浪费了。当然浪费掉的还包括一些系统资源。</p>
-<p>第三种方法在第一种方法上进行改进，把加锁放在if判断里面，或者说在加锁外放一层if判断，代码是这样的：
-{% highlight CPP %}
-static logger * get<em>logger() {
-    if (</em>instance == NULL) {
-        EnterCriticalSection();
-        if (<em>instance == NULL) {</em>instance = new logger(); }
-        LeaveCriticalSection();
-    }
-    return <em>instance;
-}
-{% endhighlight %}
-这种方法的好处是避免了每次get</em>logger都加锁，不过在某些情景上和第一种方法是一样的。</p>
-<h4>printf</h4>
-<p>在实验过程中，我发现如果write<em>log只调用一次printf，并不会出现前面谈线程安全时的输出混乱。查了一下发现，printf本身具有操作原子性。所以，如果write</em>log函数只由一个printf组成，那一处的锁也可以忽略。</p>
-<p>最后形成的代码放在github的<a href="https://github.com/Oneplus/libutilities/tree/master/src/logging">这里</a>。</p>
-<p>牢骚几句，感觉操作系统很多基础知识都还给sunner了，罪过。</p></p>
 
-<h4>参考</h4>
+<p>第三种方法在第一种方法上进行改进，把加锁放在if判断里面，或者说在加锁外放一层if判断，代码是这样的：</p>
 
-<p><ul>
+<pre class="highlight cpp"><span class="k">static</span> <span class="n">logger</span> <span class="o">*</span> <span class="nf">get_logger</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">_instance</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">EnterCriticalSection</span><span class="p">();</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">_instance</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span><span class="n">_instance</span> <span class="o">=</span> <span class="k">new</span> <span class="n">logger</span><span class="p">();</span> <span class="p">}</span>
+        <span class="n">LeaveCriticalSection</span><span class="p">();</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">_instance</span><span class="p">;</span>
+<span class="p">}</span>
+</pre><p>这种方法的好处是避免了每次get_logger都加锁，不过在某些情景上和第一种方法是一样的。
+### printf
+在实验过程中，我发现如果write_log只调用一次printf，并不会出现前面谈线程安全时的输出混乱。查了一下发现，printf本身具有操作原子性。所以，如果write_log函数只由一个printf组成，那一处的锁也可以忽略。
+最后形成的代码放在github的<a href="https://github.com/Oneplus/libutilities/tree/master/src/logging">这里</a>。
+牢骚几句，感觉操作系统很多基础知识都还给sunner了，罪过。</p>
+
+<h3 id="section-1">参考</h3>
+<ul>
 <li><a href="https://computing.llnl.gov/tutorials/pthreads/">POSIX Threads Programming</a></li>
 <li><a href="http://www.codeproject.com/Articles/96942/Singleton-Design-Pattern-and-Thread-Safety">Singleton Design Pattern and Thread Safety</a></li>
 <li><a href="http://stackoverflow.com/questions/467938/stdout-thread-safe-in-c-on-linux">stdout thread-safe in C on Linux?</a></li>
-</ul></p>
+</ul>
+
 
 </div>
 

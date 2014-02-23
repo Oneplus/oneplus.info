@@ -35,41 +35,35 @@ blockquote p { font-size: 14px; }
     <div style="color:#999;">
   <small>2011/12/02 - by
     
-      
-  
+
+    
+      &bull; <a href="/notes/tags/shell.html">Shell</a>
+    
   </small>
 </div>
 <h2>使用sed批量改文件名</h2>
 <hr />
 <div>
-  <h3>Sed批量去拓展名</h3>
+  <h3 id="sed">Sed批量去拓展名</h3>
 
-<p>{% highlight bash %}
-|- dev.gb.conll06.raw
+<pre class="highlight shell">|- dev.gb.conll06.raw
 |- test.gb.conll06.raw
 |- train.gb.conll06.raw
-{% endhighlight %}</p>
-
+</pre>
 <p>想要去掉其中的后缀<code>.raw</code>，用个小脚本就可以搞定：</p>
 
-<p>{% highlight bash %}
-for file in <code>ls</code>; do mv $file <code>echo $file | sed &#39;s/\.raw$//&#39;</code>; done
-{% endhighlight %}</p>
+<pre class="highlight shell"><span class="k">for </span>file <span class="k">in</span> <span class="sb">`</span>ls<span class="sb">`</span>; <span class="k">do </span>mv <span class="nv">$file</span> <span class="sb">`</span><span class="nb">echo</span> <span class="nv">$file</span> | sed <span class="s1">'s/\.raw$//'</span><span class="sb">`</span>; <span class="k">done</span>
+</pre>
+<h3 id="sed-1">Sed批量添加拓展名</h3>
 
-<h3>Sed批量添加拓展名</h3>
-
-<p>{% highlight bash %}
-|- dev.gb.conll06
+<pre class="highlight shell">|- dev.gb.conll06
 |- test.gb.conll06
 |- train.gb.conll06
-{% endhighlight %}</p>
-
+</pre>
 <p>同理，一个小脚本可以搞定：</p>
 
-<p>{% highlight bash %}
-for file in <code>ls</code>; do mv $file <code>echo $file | sed &#39;s/$/\.raw//&#39;</code>; done
-{% endhighlight %}</p>
-
+<pre class="highlight shell"><span class="k">for </span>file <span class="k">in</span> <span class="sb">`</span>ls<span class="sb">`</span>; <span class="k">do </span>mv <span class="nv">$file</span> <span class="sb">`</span><span class="nb">echo</span> <span class="nv">$file</span> | sed <span class="s1">'s/$/\.raw//'</span><span class="sb">`</span>; <span class="k">done</span>
+</pre>
 </div>
 
 <div id="disqus_thread"></div>

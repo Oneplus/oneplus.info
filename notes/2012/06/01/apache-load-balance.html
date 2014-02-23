@@ -34,9 +34,11 @@ blockquote p { font-size: 14px; }
   <div class="content">
     <div style="color:#999;">
   <small>2012/06/01 - by
+    Oneplus
+
     
-      
-  
+      &bull; <a href="/notes/tags/server.html">Server</a>
+    
   </small>
 </div>
 <h2>Apache负载均衡</h2>
@@ -46,36 +48,32 @@ blockquote p { font-size: 14px; }
 
 <p>在apache的配置文件<code>httpd.conf</code>中加入</p>
 
-<p>{% highlight bash %}
-ProxyPass / balancer://proxy/         #注意这里以&quot;/&ldquo;结尾 
-<Proxy balancer://proxy> 
+<pre class="highlight shell">ProxyPass / balancer://proxy/         <span class="c">#注意这里以"/"结尾 </span>
+&lt;Proxy balancer://proxy&gt; 
     BalancerMember http://192.168.6.37:6888/ 
     BalancerMember http://192.168.6.38:6888/ 
-</Proxy> 
-{% endhighlight %}</p>
-
+<span class="gp">&lt;/Proxy&gt; </span>
+</pre>
 <p>这里不一定要在<code>httpd.conf</code>中直接添加<code>ProxyPass / balancer</code>。另一种实现方法是向<code>httpd.conf</code>中添加<code>Include conf/httpd-proxy.conf</code>，然后把<code>ProxyPass</code>写到<code>httpd-proxy.conf</code>中。</p>
 
 <p>下面详细介绍这段配置文件的含义：</p>
 
 <ul>
-<li>其中<code>ProxyPass</code>是配置虚拟服务器命令</li>
-<li>/应该是类于过滤规则，指的是web请求url的后缀（参考网址中说是前缀，不懂）。如果只对<code>/redmine</code>的请求进行负载均衡，那么需要改成<code>/redmine</code>。</li>
-<li><code>balancer://proxy</code>表示要配置负载均衡，<code>proxy</code>表示负载均衡名，也可以改成其他名字，比如说<code>redmine_cluster</code>。</li>
+  <li>其中<code>ProxyPass</code>是配置虚拟服务器命令</li>
+  <li>/应该是类于过滤规则，指的是web请求url的后缀（参考网址中说是前缀，不懂）。如果只对<code>/redmine</code>的请求进行负载均衡，那么需要改成<code>/redmine</code>。</li>
+  <li><code>balancer://proxy</code>表示要配置负载均衡，<code>proxy</code>表示负载均衡名，也可以改成其他名字，比如说<code>redmine_cluster</code>。</li>
 </ul>
 
-<p>{% highlight bash %}
-BalancerMember http://192.168.6.37:6888/ 
-{% endhighlight %}</p>
-
+<pre class="highlight shell">BalancerMember http://192.168.6.37:6888/ 
+</pre>
 <p>表示将<code>http://192.168.6.37:6888/</code>注册到负载均衡中。</p>
 
 <p>上述所示的负载均衡是轮询型负载均衡，除此之外，还有按权重分配负载均衡策略，权重请求响应负载均衡策略。其中，前者按照请求次数分配负载，后者则按照请求负载分配负载。举个例子讲：按照前者，如果有4次请求，3次被分配到机器A、1次被分配到机器B。按照后者，有1000bytes的请求，750bytes被分配给A、250bytes被分配给B。具体参考下面的链接</p>
 
-<h3>参考</h3>
+<h4 id="section">参考</h4>
 
 <ul>
-<li><a href="http://blog.csdn.net/paulluo0739/article/details/2269052">apache2.2.4 负载均衡初探</a></li>
+  <li><a href="http://blog.csdn.net/paulluo0739/article/details/2269052">apache2.2.4 负载均衡初探</a></li>
 </ul>
 
 </div>

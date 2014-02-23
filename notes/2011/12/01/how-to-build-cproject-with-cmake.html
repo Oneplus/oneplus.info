@@ -34,49 +34,47 @@ blockquote p { font-size: 14px; }
   <div class="content">
     <div style="color:#999;">
   <small>2011/12/01 - by
+    Oneplus
+
     
-      
-  
+      &bull; <a href="/notes/tags/c-c.html">C/C++</a>
+    
+      &bull; <a href="/notes/tags/cmake.html">cmake</a>
+    
   </small>
 </div>
 <h2>使用cmake构建项目</h2>
 <hr />
 <div>
-  <h3>动机</h3>
+  <h3 id="section">动机</h3>
 
 <p>不用手写Makefile，够快速构建C/C++项目</p>
 
-<h3>方法</h3>
+<h3 id="section-1">方法</h3>
 
 <p>使用cmake工具可以很方便地构建项目，只需要简单地写几个CMakeLists.txt就可以了。我采用的文件夹构架为：</p>
 
-<p>{% highlight bash %}
-./
+<pre class="highlight shell">./
  |- ./bin/
  |- ./build/
  |- ./data/
  |- ./src/
-{% endhighlight %}</p>
-
+</pre>
 <p>在./src下面写CMakeLists.txt。它做的事情只有一件：指定将某些源文件编译成可执行程序，具体内容：</p>
 
-<p>{% highlight bash %}
-ADD_EXECUTABLE(wordseg, Alphabet.cpp, &hellip;)
-{% endhighlight %}</p>
-
+<pre class="highlight shell">ADD_EXECUTABLE<span class="o">(</span>wordseg, Alphabet.cpp, ...<span class="o">)</span>
+</pre>
 <p>由于要写一堆x.cpp，最好的办法是写一个小脚本:</p>
 
-<p>{% highlight bash linenos %}
-ls *.cpp | \
-awk &lsquo;BEGIN{print &ldquo;ADD_EXECUTABLE(wordseg,&rdquo;}{print &ldquo;\t&rdquo;$0&quot;;&ldquo;}&rsquo;
-{% endhighlight %}</p>
-
+<pre class="highlight shell">ls <span class="k">*</span>.cpp | <span class="se">\</span>
+awk <span class="s1">'BEGIN{print "ADD_EXECUTABLE(wordseg,"}{print "\t"$0";"}'</span>
+</pre>
 <p>同时还要在项目的根目录下写CMakeLists.txt，它做的事情有：</p>
 
 <ol>
-<li>指定./src是项目的子目录，这样cmake就会去./src中找CMakeLists.txt了，语句是：<code>ADD_SUBDIRECTORY(src)</code></li>
-<li>指定编译的可执行程序在./bin，语句是：<code>SET(EXECUTABLE_OUTPUT_PATH,${PROJECT_SOURCE_DIR}/bin)</code></li>
-<li>这里注意两个变量<code>${PROJECT_BINARY_DIR}</code>与<code>${PROJECT_SOURCE_DIR}</code>，第一个是运行cmake的路径，第二个是cmake [path]中的path</li>
+  <li>指定./src是项目的子目录，这样cmake就会去./src中找CMakeLists.txt了，语句是：<code>ADD_SUBDIRECTORY(src)</code></li>
+  <li>指定编译的可执行程序在./bin，语句是：<code>SET(EXECUTABLE_OUTPUT_PATH,${PROJECT_SOURCE_DIR}/bin)</code></li>
+  <li>这里注意两个变量<code>${PROJECT_BINARY_DIR}</code>与<code>${PROJECT_SOURCE_DIR}</code>，第一个是运行cmake的路径，第二个是cmake [path]中的path</li>
 </ol>
 
 </div>

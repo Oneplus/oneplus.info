@@ -34,146 +34,186 @@ blockquote p { font-size: 14px; }
   <div class="content">
     <div style="color:#999;">
   <small>2011/03/23 - by
+    Oneplus
+
     
-      Oneplus
-  
+      &bull; <a href="/blog/tags/cir.html">CIR</a>
+    
+      &bull; <a href="/blog/tags/language-grid.html">Language Grid</a>
+    
   </small>
 </div>
 <h2>Language Grid调研结果[iii]{补作业完结篇+番外篇}</h2>
 <hr />
 <div>
-  <div id="architecture">
-<h4>Language Grid的设计结构如图</h4>
-<p></p>
-<a id="more"></a><a id="more-142"></a>
-<p align="center"><img width="300px" src="http://blog.oneplus.info/wp-content/uploads/2011/03/2-1.png" /></p>
-其中，Core Node是Language Grid的核心节点，用于保存Service的一些信息。Service之间的相互调用，需要经过Core Node。Wrapper是Language Grid面向语言服务的一种Service。主要用于与语言资源、软件API交互。应用用户在调用Language Grid提供的语言服务时，需要经过Core Node访问Wrapper。Language Grid网站上提供的Language Grid可以看作是一种Wrapper。<br />
-Service Grid的层次可以看做
-<p align="center"><img width="400px" src="http://blog.oneplus.info/wp-content/uploads/2011/03/2-2.png" /></p>
-三个层次的作用分别是
+  <h4 id="language-grid">Language Grid的设计结构如图</h4>
+
+<p>其中，Core Node是Language Grid的核心节点，用于保存Service的一些信息。Service之间的相互调用，需要经过Core Node。Wrapper是Language Grid面向语言服务的一种Service。主要用于与语言资源、软件API交互。应用用户在调用Language Grid提供的语言服务时，需要经过Core Node访问Wrapper。Language Grid网站上提供的Language Grid可以看作是一种Wrapper。</p>
+
+<p><img alt="structure" src="http://blog.oneplus.info/wp-content/uploads/2011/03/2-1.png" /></p>
+
+<p>Service Grid的层次可以看做</p>
+
+<p><img alt="grid" src="http://blog.oneplus.info/wp-content/uploads/2011/03/2-2.png" /></p>
+
+<p>三个层次的作用分别是</p>
+
 <ul>
-<li>Service</li>
+  <li>Service
+    <ul>
+      <li>与Web Request、Application Request交互</li>
+      <li>与Program、Language Resource交互</li>
+      <li>Service一方面是接受应用请求，另一方面是调用语言资源。</li>
+    </ul>
+  </li>
+  <li>Grid
+    <ul>
+      <li>工作在DB与Service之间，提供DB的接口给Service</li>
+      <li>另一点作用是与其他Grid进行交互</li>
+    </ul>
+  </li>
+  <li>Service DB
+    <ul>
+      <li>保存Grid、Service的ID、url等属性</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="section">三个层次的通信方式</h3>
+
 <ul>
-<li>与Web Request、Application Request交互</li>
-<li>与Program、Language Resource交互</li>
-<li>Service一方面是接受应用请求，另一方面是调用语言资源。</li>
+  <li>Web Request to Service : HTML ; Application Request to Service : SOAP</li>
+  <li>Service to DB : java.dao(由于Grid只是一个中间介质，在源码中没有实体化的描述)</li>
 </ul>
-<li>Grid</li>
+
+<h3 id="service">Service调研</h3>
+
+<p><img alt="service" src="http://blog.oneplus.info/wp-content/uploads/2011/03/2-3.png" /></p>
+
+<p>各个模块的作用</p>
+
+<h4 id="service-manager">Service Manager</h4>
+
+<p>用于添加、删除、修改Service在DB中的信息。是Service层和Grid层的交互接口</p>
+
+<h4 id="service-supervisor">Service Supervisor</h4>
+
+<p>控制访问权限</p>
+
+<h4 id="composite-service">Composite Service</h4>
+
+<p>用于用户查找、部署Service。举例解释其作用，如果有一个Translate命令输入，Service Grid会先通过Composite Service找到相符的Translation Service。然后再进行与Atomic Service的交互。</p>
+
+<h4 id="atomic-service">Atomic Service</h4>
+
+<p>用于保存Wrapper、与Resources、API交互。是Service Grid服务的外部接口。</p>
+
+<h4 id="section-1">各模块之间通信方式</h4>
+
 <ul>
-<li>工作在DB与Service之间，提供DB的接口给Service</li>
-<li>另一点作用是与其他Grid进行交互</li>
+  <li>Service Supervisor to Composite/Atomic Service : SOAP, Java Method</li>
+  <li>Composite Service to Service Supervisor : SOAP, Java Method</li>
+  <li>Atomic Service to Resource : WSDL</li>
 </ul>
-<li>Service DB</li>
+
+<h3 id="atomic-service-1">Atomic Service的调研</h3>
+
+<p>Atomic Service完成一些Service Grid和语言资源、软件API的交互，是Service Grid最靠外的一层。Atomic Service的方法由AbstractSerive及其子类描述。其中包括AbstractAdjacencyPairService、AbstractMorphologicalAnalysisService等。</p>
+
+<p>其中，类的继承关系如下</p>
+
+<pre class="highlight java"><span class="n">AbstractService</span>
+	<span class="n">AbstractLanguageService</span>
+		<span class="n">AbstractAdjacencyPairService</span> <span class="c1">// 机器问答</span>
+		<span class="n">AbstractConceptDictionaryService</span> <span class="c1">// 概念词典</span>
+		<span class="n">AbstractDependencyParserService</span> <span class="c1">// 依存分析</span>
+		<span class="n">AbstractLanguageIdentificationService</span> 
+		<span class="n">AbstractMorphologicalAnalysisService</span> <span class="c1">// 词性分析</span>
+		<span class="n">AbstractParaphraseService</span>
+		<span class="n">AbstractPictogramDictionaryService</span>
+		<span class="n">AbstractSimilarityCalculationService</span>
+		<span class="n">AbstractSpeechRecognitionService</span>
+		<span class="n">AbstractTemplateParallelTextService</span>
+	<span class="n">AbstractLanguagePairService</span>
+		<span class="n">AbstractBilingualDictionaryService</span> 
+		<span class="n">AbstractDictionaryService</span>
+		<span class="n">AbstractParallelTextService</span>
+		<span class="n">AbstractTranslationService</span>
+</pre>
+<p>对于上述AbstractService，Service Grid源码中不提供该项服务的解决方案，而是要求通过重载运算来实机器问答、机器翻译等功能。</p>
+
+<p>各项AbstractService提供重载的接口如下</p>
+
 <ul>
-<li>保存Grid、Service的ID、url等属性</li>
+  <li>AbstractAdjacencyPairService
+    <ul>
+      <li>接口:search(String category, String Language, String firstTurn, String matchingMethod)</li>
+      <li>重载:doSearch(String category, Language Language, String firstTurn, MatchingMethod matchingMethod)</li>
+      <li>预处理:无</li>
+    </ul>
+  </li>
+  <li>AbstractConceptDictionaryService
+    <ul>
+      <li>接口:searchConcepts(String language, String word, String matchingMethod)</li>
+      <li>接口:getRelatedConcepts(String language, String conceptId, String relation)</li>
+      <li>重载:doSearchConcepts(Language language, String word, MatchingMethod matchingMethod)</li>
+      <li>重载:doGetRelatedConcepts(Language language, String conceptId, ConceptualRelation relation)</li>
+      <li>预处理:无</li>
+    </ul>
+  </li>
+  <li>AbstractParalledlTextService
+    <ul>
+      <li>接口:search(String sourceLang, String targetLang, String source, Stirng matchingMethod)</li>
+      <li>重载:doSearch(Language sourceLang, Language targetLang, String source, MatchingMethod matchingMethod)</li>
+      <li>预处理:无</li>
+    </ul>
+  </li>
+  <li>AbstractDependencyParserService
+    <ul>
+      <li>接口:parseDenpendency(String language, String sentence)</li>
+      <li>重载:doParseDependency(Language language, String sentence)</li>
+      <li>预处理:无</li>
+    </ul>
+  </li>
+  <li>AbstractMorphologicalAnalysisService
+    <ul>
+      <li>接口:analyze(String language, String text)</li>
+      <li>重载:doAnalyze(Language language, String text)</li>
+      <li>预处理:无</li>
+    </ul>
+  </li>
+  <li>AbstractTranslateService
+    <ul>
+      <li>接口:translate(String sourceLang, String targetLang, String source)</li>
+      <li>重载:doTranslate(Language sourceLang, Language targetLang, String source)</li>
+      <li>预处理:invokeDoTranslate
+        <ul>
+          <li>将待翻译文本分成{‘NONE’, ‘WORD’, ‘FULL’, ‘FULL_WITH_PUNCTUATION’}四种，进行预处理</li>
+          <li>NONE直接翻译</li>
+          <li>WORD按截止符拆分成单段，再调用单个词翻译</li>
+          <li>FULL按截止符拆分成单段，再调用多个词同时翻译</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
 </ul>
-</ul>
-<h4>三个层次的通信方式</h4>
-<ul>
-    <li>Web Request to Service : HTML ; Application Request to Service : SOAP</li>
-    <li>Service to DB : java.dao(由于Grid只是一个中间介质，在源码中没有实体化的描述)</li>
-</ul>
-Service调研
-<p align="center"><img width="500px" src="http://blog.oneplus.info/wp-content/uploads/2011/03/2-3.png" /></p>
-各个模块的作用
-<ul>
-<li>Service Manager</li>
-用于添加、删除、修改Service在DB中的信息。是Service层和Grid层的交互接口
-<li>Service Supervisor</li>
-控制访问权限
-<li>Composite Service</li>
-用于用户查找、部署Service。举例解释其作用，如果有一个Translate命令输入，Service Grid会先通过Composite Service找到相符的Translation Service。然后再进行与Atomic Service的交互。
-<li>Atomic Service</li>
-用于保存Wrapper、与Resources、API交互。是Service Grid服务的外部接口。
-</ul>
-<h4>各模块之间通信方式</h4>
-<ul>
-<li>Service Supervisor to Composite/Atomic Service : SOAP, Java Method</li>
-<li>Composite Service to Service Supervisor : SOAP, Java Method</li>
-<li>Atomic Service to Resource : WSDL</li>
-</ul>
-<h4>Atomic Service的调研</h4>
-Atomic Service完成一些Service Grid和语言资源、软件API的交互，是Service Grid最靠外的一层。Atomic Service的方法由AbstractSerive及其子类描述。其中包括AbstractAdjacencyPairService、AbstractMorphologicalAnalysisService等。<br />
-其中，类的继承关系如下
-{% highlight %}
-AbstractService
-    AbstractLanguageService
-        AbstractAdjacencyPairService // 机器问答
-        AbstractConceptDictionaryService // 概念词典
-        AbstractDependencyParserService // 依存分析
-        AbstractLanguageIdentificationService 
-        AbstractMorphologicalAnalysisService // 词性分析
-        AbstractParaphraseService
-        AbstractPictogramDictionaryService
-        AbstractSimilarityCalculationService
-        AbstractSpeechRecognitionService
-        AbstractTemplateParallelTextService
-    AbstractLanguagePairService
-        AbstractBilingualDictionaryService 
-        AbstractDictionaryService
-        AbstractParallelTextService
-        AbstractTranslationService
-{% endhighlight %}
-对于上述AbstractService，Service Grid源码中不提供该项服务的解决方案，而是要求通过重载运算来实机器问答、机器翻译等功能。<br />
-各项AbstractService提供重载的接口如下
-<ul>
-<li>AbstractAdjacencyPairService</li>
-<ul>
-<li>接口:search(String category, String Language, String firstTurn, String matchingMethod)</li>
-<li>重载:doSearch(String category, Language Language, String firstTurn, MatchingMethod matchingMethod)</li>
-<li>预处理:无</li>
-</ul>
-<li>AbstractConceptDictionaryService</li>
-<ul>
-<li>接口:searchConcepts(String language, String word, String matchingMethod)</li>
-<li>接口:getRelatedConcepts(String language, String conceptId, String relation)</li>
-<li>重载:doSearchConcepts(Language language, String word, MatchingMethod matchingMethod)</li>
-<li>重载:doGetRelatedConcepts(Language language, String conceptId, ConceptualRelation relation)</li>
-<li>预处理:无</li>
-</ul>
-<li>AbstractParalledlTextService</li>
-<ul>
-<li>接口:search(String sourceLang, String targetLang, String source, Stirng matchingMethod)</li>
-<li>重载:doSearch(Language sourceLang, Language targetLang, String source, MatchingMethod matchingMethod)</li>
-<li>预处理:无</li>
-</ul>
-<li>AbstractDependencyParserService</li>
-<ul>
-<li>接口:parseDenpendency(String language, String sentence)</li>
-<li>重载:doParseDependency(Language language, String sentence)</li>
-<li>预处理:无</li>
-</ul>
-<li>AbstractMorphologicalAnalysisService</li>
-<ul>
-<li>接口:analyze(String language, String text)</li>
-<li>重载:doAnalyze(Language language, String text)</li>
-<li>预处理:无</li>
-</ul>
-<li>AbstractTranslateService</li>
-<ul>
-<li>接口:translate(String sourceLang, String targetLang, String source)</li>
-<li>重载:doTranslate(Language sourceLang, Language targetLang, String source)</li>
-<li>预处理:invokeDoTranslate</li>
-将待翻译文本分成{&lsquo;NONE&rsquo;, &lsquo;WORD&rsquo;, &lsquo;FULL&rsquo;, &lsquo;FULL_WITH_PUNCTUATION&rsquo;}四种，进行预处理<br />
-NONE直接翻译<br />
-WORD按截止符拆分成单段，再调用单个词翻译<br />
-FULL按截止符拆分成单段，再调用多个词同时翻译<br />
-</ul>
-</ul>
-经过两个星期的调研，我个人对于Service Grid的理解是，相比语言服务，Service Grid提供的更多是一种一套语言服务系统。对于提供怎样的翻译，怎样的依存分析，Service Grid并不关心。其关心的重点是，如何在翻译的请求到来时，调用各个Wrapper的翻译功能。而最初看到的将多种语言服务结合使用，在Service Grid的源码中没有体现，应该也是Wrapper通过重载方法实现的。<br />
-<del>调研过程到这里就太监了</del>
-<p>
-_______________________我是番外篇的分割线________________________
-</p>
-总结这次调研工作
+
+<p>经过两个星期的调研，我个人对于Service Grid的理解是，相比语言服务，Service Grid提供的更多是一种一套语言服务系统。对于提供怎样的翻译，怎样的依存分析，Service Grid并不关心。其关心的重点是，如何在翻译的请求到来时，调用各个Wrapper的翻译功能。而最初看到的将多种语言服务结合使用，在Service Grid的源码中没有体现，应该也是Wrapper通过重载方法实现的。
+<del>调研过程到这里就太监了</del></p>
+
+<div>_______________________我是番外篇的分割线________________________</div>
+
+<p>总结这次调研工作</p>
+
 <ol>
-<li>平生第一次读60M的代码（实际上大概读了其中的20%）</li>
-<li>像Language Grid这种思路是不是就是所谓的面向服务的软件设计呢</li>
-<li>软件调研，要从Manual下手。在真正开始看代码之前，要认真阅读Manual，甚至来讲，Manual要比真正的代码还重要。因为，软件的开发者会清晰地描述他们的设计思路，而这方面上Manual远比代码直接。开始读Java源码之前，还把三天时间放在Toolbox上面了，如果早点读Manual，或许会少走不少弯路。</li>
-<li>如果以后参与开发，也要认真写好Manual，这个无论对于自己还是对于他人都是有好处的。</li>
+  <li>平生第一次读60M的代码（实际上大概读了其中的20%）</li>
+  <li>像Language Grid这种思路是不是就是所谓的面向服务的软件设计呢</li>
+  <li>软件调研，要从Manual下手。在真正开始看代码之前，要认真阅读Manual，甚至来讲，Manual要比真正的代码还重要。因为，软件的开发者会清晰地描述他们的设计思路，而这方面上Manual远比代码直接。开始读Java源码之前，还把三天时间放在Toolbox上面了，如果早点读Manual，或许会少走不少弯路。</li>
+  <li>如果以后参与开发，也要认真写好Manual，这个无论对于自己还是对于他人都是有好处的。</li>
 </ol>
-整个这个工作在上个星期时已经结束了，但是一直没拿出时间来把这篇总结写出来，也不知道自己都在做些啥。摔！
-</div>
+
+<p>整个这个工作在上个星期时已经结束了，但是一直没拿出时间来把这篇总结写出来，也不知道自己都在做些啥。摔！</p>
+
 
 </div>
 

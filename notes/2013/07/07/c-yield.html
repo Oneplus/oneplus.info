@@ -35,14 +35,17 @@ blockquote p { font-size: 14px; }
     <div style="color:#999;">
   <small>2013/07/07 - by
     
-      
-  
+
+    
+      &bull; <a href="/notes/tags/c-c.html">C/C++</a>
+    
   </small>
 </div>
 <h2>用C语言实现yield</h2>
 <hr />
 <div>
   <p>C/C++中没有yield语法，有的时候想用产生器，自己实现一个循环会感觉很麻烦。C/C++应该如何实现产生器呢？</p>
+
 <pre class="highlight cpp"><span class="k">class</span> <span class="nc">FibonacciGenerator</span> <span class="p">{</span>
 <span class="k">public</span><span class="o">:</span>
   <span class="n">FibonacciGenerator</span><span class="p">()</span> <span class="o">:</span> <span class="n">a</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">b</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">state</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="p">{}</span>
@@ -63,11 +66,12 @@ blockquote p { font-size: 14px; }
 </pre>
 <p>这个代码真的很神奇，我也没搞懂他是如何运行的，但是循环式的generator似乎可以这么写。</p>
 
-<h3>参考</h3>
+<h3 id="section">参考</h3>
 
 <ul>
-<li><a href="http://www.chiark.greenend.org.uk/~sgtatham/coroutines.html">Coroutines in C</a></li>
+  <li><a href="http://www.chiark.greenend.org.uk/~sgtatham/coroutines.html">Coroutines in C</a></li>
 </ul>
+
 
 </div>
 

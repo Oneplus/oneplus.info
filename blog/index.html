@@ -42,12 +42,13 @@ blockquote p { font-size: 14px; }
     <h2><a href="/blog/2013/08/05/summary-on-first-year-as-graduate-student.html">研一这一年吧</a></h2>
     <p>给这一年列一个时间表吧，这篇文章想写很久了，虽然有预感写出来又是满满的负能量。</p>
 
-<p><a id="more"></a><a id="more-826"></a>
-</p><h3>2012年</h3>
-<h4>8月-9月</h4>
+<h3 id="section">2012年</h3>
+
+<h4 id="section-1">8月-9月</h4>
 <p>写了一篇叫《基于序列标注的中文分词、词性标注模型比较分析》，投了一个学生会议。大概是想论证用分类方法做分词、词性标注这些序列性问题可以取得与序列标注模型类似的性能。还想强调分类速度比较快。不过实验并没有获得符合预期的结果。所以这篇论文的论点比较奇怪，不管是写还是修改都很痛苦。在后来被转投中文信息学报，我又不得不痛苦地改了一遍。</p>
-<h4>9月-10月</h4>
-<p>参加了微博分词的评测。最后提交的系统是一个...</p>
+
+<h4 id="section-2">9月-10月</h4>
+<p>参加了微博分词的评测。最后提交的系统是一...</p>
     <a href="/blog/2013/08/05/summary-on-first-year-as-graduate-student.html">[READ MORE]</a>
   </div>
   <hr />
@@ -59,11 +60,10 @@ blockquote p { font-size: 14px; }
   </div>
   <div class="col-md-11">
     <h2><a href="/blog/2013/07/21/luxation.html">脱臼</a></h2>
-    <p>昨天睡觉前，躺在床上打了个哈欠，结果一不小心下巴脱臼了。</p>
-
-<p><a id="more"></a><a id="more-819"></a>
-</p><p>下巴脱臼已经不是一次两次了。第一次脱臼好像是由于吃苹果张太大口，后来则以打哈欠打脱臼了居多。我把这种病症归咎于基因，因为印象中我妈好像也脱臼过。可能是骨骼的构造不合适，也可能是韧带的力度不够，不过这些一定是由基因决定的。由于接受了这种设定，我也就比较释然，重来没埋怨过苹果或者是哈欠。</p>
-<p>出于多次脱臼的经验，我已经学会了一些基本的救治手段。一般是将下巴向左稍用力顶一下，感觉头骨错动，也可能会听到咯噔一声。如果运气好，脱臼就归位了。运...</p>
+    <p>昨天睡觉前，躺在床上打了个哈欠，结果一不小心下巴脱臼了。
+<a id="more"></a><a id="more-819"></a>
+下巴脱臼已经不是一次两次了。第一次脱臼好像是由于吃苹果张太大口，后来则以打哈欠打脱臼了居多。我把这种病症归咎于基因，因为印象中我妈好像也脱臼过。可能是骨骼的构造不合适，也可能是韧带的力度不够，不过这些一定是由基因决定的。由于接受了这种设定，我也就比较释然，重来没埋怨过苹果或者是哈欠。
+出于多次脱臼的经验，我已经学会了一些基本的救治手段。一般是将下巴向左稍用力顶一下，感觉头骨错动，也可能会听到咯噔一声。如果运气好，脱臼就归位了。运气...</p>
     <a href="/blog/2013/07/21/luxation.html">[READ MORE]</a>
   </div>
   <hr />
@@ -75,7 +75,8 @@ blockquote p { font-size: 14px; }
   </div>
   <div class="col-md-11">
     <h2><a href="/blog/2013/06/18/implementation-of-a-faster-hashmap.html">实现一个更快一点的hashmap</a></h2>
-    <p>这段时间在写parser，难免又碰到了特征映射的问题。去年毕设做分词、词性标注时，这部分是用__gnu_cxx::hash_map<string>来实现的。下表显示了几种数据集条件下的特征字典规模。
+    <p>这段时间在写parser，难免又碰到了特征映射的问题。去年毕设做分词、词性标注时，这部分是用<code>__gnu_cxx::hash_map&lt;string,int&gt;</code>来实现的。下表显示了几种数据集条件下的特征字典规模。</p>
+
 <table width="100%" border="1">
 <tr>
 <td>数据集</td>
@@ -101,10 +102,7 @@ blockquote p { font-size: 14px; }
 <td>274.2W</td>
 <td>751.3W</td>
 </tr>
-</table></string></p>
-
-<p><a id="more"></a><a id="more-786"></a>
-</p><p>对于这个级别的数据量，在特征检索过程中，特征字典的性能已经对于整个分析器的性能产生了...</p>
+</table><p>对于这个级别的数据量，在特征检索过程中，特征字典的性能已经对于整...</p>
     <a href="/blog/2013/06/18/implementation-of-a-faster-hashmap.html">[READ MORE]</a>
   </div>
   <hr />
@@ -118,8 +116,7 @@ blockquote p { font-size: 14px; }
     <h2><a href="/blog/2012/10/13/restruct-my-blog.html">小记博客重组织</a></h2>
     <p><a href="http://oneplus.info">oneplus.info</a>这个域名和它使用的主机空间是我在2011年初买下的。到现在，就快有两年的时间了。两年之间，这个里产生了38篇博文，接受了2.4万次PV，其中《<a href="http://blog.oneplus.info/archives/535">哈工大男女比例调研报告</a>》和《<a href="http://blog.oneplus.info/archives/455">关于一个点歌社交网络的构想</a>》两篇得到了豆瓣九点首页的推荐。总的来讲，我对博客中提供的内容还是比较用心。</p>
 
-<p><a id="more"></a><a id="more-762"></a>
-</p><p>虽然这个博客的一直以来的表现也没什么差错，但是我却在很早以前就产生了重新组织网站结构的想法。建站之初，没什么经验（现在我也没什么经验），直接把wordpress安装在web根目录public<em>html...</em></p>
+<p>虽然这个博客的一直以来的表现也没什么差错，但是我却在很早以前就产生了重新组织网站结构的想法。建站之初，没什么经验（现在我也没什么经验），直接把wordpress安装在web根目录public_html...</p>
     <a href="/blog/2012/10/13/restruct-my-blog.html">[READ MORE]</a>
   </div>
   <hr />
@@ -131,16 +128,16 @@ blockquote p { font-size: 14px; }
   </div>
   <div class="col-md-11">
     <h2><a href="/blog/2012/10/06/the-implementation-of-a-thread-safe-logging-library.html">实现一个线程安全的logging库</a></h2>
-    <h4>Introduction</h4>
+    <h3 id="introduction">Introduction</h3>
 
-<p>
-Log是用来记录程序事件的一系列打印信息，和调试时的printf大法有点像。Log和我所接触的工作关系还是比较密切的。比方说，打印一下模型的加载时间、句子的解析速度、开发集上准确率什么的。由于接下来一段时间的工作需要写多线程，网上的logging库又不怎么习惯，所以计划造一个Log库的轮子。这篇文章中大概会讨论下面两方面内容：
-</p><ul>
+<p>Log是用来记录程序事件的一系列打印信息，和调试时的printf大法有点像。Log和我所接触的工作关系还是比较密切的。比方说，打印一下模型的加载时间、句子的解析速度、开发集上准确率什么的。由于接下来一段时间的工作需要写多线程，网上的logging库又不怎么习惯，所以计划造一个Log库的轮子。这篇文章中大概会讨论下面两方面内容：</p>
+
+<ul>
 <li>用singleton模式实现logging库</li>
-<li>Singleton模式的线程安全</li>
-</ul><p><a id="more"></a><a id="more-726"></a>
-</p><h4>Singleton</h4>
-<p>单件(Singleton)是设计模...</p>
+  <li>Singleton模式的线程安全</li>
+</ul><h3 id="singleton">Singleton</h3>
+
+<p>单件(Singleton)是...</p>
     <a href="/blog/2012/10/06/the-implementation-of-a-thread-safe-logging-library.html">[READ MORE]</a>
   </div>
   <hr />
@@ -152,12 +149,19 @@ Log是用来记录程序事件的一系列打印信息，和调试时的printf�
   </div>
   <div class="col-md-11">
     <h2><a href="/blog/2012/07/22/easy-implementation-on-maxent.html">最大熵模型的简单实现</a></h2>
-    <p>谈到最大熵，真的是一个妇孺皆知老少咸宜的好模型。而且，网上确实已有大批量的论文、笔记、幻灯片介绍最大熵。所以，这篇的重点放在如何实现一个简单的最大熵分类器上。</p>
+    <p>谈到最大熵，真的是一个妇孺皆知老少咸宜的好模型。
+而且，网上确实已有大批量的论文、笔记、幻灯片介绍最大熵。
+所以，这篇的重点放在如何实现一个简单的最大熵分类器上。</p>
 
-<p><a id="more"></a><a id="more-671"></a>
-</p><h3>最大熵模型推导</h3>
-<p>机器学习的任务是从数据中学习知识。我们做分类问题，看到的数据往往是每个实例对应一个类别。比如说词性标注中一个词对应一个标注。为了下面讨论的方便，将类别称为Outcome，将每个实例的上下文环境叫做Context。实例被称为Event，一个实例是Outcome与Context的二元组。</p>
-<p>为了表示数据，我们从数据中抽...</p>
+<h3 id="section">最大熵模型推导</h3>
+
+<p>机器学习的任务是从数据中学习知识。
+我们做分类问题，看到的数据往往是每个实例对应一个类别。
+比如说词性标注中一个词对应一个标注。
+为了下面讨论的方便，将类别称为Outcome，将每个实例的上下文环境叫做Context。
+实例被称为Event，一个实例是Outcome与Context的二元组。</p>
+
+<p>为了表示数据，...</p>
     <a href="/blog/2012/07/22/easy-implementation-on-maxent.html">[READ MORE]</a>
   </div>
   <hr />
@@ -169,19 +173,18 @@ Log是用来记录程序事件的一系列打印信息，和调试时的printf�
   </div>
   <div class="col-md-11">
     <h2><a href="/blog/2012/07/14/a-brief-talk-about-online-learning.html">浅谈在线机器学习算法</a></h2>
-    <h3>前言</h3>
+    <h3 id="section">前言</h3>
 
 <p>这篇博客的内容基本是我本科毕设论文的第二章。
 其中包括从毕设开始到现在，关于在线机器学习算法的一些粗浅的理解、算法的一些性质的证明以及算法如何从分类问题迁移到结构化预测问题，有些内容我也比较模糊，还有些内容太过繁琐，读者尽可能选择自己愿意接受的内容看，其他略过就好。</p>
 
 <p><a id="more"></a><a id="more-600"></a></p>
 
-<h3>机器学习的回顾</h3>
+<h3 id="section-1">机器学习的回顾</h3>
 
-<p>机器学习是人工智能的一个分支。抽象讲，机器学习理论主要是设计和分析一些让计算机可以自动<strong>“学习”</strong>的算法。
+<p>机器学习是人工智能的一个分支。抽象讲，机器学习理论主要是设计和分析一些让计算机可以自动__“学习”__的算法。
 机器学习算法是一类从数据中自动分析获得规律，并利用规律对未知数据进行预测的算法。</p>
-
-<p>通常来...</p>
+...
     <a href="/blog/2012/07/14/a-brief-talk-about-online-learning.html">[READ MORE]</a>
   </div>
   <hr />
@@ -197,12 +200,15 @@ Log是用来记录程序事件的一系列打印信息，和调试时的printf�
 
 <p>PS：那处NG我就不说啥了。</p>
 
-<p><a id="more"></a><a id="more-603"></a>
-</p><p><strong>视频原片</strong><br></p><div align="center"><embed src="http://player.youku.com/player.php/sid/XNDIwNDE1ODEy/v.swf" allowfullscreen="true" quality="high" width="480" height="400" allowscriptaccess="always" type="application/x-shockwave-flash"></embed></div>
-<p><strong>访谈录</strong>
-</p><div style="background:#000; color:#fff; padding:10px">
+<p><strong>视频原片</strong></p>
+
+<p></p><div align="center"><embed src="http://player.youku.com/player.php/sid/XNDIwNDE1ODEy/v.swf" allowfullscreen="true" quality="high" width="480" height="400" allowscriptaccess="always" type="application/x-shockwave-flash"></embed></div>
+
+<p><strong>访谈录</strong></p>
+
+<div style="background:#000; color:#fff; padding:10px">
     Hi，08级的同学们。你们好，恭喜你们终于悲催地毕业了。为什么悲催呢。你们上大学开始就注定了你们是悲催的一届。因为你们是在2012年毕业。世界末日啊。刚毕业就碰上世界末日，这是很悲催的事情。
-    你知道，...</div>
+    你...</div>
     <a href="/blog/2012/06/27/wishes-from-sunner.html">[READ MORE]</a>
   </div>
   <hr />
@@ -214,14 +220,11 @@ Log是用来记录程序事件的一系列打印信息，和调试时的printf�
   </div>
   <div class="col-md-11">
     <h2><a href="/blog/2012/06/13/report-on-sex-ratio-in-hit.html">哈工大男女比例调研报告</a></h2>
-    <p></p><h3>前言</h3>
+    <h3 id="section">前言</h3>
+<p>虽然关于工大七比一男女比例的说法已经流传多年，但是一直没有一个详实可靠的数据佐证这一结论，抑或推翻这个结论。抱着这样的疑惑，我们开展了这次调研。目的是对于工大男女比例给出一个相对可信的结论。</p>
 
-<p>虽然关于工大七比一男女比例的说法已经流传多年，但是一直没有一个详实可靠的数据佐证这一结论，抑或推翻这个结论。抱着这样的疑惑，我们开展了这次调研。目的是对于工大男女比例给出一个相对可信的结论。
-</p>
-
-<p></p><h3>数据来源</h3>
-
-<p>本次调研的数据来源大致有以下几个方面。首先通过教务处照片图床的一个广为人知的漏洞获得08-11级全体本科生学号的列表。然后，将列表提供学号用作用户名和密码请求体育部的健康成绩网站，由于该网站包含一些基本的性别、年级、自然班等信息，从其响应的页面基本可以获得本次调研所需要的全部信...</p>
+<h3 id="section-1">数据来源</h3>
+<p>本次调研的数据来源大致有以下几个方面。首先通过教务处照片图床的一个广为人知的漏洞获得08-11级全体本科生学号的列表。然后，将列表提供学号用作用户名和密码请求体育部的健康成绩网站，由于该网站包含一些基本的性别、年级、自然班等信息，从其响应的页面基本可以获得本次调研所需要的全部信息。通...</p>
     <a href="/blog/2012/06/13/report-on-sex-ratio-in-hit.html">[READ MORE]</a>
   </div>
   <hr />
@@ -233,13 +236,13 @@ Log是用来记录程序事件的一系列打印信息，和调试时的printf�
   </div>
   <div class="col-md-11">
     <h2><a href="/blog/2012/04/29/dynamic-member-in-python-class.html">Python对象的动态成员与__dict__</a></h2>
-    <p>在写一些python脚本时，我很喜欢用optparse module中的OptionParser对象来解析一些命令行参数。一个简单的例子如下，
-{% highlight python %}
-parser = OptionParser()
-parser.add_option(“-f”, “–file”, dest=“filename”)
-(options, args) = parser.parse_args()
-{% endhighlight %}
-然后，使用options.filename...</p>
+    <p>在写一些python脚本时，我很喜欢用optparse module中的OptionParser对象来解析一些命令行参数。一个简单的例子如下，</p>
+
+<pre class="highlight python"><span class="n">parser</span> <span class="o">=</span> <span class="n">OptionParser</span><span class="p">()</span>
+<span class="n">parser</span><span class="o">.</span><span class="n">add_option</span><span class="p">(</span><span class="s">"-f"</span><span class="p">,</span> <span class="s">"--file"</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="s">"filename"</span><span class="p">)</span>
+<span class="p">(</span><span class="n">options</span><span class="p">,</span> <span class="n">args</span><span class="p">)</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
+</pre>
+<p>然后，使用options.filename可以调用–file指定的参数，这似乎也没什么神奇的。但是，在第一次用OptionParser...</p>
     <a href="/blog/2012/04/29/dynamic-member-in-python-class.html">[READ MORE]</a>
   </div>
   <hr />

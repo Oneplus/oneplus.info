@@ -34,76 +34,80 @@ blockquote p { font-size: 14px; }
   <div class="content">
     <div style="color:#999;">
   <small>2011/03/02 - by
+    Oneplus
+
     
-      Oneplus
-  
+      &bull; <a href="/blog/tags/acm-group.html">ACM Group</a>
+    
+      &bull; <a href="/blog/tags/程序设计实践.html">程序设计实践</a>
+    
+      &bull; <a href="/blog/tags/不靠谱.html">不靠谱</a>
+    
   </small>
 </div>
 <h2>程序设计实践一 - 第一课</h2>
 <hr />
 <div>
-  <div>
-<div id="outline">
-<h4>课程提纲</h4>
+  <h3 id="section">课程提纲</h3>
+
 <ul>
-<li>课程介绍</li>
-<li>算法复杂度分析</li>
-<li>程序的三种控制结构</li>
-<li>递推</li>
-<li>递归</li>
+  <li>课程介绍</li>
+  <li>算法复杂度分析</li>
+  <li>程序的三种控制结构</li>
+  <li>递推</li>
+  <li>递归</li>
 </ul>
-</div>
 
-<p><a id="more"></a><a id="more-118"></a>
-<div id="summary">
-<h4>简单的讲义</h4>
-本次课程实在是太简单了，所以不计讲义了。课件下载请点<a href="http://acm.hit.edu.cn/~oneplus/design-2011/01.pdf">这里</a>
-</div>
-<div id="comment">
-<h4>有关课程的一些丫丫</h4>
-在开始准备第一课时，我尽力让自己保持一种轻松愉快的心情。结果内容非常不靠谱，或者说是weird。本意是用一些更贴近大一同学的方式使更多的同学对课程产生兴趣，不过反馈效果不明显，下节课还是正经点，多搞点动画什么的吧。<br />
-去二区的时候堵了一路车，无语。下次自己去，还要再早点。<br />
-本来是打算用自己的笔记本作演示，但由于堵车迟到，这件事就只好作罢。结果原来准备的用matlab画Sierpinski triangle的动画泡汤了。这里贴出土鳖的matlab代码，路过轻拍。
-{% highlight matlab %}
-function Sierpinski(x, y, l, d)
-if( d == 0 )
-    axis off;
-    hold on;
-    triangle(x, y, l, 1);
-end;
-if( d &lt; 6 )
-    triangle(x, y, l / 2, -1);
-    pause(0.001);
-    Sierpinski(x - l / 4, y - l / 4 * sqrt(3) / 3, l / 2, d + 1 );
-    Sierpinski(x + l / 4, y - l / 4 * sqrt(3) / 3, l / 2, d + 1 );
-    Sierpinski(x, y + l / 2 * sqrt(3) / 3, l / 2, d + 1 );
-end;
-{% endhighlight %}
-{% highlight %}
-function triangle( x, y, l, d )
-x1 = x - l / 2;
-x2 = x + l / 2;
-x3 = x;</p>
+<h3 id="section-1">简单的讲义</h3>
+<p>本次课程实在是太简单了，所以不计讲义了。课件下载请点<a href="http://acm.hit.edu.cn/~oneplus/design-2011/01.pdf">这里</a></p>
 
-<p>y1 = y - d * l / 2 * sqrt(3) / 3;
-y2 = y - d * l / 2 * sqrt(3) / 3;
-y3 = y + d * l * sqrt(3) / 3;</p>
+<h3 id="section-2">有关课程的一些丫丫</h3>
+<p>在开始准备第一课时，我尽力让自己保持一种轻松愉快的心情。结果内容非常不靠谱，或者说是weird。本意是用一些更贴近大一同学的方式使更多的同学对课程产生兴趣，不过反馈效果不明显，下节课还是正经点，多搞点动画什么的吧。</p>
 
-<p>fill([x1 x2 x3], [y1 y2 y3], &lsquo;w&rsquo;);
-{% endhighlight %}
-不能使用笔记本的另一个坏处就是，原计划进行的课程录音杯具了。下节课早点去二区，心平气和地把这件事做清楚吧。<br />
-第一课的难度实在是太简单了，所以我想当然地认为下次课的出勤还应该不错。不过这只是我个人的一些臆想。一周后再看结果吧。<br />
-作为一门选修课，而且是我承诺不点名的选修课，衡量其成败的唯一标准大概就是课程的出勤了。怎样分配难易，一个问题要讲多深才能把握大部分听众的兴趣又让人觉得有一定的趣味，希望我能撞大运把这件事做好吧。<br />
-</div>
-<div id="ps">
-<h4>P勒个S</h4>
+<p>去二区的时候堵了一路车，无语。下次自己去，还要再早点。</p>
+
+<p>本来是打算用自己的笔记本作演示，但由于堵车迟到，这件事就只好作罢。结果原来准备的用matlab画Sierpinski triangle的动画泡汤了。这里贴出土鳖的matlab代码，路过轻拍。</p>
+
+<pre class="highlight matlab"><span class="k">function</span> <span class="n">Sierpinski</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">d</span><span class="p">)</span>
+<span class="k">if</span><span class="p">(</span> <span class="n">d</span> <span class="o">==</span> <span class="mi">0</span> <span class="p">)</span>
+    <span class="nb">axis</span> <span class="n">off</span><span class="p">;</span>
+    <span class="nb">hold</span> <span class="n">on</span><span class="p">;</span>
+    <span class="n">triangle</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+<span class="k">end</span><span class="p">;</span>
+<span class="k">if</span><span class="p">(</span> <span class="n">d</span> <span class="o">&lt;</span> <span class="mi">6</span> <span class="p">)</span>
+    <span class="n">triangle</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">l</span> <span class="p">/</span> <span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+    <span class="nb">pause</span><span class="p">(</span><span class="mf">0.001</span><span class="p">);</span>
+    <span class="n">Sierpinski</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">l</span> <span class="p">/</span> <span class="mi">4</span><span class="p">,</span> <span class="n">y</span> <span class="o">-</span> <span class="n">l</span> <span class="p">/</span> <span class="mi">4</span> <span class="o">*</span> <span class="nb">sqrt</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="p">/</span> <span class="mi">3</span><span class="p">,</span> <span class="n">l</span> <span class="p">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">d</span> <span class="o">+</span> <span class="mi">1</span> <span class="p">);</span>
+    <span class="n">Sierpinski</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">l</span> <span class="p">/</span> <span class="mi">4</span><span class="p">,</span> <span class="n">y</span> <span class="o">-</span> <span class="n">l</span> <span class="p">/</span> <span class="mi">4</span> <span class="o">*</span> <span class="nb">sqrt</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="p">/</span> <span class="mi">3</span><span class="p">,</span> <span class="n">l</span> <span class="p">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">d</span> <span class="o">+</span> <span class="mi">1</span> <span class="p">);</span>
+    <span class="n">Sierpinski</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">+</span> <span class="n">l</span> <span class="p">/</span> <span class="mi">2</span> <span class="o">*</span> <span class="nb">sqrt</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="p">/</span> <span class="mi">3</span><span class="p">,</span> <span class="n">l</span> <span class="p">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">d</span> <span class="o">+</span> <span class="mi">1</span> <span class="p">);</span>
+<span class="k">end</span><span class="p">;</span>
+
+<span class="k">function</span> <span class="n">triangle</span><span class="p">(</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">d</span> <span class="p">)</span>
+<span class="n">x1</span> <span class="o">=</span> <span class="n">x</span> <span class="o">-</span> <span class="n">l</span> <span class="p">/</span> <span class="mi">2</span><span class="p">;</span>
+<span class="n">x2</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">l</span> <span class="p">/</span> <span class="mi">2</span><span class="p">;</span>
+<span class="n">x3</span> <span class="o">=</span> <span class="n">x</span><span class="p">;</span>
+
+<span class="n">y1</span> <span class="o">=</span> <span class="n">y</span> <span class="o">-</span> <span class="n">d</span> <span class="o">*</span> <span class="n">l</span> <span class="p">/</span> <span class="mi">2</span> <span class="o">*</span> <span class="nb">sqrt</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="p">/</span> <span class="mi">3</span><span class="p">;</span>
+<span class="n">y2</span> <span class="o">=</span> <span class="n">y</span> <span class="o">-</span> <span class="n">d</span> <span class="o">*</span> <span class="n">l</span> <span class="p">/</span> <span class="mi">2</span> <span class="o">*</span> <span class="nb">sqrt</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="p">/</span> <span class="mi">3</span><span class="p">;</span>
+<span class="n">y3</span> <span class="o">=</span> <span class="n">y</span> <span class="o">+</span> <span class="n">d</span> <span class="o">*</span> <span class="n">l</span> <span class="o">*</span> <span class="nb">sqrt</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="p">/</span> <span class="mi">3</span><span class="p">;</span>
+
+<span class="nb">fill</span><span class="p">([</span><span class="n">x1</span> <span class="n">x2</span> <span class="n">x3</span><span class="p">],</span> <span class="p">[</span><span class="n">y1</span> <span class="n">y2</span> <span class="n">y3</span><span class="p">],</span> <span class="s1">'w'</span><span class="p">);</span>
+</pre>
+<p>不能使用笔记本的另一个坏处就是，原计划进行的课程录音杯具了。下节课早点去二区，心平气和地把这件事做清楚吧。</p>
+
+<p>第一课的难度实在是太简单了，所以我想当然地认为下次课的出勤还应该不错。不过这只是我个人的一些臆想。一周后再看结果吧。</p>
+
+<p>作为一门选修课，而且是我承诺不点名的选修课，衡量其成败的唯一标准大概就是课程的出勤了。怎样分配难易，一个问题要讲多深才能把握大部分听众的兴趣又让人觉得有一定的趣味，希望我能撞大运把这件事做好吧。</p>
+
+<h3 id="ps">P勒个S</h3>
+
 <ul>
-<li>3月1日上午，与班长张晨同学一行前往计算机学院团委办公室上交<a href="http://90.oneplus.info/">“主题教育网站”</a>(张晨习惯称其为：红色网站，不过这总让我想到黄色，- -|||)。上交过程中，受到党委书记孟凡东老师的亲切接待，孟老师根据当前形势对于网站提出了进一步修改意见，并表达了对下一版本的殷切期待。</li>
-<li>-“那么请问，您对本次访问有很感想呢？” -“刘屁民诚惶诚恐，屁滚尿流，不敢草率了事啊。”</li>
-<li>按照车老师的想法，Language Grid的调研工作将要深入到系统的源码中，顿感压力巨大</li>
-<li>本月结束前要将toefl词汇背完一遍，现在还有三十余个list。这不是坑爹吗！</li>
-</div>
-</div></p>
+  <li>3月1日上午，与班长张晨同学一行前往计算机学院团委办公室上交</li>
+  <li>-“那么请问，您对本次访问有很感想呢？” -“刘屁民诚惶诚恐，屁滚尿流，不敢草率了事啊。”&lt;</li>
+  <li>按照车老师的想法，Language Grid的调研工作将要深入到系统的源码中，顿感压力巨大</li>
+  <li>本月结束前要将toefl词汇背完一遍，现在还有三十余个list。这不是坑爹吗！</li>
+</ul>
+
 
 </div>
 

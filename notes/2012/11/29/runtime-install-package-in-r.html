@@ -35,8 +35,10 @@ blockquote p { font-size: 14px; }
     <div style="color:#999;">
   <small>2012/11/29 - by
     
-      
-  
+
+    
+      &bull; <a href="/notes/tags/r.html">R</a>
+    
   </small>
 </div>
 <h2>R语言中动态安装库</h2>
@@ -46,11 +48,9 @@ blockquote p { font-size: 14px; }
 
 <p>代码如下：</p>
 
-<p>{% highlight r %}
-site&lt;-&ldquo;http://cran.r-project.org&rdquo;
-if (!require(&ldquo;ggplot2&rdquo;)) { install.package(&ldquo;ggplot2&rdquo;, repos=site) }
-{% endhighlight %}</p>
-
+<pre class="highlight r"><span class="n">site</span><span class="o">&lt;-</span><span class="s2">"http://cran.r-project.org"</span>
+<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">require</span><span class="p">(</span><span class="s2">"ggplot2"</span><span class="p">))</span> <span class="p">{</span> <span class="n">install.package</span><span class="p">(</span><span class="s2">"ggplot2"</span><span class="p">,</span> <span class="n">repos</span><span class="o">=</span><span class="n">site</span><span class="p">)</span> <span class="p">}</span>
+</pre>
 </div>
 
 <div id="disqus_thread"></div>

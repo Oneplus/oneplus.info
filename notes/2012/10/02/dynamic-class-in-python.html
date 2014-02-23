@@ -35,8 +35,10 @@ blockquote p { font-size: 14px; }
     <div style="color:#999;">
   <small>2012/10/02 - by
     
-      
-  
+
+    
+      &bull; <a href="/notes/tags/python.html">Python</a>
+    
   </small>
 </div>
 <h2>Python中的动态类</h2>
@@ -46,30 +48,25 @@ blockquote p { font-size: 14px; }
 
 <p>Python中有个一函数<code>globals()</code>返回当前全局的符号表，如果已经import了这三个类，他们就会出现在全局的符号表中。</p>
 
-<p>{% highlight python linenos %}
-from corpusproc.io import SegmentReader, PostagReader, ConllReader</p>
+<pre class="highlight python"><span class="kn">from</span> <span class="nn">corpusproc.io</span> <span class="kn">import</span> <span class="n">SegmentReader</span><span class="p">,</span> <span class="n">PostagReader</span><span class="p">,</span> <span class="n">ConllReader</span>
 
-<p>def createObject(className, * args):
-    cls = globals()[className]</p>
-<pre class="highlight plaintext">if isinstance(cls, type) and isinstance(args[0], file):
-    return cls(args[0])
-else:
-    raise Exception("No such class")
+<span class="k">def</span> <span class="nf">createObject</span><span class="p">(</span><span class="n">className</span><span class="p">,</span> <span class="o">*</span> <span class="n">args</span><span class="p">):</span>
+    <span class="n">cls</span> <span class="o">=</span> <span class="nb">globals</span><span class="p">()[</span><span class="n">className</span><span class="p">]</span>
+
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="nb">type</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nb">file</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">cls</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">Exception</span><span class="p">(</span><span class="s">"No such class"</span><span class="p">)</span>
 </pre>
-<p>{% endhighlight %}</p>
+<p>测试一下</p>
 
-<p>测试一下
-{% highlight python %}
-format = &ldquo;segment&rdquo;
-reader = createObject(format[0].upper() + format[1:])</p>
+<pre class="highlight python"><span class="n">format</span> <span class="o">=</span> <span class="s">"segment"</span>
+<span class="n">reader</span> <span class="o">=</span> <span class="n">createObject</span><span class="p">(</span><span class="n">format</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="o">+</span> <span class="n">format</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
 
-<p>format = &ldquo;unknown&rdquo;
-reader = createObject(format[0].upper() + format[1:])</p>
-
-<h1>Raise Exception &ldquo;No such class&rdquo;</h1>
-
-<p>{% endhighlight %}</p>
-
+<span class="n">format</span> <span class="o">=</span> <span class="s">"unknown"</span>
+<span class="n">reader</span> <span class="o">=</span> <span class="n">createObject</span><span class="p">(</span><span class="n">format</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="o">+</span> <span class="n">format</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+<span class="c"># Raise Exception "No such class"</span>
+</pre>
 </div>
 
 <div id="disqus_thread"></div>

@@ -35,8 +35,10 @@ blockquote p { font-size: 14px; }
     <div style="color:#999;">
   <small>2012/05/04 - by
     
-      
-  
+
+    
+      &bull; <a href="/notes/tags/python.html">Python</a>
+    
   </small>
 </div>
 <h2>Python sorted list的实现</h2>
@@ -44,28 +46,27 @@ blockquote p { font-size: 14px; }
 <div>
   <p>具体思路是用二分保list有序+插入</p>
 
-<p>{% highlight python linenos %}
-class SortedList(list):
-    K = -1</p>
-<pre class="highlight plaintext">def __init__(self, K=-1):
-    list.__init__(self)
-    if K != -1: self.K = K
+<pre class="highlight python"><span class="k">class</span> <span class="nc">SortedList</span><span class="p">(</span><span class="nb">list</span><span class="p">):</span>
+    <span class="n">K</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
 
-def append(self, x):
-    bisect.insort(self, x)
-    if self.K != -1:
-        if len(self)==self.K+1:
-            self.pop(0)
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">K</span><span class="o">=-</span><span class="mi">1</span><span class="p">):</span>
+        <span class="nb">list</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">K</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">K</span> <span class="o">=</span> <span class="n">K</span>
+
+    <span class="k">def</span> <span class="nf">append</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="n">bisect</span><span class="o">.</span><span class="n">insort</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">K</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">==</span><span class="bp">self</span><span class="o">.</span><span class="n">K</span><span class="o">+</span><span class="mi">1</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 </pre>
-<p>{% endhighlight %}</p>
-
 <p>这里还有一个限size的操作，之前写了一个<code>self=self[1:]</code>，结果不对。还不清楚是为什么，留一个问题在这里。</p>
 
-<h3>参考</h3>
+<h4 id="section">参考</h4>
 
 <ul>
-<li><a href="http://stackoverflow.com/questions/5998368/python-sorted-list-of-lists">Python - sorted list of lists</a></li>
+  <li><a href="http://stackoverflow.com/questions/5998368/python-sorted-list-of-lists">Python - sorted list of lists</a></li>
 </ul>
+
 
 </div>
 

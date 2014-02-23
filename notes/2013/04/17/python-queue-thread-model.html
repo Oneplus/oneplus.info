@@ -34,9 +34,13 @@ blockquote p { font-size: 14px; }
   <div class="content">
     <div style="color:#999;">
   <small>2013/04/17 - by
+    Oneplus
+
     
-      Oneplus
-  
+      &bull; <a href="/notes/tags/python.html">Python</a>
+    
+      &bull; <a href="/notes/tags/multi-threaded.html">Multi-threaded</a>
+    
   </small>
 </div>
 <h2>Python 多线程同步队列模型</h2>
@@ -55,6 +59,7 @@ blockquote p { font-size: 14px; }
 程序的模型大概是这样的。有一个master()，用来分发任务。有N个多线程的slave用来处理任务。</p>
 
 <p>具体程序如下：</p>
+
 <pre class="highlight python"><span class="c">#!/usr/bin/env python</span>
 <span class="c"># real    3m0.263s</span>
 <span class="c"># user    0m0.016s</span>
@@ -120,6 +125,7 @@ blockquote p { font-size: 14px; }
 <p>在300句的条件下，单线程的处理速度约为750s=12m，开4个线程后3m可以处理完成，并且输出是有序的。</p>
 
 <p>其他语言应该可以仿照这个方式编写程序，对于没有同步队列的语言，实现时可以参考这个http://hg.python.org/cpython/file/2.7/Lib/Queue.py</p>
+
 
 </div>
 
