@@ -2,7 +2,9 @@
 <html>
 <head>
 <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
-<title>  程序设计实践一 - 第二课 |  Static Oneplus </title>
+<title>
+  程序设计实践一 - 第二课 |  Static Oneplus
+</title>
 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap-responsive.min.css">
 <style type="text/css">
@@ -10,35 +12,37 @@
 .nav { }
 .nav li { float: left; width: 70px; }
 .content { padding: 30px 0; }
-.site_title { font-family: "Fjalla One","Georgia","Helvetica Neue",Arial,sans-serif;}
-header { width: 100%; }
+body, h1, h2, h3, h4 { font-family: "Fjalla One","Georgia","Helvetica Neue",Arial,sans-serif;}
+header { width: 100%; height: 80px;}
 blockquote p { font-size: 14px; }
 </style>
 </head>
 <body>
 
 <div class="container">
-<header class="header">
+  <header class="header">
     <h1 class="site_title">Static Oneplus <small>不可控制论</small></h1>
-    <ul class="nav">
-        <li><a href="http://yjliu.net">Home</a></li>
-        <li><a href="/cv">CV</a></li>
-        <li><a href="/blog">Blog</a></li>
-        <li><a href="/notes">Notes</a></li>
-        <li><a href="/feed.xml">RSS</a></li>
+    <ul class="nav pull-right">
+      <li><a href="/">Home</a></li>
+      <li><a href="/cv">CV</a></li>
+      <li><a href="/blog">Blog</a></li>
+      <li><a href="/notes">Notes</a></li>
+      <li><a href="/feed.xml">RSS</a></li>
     </ul>
-</header>
+  </header>
 
-<div class="content">
-
-<div style="color:#999;">
-    <small>2011-03-09
-        by  Oneplus </small></div>
+  <div class="content">
+    <div style="color:#999;">
+  <small>2011/03/09 - by
+    
+      Oneplus
+  
+  </small>
+</div>
 <h2>程序设计实践一 - 第二课</h2>
 <hr />
 <div>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
-
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
 
 <script type="text/javascript">     
 $(document).ready(function(){
@@ -47,12 +51,9 @@ $(".box").toggle(function(){
 $(this).next(".text").animate({height: 'toggle', opacity: 'toggle'}, "slow");
 } ,function() {$(this).next(".text").animate({height: 'toggle', opacity: 'toggle'}, "slow");});});</script>
 
-
 <h4>课程提纲</h4>
 
-
 <div class="box">请点击<a href="#">这里</a></div>
-
 
 <div class="text"><ul>
 <li>上节课的回归与作业讲解</li>
@@ -116,23 +117,15 @@ $(this).next(".text").animate({height: 'toggle', opacity: 'toggle'}, "slow");
 </ul>
 </div>
 
-
 <h4>简单的讲义</h4>
-
 
 <p><a id="more"></a><a id="more-125"></a>
 讲义请看<a href="http://acm.hit.edu.cn/~oneplus/design-2011/02-lecture.pdf">这里</a><br />
-PPT请看<a href="http://acm.hit.edu.cn/~oneplus/design-2011/02-ppt.pdf">这里</a></p>
-
+PPT请看<a href="http://acm.hit.edu.cn/~oneplus/design-2011/02-ppt.pdf">这里</a>
 <h4>录了30多分钟的课堂录音</h4>
-
-
-<p>这节课是用自己的笔记本进行的演示，录到了课堂录音。原文件噪音非常多，用Goldwave处理了一下，果然好了不少。
-<embed src="http://acm.hit.edu.cn/~oneplus/design-2011/02-record.wma" autostart="false"></embed></p>
-
+这节课是用自己的笔记本进行的演示，录到了课堂录音。原文件噪音非常多，用Goldwave处理了一下，果然好了不少。
+<embed src="http://acm.hit.edu.cn/~oneplus/design-2011/02-record.wma" autostart="false"></embed>
 <h4>自我检讨</h4>
-
-
 <ul>
 <li>因为课程录了音，所以对于自己的授课内容有了一个比较清楚的认知。</li>
 <li>从这节课的录音来看，我讲课的一些问题包括：重复冗余严重，二分的算法过程被说了三次、二分复杂度证明说了两次；语气平淡，重点不突出；声音比较小，有点无力。</li>
@@ -141,126 +134,117 @@ PPT请看<a href="http://acm.hit.edu.cn/~oneplus/design-2011/02-ppt.pdf">这里<
 <li>现在看，自己的讲义是挺混乱的。课件做得尤其糟糕。</li>
 <li>这里需要向上课的同学道歉，第二课我的准备工作的确有不足。这节课的准备中，把太多时间花在demo上，以至于没有足够的时间去思考要讲什么内容。下节课demo的东西比较少，我会认真准备课程内容的。</li>
 </ul>
-
-
 <h4>浮云一样的heap的demo</h4>
-
-
-<p>其实这个flash动画也是我做的…
-<embed src="http://acm.hit.edu.cn/~oneplus/design-2011/02-heapdemo.swf" width="400" height="400"></embed></p>
-
+其实这个flash动画也是我做的…
+<embed src="http://acm.hit.edu.cn/~oneplus/design-2011/02-heapdemo.swf" width="400" height="400"></embed>
 <h4>演示二分时用的Java代码</h4>
-
-
 <div class="codeindex">请点击<a href="#">这里</a></div>
-
-
 <div class="codemain">
-<div>
-  <pre class="prettyprint linenums 1"><code class=''>import javax.swing.*;
-import java.awt.*;
-import java.awt.event.*;
+{% highlight %}
+import javax.swing.<em>;
+import java.awt.</em>;
+import java.awt.event.<em>;
 import java.awt.Panel;
-import java.io.*;
-import java.text.DecimalFormat;
+import java.io.</em>;
+import java.text.DecimalFormat;</p>
 
-public class bisearch extends JFrame implements ActionListener {
+<p>public class bisearch extends JFrame implements ActionListener {
     public bisearch() {
         setLayout(new FlowLayout(FlowLayout.LEFT));
         setSize(500, 400);
-        setBackground(Color.white);
-        
-        nextButton = new Button( &amp;quot;Next&amp;quot; );
-        nextButton.addActionListener( this );
-        add( nextButton );
-        
-        init();
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setBackground(Color.white);</p>
+<pre class="highlight plaintext">    nextButton = new Button( &amp;quot;Next&amp;quot; );
+    nextButton.addActionListener( this );
+    add( nextButton );
+
+    init();
+    this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+}
+
+public void init() {
+    lowerBound = f( leftBound );
+    upperBound = f( rightBound );
+    low = 3.0;
+    high = 4.0;
+    //System.out.println( lowerBound + &amp;quot; &amp;quot; + upperBound );
+}
+
+public void paint( Graphics g ) {
+    point p1 = new point();
+    point p2 = new point();
+    p1 = toPoint(2.7, 0.0 );
+    p2 = toPoint(4.3, 0.0 );
+    x_axis = p1.getY();
+    g.drawLine( p1.getX(), p1.getY(), p2.getX(), p2.getY());
+    g.drawLine( 40, 0, 40, 400);
+    g.drawString( &amp;quot;y axis&amp;quot;, 35, 75 );
+    g.drawString( &amp;quot;x axis&amp;quot;, 450, x_axis );
+
+    for( double i = leftBound; i &amp;lt;= rightBound; i = i + eps ) {
+        double x = i, xx = i + eps;
+        double y = f( x ), yy = f( xx );
+
+        p1 = toPoint( x , y );
+        g.drawLine( p1.getX(), p1.getY(), p1.getX(), p1.getY());
     }
-    
-    public void init() {
-        lowerBound = f( leftBound );
-        upperBound = f( rightBound );
-        low = 3.0;
-        high = 4.0;
-        //System.out.println( lowerBound + &amp;quot; &amp;quot; + upperBound );
-    }
-    
-    public void paint( Graphics g ) {
-        point p1 = new point();
-        point p2 = new point();
-        p1 = toPoint(2.7, 0.0 );
-        p2 = toPoint(4.3, 0.0 );
-        x_axis = p1.getY();
-        g.drawLine( p1.getX(), p1.getY(), p2.getX(), p2.getY());
-        g.drawLine( 40, 0, 40, 400);
-        g.drawString( &amp;quot;y axis&amp;quot;, 35, 75 );
-        g.drawString( &amp;quot;x axis&amp;quot;, 450, x_axis );
-        
-        for( double i = leftBound; i &amp;lt;= rightBound; i = i + eps ) {
-            double x = i, xx = i + eps;
-            double y = f( x ), yy = f( xx );
-            
-            p1 = toPoint( x , y );
-            g.drawLine( p1.getX(), p1.getY(), p1.getX(), p1.getY());
-        }
-        p1 = toPoint( 3.0, f(3.0) );
-        p2 = toPoint( 4.0, f(4.0) );
-        g.drawOval( p1.getX() - 3, p1.getY() - 3, 6, 6);
-        g.drawOval( p2.getX() - 3, p2.getY() - 3, 6, 6);
-        g.drawLine( p1.getX(), p1.getY(), p1.getX(), x_axis );
-        g.drawLine( p2.getX(), p2.getY(), p2.getX(), x_axis );
-        new DecimalFormat( &amp;quot;0.00&amp;quot; );
-        g.drawString( Double.toString( 3.0 ), p1.getX(), x_axis + 12);
-        g.drawString( Double.toString( 4.0 ), p2.getX(), x_axis + 12);
-        //System.out.println( p1.getX() + &amp;quot; &amp;quot; + p1.getY() );
-    }
-    
-    public double f( double x ) {
-        return x * x - 9.8;
-    }
-    
-    public point toPoint( double x, double y ) {
-        double xx = ( x - leftBound ) / ( rightBound - leftBound ) * 500.0;
-        double yy = ( y - upperBound ) / ( lowerBound - upperBound ) * 400.0;
-        
-        point ret = new point( (int)xx , (int)yy );
-        return ret;
-    }
-    
-    public void actionPerformed( ActionEvent event ) {
-        if( event.getSource() == nextButton ) {
-            if( high - low &amp;gt; 0.001 ) {
-                mid = ( low + high ) * 0.5;
-                new DecimalFormat( &amp;quot;0.00&amp;quot; );
-                point p1 = toPoint( mid, f(mid) );
-                getGraphics().drawOval( p1.getX() - 3, p1.getY() - 3, 6, 6);
-                getGraphics().drawLine( p1.getX(), p1.getY(), p1.getX(), x_axis );
-                getGraphics().drawString( Double.toString( mid ), p1.getX(), x_axis + 12);
-                double tmp = f( mid );
-                if( f( mid ) &amp;gt; 0 ) {
-                    high = mid;
-                }
-                else {
-                    low = mid;
-                }
+    p1 = toPoint( 3.0, f(3.0) );
+    p2 = toPoint( 4.0, f(4.0) );
+    g.drawOval( p1.getX() - 3, p1.getY() - 3, 6, 6);
+    g.drawOval( p2.getX() - 3, p2.getY() - 3, 6, 6);
+    g.drawLine( p1.getX(), p1.getY(), p1.getX(), x_axis );
+    g.drawLine( p2.getX(), p2.getY(), p2.getX(), x_axis );
+    new DecimalFormat( &amp;quot;0.00&amp;quot; );
+    g.drawString( Double.toString( 3.0 ), p1.getX(), x_axis + 12);
+    g.drawString( Double.toString( 4.0 ), p2.getX(), x_axis + 12);
+    //System.out.println( p1.getX() + &amp;quot; &amp;quot; + p1.getY() );
+}
+
+public double f( double x ) {
+    return x * x - 9.8;
+}
+
+public point toPoint( double x, double y ) {
+    double xx = ( x - leftBound ) / ( rightBound - leftBound ) * 500.0;
+    double yy = ( y - upperBound ) / ( lowerBound - upperBound ) * 400.0;
+
+    point ret = new point( (int)xx , (int)yy );
+    return ret;
+}
+
+public void actionPerformed( ActionEvent event ) {
+    if( event.getSource() == nextButton ) {
+        if( high - low &amp;gt; 0.001 ) {
+            mid = ( low + high ) * 0.5;
+            new DecimalFormat( &amp;quot;0.00&amp;quot; );
+            point p1 = toPoint( mid, f(mid) );
+            getGraphics().drawOval( p1.getX() - 3, p1.getY() - 3, 6, 6);
+            getGraphics().drawLine( p1.getX(), p1.getY(), p1.getX(), x_axis );
+            getGraphics().drawString( Double.toString( mid ), p1.getX(), x_axis + 12);
+            double tmp = f( mid );
+            if( f( mid ) &amp;gt; 0 ) {
+                high = mid;
+            }
+            else {
+                low = mid;
             }
         }
     }
-    
-    public static void main(String[] args) throws IOException {
-        bisearch bs = new bisearch();
-        bs.setVisible(true);
-    }
-    
-    private double low, high, mid;
-    private double leftBound = 2.7, rightBound = 4.3, eps = 0.003;
-    private double lowerBound, upperBound;
-    private int x_axis, y_axis;
-    Button nextButton;
 }
 
-class point {
+public static void main(String[] args) throws IOException {
+    bisearch bs = new bisearch();
+    bs.setVisible(true);
+}
+
+private double low, high, mid;
+private double leftBound = 2.7, rightBound = 4.3, eps = 0.003;
+private double lowerBound, upperBound;
+private int x_axis, y_axis;
+Button nextButton;
+</pre>
+<p>}</p>
+
+<p>class point {
     public point() {
         x = 0;
         y = 0;
@@ -273,54 +257,46 @@ class point {
     public int getY() { return y; }
     private int x;
     private int y;
-}</code></pre>
+}
+{% endhighlight %}
 </div>
-
-</div>
-
-
-<script type="text/javascript">     
+<script type="text/javascript"><br>
 $(document).ready(function(){
-$(".codemain").toggle();
-$(".codeindex").toggle(function(){
-$(this).next(".codemain").animate({height: 'toggle', opacity: 'toggle'}, "slow");
-} ,function() {$(this).next(".codemain").animate({height: 'toggle', opacity: 'toggle'}, "slow");});});</script>
-
-
-<p>太懒，不想把这段代码弄成applet了，想看编译后结果的同学点击<a href="http://acm.hit.edu.cn/~oneplus/design-2011/02-bisearch.jar">这里</a>下载可执行程序啊。</p>
-
+$(&quot;.codemain&quot;).toggle();
+$(&quot;.codeindex&quot;).toggle(function(){
+$(this).next(&quot;.codemain&quot;).animate({height: &#39;toggle&#39;, opacity: &#39;toggle&#39;}, &quot;slow&quot;);
+} ,function() {$(this).next(&quot;.codemain&quot;).animate({height: &#39;toggle&#39;, opacity: &#39;toggle&#39;}, &quot;slow&quot;);});});</script>
+太懒，不想把这段代码弄成applet了，想看编译后结果的同学点击<a href="http://acm.hit.edu.cn/~oneplus/design-2011/02-bisearch.jar">这里</a>下载可执行程序啊。
 <h4>杂碎</h4>
-
-
 <ul>
 <li>cai组队的事纠结了。</li>
 <li>84路换车站了，昨天从教化桥的一头跑到另一头去坐公交，T.T。以后再也不坐84了。</li>
 <li>上周的大概把三天时间花在toolbox源码的调研上，到周日才搞清楚要做的应该是service grid。脑残了…</li>
 <li>事情太多，还需多多努力啊…</li>
-</ul>
-
+</ul></p>
 
 </div>
 
 <div id="disqus_thread"></div>
 <script type="text/javascript">
-    var disqus_shortname = 'yjliu'; // required: replace example with your forum shortname
-    /* * * DON'T EDIT BELOW THIS LINE * * */
-    (function() {
-        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
+var disqus_shortname = 'yjliu'; // required: replace example with your forum shortname
+/* * * DON'T EDIT BELOW THIS LINE * * */
+(function() {
+ var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+ dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+ (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+ })();
 </script>
 <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 <a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
 
-</div>
+  </div>
 
-<footer>
-    &copy; <a href="#">Static Oneplus</a> 2014 | 
-    This site is built by <a href="">Level0</a>.
-</footer>
+  <footer class="text-center">
+    &copy; <a href="#">Static Oneplus</a> 2010 - 2014 |
+    This site is built by <a href="http://middlemanapp.com/" target="_blank">Middleman</a> and
+    <a href="http://getbootstrap.com/">bootstrap</a>.
+  </footer>
 </div>
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
@@ -331,7 +307,7 @@ MathJax.Hub.Config({
 });
 </script>
 <script type="text/javascript"
-    src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
+src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
 <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
 </body>
 </html>

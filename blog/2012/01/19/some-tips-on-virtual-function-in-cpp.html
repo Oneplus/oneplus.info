@@ -2,7 +2,9 @@
 <html>
 <head>
 <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
-<title>  C++笔记 - 虚函数几个小问题 |  Static Oneplus </title>
+<title>
+  C++笔记 - 虚函数几个小问题 |  Static Oneplus
+</title>
 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap-responsive.min.css">
 <style type="text/css">
@@ -10,35 +12,37 @@
 .nav { }
 .nav li { float: left; width: 70px; }
 .content { padding: 30px 0; }
-.site_title { font-family: "Fjalla One","Georgia","Helvetica Neue",Arial,sans-serif;}
-header { width: 100%; }
+body, h1, h2, h3, h4 { font-family: "Fjalla One","Georgia","Helvetica Neue",Arial,sans-serif;}
+header { width: 100%; height: 80px;}
 blockquote p { font-size: 14px; }
 </style>
 </head>
 <body>
 
 <div class="container">
-<header class="header">
+  <header class="header">
     <h1 class="site_title">Static Oneplus <small>不可控制论</small></h1>
-    <ul class="nav">
-        <li><a href="http://yjliu.net">Home</a></li>
-        <li><a href="/cv">CV</a></li>
-        <li><a href="/blog">Blog</a></li>
-        <li><a href="/notes">Notes</a></li>
-        <li><a href="/feed.xml">RSS</a></li>
+    <ul class="nav pull-right">
+      <li><a href="/">Home</a></li>
+      <li><a href="/cv">CV</a></li>
+      <li><a href="/blog">Blog</a></li>
+      <li><a href="/notes">Notes</a></li>
+      <li><a href="/feed.xml">RSS</a></li>
     </ul>
-</header>
+  </header>
 
-<div class="content">
-
-<div style="color:#999;">
-    <small>2012-01-19
-        by  Oneplus </small></div>
+  <div class="content">
+    <div style="color:#999;">
+  <small>2012/01/19 - by
+    
+      Oneplus
+  
+  </small>
+</div>
 <h2>C++笔记 - 虚函数几个小问题</h2>
 <hr />
 <div>
-    <p><h4>问题零：虚函数与纯虚函数有什么区别</h4></p>
-
+  <p><h4>问题零：虚函数与纯虚函数有什么区别</h4></p>
 
 <p>
 <ul>
@@ -48,148 +52,107 @@ blockquote p { font-size: 14px; }
 （上面这段转载自<a href="http://www.cppblog.com/ElliottZC/archive/2007/07/20/28417.html">这里</a>，我觉得解释得非常清楚）
 </p>
 
-
-<p><a id="more"></a><a id="more-388"></a></p>
-
+<p><a id="more"></a><a id="more-388"></a>
 <p><h4>问题一：抽象类的析构函数可以是纯虚函数吗</h4></p>
-
-
 <p>&nbsp;&nbsp;&nbsp;&nbsp;答案是可以的。通过纯虚析构函数，可以防止抽象类被实例化。但是，这里有一个逻辑上的矛盾。由于抽象类往往与具体类对应，从类的继承关系来看，抽象类往往是某些类的基类，如果有继承关系存在，派生类就需要知道基类的析构函数。所以，类似于
-<div>
-  <pre class="prettyprint linenums 1"><code class='CPP'>class fruit {
+{% highlight CPP %}class fruit {
 public:
     fruit() {}
     //virtual ~fruit() = 0;
-    virtual ~fruit() { cout &lt;&lt; &quot;deallocate fruit.&quot; &lt;&lt; endl; }
+    virtual ~fruit() { cout &lt;&lt; &ldquo;deallocate fruit.&rdquo; &lt;&lt; endl; }
     virtual void taste() = 0;
-};
+};</p>
 
-class apple : public fruit {
+<p>class apple : public fruit {
 public:
-    apple(const char *_name) : name(_name) {}
-    ~apple() { cout &lt;&lt; &quot;deallocate apple.&quot; &lt;&lt; endl;}
+    apple(const char *<em>name) : name(</em>name) {}
+    ~apple() { cout &lt;&lt; &ldquo;deallocate apple.&rdquo; &lt;&lt; endl;}</p>
+<pre class="highlight plaintext">void taste() {
+    cout &lt;&lt; "apple [" &lt;&lt; name
+        &lt;&lt; "] is rich of juice." &lt;&lt; endl;
+}
 
-    void taste() {
-        cout &lt;&lt; &quot;apple [&quot; &lt;&lt; name
-            &lt;&lt; &quot;] is rich of juice.&quot; &lt;&lt; endl;
-    }
+void smell() {
+    cout &lt;&lt; "apple [" &lt;&lt; name
+        &lt;&lt; "] smells good." &lt;&lt; endl;
+}
 
-    void smell() {
-        cout &lt;&lt; &quot;apple [&quot; &lt;&lt; name
-            &lt;&lt; &quot;] smells good.&quot; &lt;&lt; endl;
-    }
-
-    const char *name;
-};</code></pre>
-</div>
-
+const char *name;
+</pre>
+<p>};
+{% endhighlight %}
 的代码不能编译通过。</p>
-
-
 <p><h4>问题二：如何将同一抽象类的若干子类的实例用同一结构存储</h4></p>
-
-
 <p><img height="250" src="http://blog.oneplus.info/wp-content/uploads/2012/01/g1.png"></p>
-
-
 <p>&nbsp;&nbsp;&nbsp;&nbsp;假设已经有如同图的设计，现在想用一个vector或者数组将不同种的fruit存储在一起。但是，抽象类不能实例化，所以，类似于
-<div>
-  <pre class="prettyprint linenums 1"><code class=''>vector&lt;fruit&gt; fruits;</code></pre>
-</div>
-
+{% highlight %}vector<fruit> fruits;{% endhighlight %}
 或者
-<div>
-  <pre class="prettyprint linenums 1"><code class=''>fruit *fruits = new fruit[3];</code></pre>
-</div>
-
+{% highlight %}fruit *fruits = new fruit[3];{% endhighlight %}
 的代码都是不能编译通过的。不过，虽然fruit *fruits = new fruit[3]不能编译通过，fruit *fruits = (fruit *)calloc(3, sizeof(fruit));这样的C风格的代码却可以编译通过。只是在运行过程中，一旦调用fruit子类的方法就会出现segment fault。要分析上面问题的原因，就要简单解释一下C++虚函数的实现方法。</p>
-
-
 <p>&nbsp;&nbsp;&nbsp;&nbsp;在没有C++时，C程序员可以在结构体中保存函数指针的方法来实现一些简单的重写(override)，比如一个链表，喜欢面向对象的程序员或许会把它写成：
-<div>
-  <pre class="prettyprint linenums 1"><code class='C'>typedef struct _list_node node_t;
-typedef struct _list      list_t;
+{% highlight C %}typedef struct <em>list</em>node node<em>t;
+typedef struct _list      list</em>t;</p>
 
-struct _list_node {
+<p>struct <em>list</em>node {
     int data;
     node_t *next;
-};
+};</p>
 
-struct _list {
-    node_t *head;
-
-    void (*init)(list_t *list);
-    void (*append)(list_t *list, int data);
-};</code></pre>
-</div>
-
-然后定义一些不同的append的方式把list->append的函数指针指向这些函数名，也从一定程度上实现了面向对象中的封装。</p>
-
-
+<p>struct <em>list {
+    node</em>t *head;</p>
+<pre class="highlight plaintext">void (*init)(list_t *list);
+void (*append)(list_t *list, int data);
+</pre>
+<p>};{% endhighlight %}
+然后定义一些不同的append的方式把list-&gt;append的函数指针指向这些函数名，也从一定程度上实现了面向对象中的封装。</p>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;而C++对于函数的实现思路与上面大致类似。对于每个类都保存一组函数指针的表。在发生类的继承关系后，由编译器处理各函数指针指向的函数入口。在调用成员函数时，通过这个表找到对应函数的入口地址。对于这段代码：
-<div>
-  <pre class="prettyprint linenums 1"><code class='CPP'>fruit *fruits = (fruit *)calloc(3, sizeof(fruit));
-fruits[0] = apple(&quot;ipad&quot;);
-    fruits[1] = banana(&quot;what&quot;);
+{% highlight CPP %}fruit *fruits = (fruit *)calloc(3, sizeof(fruit));
+fruits[0] = apple(&ldquo;ipad&rdquo;);
+    fruits[1] = banana(&ldquo;what&rdquo;);</p>
 
-for (int i = 0; i &lt; 2; ++ i) {
+<p>for (int i = 0; i &lt; 2; ++ i) {
     (fruits + i)-&gt;taste();
-}</code></pre>
-</div>
-</p>
-
-
+}{% endhighlight %}</p>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;用VS2008调试，发现fruits变量所指向的内存中，__vfptr(是前面提到的虚指针)的值为0，也就是在调用taste方法时，找不到正确的函数入口，所以出现了segment fault。</p>
-
-
 <p>&nbsp;&nbsp;&nbsp;&nbsp;这个实例从另一个角度也说明，C++的new关键字并非只做分配内存的工作。再进一步就是，C++程序中尽量不要出现C风格的内存分配，百害而无一益。</p>
-
-
 <p>&nbsp;&nbsp;&nbsp;&nbsp;回到最初讨论的问题，要实现同一抽象类的若干子类的实例用同一结构存储，一种可行的方法是保存fruit类的指针。将代码变为：
-```
-vector<fruit *> fruits;
-```
+<code>
+vector&lt;fruit *&gt; fruits;
+</code>
 或者
-```
+<code>
 fruit **fruits = new fruit *[3];
-```</p>
-
-
-
+</code></p></p>
 
 <p><h4>问题三：能否通过抽象类的指针访问具体类中的某些未在抽象类中声明的函数</h4></p>
 
-
 <p>&nbsp;&nbsp;&nbsp;&nbsp;这个，显然是不能的。比方说，如下代码
-<div>
-  <pre class="prettyprint linenums 1"><code class='CPP'>fruit *app = new apple();
-app-&gt;smell();</code></pre>
-</div>
-
+{% highlight CPP %}fruit *app = new apple();
+app->smell();{% endhighlight %}
 编译不过。这也是我觉得C/C++相对于动态语言非常不灵活的一方面。</p>
-
 
 </div>
 
 <div id="disqus_thread"></div>
 <script type="text/javascript">
-    var disqus_shortname = 'yjliu'; // required: replace example with your forum shortname
-    /* * * DON'T EDIT BELOW THIS LINE * * */
-    (function() {
-        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
+var disqus_shortname = 'yjliu'; // required: replace example with your forum shortname
+/* * * DON'T EDIT BELOW THIS LINE * * */
+(function() {
+ var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+ dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+ (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+ })();
 </script>
 <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 <a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
 
-</div>
+  </div>
 
-<footer>
-    &copy; <a href="#">Static Oneplus</a> 2014 | 
-    This site is built by <a href="">Level0</a>.
-</footer>
+  <footer class="text-center">
+    &copy; <a href="#">Static Oneplus</a> 2010 - 2014 |
+    This site is built by <a href="http://middlemanapp.com/" target="_blank">Middleman</a> and
+    <a href="http://getbootstrap.com/">bootstrap</a>.
+  </footer>
 </div>
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
@@ -200,7 +163,7 @@ MathJax.Hub.Config({
 });
 </script>
 <script type="text/javascript"
-    src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
+src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
 <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
 </body>
 </html>

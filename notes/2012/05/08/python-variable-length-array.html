@@ -2,7 +2,9 @@
 <html>
 <head>
 <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
-<title>  Python的变长参数 |  Static Oneplus </title>
+<title>
+  Python的变长参数 |  Static Oneplus
+</title>
 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap-responsive.min.css">
 <style type="text/css">
@@ -10,113 +12,110 @@
 .nav { }
 .nav li { float: left; width: 70px; }
 .content { padding: 30px 0; }
-.site_title { font-family: "Fjalla One","Georgia","Helvetica Neue",Arial,sans-serif;}
-header { width: 100%; }
+body, h1, h2, h3, h4 { font-family: "Fjalla One","Georgia","Helvetica Neue",Arial,sans-serif;}
+header { width: 100%; height: 80px;}
 blockquote p { font-size: 14px; }
 </style>
 </head>
 <body>
 
 <div class="container">
-<header class="header">
+  <header class="header">
     <h1 class="site_title">Static Oneplus <small>不可控制论</small></h1>
-    <ul class="nav">
-        <li><a href="http://yjliu.net">Home</a></li>
-        <li><a href="/cv">CV</a></li>
-        <li><a href="/blog">Blog</a></li>
-        <li><a href="/notes">Notes</a></li>
-        <li><a href="/feed.xml">RSS</a></li>
+    <ul class="nav pull-right">
+      <li><a href="/">Home</a></li>
+      <li><a href="/cv">CV</a></li>
+      <li><a href="/blog">Blog</a></li>
+      <li><a href="/notes">Notes</a></li>
+      <li><a href="/feed.xml">RSS</a></li>
     </ul>
-</header>
+  </header>
 
-<div class="content">
-
-<div style="color:#999;">
-    <small>
-        by  Oneplus </small></div>
+  <div class="content">
+    <div style="color:#999;">
+  <small>2012/05/08 - by
+    
+      
+  
+  </small>
+</div>
 <h2>Python的变长参数</h2>
 <hr />
 <div>
-    
+  <p>{% highlight python linenos %}
+def foo1(*args):
+    for arg in args: print arg</p>
 
-<div>
-  <pre class="prettyprint linenums 1"><code class='python linenos'>def foo1(*args):
-    for arg in args: print arg
-
-def foo2(**kargs):
+<p>def foo2(**kargs):
     for key in kargs:
-        print key, kargs[key]
+        print key, kargs[key]</p>
 
-def foo3(*args, **kargs):
-    print &quot;args:&quot;
+<p>def foo3(<em>args, *</em>kargs):
+    print &ldquo;args:&rdquo;
     for arg in args:
-        print arg
-
-    print &quot;kargs&quot;:
-    for key in kargs:
-        print key, kargs[key]</code></pre>
-</div>
-
+        print arg</p>
+<pre class="highlight plaintext">print "kargs":
+for key in kargs:
+    print key, kargs[key]
+</pre>
+<p>{% endhighlight %}</p>
 
 <p>这里面有<code>*args</code>,<code>**kargs</code>并存的问题</p>
 
-<p>调用一下试试看</p>
-
-<div>
-  <pre class="prettyprint linenums 1"><code class='python linenos'>if __name__==&quot;__main__&quot;:
-    foo1(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;)
-    print &quot;===========&quot;
+<p>调用一下试试看
+{% highlight python linenos %}
+if <strong>name</strong>==&ldquo;<strong>main</strong>&rdquo;:
+    foo1(&ldquo;a&rdquo;, &ldquo;b&rdquo;, &ldquo;c&rdquo;)
+    print &ldquo;===========&rdquo;
     foo2(a=1,b=2,c=3)
-    print &quot;===========&quot;
-    foo3(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, a=1, b=2, c=3)</code></pre>
-</div>
+    print &ldquo;===========&rdquo;
+    foo3(&ldquo;a&rdquo;, &ldquo;b&rdquo;, &ldquo;c&rdquo;, a=1, b=2, c=3)
+{% endhighlight %}</p>
 
+<p>得到结果是
+{% highlight bash %}
+a
+b</p>
 
-<p>得到结果是</p>
+<h1>c</h1>
 
-<div>
-  <pre class="prettyprint linenums 1"><code class='bash'>a
-b
-c
-=========
-a 1
-c 3
-b 2
-=========
-args:
+<p>a 1
+c 3</p>
+
+<h1>b 2</h1>
+
+<p>args:
 a
 b
 c
 kargs:
 a 1
 c 3
-b 2</code></pre>
-</div>
-
-
-
+b 2
+{% endhighlight %}</p>
 
 </div>
 
 <div id="disqus_thread"></div>
 <script type="text/javascript">
-    var disqus_shortname = 'yjliu'; // required: replace example with your forum shortname
-    /* * * DON'T EDIT BELOW THIS LINE * * */
-    (function() {
-        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
+var disqus_shortname = 'yjliu'; // required: replace example with your forum shortname
+/* * * DON'T EDIT BELOW THIS LINE * * */
+(function() {
+ var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+ dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+ (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+ })();
 </script>
 <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 <a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
 
-</div>
+  </div>
 
-<footer>
-    &copy; <a href="#">Static Oneplus</a> 2014 | 
-    This site is built by <a href="">Level0</a>.
-</footer>
+  <footer class="text-center">
+    &copy; <a href="#">Static Oneplus</a> 2010 - 2014 |
+    This site is built by <a href="http://middlemanapp.com/" target="_blank">Middleman</a> and
+    <a href="http://getbootstrap.com/">bootstrap</a>.
+  </footer>
 </div>
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
@@ -127,7 +126,7 @@ MathJax.Hub.Config({
 });
 </script>
 <script type="text/javascript"
-    src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
+src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
 <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
 </body>
 </html>

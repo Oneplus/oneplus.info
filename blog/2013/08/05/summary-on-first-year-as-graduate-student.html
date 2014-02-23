@@ -2,7 +2,9 @@
 <html>
 <head>
 <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
-<title>  研一这一年吧 |  Static Oneplus </title>
+<title>
+  研一这一年吧 |  Static Oneplus
+</title>
 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap-responsive.min.css">
 <style type="text/css">
@@ -10,146 +12,91 @@
 .nav { }
 .nav li { float: left; width: 70px; }
 .content { padding: 30px 0; }
-.site_title { font-family: "Fjalla One","Georgia","Helvetica Neue",Arial,sans-serif;}
-header { width: 100%; }
+body, h1, h2, h3, h4 { font-family: "Fjalla One","Georgia","Helvetica Neue",Arial,sans-serif;}
+header { width: 100%; height: 80px;}
 blockquote p { font-size: 14px; }
 </style>
 </head>
 <body>
 
 <div class="container">
-<header class="header">
+  <header class="header">
     <h1 class="site_title">Static Oneplus <small>不可控制论</small></h1>
-    <ul class="nav">
-        <li><a href="http://yjliu.net">Home</a></li>
-        <li><a href="/cv">CV</a></li>
-        <li><a href="/blog">Blog</a></li>
-        <li><a href="/notes">Notes</a></li>
-        <li><a href="/feed.xml">RSS</a></li>
+    <ul class="nav pull-right">
+      <li><a href="/">Home</a></li>
+      <li><a href="/cv">CV</a></li>
+      <li><a href="/blog">Blog</a></li>
+      <li><a href="/notes">Notes</a></li>
+      <li><a href="/feed.xml">RSS</a></li>
     </ul>
-</header>
+  </header>
 
-<div class="content">
-
-<div style="color:#999;">
-    <small>2013-08-05
-        by  Oneplus </small></div>
+  <div class="content">
+    <div style="color:#999;">
+  <small>2013/08/05 - by
+    
+      Oneplus
+  
+  </small>
+</div>
 <h2>研一这一年吧</h2>
 <hr />
 <div>
-    <p>给这一年列一个时间表吧，这篇文章想写很久了，虽然有预感写出来又是满满的负能量。</p>
+  <p>给这一年列一个时间表吧，这篇文章想写很久了，虽然有预感写出来又是满满的负能量。</p>
 
-
-<p><a id="more"></a><a id="more-826"></a></p>
-
+<p><a id="more"></a><a id="more-826"></a>
 <h3>2012年</h3>
-
-
 <h4>8月-9月</h4>
-
-
 <p>写了一篇叫《基于序列标注的中文分词、词性标注模型比较分析》，投了一个学生会议。大概是想论证用分类方法做分词、词性标注这些序列性问题可以取得与序列标注模型类似的性能。还想强调分类速度比较快。不过实验并没有获得符合预期的结果。所以这篇论文的论点比较奇怪，不管是写还是修改都很痛苦。在后来被转投中文信息学报，我又不得不痛苦地改了一遍。</p>
-
-
 <h4>9月-10月</h4>
-
-
 <p>参加了微博分词的评测。最后提交的系统是一个混了一大坨预处理的特征、半监督特征的CRF模型。除了把别人论证过的东西实现了一通后，几乎没有引入什么有新意的东西。由于官方没公布评测排名，并不知道自己的系统排名如何，但开会时统计了一下，大概是第二的位置。大概半年后，我review这个系统时发现当时使用crfsuite工具训练模型时没把负特征开关打开，所以最终结果应该是高于提交的系统的结果的。但主办方也没公布数据，也没法去做实验。</p>
-
-
 <h4>10月-11月</h4>
-
-
 <p>拿出不多的时间学习了机器学习，包括实现了一些简单的机器学习算法。重组织了博客。调研了一部分domain adaptation的论文，改之前的水文。还有一些杂七杂八的上课实验什么的。</p>
-
-
 <h4>11月-12月</h4>
-
-
 <p>写微博分词的评测报告，同时也看一段gibbs抽样。准备去上海开会的报告以及去开会，接着改论文投中文信息学报。</p>
-
-
 <h4>12月-1月</h4>
-
-
 <p>前半段考试，做了一坨课程实验，后半段去天津开了微博分词的会，其间都是准备poster一些杂事。这月后半段开始接了网管的工作。这其间还草草做了一个字聚类帮助分词的实验。后来这个非常烂的idea投了ccl2013。</p>
-
-
 <h3>2013年</h3>
-
-
 <h4>1月-2月</h4>
-
-
 <p>前半段修硬盘来着。刚接手网管，实验室的磁盘阵列就挂了。大概原因就是raid5坏了两块后没人知道，第三块坏后就彻底挂了。大冬天抱着硬盘跑数据恢复，反正是非常苦逼。后来十天草草准备了一下托福，一战成了挂逼。</p>
-
-
 <h4>2月-3月</h4>
-
-
 <p>打算考G，利用过年时间背了一个多月单词，约了5月的G和6月的T。</p>
-
-
 <h4>3月-5月</h4>
-
-
-<p>开始调研用deep learning做分词，基本把rnnlm看了一遍。最初的思路是用语言模型做分词，结果做出来就让人没什么信心，后来又把思路换成用embedding做semi-supervised，也没什么信心。当时觉得主要问题在embedding结果对于分词模型不是线性作用的。也想过用c&w直接做一个分词的神经网络，不过后来看ccl好像有中科院的同学用实现了这个思路，不过效果似乎也让人没什么信心。不知道dl是不是不适合参加自然语言处理的battle against state-of-the-art。</p>
-
-
+<p>开始调研用deep learning做分词，基本把rnnlm看了一遍。最初的思路是用语言模型做分词，结果做出来就让人没什么信心，后来又把思路换成用embedding做semi-supervised，也没什么信心。当时觉得主要问题在embedding结果对于分词模型不是线性作用的。也想过用c&amp;w直接做一个分词的神经网络，不过后来看ccl好像有中科院的同学用实现了这个思路，不过效果似乎也让人没什么信心。不知道dl是不是不适合参加自然语言处理的battle against state-of-the-art。</p>
 <p>断断续续地准备英语。</p>
-
-
 <p>这两个月中做的另外一件事是机房上新设备。配上机器，电路改造，修空调，反正很少能安心下来看看书或者读读论文，跑实验也总出错。</p>
-
-
 <h4>5月-6月</h4>
-
-
 <p>面对一坨考试，终于撑不住了。取消的5月的G。不过考试还是成功考出两科60分。</p>
-
-
 <h4>6月-8月</h4>
-
-
 <p>在万念俱灰的情绪下，用一个星期整理了之前cluster帮助分词的工作。想论证怎样做字的表示才能帮助分词任务，结论是对单个字做不靠谱，对字聚类时要考虑字的上下文信息。这个水文投出去后重构了正华师兄的依存句法分析器dparser。当时估计工作量大概是一个月，1万行代码以下。但是实际做起来发现可以顺势将ltp里面的其他模块也重构一下。结果就是重写了本科毕设的序列标注统一框架，整个项目下来有1.7万行代码。还有9K字的文档，再加上写了python和ruby两个版本的client和一部分web页面。总之这两个月彻底做了一只代码狗。</p>
-
-
 <p>6月末托福二战，再次准备十天，再次挂逼，考了个什么都不能做的93。基本是死了出国这条心了。</p>
-
-
 <p>再一件事是实验室网站被挂马，被网络中心关站了。没办法用静态页生成器重构了主页，迁移+升级了服务器，跑了几趟网络中心。现在还有一些服务没恢复，拙计。</p>
-
-
 <p>这一年，基本上是在一种忙碌而压抑的状态中度过。没怎么过过周末，也没时间去运动。体重又回到了110斤以下，可悲的是肚子好像有胖的趋势。前个周末，爸妈来哈尔滨，幸亏没买到车票。因为那天综合楼停电，结果来电后机房就烧到50度了。若是他们来，恐怕只能把他们撂旅馆里一天了。</p>
-
-
 <p>有的时候，我也不知道想过什么应该怎样生活。也没时间去想一想，反正一直被无形的力量推动，不由自主。</p>
-
-
-<p>他们大四的毕业那会儿，我有几次被三点唱歌的醉汉们吵醒。只好去公寓平台的椅子里乘凉，有时看天色由黑转灰，继而一片青蓝，觉得很陌生。</p>
-
+<p>他们大四的毕业那会儿，我有几次被三点唱歌的醉汉们吵醒。只好去公寓平台的椅子里乘凉，有时看天色由黑转灰，继而一片青蓝，觉得很陌生。</p></p>
 
 </div>
 
 <div id="disqus_thread"></div>
 <script type="text/javascript">
-    var disqus_shortname = 'yjliu'; // required: replace example with your forum shortname
-    /* * * DON'T EDIT BELOW THIS LINE * * */
-    (function() {
-        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
+var disqus_shortname = 'yjliu'; // required: replace example with your forum shortname
+/* * * DON'T EDIT BELOW THIS LINE * * */
+(function() {
+ var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+ dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+ (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+ })();
 </script>
 <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 <a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
 
-</div>
+  </div>
 
-<footer>
-    &copy; <a href="#">Static Oneplus</a> 2014 | 
-    This site is built by <a href="">Level0</a>.
-</footer>
+  <footer class="text-center">
+    &copy; <a href="#">Static Oneplus</a> 2010 - 2014 |
+    This site is built by <a href="http://middlemanapp.com/" target="_blank">Middleman</a> and
+    <a href="http://getbootstrap.com/">bootstrap</a>.
+  </footer>
 </div>
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
@@ -160,7 +107,7 @@ MathJax.Hub.Config({
 });
 </script>
 <script type="text/javascript"
-    src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
+src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
 <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
 </body>
 </html>

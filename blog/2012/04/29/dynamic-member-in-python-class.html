@@ -2,7 +2,9 @@
 <html>
 <head>
 <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
-<title>  Python对象的动态成员与__dict__ |  Static Oneplus </title>
+<title>
+  Python对象的动态成员与__dict__ |  Static Oneplus
+</title>
 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap-responsive.min.css">
 <style type="text/css">
@@ -10,57 +12,52 @@
 .nav { }
 .nav li { float: left; width: 70px; }
 .content { padding: 30px 0; }
-.site_title { font-family: "Fjalla One","Georgia","Helvetica Neue",Arial,sans-serif;}
-header { width: 100%; }
+body, h1, h2, h3, h4 { font-family: "Fjalla One","Georgia","Helvetica Neue",Arial,sans-serif;}
+header { width: 100%; height: 80px;}
 blockquote p { font-size: 14px; }
 </style>
 </head>
 <body>
 
 <div class="container">
-<header class="header">
+  <header class="header">
     <h1 class="site_title">Static Oneplus <small>不可控制论</small></h1>
-    <ul class="nav">
-        <li><a href="http://yjliu.net">Home</a></li>
-        <li><a href="/cv">CV</a></li>
-        <li><a href="/blog">Blog</a></li>
-        <li><a href="/notes">Notes</a></li>
-        <li><a href="/feed.xml">RSS</a></li>
+    <ul class="nav pull-right">
+      <li><a href="/">Home</a></li>
+      <li><a href="/cv">CV</a></li>
+      <li><a href="/blog">Blog</a></li>
+      <li><a href="/notes">Notes</a></li>
+      <li><a href="/feed.xml">RSS</a></li>
     </ul>
-</header>
+  </header>
 
-<div class="content">
-
-<div style="color:#999;">
-    <small>2012-04-29
-        by  Oneplus </small></div>
+  <div class="content">
+    <div style="color:#999;">
+  <small>2012/04/29 - by
+    
+      Oneplus
+  
+  </small>
+</div>
 <h2>Python对象的动态成员与__dict__</h2>
 <hr />
 <div>
-    
-
-<p>在写一些python脚本时，我很喜欢用optparse module中的OptionParser对象来解析一些命令行参数。一个简单的例子如下，
-<div>
-  <pre class="prettyprint linenums 1"><code class='python'>parser = OptionParser()
-parser.add_option(&quot;-f&quot;, &quot;--file&quot;, dest=&quot;filename&quot;)
-(options, args) = parser.parse_args()</code></pre>
-</div>
-
-然后，使用options.filename可以调用--file指定的参数，这似乎也没什么神奇的。但是，在第一次用OptionParser时，我那个充满C惯性思维的大脑却很严重地shock了。因为，options对象的成员在调用期间才产生，这不科学啊。</p>
-
-
-
+  <p>在写一些python脚本时，我很喜欢用optparse module中的OptionParser对象来解析一些命令行参数。一个简单的例子如下，
+{% highlight python %}
+parser = OptionParser()
+parser.add_option(&ldquo;-f&rdquo;, &ldquo;&ndash;file&rdquo;, dest=&ldquo;filename&rdquo;)
+(options, args) = parser.parse_args()
+{% endhighlight %}
+然后，使用options.filename可以调用&ndash;file指定的参数，这似乎也没什么神奇的。但是，在第一次用OptionParser时，我那个充满C惯性思维的大脑却很严重地shock了。因为，options对象的成员在调用期间才产生，这不科学啊。</p>
 
 <p>结果这个问题被搁置了大半年，今天早上又想起来，心血来潮看了一眼optparse的源代码，
-```
+&ldquo;`
 self.__dict__.update(dict)
-```
+&rdquo;`
 然后一下子，我似乎明白了什么。</p>
-
-
-<p>首先，每个python对象中都用一个字典来保存其命名空间，也就是`__dict__`。举栗来讲，C.x实际上是被翻译成`C.__dict__["x"]`。那么，runtime地向C中添加一些成员就是小case了。一个栗子程序如下：
-<div>
-  <pre class="prettyprint linenums 1"><code class='python'>class C:
+<p>首先，每个python对象中都用一个字典来保存其命名空间，也就是`__dict__`。举栗来讲，C.x实际上是被翻译成`C.__dict__[&ldquo;x&rdquo;]`。那么，runtime地向C中添加一些成员就是小case了。一个栗子程序如下：
+{% highlight python %}
+class C:
     def __init__(self):
         self.x = 1
         self.y = 2
@@ -70,60 +67,52 @@ self.__dict__.update(dict)
 
 c = C()
 print c.__dict__
-c.regist(&quot;z&quot;, 3)
-c.regist(&quot;func&quot;, lambda x: &quot;&quot;.join([&quot;=&gt;&quot;, str(x), &quot;&lt;=&quot;]))
+c.regist(&ldquo;z&rdquo;, 3)
+c.regist(&ldquo;func&rdquo;, lambda x: &ldquo;&rdquo;.join([&ldquo;=>&rdquo;, str(x), &ldquo;<="]))
 print c.__dict__
-print c.x, c.y, c.z, c.func(&quot;__dict__&quot;)</code></pre>
-</div>
-
+print c.x, c.y, c.z, c.func("__dict__")
+{% endhighlight %}
 </p>
-
 
 <p>运行结果是
-<div>
-  <pre class="prettyprint linenums 1"><code class=''>{'y': 2, 'x': 1}
-{'y': 2, 'x': 1, 'z': 3, 'func': &lt;function &lt;lambda&gt; at 0x2b55c97de668&gt;}
-1 2 3 =&gt;__dict__&lt;=</code></pre>
-</div>
-
+{% highlight %}
+{&lsquo;y&rsquo;: 2, &lsquo;x&rsquo;: 1}
+{&lsquo;y&rsquo;: 2, &lsquo;x&rsquo;: 1, &lsquo;z&rsquo;: 3, &lsquo;func&rsquo;: <function <lambda> at 0x2b55c97de668>}
+1 2 3 =>__dict__<=
+{% endhighlight %}
 </p>
-
-
-
 
 <p>不过问题就这样解决了，真是不甘心。所以发个博客吧。</p>
 
-
 <p>P勒个S：这之前，还看过C中实现命令行解析的类库，<a href="http://argtable.sourceforge.net/">argtable</a>。C语言真是好难啊。</p>
-
 
 <p>参考：
 <ul>
 <li><a href="http://docs.python.org/reference/datamodel.html">http://docs.python.org/reference/datamodel.html</a></li></ul>
 </p>
 
-
 </div>
 
 <div id="disqus_thread"></div>
 <script type="text/javascript">
-    var disqus_shortname = 'yjliu'; // required: replace example with your forum shortname
-    /* * * DON'T EDIT BELOW THIS LINE * * */
-    (function() {
-        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
+var disqus_shortname = 'yjliu'; // required: replace example with your forum shortname
+/* * * DON'T EDIT BELOW THIS LINE * * */
+(function() {
+ var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+ dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+ (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+ })();
 </script>
 <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 <a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
 
-</div>
+  </div>
 
-<footer>
-    &copy; <a href="#">Static Oneplus</a> 2014 | 
-    This site is built by <a href="">Level0</a>.
-</footer>
+  <footer class="text-center">
+    &copy; <a href="#">Static Oneplus</a> 2010 - 2014 |
+    This site is built by <a href="http://middlemanapp.com/" target="_blank">Middleman</a> and
+    <a href="http://getbootstrap.com/">bootstrap</a>.
+  </footer>
 </div>
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
@@ -134,7 +123,7 @@ MathJax.Hub.Config({
 });
 </script>
 <script type="text/javascript"
-    src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
+src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
 <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
 </body>
 </html>

@@ -2,7 +2,9 @@
 <html>
 <head>
 <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
-<title>  记一次修复MySQL数据库的经历 |  Static Oneplus </title>
+<title>
+  记一次修复MySQL数据库的经历 |  Static Oneplus
+</title>
 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap-responsive.min.css">
 <style type="text/css">
@@ -10,101 +12,88 @@
 .nav { }
 .nav li { float: left; width: 70px; }
 .content { padding: 30px 0; }
-.site_title { font-family: "Fjalla One","Georgia","Helvetica Neue",Arial,sans-serif;}
-header { width: 100%; }
+body, h1, h2, h3, h4 { font-family: "Fjalla One","Georgia","Helvetica Neue",Arial,sans-serif;}
+header { width: 100%; height: 80px;}
 blockquote p { font-size: 14px; }
 </style>
 </head>
 <body>
 
 <div class="container">
-<header class="header">
+  <header class="header">
     <h1 class="site_title">Static Oneplus <small>不可控制论</small></h1>
-    <ul class="nav">
-        <li><a href="http://yjliu.net">Home</a></li>
-        <li><a href="/cv">CV</a></li>
-        <li><a href="/blog">Blog</a></li>
-        <li><a href="/notes">Notes</a></li>
-        <li><a href="/feed.xml">RSS</a></li>
+    <ul class="nav pull-right">
+      <li><a href="/">Home</a></li>
+      <li><a href="/cv">CV</a></li>
+      <li><a href="/blog">Blog</a></li>
+      <li><a href="/notes">Notes</a></li>
+      <li><a href="/feed.xml">RSS</a></li>
     </ul>
-</header>
+  </header>
 
-<div class="content">
-
-<div style="color:#999;">
-    <small>
-        by  Oneplus </small></div>
+  <div class="content">
+    <div style="color:#999;">
+  <small>2013/07/09 - by
+    
+      Oneplus
+  
+  </small>
+</div>
 <h2>记一次修复MySQL数据库的经历</h2>
 <hr />
 <div>
-    <p>实验室服务器的硬盘满了，结果导致一个线上服务的MySQL数据库的两个表坏了。具体症状是<code>desc cdb_searchindex</code>显示</p>
-
-<div>
-  <pre class="prettyprint linenums 1"><code class='bash'>ERROR 1017 (HY000): Can't find file: 'cdb_searchindex' (errno: 2)</code></pre>
-</div>
-
-
+  <p>实验室服务器的硬盘满了，结果导致一个线上服务的MySQL数据库的两个表坏了。具体症状是<code>desc cdb_searchindex</code>显示</p>
+<pre class="highlight shell">ERROR 1017 <span class="o">(</span>HY000<span class="o">)</span>: Can<span class="s1">'t find file: '</span>cdb_searchindex<span class="s1">' (errno: 2)
+</span></pre>
 <p>这是要通过/etc/my.cnf(或者同类的mysql配置文件)找到数据文件的位置。定位后进入文件夹，<code>ls cdb_searchindex*</code>一看，只剩一个cdb_searchindex.frm文件了。</p>
 
 <p>接下来要进行恢复了。</p>
 
 <p>第一步是确定这个表的引擎类型，命令是:</p>
-
-<div>
-  <pre class="prettyprint linenums 1"><code class='bash'>show table status from `discuz`;</code></pre>
-</div>
-
-
+<pre class="highlight shell">show table status from <span class="sb">`</span>discuz<span class="sb">`</span>;
+</pre>
 <p>一看都是MyISAM，恢复起来就相对比较容易了。</p>
 
 <p>第二步是在数据库文件所在的文件夹中新建<code>cdb_searchindex.MYD</code>和<code>cdb_searchindex.MYI</code>两个文件，注意权限应该是mysql的。</p>
 
 <p>第三步是在mysql中用</p>
-
-<div>
-  <pre class="prettyprint linenums 1"><code class='bash'>repair table cdb_searchindex USE_FRM;</code></pre>
-</div>
-
-
+<pre class="highlight shell">repair table cdb_searchindex USE_FRM;
+</pre>
 <p>就可以恢复了。</p>
 
 <p>第四步用</p>
-
-<div>
-  <pre class="prettyprint linenums 1"><code class='bash'>mysqlcheck discuz;</code></pre>
-</div>
-
-
+<pre class="highlight shell">mysqlcheck discuz;
+</pre>
 <p>没啥问题就OK了。</p>
 
 <h3>参考</h3>
 
 <ul>
-<li><a href="http://myceo.blog.51cto.com/2340655/737216">MYSQL数据文件--.frm文件(只有.frm文件时的表结构恢复)</a></li>
+<li><a href="http://myceo.blog.51cto.com/2340655/737216">MYSQL数据文件&ndash;.frm文件(只有.frm文件时的表结构恢复)</a></li>
 </ul>
-
 
 </div>
 
 <div id="disqus_thread"></div>
 <script type="text/javascript">
-    var disqus_shortname = 'yjliu'; // required: replace example with your forum shortname
-    /* * * DON'T EDIT BELOW THIS LINE * * */
-    (function() {
-        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
+var disqus_shortname = 'yjliu'; // required: replace example with your forum shortname
+/* * * DON'T EDIT BELOW THIS LINE * * */
+(function() {
+ var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+ dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+ (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+ })();
 </script>
 <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 <a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
 
-</div>
+  </div>
 
-<footer>
-    &copy; <a href="#">Static Oneplus</a> 2014 | 
-    This site is built by <a href="">Level0</a>.
-</footer>
+  <footer class="text-center">
+    &copy; <a href="#">Static Oneplus</a> 2010 - 2014 |
+    This site is built by <a href="http://middlemanapp.com/" target="_blank">Middleman</a> and
+    <a href="http://getbootstrap.com/">bootstrap</a>.
+  </footer>
 </div>
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
@@ -115,7 +104,7 @@ MathJax.Hub.Config({
 });
 </script>
 <script type="text/javascript"
-    src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
+src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
 <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
 </body>
 </html>

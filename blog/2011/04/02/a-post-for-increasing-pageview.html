@@ -2,7 +2,9 @@
 <html>
 <head>
 <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
-<title>  访问量神马的最喜欢了 |  Static Oneplus </title>
+<title>
+  访问量神马的最喜欢了 |  Static Oneplus
+</title>
 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap-responsive.min.css">
 <style type="text/css">
@@ -10,377 +12,373 @@
 .nav { }
 .nav li { float: left; width: 70px; }
 .content { padding: 30px 0; }
-.site_title { font-family: "Fjalla One","Georgia","Helvetica Neue",Arial,sans-serif;}
-header { width: 100%; }
+body, h1, h2, h3, h4 { font-family: "Fjalla One","Georgia","Helvetica Neue",Arial,sans-serif;}
+header { width: 100%; height: 80px;}
 blockquote p { font-size: 14px; }
 </style>
 </head>
 <body>
 
 <div class="container">
-<header class="header">
+  <header class="header">
     <h1 class="site_title">Static Oneplus <small>不可控制论</small></h1>
-    <ul class="nav">
-        <li><a href="http://yjliu.net">Home</a></li>
-        <li><a href="/cv">CV</a></li>
-        <li><a href="/blog">Blog</a></li>
-        <li><a href="/notes">Notes</a></li>
-        <li><a href="/feed.xml">RSS</a></li>
+    <ul class="nav pull-right">
+      <li><a href="/">Home</a></li>
+      <li><a href="/cv">CV</a></li>
+      <li><a href="/blog">Blog</a></li>
+      <li><a href="/notes">Notes</a></li>
+      <li><a href="/feed.xml">RSS</a></li>
     </ul>
-</header>
+  </header>
 
-<div class="content">
-
-<div style="color:#999;">
-    <small>2011-04-02
-        by  Oneplus </small></div>
+  <div class="content">
+    <div style="color:#999;">
+  <small>2011/04/02 - by
+    
+      Oneplus
+  
+  </small>
+</div>
 <h2>访问量神马的最喜欢了</h2>
 <hr />
 <div>
-    <div>当当当~过节给大家发福利啦。</div>
-
+  <div>当当当~过节给大家发福利啦。</div>
 
 <div>这货就是，神马人工智能啊、a*搜索啊、八数码啊、实验啊、Python啊，你懂的。都是哗哗的啦。</div>
 
-
 <div>不过伦家写300来行的java风的C++版Python，也挺不容易的啦。乃们表拿了东西也不吭一声就走了，怎么也留个爪神马的。</div>
-
 
 <div>输入那么浮云的东西，用一个叫eight.in的文件存一下，空格就画个x就好了。</div>
 
-
 <p><a id="more"></a><a id="more-183"></a></p>
+<pre class="highlight python"><span class="c"># coding=utf-8</span>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">math</span>
 
-<div>
-  <pre class="prettyprint linenums 1"><code class='python'># coding=utf-8
-import re
-import os
-import math
+<span class="n">SIZE</span> <span class="o">=</span> <span class="mi">362881</span>
+<span class="n">f</span>    <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">SIZE</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">g</span>    <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">SIZE</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">path</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">SIZE</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">step</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">SIZE</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 
-SIZE = 362881
-f    = range(0, SIZE, 1)
-g    = range(0, SIZE, 1)
-path = range(0, SIZE, 1)
-step = range(0, SIZE, 1)
+<span class="n">sourceNumState</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+<span class="n">targetNumState</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+<span class="nb">hash</span><span class="n">edSourceNumState</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+<span class="nb">hash</span><span class="n">edTargetNumState</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
 
-sourceNumState = -1
-targetNumState = -1
-hashedSourceNumState = -1
-hashedTargetNumState = -1
+<span class="n">distance</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">[</span><span class="mi">0</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)]</span> <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="p">]</span>
+<span class="n">adjancy</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> 
+    <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> 
+    <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span> 
+    <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">],</span> 
+    <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">],</span> 
+    <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">7</span><span class="p">],</span> 
+    <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">],</span> 
+    <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">]</span>
+<span class="p">]</span>
+<span class="n">moves</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">[</span><span class="s">'r'</span><span class="p">,</span> <span class="s">'d'</span><span class="p">],</span> 
+    <span class="p">[</span><span class="s">'l'</span><span class="p">,</span> <span class="s">'r'</span><span class="p">,</span> <span class="s">'d'</span><span class="p">],</span>
+    <span class="p">[</span><span class="s">'l'</span><span class="p">,</span> <span class="s">'d'</span><span class="p">],</span> 
+    <span class="p">[</span><span class="s">'u'</span><span class="p">,</span> <span class="s">'r'</span><span class="p">,</span> <span class="s">'d'</span><span class="p">],</span>
+    <span class="p">[</span><span class="s">'u'</span><span class="p">,</span> <span class="s">'l'</span><span class="p">,</span> <span class="s">'r'</span><span class="p">,</span> <span class="s">'d'</span><span class="p">],</span> 
+    <span class="p">[</span><span class="s">'u'</span><span class="p">,</span> <span class="s">'l'</span><span class="p">,</span> <span class="s">'d'</span><span class="p">],</span>
+    <span class="p">[</span><span class="s">'u'</span><span class="p">,</span> <span class="s">'r'</span><span class="p">],</span> 
+    <span class="p">[</span><span class="s">'u'</span><span class="p">,</span> <span class="s">'l'</span><span class="p">,</span> <span class="s">'r'</span><span class="p">],</span> 
+    <span class="p">[</span><span class="s">'u'</span><span class="p">,</span> <span class="s">'l'</span><span class="p">]</span>
+<span class="p">]</span>
+<span class="n">location</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+<span class="p">]</span>
 
-distance = [
-    [0 for a in range(10)] for b in range(10)
-]
-adjancy = [
-    [1, 3],
-    [0, 2, 4], 
-    [1, 5], 
-    [0, 4, 6], 
-    [1, 3, 5, 7], 
-    [2, 4, 8], 
-    [3, 7], 
-    [4, 6, 8], 
-    [5, 7]
-]
-moves = [
-    ['r', 'd'], 
-    ['l', 'r', 'd'],
-    ['l', 'd'], 
-    ['u', 'r', 'd'],
-    ['u', 'l', 'r', 'd'], 
-    ['u', 'l', 'd'],
-    ['u', 'r'], 
-    ['u', 'l', 'r'], 
-    ['u', 'l']
-]
-location = [
-    [0, 0], [0, 1], [0, 2],
-    [1, 0], [1, 1], [1, 2],
-    [2, 0], [2, 1], [2, 2]
-]
+<span class="k">class</span> <span class="nc">node</span><span class="p">():</span>
+    <span class="n">key</span>   <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+    <span class="n">value</span> <span class="o">=</span> <span class="mi">10000000000</span>
 
-class node():
-    key   = -1
-    value = 10000000000
-    
-    def __init__(self, key, value):
-        self.key   = key
-        self.value = value
-        
-    def lessThan(self, node_t):
-        if self.value &amp;lt; node_t.value or (self.value == node_t.value and self.key &amp;gt; node_t.key):
-            return True
-        else:
-            return False
-            
-    def getKey(self):
-        return self.key
-        
-    def getValue(self):
-        return self.value
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">key</span>   <span class="o">=</span> <span class="n">key</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">value</span>
 
-class hash():
-    hashTable = range(0, SIZE, 1)
-    
-    def __init__(self):
-        for i in range(0, SIZE, 1):
-            self.hashTable[i] = -1
+    <span class="k">def</span> <span class="nf">lessThan</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node_t</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span> <span class="n">node_t</span><span class="o">.</span><span class="n">value</span> <span class="ow">or</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">==</span> <span class="n">node_t</span><span class="o">.</span><span class="n">value</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">key</span> <span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="n">node_t</span><span class="o">.</span><span class="n">key</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">True</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">False</span>
 
-    def findHashPosition(self, value):
-        hashID = value % SIZE
-        while self.hashTable[hashID] != -1 and self.hashTable[hashID] != value:
-            # print 'in while', self.hashTable[hashID]
-            hashID = hashID + 1
-            if hashID == SIZE:
-                hashID = 0
-        return hashID
-            
-    def findHashValue(self, position):
-        if position &amp;gt;= SIZE or position &amp;lt; 0:
-            return -1
-        else:
-            return self.hashTable[position]
-            
-    def insertHash(self, value):
-        position = self.findHashPosition(value)
-        # print 'insertHash:: hash position :', position
-        self.hashTable[position] = value
-        return position
-        
-class priority_queue():
-    last = 0
-    queue = []
-    # queue save hash id
+    <span class="k">def</span> <span class="nf">getKey</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">key</span>
 
-    def __init__(self):
-        self.last = 0
-        self.queue = [ node(10000000000, 10000000000) ] * SIZE
-        # print type( self.queue[100000] )
-    
-    def empty(self):
-        if self.last == 0:
-            return True
-        else:
-            return False
+    <span class="k">def</span> <span class="nf">getValue</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span>
 
-    def top(self):
-        return self.queue[1]
+<span class="k">class</span> <span class="nc">hash</span><span class="p">():</span>
+    <span class="nb">hash</span><span class="n">Table</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">SIZE</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 
-    def pop(self):
-        self.queue[ 1 ] = self.queue[ self.last ]
-        self.last = self.last - 1
-        self.siftDown( 1 )
-    
-    def push( self, value ):
-        self.last = self.last + 1
-        self.queue[ self.last ] = value
-        self.queue[ 0 ] = value
-        self.siftUp( self.last )
-    
-    def getF( self, p ):
-        # print self.queue[ p ]
-        return f[ hashTable.findHashPosition(self.queue[ p ]) ]
-    
-    def siftUp( self, p ):
-        i = p / 2
-        j = p
-        tmp = self.queue[ p ]
-        # print type( tmp )
-        
-        while tmp.lessThan(self.queue[ i ]):
-            # print i
-            self.queue[ j ] = self.queue[ i ]
-            j = i
-            i = j / 2
-        self.queue[ j ] = tmp
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">SIZE</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="nb">hash</span><span class="n">Table</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
 
-    def siftDown( self, p ):
-        i = p * 2
-        j = p
-        tmp = self.queue[ p ]
-        
-        while i &amp;lt;= self.last:
-            if i &amp;lt; self.last and self.queue[ i + 1 ].lessThan(self.queue[ i ]):
-                i = i + 1
-            if self.queue[ i ].lessThan( tmp ) == False:
-                break
-            else:
-                self.queue[ j ] = self.queue[ i ]
-                j = i
-                i = j * 2
-        self.queue[ j ] = tmp
+    <span class="k">def</span> <span class="nf">findHashPosition</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="nb">hash</span><span class="n">ID</span> <span class="o">=</span> <span class="n">value</span> <span class="o">%</span> <span class="n">SIZE</span>
+        <span class="k">while</span> <span class="bp">self</span><span class="o">.</span><span class="nb">hash</span><span class="n">Table</span><span class="p">[</span><span class="nb">hash</span><span class="n">ID</span><span class="p">]</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="nb">hash</span><span class="n">Table</span><span class="p">[</span><span class="nb">hash</span><span class="n">ID</span><span class="p">]</span> <span class="o">!=</span> <span class="n">value</span><span class="p">:</span>
+            <span class="c"># print 'in while', self.hashTable[hashID]</span>
+            <span class="nb">hash</span><span class="n">ID</span> <span class="o">=</span> <span class="nb">hash</span><span class="n">ID</span> <span class="o">+</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="nb">hash</span><span class="n">ID</span> <span class="o">==</span> <span class="n">SIZE</span><span class="p">:</span>
+                <span class="nb">hash</span><span class="n">ID</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">return</span> <span class="nb">hash</span><span class="n">ID</span>
 
-openTable = priority_queue()
-hashTable = hash()
-closeTable = range(0, SIZE, 1)
-        
-def convertToNum( arrayState ):
-    ret = 0
-    for i in range(0, 9, 1):
-        ret = ret * 10
-        ret = ret + int(arrayState[i])
-    return ret
-    
-def convertToArray( numState ):
-    ret = range(0, 9, 1)
-    for i in range(8, -1, -1):
-        ret[i]   = numState % 10
-        numState = numState / 10
-    return ret
-    
-def isSolvable(sourceState, targetState):
-    odd = 0
-    eve = 0
-    for i in range(0, 9, 1):
-        for j in range(0, 9, 1):
-            if sourceState[i] &amp;gt; sourceState[j] and sourceState[i] &amp;gt; 0 and sourceState[j] &amp;gt; 0:
-                odd = odd + 1
-            if targetState[i] &amp;gt; targetState[j] and targetState[i] &amp;gt; 0 and targetState[j] &amp;gt; 0:
-                eve = eve + 1
-    if odd % 2 == eve % 2:
-        return True
-    else:
-        return False
+    <span class="k">def</span> <span class="nf">findHashValue</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">position</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">position</span> <span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span><span class="o">=</span> <span class="n">SIZE</span> <span class="ow">or</span> <span class="n">position</span> <span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="o">-</span><span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="nb">hash</span><span class="n">Table</span><span class="p">[</span><span class="n">position</span><span class="p">]</span>
 
-def getSourceState():
-    fp  = open('eight.in', 'r')
-    sourceState = re.split('\n| ', fp.read())
-    fp.close()
-    
-    for i in range(0, 9, 1):
-        if sourceState[i] == 'x':
-            sourceState[i] = '0'
-    return sourceState
-    
-def getTargetState():
-    targetState = []
-    for i in range(0, 8, 1):
-        targetState.append( str(i + 1) )
-    targetState.append('0')
-    
-    return targetState
+    <span class="k">def</span> <span class="nf">insertHash</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="n">position</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">findHashPosition</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+        <span class="c"># print 'insertHash:: hash position :', position</span>
+        <span class="bp">self</span><span class="o">.</span><span class="nb">hash</span><span class="n">Table</span><span class="p">[</span><span class="n">position</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+        <span class="k">return</span> <span class="n">position</span>
 
-def getEmptyPositionInArray( arrayState ):
-    for i in range(0, 9, 1):
-        if arrayState[i] == 0:
-            return i
-            
-def getEstimateValue( numState ):
-    ret = 0
-    for i in range(0, 9, 1):
-        # print i, numState[i]
-        ret = ret + distance[(i + 1) % 9][ int(numState[i]) ]
-    return ret
+<span class="k">class</span> <span class="nc">priority_queue</span><span class="p">():</span>
+    <span class="n">last</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">queue</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="c"># queue save hash id</span>
 
-def solve(srcArrayState, tagArrayState):
-    for i in range(0, SIZE, 1):
-        closeTable[i] = 0
-    
-    for i in range(0, 9, 1):
-        for j in range(0, 9, 1):
-            distance[(i + 1) % 9][(j + 1) % 9] = abs(location[i][0] - location[j][0]) + abs(location[i][1] - location[j][1])
-            
-    sourceNumState = convertToNum(srcArrayState)
-    targetNumState = convertToNum(tagArrayState)
-    hashedSourceNumState = hashTable.insertHash(sourceNumState)
-    hashedTargetNumState = hashTable.insertHash(targetNumState)
-    
-    # print 'sourceNumState :', sourceNumState, hashedSourceNumState
-    g[ hashedSourceNumState ] = 0;
-    f[ hashedSourceNumState ] = getEstimateValue(srcArrayState)
-    f[ hashedTargetNumState ] = -1;
-    openTable.push( node(sourceNumState, f[ hashedSourceNumState ]) )
-    
-    while True:
-        currentNumState = openTable.top().key
-        currentArrayState = convertToArray( currentNumState )
-        hashedCurrentNumState = hashTable.insertHash( currentNumState )
-        openTable.pop()
-        # print 'currentNumState :', currentNumState, hashedCurrentNumState
-        # raw_input(&amp;quot;Press ENTER to exit&amp;quot;)
-        
-        if currentNumState == targetNumState:
-            stack = []
-            traceNumState = currentNumState
-            hashedTraceNumState = hashTable.insertHash(traceNumState)
-            while hashedTraceNumState != hashedSourceNumState:
-                stack.append( step[ hashedTraceNumState ] )
-                hashedTraceNumState = path[ hashedTraceNumState ]
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">last</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">queue</span> <span class="o">=</span> <span class="p">[</span> <span class="n">node</span><span class="p">(</span><span class="mi">10000000000</span><span class="p">,</span> <span class="mi">10000000000</span><span class="p">)</span> <span class="p">]</span> <span class="o">*</span> <span class="n">SIZE</span>
+        <span class="c"># print type( self.queue[100000] )</span>
 
-            for move in reversed( stack ):
-                print move
-            break
-        
-        closeTable[ hashedCurrentNumState ] = 2
-        emptyPosition = getEmptyPositionInArray( currentArrayState )
-        
-        for nextPosition in adjancy[ emptyPosition ]:
-            nextArrayState = []
-            for ii in currentArrayState:
-                nextArrayState.append(str(ii))
-            
-            nextArrayState[ emptyPosition ] = currentArrayState[ nextPosition ]
-            nextArrayState[ nextPosition ]  = '0'
-            
-            # print 'nextArrayState :', nextArrayState
-            nextNumState = convertToNum( nextArrayState )
-            
-            hashedNextNumState = hashTable.insertHash( nextNumState );
-            
-            if closeTable[ hashedNextNumState ] == 0:
-                closeTable[ hashedNextNumState ] = 1;
-                g[ hashedNextNumState ] = g[ hashedCurrentNumState ] + 1
-                f[ hashedNextNumState ] = g[ hashedNextNumState ] + getEstimateValue( currentArrayState )
-                path[ hashedNextNumState ] = hashedCurrentNumState
-                step[ hashedNextNumState ] = moves[ emptyPosition ][ adjancy[ emptyPosition ].index( nextPosition ) ]
-                openTable.push( node(nextNumState, f[hashedNextNumState]) )
-            elif closeTable[ hashedNextNumState ] == 1 and g[ hashedCurrentNumState ] + 1 &amp;lt; g[ hashedNextNumState ]:
-                g[ hashedNextNumState ] = g[ hashedCurrentNumState ] + 1
-                f[ hashedNextNumState ] = g[ hashedNextNumState ] + getEstimateValue( currentArrayState )
-                path[ hashedNextNumState ] = hashedCurrentNumState
-                step[ hashedNextNumState ] = moves[ emptyPosition ][ adjancy[ emptyPosition ].index( nextPosition ) ]
-                openTable.pop()
-    
-def main():
-    sourceArrayState = getSourceState()
-    targetArrayState = getTargetState()
-    sourceNumState = convertToNum(sourceArrayState)
-    targetNumState = convertToNum(targetArrayState)
-    print sourceNumState, targetNumState
-    
-    if isSolvable(sourceArrayState, targetArrayState) == False:
-        print 'What the Hell!'
-    else:
-        solve(sourceArrayState, targetArrayState)
-        
-if __name__ == '__main__':
-    main()</code></pre>
-</div>
+    <span class="k">def</span> <span class="nf">empty</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">last</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">True</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">False</span>
 
+    <span class="k">def</span> <span class="nf">top</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">queue</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
 
+    <span class="k">def</span> <span class="nf">pop</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">queue</span><span class="p">[</span> <span class="mi">1</span> <span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">queue</span><span class="p">[</span> <span class="bp">self</span><span class="o">.</span><span class="n">last</span> <span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">last</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">last</span> <span class="o">-</span> <span class="mi">1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">siftDown</span><span class="p">(</span> <span class="mi">1</span> <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">push</span><span class="p">(</span> <span class="bp">self</span><span class="p">,</span> <span class="n">value</span> <span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">last</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">last</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">queue</span><span class="p">[</span> <span class="bp">self</span><span class="o">.</span><span class="n">last</span> <span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">queue</span><span class="p">[</span> <span class="mi">0</span> <span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">siftUp</span><span class="p">(</span> <span class="bp">self</span><span class="o">.</span><span class="n">last</span> <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">getF</span><span class="p">(</span> <span class="bp">self</span><span class="p">,</span> <span class="n">p</span> <span class="p">):</span>
+        <span class="c"># print self.queue[ p ]</span>
+        <span class="k">return</span> <span class="n">f</span><span class="p">[</span> <span class="nb">hash</span><span class="n">Table</span><span class="o">.</span><span class="n">findHashPosition</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">queue</span><span class="p">[</span> <span class="n">p</span> <span class="p">])</span> <span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">siftUp</span><span class="p">(</span> <span class="bp">self</span><span class="p">,</span> <span class="n">p</span> <span class="p">):</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="n">p</span> <span class="o">/</span> <span class="mi">2</span>
+        <span class="n">j</span> <span class="o">=</span> <span class="n">p</span>
+        <span class="n">tmp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">queue</span><span class="p">[</span> <span class="n">p</span> <span class="p">]</span>
+        <span class="c"># print type( tmp )</span>
+
+        <span class="k">while</span> <span class="n">tmp</span><span class="o">.</span><span class="n">lessThan</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">queue</span><span class="p">[</span> <span class="n">i</span> <span class="p">]):</span>
+            <span class="c"># print i</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">queue</span><span class="p">[</span> <span class="n">j</span> <span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">queue</span><span class="p">[</span> <span class="n">i</span> <span class="p">]</span>
+            <span class="n">j</span> <span class="o">=</span> <span class="n">i</span>
+            <span class="n">i</span> <span class="o">=</span> <span class="n">j</span> <span class="o">/</span> <span class="mi">2</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">queue</span><span class="p">[</span> <span class="n">j</span> <span class="p">]</span> <span class="o">=</span> <span class="n">tmp</span>
+
+    <span class="k">def</span> <span class="nf">siftDown</span><span class="p">(</span> <span class="bp">self</span><span class="p">,</span> <span class="n">p</span> <span class="p">):</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="n">p</span> <span class="o">*</span> <span class="mi">2</span>
+        <span class="n">j</span> <span class="o">=</span> <span class="n">p</span>
+        <span class="n">tmp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">queue</span><span class="p">[</span> <span class="n">p</span> <span class="p">]</span>
+
+        <span class="k">while</span> <span class="n">i</span> <span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">last</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">i</span> <span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span> <span class="bp">self</span><span class="o">.</span><span class="n">last</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">queue</span><span class="p">[</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span> <span class="p">]</span><span class="o">.</span><span class="n">lessThan</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">queue</span><span class="p">[</span> <span class="n">i</span> <span class="p">]):</span>
+                <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">queue</span><span class="p">[</span> <span class="n">i</span> <span class="p">]</span><span class="o">.</span><span class="n">lessThan</span><span class="p">(</span> <span class="n">tmp</span> <span class="p">)</span> <span class="o">==</span> <span class="bp">False</span><span class="p">:</span>
+                <span class="k">break</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">queue</span><span class="p">[</span> <span class="n">j</span> <span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">queue</span><span class="p">[</span> <span class="n">i</span> <span class="p">]</span>
+                <span class="n">j</span> <span class="o">=</span> <span class="n">i</span>
+                <span class="n">i</span> <span class="o">=</span> <span class="n">j</span> <span class="o">*</span> <span class="mi">2</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">queue</span><span class="p">[</span> <span class="n">j</span> <span class="p">]</span> <span class="o">=</span> <span class="n">tmp</span>
+
+<span class="nb">open</span><span class="n">Table</span> <span class="o">=</span> <span class="n">priority_queue</span><span class="p">()</span>
+<span class="nb">hash</span><span class="n">Table</span> <span class="o">=</span> <span class="nb">hash</span><span class="p">()</span>
+<span class="n">closeTable</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">SIZE</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">convertToNum</span><span class="p">(</span> <span class="n">arrayState</span> <span class="p">):</span>
+    <span class="n">ret</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="n">ret</span> <span class="o">*</span> <span class="mi">10</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="n">ret</span> <span class="o">+</span> <span class="nb">int</span><span class="p">(</span><span class="n">arrayState</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">ret</span>
+
+<span class="k">def</span> <span class="nf">convertToArray</span><span class="p">(</span> <span class="n">numState</span> <span class="p">):</span>
+    <span class="n">ret</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">ret</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>   <span class="o">=</span> <span class="n">numState</span> <span class="o">%</span> <span class="mi">10</span>
+        <span class="n">numState</span> <span class="o">=</span> <span class="n">numState</span> <span class="o">/</span> <span class="mi">10</span>
+    <span class="k">return</span> <span class="n">ret</span>
+
+<span class="k">def</span> <span class="nf">isSolvable</span><span class="p">(</span><span class="n">sourceState</span><span class="p">,</span> <span class="n">targetState</span><span class="p">):</span>
+    <span class="n">odd</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">eve</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">sourceState</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="n">sourceState</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="ow">and</span> <span class="n">sourceState</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">sourceState</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">odd</span> <span class="o">=</span> <span class="n">odd</span> <span class="o">+</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="n">targetState</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="n">targetState</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="ow">and</span> <span class="n">targetState</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">targetState</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">eve</span> <span class="o">=</span> <span class="n">eve</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="k">if</span> <span class="n">odd</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="n">eve</span> <span class="o">%</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">True</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">False</span>
+
+<span class="k">def</span> <span class="nf">getSourceState</span><span class="p">():</span>
+    <span class="n">fp</span>  <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">'eight.in'</span><span class="p">,</span> <span class="s">'r'</span><span class="p">)</span>
+    <span class="n">sourceState</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">'</span><span class="se">\n</span><span class="s">| '</span><span class="p">,</span> <span class="n">fp</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+    <span class="n">fp</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">sourceState</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="s">'x'</span><span class="p">:</span>
+            <span class="n">sourceState</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="s">'0'</span>
+    <span class="k">return</span> <span class="n">sourceState</span>
+
+<span class="k">def</span> <span class="nf">getTargetState</span><span class="p">():</span>
+    <span class="n">targetState</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="n">targetState</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="p">)</span>
+    <span class="n">targetState</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s">'0'</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">targetState</span>
+
+<span class="k">def</span> <span class="nf">getEmptyPositionInArray</span><span class="p">(</span> <span class="n">arrayState</span> <span class="p">):</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">arrayState</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">i</span>
+
+<span class="k">def</span> <span class="nf">getEstimateValue</span><span class="p">(</span> <span class="n">numState</span> <span class="p">):</span>
+    <span class="n">ret</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="c"># print i, numState[i]</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="n">ret</span> <span class="o">+</span> <span class="n">distance</span><span class="p">[(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="mi">9</span><span class="p">][</span> <span class="nb">int</span><span class="p">(</span><span class="n">numState</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="p">]</span>
+    <span class="k">return</span> <span class="n">ret</span>
+
+<span class="k">def</span> <span class="nf">solve</span><span class="p">(</span><span class="n">srcArrayState</span><span class="p">,</span> <span class="n">tagArrayState</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">SIZE</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="n">closeTable</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="n">distance</span><span class="p">[(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="mi">9</span><span class="p">][(</span><span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="mi">9</span><span class="p">]</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">location</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">location</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span> <span class="o">+</span> <span class="nb">abs</span><span class="p">(</span><span class="n">location</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">location</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span>
+
+    <span class="n">sourceNumState</span> <span class="o">=</span> <span class="n">convertToNum</span><span class="p">(</span><span class="n">srcArrayState</span><span class="p">)</span>
+    <span class="n">targetNumState</span> <span class="o">=</span> <span class="n">convertToNum</span><span class="p">(</span><span class="n">tagArrayState</span><span class="p">)</span>
+    <span class="nb">hash</span><span class="n">edSourceNumState</span> <span class="o">=</span> <span class="nb">hash</span><span class="n">Table</span><span class="o">.</span><span class="n">insertHash</span><span class="p">(</span><span class="n">sourceNumState</span><span class="p">)</span>
+    <span class="nb">hash</span><span class="n">edTargetNumState</span> <span class="o">=</span> <span class="nb">hash</span><span class="n">Table</span><span class="o">.</span><span class="n">insertHash</span><span class="p">(</span><span class="n">targetNumState</span><span class="p">)</span>
+
+    <span class="c"># print 'sourceNumState :', sourceNumState, hashedSourceNumState</span>
+    <span class="n">g</span><span class="p">[</span> <span class="nb">hash</span><span class="n">edSourceNumState</span> <span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="n">f</span><span class="p">[</span> <span class="nb">hash</span><span class="n">edSourceNumState</span> <span class="p">]</span> <span class="o">=</span> <span class="n">getEstimateValue</span><span class="p">(</span><span class="n">srcArrayState</span><span class="p">)</span>
+    <span class="n">f</span><span class="p">[</span> <span class="nb">hash</span><span class="n">edTargetNumState</span> <span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+    <span class="nb">open</span><span class="n">Table</span><span class="o">.</span><span class="n">push</span><span class="p">(</span> <span class="n">node</span><span class="p">(</span><span class="n">sourceNumState</span><span class="p">,</span> <span class="n">f</span><span class="p">[</span> <span class="nb">hash</span><span class="n">edSourceNumState</span> <span class="p">])</span> <span class="p">)</span>
+
+    <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+        <span class="n">currentNumState</span> <span class="o">=</span> <span class="nb">open</span><span class="n">Table</span><span class="o">.</span><span class="n">top</span><span class="p">()</span><span class="o">.</span><span class="n">key</span>
+        <span class="n">currentArrayState</span> <span class="o">=</span> <span class="n">convertToArray</span><span class="p">(</span> <span class="n">currentNumState</span> <span class="p">)</span>
+        <span class="nb">hash</span><span class="n">edCurrentNumState</span> <span class="o">=</span> <span class="nb">hash</span><span class="n">Table</span><span class="o">.</span><span class="n">insertHash</span><span class="p">(</span> <span class="n">currentNumState</span> <span class="p">)</span>
+        <span class="nb">open</span><span class="n">Table</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+        <span class="c"># print 'currentNumState :', currentNumState, hashedCurrentNumState</span>
+        <span class="c"># raw_input(&amp;quot;Press ENTER to exit&amp;quot;)</span>
+
+        <span class="k">if</span> <span class="n">currentNumState</span> <span class="o">==</span> <span class="n">targetNumState</span><span class="p">:</span>
+            <span class="n">stack</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">traceNumState</span> <span class="o">=</span> <span class="n">currentNumState</span>
+            <span class="nb">hash</span><span class="n">edTraceNumState</span> <span class="o">=</span> <span class="nb">hash</span><span class="n">Table</span><span class="o">.</span><span class="n">insertHash</span><span class="p">(</span><span class="n">traceNumState</span><span class="p">)</span>
+            <span class="k">while</span> <span class="nb">hash</span><span class="n">edTraceNumState</span> <span class="o">!=</span> <span class="nb">hash</span><span class="n">edSourceNumState</span><span class="p">:</span>
+                <span class="n">stack</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="n">step</span><span class="p">[</span> <span class="nb">hash</span><span class="n">edTraceNumState</span> <span class="p">]</span> <span class="p">)</span>
+                <span class="nb">hash</span><span class="n">edTraceNumState</span> <span class="o">=</span> <span class="n">path</span><span class="p">[</span> <span class="nb">hash</span><span class="n">edTraceNumState</span> <span class="p">]</span>
+
+            <span class="k">for</span> <span class="n">move</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span> <span class="n">stack</span> <span class="p">):</span>
+                <span class="k">print</span> <span class="n">move</span>
+            <span class="k">break</span>
+
+        <span class="n">closeTable</span><span class="p">[</span> <span class="nb">hash</span><span class="n">edCurrentNumState</span> <span class="p">]</span> <span class="o">=</span> <span class="mi">2</span>
+        <span class="n">emptyPosition</span> <span class="o">=</span> <span class="n">getEmptyPositionInArray</span><span class="p">(</span> <span class="n">currentArrayState</span> <span class="p">)</span>
+
+        <span class="k">for</span> <span class="nb">next</span><span class="n">Position</span> <span class="ow">in</span> <span class="n">adjancy</span><span class="p">[</span> <span class="n">emptyPosition</span> <span class="p">]:</span>
+            <span class="nb">next</span><span class="n">ArrayState</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">ii</span> <span class="ow">in</span> <span class="n">currentArrayState</span><span class="p">:</span>
+                <span class="nb">next</span><span class="n">ArrayState</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">ii</span><span class="p">))</span>
+
+            <span class="nb">next</span><span class="n">ArrayState</span><span class="p">[</span> <span class="n">emptyPosition</span> <span class="p">]</span> <span class="o">=</span> <span class="n">currentArrayState</span><span class="p">[</span> <span class="nb">next</span><span class="n">Position</span> <span class="p">]</span>
+            <span class="nb">next</span><span class="n">ArrayState</span><span class="p">[</span> <span class="nb">next</span><span class="n">Position</span> <span class="p">]</span>  <span class="o">=</span> <span class="s">'0'</span>
+
+            <span class="c"># print 'nextArrayState :', nextArrayState</span>
+            <span class="nb">next</span><span class="n">NumState</span> <span class="o">=</span> <span class="n">convertToNum</span><span class="p">(</span> <span class="nb">next</span><span class="n">ArrayState</span> <span class="p">)</span>
+
+            <span class="nb">hash</span><span class="n">edNextNumState</span> <span class="o">=</span> <span class="nb">hash</span><span class="n">Table</span><span class="o">.</span><span class="n">insertHash</span><span class="p">(</span> <span class="nb">next</span><span class="n">NumState</span> <span class="p">);</span>
+
+            <span class="k">if</span> <span class="n">closeTable</span><span class="p">[</span> <span class="nb">hash</span><span class="n">edNextNumState</span> <span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">closeTable</span><span class="p">[</span> <span class="nb">hash</span><span class="n">edNextNumState</span> <span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+                <span class="n">g</span><span class="p">[</span> <span class="nb">hash</span><span class="n">edNextNumState</span> <span class="p">]</span> <span class="o">=</span> <span class="n">g</span><span class="p">[</span> <span class="nb">hash</span><span class="n">edCurrentNumState</span> <span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
+                <span class="n">f</span><span class="p">[</span> <span class="nb">hash</span><span class="n">edNextNumState</span> <span class="p">]</span> <span class="o">=</span> <span class="n">g</span><span class="p">[</span> <span class="nb">hash</span><span class="n">edNextNumState</span> <span class="p">]</span> <span class="o">+</span> <span class="n">getEstimateValue</span><span class="p">(</span> <span class="n">currentArrayState</span> <span class="p">)</span>
+                <span class="n">path</span><span class="p">[</span> <span class="nb">hash</span><span class="n">edNextNumState</span> <span class="p">]</span> <span class="o">=</span> <span class="nb">hash</span><span class="n">edCurrentNumState</span>
+                <span class="n">step</span><span class="p">[</span> <span class="nb">hash</span><span class="n">edNextNumState</span> <span class="p">]</span> <span class="o">=</span> <span class="n">moves</span><span class="p">[</span> <span class="n">emptyPosition</span> <span class="p">][</span> <span class="n">adjancy</span><span class="p">[</span> <span class="n">emptyPosition</span> <span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="p">(</span> <span class="nb">next</span><span class="n">Position</span> <span class="p">)</span> <span class="p">]</span>
+                <span class="nb">open</span><span class="n">Table</span><span class="o">.</span><span class="n">push</span><span class="p">(</span> <span class="n">node</span><span class="p">(</span><span class="nb">next</span><span class="n">NumState</span><span class="p">,</span> <span class="n">f</span><span class="p">[</span><span class="nb">hash</span><span class="n">edNextNumState</span><span class="p">])</span> <span class="p">)</span>
+            <span class="k">elif</span> <span class="n">closeTable</span><span class="p">[</span> <span class="nb">hash</span><span class="n">edNextNumState</span> <span class="p">]</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">g</span><span class="p">[</span> <span class="nb">hash</span><span class="n">edCurrentNumState</span> <span class="p">]</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span> <span class="n">g</span><span class="p">[</span> <span class="nb">hash</span><span class="n">edNextNumState</span> <span class="p">]:</span>
+                <span class="n">g</span><span class="p">[</span> <span class="nb">hash</span><span class="n">edNextNumState</span> <span class="p">]</span> <span class="o">=</span> <span class="n">g</span><span class="p">[</span> <span class="nb">hash</span><span class="n">edCurrentNumState</span> <span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
+                <span class="n">f</span><span class="p">[</span> <span class="nb">hash</span><span class="n">edNextNumState</span> <span class="p">]</span> <span class="o">=</span> <span class="n">g</span><span class="p">[</span> <span class="nb">hash</span><span class="n">edNextNumState</span> <span class="p">]</span> <span class="o">+</span> <span class="n">getEstimateValue</span><span class="p">(</span> <span class="n">currentArrayState</span> <span class="p">)</span>
+                <span class="n">path</span><span class="p">[</span> <span class="nb">hash</span><span class="n">edNextNumState</span> <span class="p">]</span> <span class="o">=</span> <span class="nb">hash</span><span class="n">edCurrentNumState</span>
+                <span class="n">step</span><span class="p">[</span> <span class="nb">hash</span><span class="n">edNextNumState</span> <span class="p">]</span> <span class="o">=</span> <span class="n">moves</span><span class="p">[</span> <span class="n">emptyPosition</span> <span class="p">][</span> <span class="n">adjancy</span><span class="p">[</span> <span class="n">emptyPosition</span> <span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="p">(</span> <span class="nb">next</span><span class="n">Position</span> <span class="p">)</span> <span class="p">]</span>
+                <span class="nb">open</span><span class="n">Table</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="n">sourceArrayState</span> <span class="o">=</span> <span class="n">getSourceState</span><span class="p">()</span>
+    <span class="n">targetArrayState</span> <span class="o">=</span> <span class="n">getTargetState</span><span class="p">()</span>
+    <span class="n">sourceNumState</span> <span class="o">=</span> <span class="n">convertToNum</span><span class="p">(</span><span class="n">sourceArrayState</span><span class="p">)</span>
+    <span class="n">targetNumState</span> <span class="o">=</span> <span class="n">convertToNum</span><span class="p">(</span><span class="n">targetArrayState</span><span class="p">)</span>
+    <span class="k">print</span> <span class="n">sourceNumState</span><span class="p">,</span> <span class="n">targetNumState</span>
+
+    <span class="k">if</span> <span class="n">isSolvable</span><span class="p">(</span><span class="n">sourceArrayState</span><span class="p">,</span> <span class="n">targetArrayState</span><span class="p">)</span> <span class="o">==</span> <span class="bp">False</span><span class="p">:</span>
+        <span class="k">print</span> <span class="s">'What the Hell!'</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">solve</span><span class="p">(</span><span class="n">sourceArrayState</span><span class="p">,</span> <span class="n">targetArrayState</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">'__main__'</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</pre>
 <p><a href="http://blog.oneplus.info/wp-content/uploads/2011/04/haha.jpg"><img src="http://blog.oneplus.info/wp-content/uploads/2011/04/haha.jpg" alt="" title="haha" width="530" height="318" class="aligncenter size-full wp-image-184" /></a></p>
 
 </div>
 
 <div id="disqus_thread"></div>
 <script type="text/javascript">
-    var disqus_shortname = 'yjliu'; // required: replace example with your forum shortname
-    /* * * DON'T EDIT BELOW THIS LINE * * */
-    (function() {
-        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
+var disqus_shortname = 'yjliu'; // required: replace example with your forum shortname
+/* * * DON'T EDIT BELOW THIS LINE * * */
+(function() {
+ var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+ dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+ (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+ })();
 </script>
 <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 <a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
 
-</div>
+  </div>
 
-<footer>
-    &copy; <a href="#">Static Oneplus</a> 2014 | 
-    This site is built by <a href="">Level0</a>.
-</footer>
+  <footer class="text-center">
+    &copy; <a href="#">Static Oneplus</a> 2010 - 2014 |
+    This site is built by <a href="http://middlemanapp.com/" target="_blank">Middleman</a> and
+    <a href="http://getbootstrap.com/">bootstrap</a>.
+  </footer>
 </div>
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
@@ -391,7 +389,7 @@ MathJax.Hub.Config({
 });
 </script>
 <script type="text/javascript"
-    src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
+src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
 <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
 </body>
 </html>

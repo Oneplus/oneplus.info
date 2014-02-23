@@ -2,7 +2,9 @@
 <html>
 <head>
 <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
-<title>  程序设计实践一 - 第一课 |  Static Oneplus </title>
+<title>
+  程序设计实践一 - 第一课 |  Static Oneplus
+</title>
 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap-responsive.min.css">
 <style type="text/css">
@@ -10,34 +12,37 @@
 .nav { }
 .nav li { float: left; width: 70px; }
 .content { padding: 30px 0; }
-.site_title { font-family: "Fjalla One","Georgia","Helvetica Neue",Arial,sans-serif;}
-header { width: 100%; }
+body, h1, h2, h3, h4 { font-family: "Fjalla One","Georgia","Helvetica Neue",Arial,sans-serif;}
+header { width: 100%; height: 80px;}
 blockquote p { font-size: 14px; }
 </style>
 </head>
 <body>
 
 <div class="container">
-<header class="header">
+  <header class="header">
     <h1 class="site_title">Static Oneplus <small>不可控制论</small></h1>
-    <ul class="nav">
-        <li><a href="http://yjliu.net">Home</a></li>
-        <li><a href="/cv">CV</a></li>
-        <li><a href="/blog">Blog</a></li>
-        <li><a href="/notes">Notes</a></li>
-        <li><a href="/feed.xml">RSS</a></li>
+    <ul class="nav pull-right">
+      <li><a href="/">Home</a></li>
+      <li><a href="/cv">CV</a></li>
+      <li><a href="/blog">Blog</a></li>
+      <li><a href="/notes">Notes</a></li>
+      <li><a href="/feed.xml">RSS</a></li>
     </ul>
-</header>
+  </header>
 
-<div class="content">
-
-<div style="color:#999;">
-    <small>2011-03-02
-        by  Oneplus </small></div>
+  <div class="content">
+    <div style="color:#999;">
+  <small>2011/03/02 - by
+    
+      Oneplus
+  
+  </small>
+</div>
 <h2>程序设计实践一 - 第一课</h2>
 <hr />
 <div>
-    <div>
+  <div>
 <div id="outline">
 <h4>课程提纲</h4>
 <ul>
@@ -48,7 +53,8 @@ blockquote p { font-size: 14px; }
 <li>递归</li>
 </ul>
 </div>
-<a id="more"></a><a id="more-118"></a>
+
+<p><a id="more"></a><a id="more-118"></a>
 <div id="summary">
 <h4>简单的讲义</h4>
 本次课程实在是太简单了，所以不计讲义了。课件下载请点<a href="http://acm.hit.edu.cn/~oneplus/design-2011/01.pdf">这里</a>
@@ -58,35 +64,33 @@ blockquote p { font-size: 14px; }
 在开始准备第一课时，我尽力让自己保持一种轻松愉快的心情。结果内容非常不靠谱，或者说是weird。本意是用一些更贴近大一同学的方式使更多的同学对课程产生兴趣，不过反馈效果不明显，下节课还是正经点，多搞点动画什么的吧。<br />
 去二区的时候堵了一路车，无语。下次自己去，还要再早点。<br />
 本来是打算用自己的笔记本作演示，但由于堵车迟到，这件事就只好作罢。结果原来准备的用matlab画Sierpinski triangle的动画泡汤了。这里贴出土鳖的matlab代码，路过轻拍。
-<div>
-  <pre class="prettyprint linenums 1"><code class='matlab'>function Sierpinski(x, y, l, d)
+{% highlight matlab %}
+function Sierpinski(x, y, l, d)
 if( d == 0 )
     axis off;
     hold on;
     triangle(x, y, l, 1);
 end;
-if( d &amp;lt; 6 )
+if( d &lt; 6 )
     triangle(x, y, l / 2, -1);
     pause(0.001);
     Sierpinski(x - l / 4, y - l / 4 * sqrt(3) / 3, l / 2, d + 1 );
     Sierpinski(x + l / 4, y - l / 4 * sqrt(3) / 3, l / 2, d + 1 );
     Sierpinski(x, y + l / 2 * sqrt(3) / 3, l / 2, d + 1 );
-end;</code></pre>
-</div>
-
-<div>
-  <pre class="prettyprint linenums 1"><code class=''>function triangle( x, y, l, d )
+end;
+{% endhighlight %}
+{% highlight %}
+function triangle( x, y, l, d )
 x1 = x - l / 2;
 x2 = x + l / 2;
-x3 = x;
+x3 = x;</p>
 
-y1 = y - d * l / 2 * sqrt(3) / 3;
+<p>y1 = y - d * l / 2 * sqrt(3) / 3;
 y2 = y - d * l / 2 * sqrt(3) / 3;
-y3 = y + d * l * sqrt(3) / 3;
+y3 = y + d * l * sqrt(3) / 3;</p>
 
-fill([x1 x2 x3], [y1 y2 y3], 'w');</code></pre>
-</div>
-
+<p>fill([x1 x2 x3], [y1 y2 y3], &lsquo;w&rsquo;);
+{% endhighlight %}
 不能使用笔记本的另一个坏处就是，原计划进行的课程录音杯具了。下节课早点去二区，心平气和地把这件事做清楚吧。<br />
 第一课的难度实在是太简单了，所以我想当然地认为下次课的出勤还应该不错。不过这只是我个人的一些臆想。一周后再看结果吧。<br />
 作为一门选修课，而且是我承诺不点名的选修课，衡量其成败的唯一标准大概就是课程的出勤了。怎样分配难易，一个问题要讲多深才能把握大部分听众的兴趣又让人觉得有一定的趣味，希望我能撞大运把这件事做好吧。<br />
@@ -99,30 +103,30 @@ fill([x1 x2 x3], [y1 y2 y3], 'w');</code></pre>
 <li>按照车老师的想法，Language Grid的调研工作将要深入到系统的源码中，顿感压力巨大</li>
 <li>本月结束前要将toefl词汇背完一遍，现在还有三十余个list。这不是坑爹吗！</li>
 </div>
-</div>
-
+</div></p>
 
 </div>
 
 <div id="disqus_thread"></div>
 <script type="text/javascript">
-    var disqus_shortname = 'yjliu'; // required: replace example with your forum shortname
-    /* * * DON'T EDIT BELOW THIS LINE * * */
-    (function() {
-        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
+var disqus_shortname = 'yjliu'; // required: replace example with your forum shortname
+/* * * DON'T EDIT BELOW THIS LINE * * */
+(function() {
+ var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+ dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+ (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+ })();
 </script>
 <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 <a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
 
-</div>
+  </div>
 
-<footer>
-    &copy; <a href="#">Static Oneplus</a> 2014 | 
-    This site is built by <a href="">Level0</a>.
-</footer>
+  <footer class="text-center">
+    &copy; <a href="#">Static Oneplus</a> 2010 - 2014 |
+    This site is built by <a href="http://middlemanapp.com/" target="_blank">Middleman</a> and
+    <a href="http://getbootstrap.com/">bootstrap</a>.
+  </footer>
 </div>
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
@@ -133,7 +137,7 @@ MathJax.Hub.Config({
 });
 </script>
 <script type="text/javascript"
-    src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
+src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
 <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
 </body>
 </html>

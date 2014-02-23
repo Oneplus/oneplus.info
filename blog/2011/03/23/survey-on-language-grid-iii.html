@@ -2,7 +2,9 @@
 <html>
 <head>
 <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
-<title>  Language Grid调研结果[iii]{补作业完结篇+番外篇} |  Static Oneplus </title>
+<title>
+  Language Grid调研结果[iii]{补作业完结篇+番外篇} |  Static Oneplus
+</title>
 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap-responsive.min.css">
 <style type="text/css">
@@ -10,34 +12,37 @@
 .nav { }
 .nav li { float: left; width: 70px; }
 .content { padding: 30px 0; }
-.site_title { font-family: "Fjalla One","Georgia","Helvetica Neue",Arial,sans-serif;}
-header { width: 100%; }
+body, h1, h2, h3, h4 { font-family: "Fjalla One","Georgia","Helvetica Neue",Arial,sans-serif;}
+header { width: 100%; height: 80px;}
 blockquote p { font-size: 14px; }
 </style>
 </head>
 <body>
 
 <div class="container">
-<header class="header">
+  <header class="header">
     <h1 class="site_title">Static Oneplus <small>不可控制论</small></h1>
-    <ul class="nav">
-        <li><a href="http://yjliu.net">Home</a></li>
-        <li><a href="/cv">CV</a></li>
-        <li><a href="/blog">Blog</a></li>
-        <li><a href="/notes">Notes</a></li>
-        <li><a href="/feed.xml">RSS</a></li>
+    <ul class="nav pull-right">
+      <li><a href="/">Home</a></li>
+      <li><a href="/cv">CV</a></li>
+      <li><a href="/blog">Blog</a></li>
+      <li><a href="/notes">Notes</a></li>
+      <li><a href="/feed.xml">RSS</a></li>
     </ul>
-</header>
+  </header>
 
-<div class="content">
-
-<div style="color:#999;">
-    <small>2011-03-23
-        by  Oneplus </small></div>
+  <div class="content">
+    <div style="color:#999;">
+  <small>2011/03/23 - by
+    
+      Oneplus
+  
+  </small>
+</div>
 <h2>Language Grid调研结果[iii]{补作业完结篇+番外篇}</h2>
 <hr />
 <div>
-    <div id="architecture">
+  <div id="architecture">
 <h4>Language Grid的设计结构如图</h4>
 <p></p>
 <a id="more"></a><a id="more-142"></a>
@@ -90,8 +95,8 @@ Service调研
 <h4>Atomic Service的调研</h4>
 Atomic Service完成一些Service Grid和语言资源、软件API的交互，是Service Grid最靠外的一层。Atomic Service的方法由AbstractSerive及其子类描述。其中包括AbstractAdjacencyPairService、AbstractMorphologicalAnalysisService等。<br />
 其中，类的继承关系如下
-<div>
-  <pre class="prettyprint linenums 1"><code class=''>AbstractService
+{% highlight %}
+AbstractService
     AbstractLanguageService
         AbstractAdjacencyPairService // 机器问答
         AbstractConceptDictionaryService // 概念词典
@@ -107,9 +112,8 @@ Atomic Service完成一些Service Grid和语言资源、软件API的交互，是
         AbstractBilingualDictionaryService 
         AbstractDictionaryService
         AbstractParallelTextService
-        AbstractTranslationService</code></pre>
-</div>
-
+        AbstractTranslationService
+{% endhighlight %}
 对于上述AbstractService，Service Grid源码中不提供该项服务的解决方案，而是要求通过重载运算来实机器问答、机器翻译等功能。<br />
 各项AbstractService提供重载的接口如下
 <ul>
@@ -150,7 +154,7 @@ Atomic Service完成一些Service Grid和语言资源、软件API的交互，是
 <li>接口:translate(String sourceLang, String targetLang, String source)</li>
 <li>重载:doTranslate(Language sourceLang, Language targetLang, String source)</li>
 <li>预处理:invokeDoTranslate</li>
-将待翻译文本分成{'NONE', 'WORD', 'FULL', 'FULL_WITH_PUNCTUATION'}四种，进行预处理<br />
+将待翻译文本分成{&lsquo;NONE&rsquo;, &lsquo;WORD&rsquo;, &lsquo;FULL&rsquo;, &lsquo;FULL_WITH_PUNCTUATION&rsquo;}四种，进行预处理<br />
 NONE直接翻译<br />
 WORD按截止符拆分成单段，再调用单个词翻译<br />
 FULL按截止符拆分成单段，再调用多个词同时翻译<br />
@@ -171,28 +175,28 @@ _______________________我是番外篇的分割线________________________
 整个这个工作在上个星期时已经结束了，但是一直没拿出时间来把这篇总结写出来，也不知道自己都在做些啥。摔！
 </div>
 
-
 </div>
 
 <div id="disqus_thread"></div>
 <script type="text/javascript">
-    var disqus_shortname = 'yjliu'; // required: replace example with your forum shortname
-    /* * * DON'T EDIT BELOW THIS LINE * * */
-    (function() {
-        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
+var disqus_shortname = 'yjliu'; // required: replace example with your forum shortname
+/* * * DON'T EDIT BELOW THIS LINE * * */
+(function() {
+ var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+ dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+ (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+ })();
 </script>
 <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 <a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
 
-</div>
+  </div>
 
-<footer>
-    &copy; <a href="#">Static Oneplus</a> 2014 | 
-    This site is built by <a href="">Level0</a>.
-</footer>
+  <footer class="text-center">
+    &copy; <a href="#">Static Oneplus</a> 2010 - 2014 |
+    This site is built by <a href="http://middlemanapp.com/" target="_blank">Middleman</a> and
+    <a href="http://getbootstrap.com/">bootstrap</a>.
+  </footer>
 </div>
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
@@ -203,7 +207,7 @@ MathJax.Hub.Config({
 });
 </script>
 <script type="text/javascript"
-    src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
+src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
 <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
 </body>
 </html>

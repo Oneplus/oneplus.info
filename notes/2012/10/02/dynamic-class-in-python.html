@@ -2,7 +2,9 @@
 <html>
 <head>
 <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
-<title>  Python中的动态类 |  Static Oneplus </title>
+<title>
+  Python中的动态类 |  Static Oneplus
+</title>
 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap-responsive.min.css">
 <style type="text/css">
@@ -10,85 +12,86 @@
 .nav { }
 .nav li { float: left; width: 70px; }
 .content { padding: 30px 0; }
-.site_title { font-family: "Fjalla One","Georgia","Helvetica Neue",Arial,sans-serif;}
-header { width: 100%; }
+body, h1, h2, h3, h4 { font-family: "Fjalla One","Georgia","Helvetica Neue",Arial,sans-serif;}
+header { width: 100%; height: 80px;}
 blockquote p { font-size: 14px; }
 </style>
 </head>
 <body>
 
 <div class="container">
-<header class="header">
+  <header class="header">
     <h1 class="site_title">Static Oneplus <small>不可控制论</small></h1>
-    <ul class="nav">
-        <li><a href="http://yjliu.net">Home</a></li>
-        <li><a href="/cv">CV</a></li>
-        <li><a href="/blog">Blog</a></li>
-        <li><a href="/notes">Notes</a></li>
-        <li><a href="/feed.xml">RSS</a></li>
+    <ul class="nav pull-right">
+      <li><a href="/">Home</a></li>
+      <li><a href="/cv">CV</a></li>
+      <li><a href="/blog">Blog</a></li>
+      <li><a href="/notes">Notes</a></li>
+      <li><a href="/feed.xml">RSS</a></li>
     </ul>
-</header>
+  </header>
 
-<div class="content">
-
-<div style="color:#999;">
-    <small>
-        by  Oneplus </small></div>
+  <div class="content">
+    <div style="color:#999;">
+  <small>2012/10/02 - by
+    
+      
+  
+  </small>
+</div>
 <h2>Python中的动态类</h2>
 <hr />
 <div>
-    <p>有这样一个需求，我有<code>SegmentReader</code>、<code>PostagReader</code>、<code>ConllReader</code>这三个<code>Reader</code>，他们都继承于一个<code>Reader</code>类。在程序运行中，由用户通过<code>segment</code>、<code>postag</code>或<code>conll</code>决定读入哪一种数据，所以<code>XReader</code>的实例化也由用户决定。当然，我们可以写一连串的if判断，但是这往往不够美观。这里有一个python动态创建类的问题。</p>
+  <p>有这样一个需求，我有<code>SegmentReader</code>、<code>PostagReader</code>、<code>ConllReader</code>这三个<code>Reader</code>，他们都继承于一个<code>Reader</code>类。在程序运行中，由用户通过<code>segment</code>、<code>postag</code>或<code>conll</code>决定读入哪一种数据，所以<code>XReader</code>的实例化也由用户决定。当然，我们可以写一连串的if判断，但是这往往不够美观。这里有一个python动态创建类的问题。</p>
 
 <p>Python中有个一函数<code>globals()</code>返回当前全局的符号表，如果已经import了这三个类，他们就会出现在全局的符号表中。</p>
 
-<div>
-  <pre class="prettyprint linenums 1"><code class='python linenos'>from corpusproc.io import SegmentReader, PostagReader, ConllReader
+<p>{% highlight python linenos %}
+from corpusproc.io import SegmentReader, PostagReader, ConllReader</p>
 
-def createObject(className, * args):
-    cls = globals()[className]
+<p>def createObject(className, * args):
+    cls = globals()[className]</p>
+<pre class="highlight plaintext">if isinstance(cls, type) and isinstance(args[0], file):
+    return cls(args[0])
+else:
+    raise Exception("No such class")
+</pre>
+<p>{% endhighlight %}</p>
 
-    if isinstance(cls, type) and isinstance(args[0], file):
-        return cls(args[0])
-    else:
-        raise Exception(&quot;No such class&quot;)</code></pre>
-</div>
+<p>测试一下
+{% highlight python %}
+format = &ldquo;segment&rdquo;
+reader = createObject(format[0].upper() + format[1:])</p>
 
+<p>format = &ldquo;unknown&rdquo;
+reader = createObject(format[0].upper() + format[1:])</p>
 
-<p>测试一下</p>
+<h1>Raise Exception &ldquo;No such class&rdquo;</h1>
 
-<div>
-  <pre class="prettyprint linenums 1"><code class='python'>format = &quot;segment&quot;
-reader = createObject(format[0].upper() + format[1:])
-
-format = &quot;unknown&quot;
-reader = createObject(format[0].upper() + format[1:])
-# Raise Exception &quot;No such class&quot;</code></pre>
-</div>
-
-
-
+<p>{% endhighlight %}</p>
 
 </div>
 
 <div id="disqus_thread"></div>
 <script type="text/javascript">
-    var disqus_shortname = 'yjliu'; // required: replace example with your forum shortname
-    /* * * DON'T EDIT BELOW THIS LINE * * */
-    (function() {
-        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
+var disqus_shortname = 'yjliu'; // required: replace example with your forum shortname
+/* * * DON'T EDIT BELOW THIS LINE * * */
+(function() {
+ var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+ dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+ (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+ })();
 </script>
 <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 <a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
 
-</div>
+  </div>
 
-<footer>
-    &copy; <a href="#">Static Oneplus</a> 2014 | 
-    This site is built by <a href="">Level0</a>.
-</footer>
+  <footer class="text-center">
+    &copy; <a href="#">Static Oneplus</a> 2010 - 2014 |
+    This site is built by <a href="http://middlemanapp.com/" target="_blank">Middleman</a> and
+    <a href="http://getbootstrap.com/">bootstrap</a>.
+  </footer>
 </div>
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
@@ -99,7 +102,7 @@ MathJax.Hub.Config({
 });
 </script>
 <script type="text/javascript"
-    src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
+src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
 <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
 </body>
 </html>

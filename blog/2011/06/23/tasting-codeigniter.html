@@ -2,7 +2,9 @@
 <html>
 <head>
 <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
-<title>  使用CodeIgniter框架编写Web应用 |  Static Oneplus </title>
+<title>
+  使用CodeIgniter框架编写Web应用 |  Static Oneplus
+</title>
 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap-responsive.min.css">
 <style type="text/css">
@@ -10,34 +12,37 @@
 .nav { }
 .nav li { float: left; width: 70px; }
 .content { padding: 30px 0; }
-.site_title { font-family: "Fjalla One","Georgia","Helvetica Neue",Arial,sans-serif;}
-header { width: 100%; }
+body, h1, h2, h3, h4 { font-family: "Fjalla One","Georgia","Helvetica Neue",Arial,sans-serif;}
+header { width: 100%; height: 80px;}
 blockquote p { font-size: 14px; }
 </style>
 </head>
 <body>
 
 <div class="container">
-<header class="header">
+  <header class="header">
     <h1 class="site_title">Static Oneplus <small>不可控制论</small></h1>
-    <ul class="nav">
-        <li><a href="http://yjliu.net">Home</a></li>
-        <li><a href="/cv">CV</a></li>
-        <li><a href="/blog">Blog</a></li>
-        <li><a href="/notes">Notes</a></li>
-        <li><a href="/feed.xml">RSS</a></li>
+    <ul class="nav pull-right">
+      <li><a href="/">Home</a></li>
+      <li><a href="/cv">CV</a></li>
+      <li><a href="/blog">Blog</a></li>
+      <li><a href="/notes">Notes</a></li>
+      <li><a href="/feed.xml">RSS</a></li>
     </ul>
-</header>
+  </header>
 
-<div class="content">
-
-<div style="color:#999;">
-    <small>2011-06-23
-        by  Oneplus </small></div>
+  <div class="content">
+    <div style="color:#999;">
+  <small>2011/06/23 - by
+    
+      Oneplus
+  
+  </small>
+</div>
 <h2>使用CodeIgniter框架编写Web应用</h2>
 <hr />
 <div>
-    <div><h3>总结</h3>
+  <div><h3>总结</h3>
 总的来讲，这次软件工程的课设收获是挺大的。学到的东西包括
 <ul>
     <li>MVC的一些思想</li>
@@ -50,7 +55,6 @@ blockquote p { font-size: 14px; }
 <a id="more"></a><a id="more-319"></a>因为一开始时觉得组里其他几位没写过php，要是再套一套框架进来，预计花在学习上的时间要大于花在工作的时间上。而且，代码还是自己的比较好控制，所以就鲁莽地决定淡化合作这件事，自己从内部逻辑到前端一并做了。整个软件工作量还不太大，所以也不是很有压力。课设的几天说说笑笑，再看了一天漫画，还好。
 </div>
 
-
 <div><h3>关于MVC</h3>
 对于MVC，我个人的一些体会是
 <ol>
@@ -62,27 +66,24 @@ blockquote p { font-size: 14px; }
 这些感触，一方面是我个人做过硬编程的网站，另一方面是很长一段时间都在面对一个硬编程的网站-HOJ，对于那一坨的感觉比较清晰。说实话，整个课设都按自己的思路，非常清楚软件在什么地方应该放什么东西，写完还可以回顾一下，如果觉得哪个地方不爽了就删了重写，还是有一点小激动的。
 </div>
 
-
 <div><h3>CodeIgniter</h3>
 起初是打算用Zend Framework来做的，但是从网上把那30多M的开发框架下下来，我就湿了。恐怕第一次就要玩高难度动作也是这感觉吧>:D。<br />
 ZF不可靠，只好重新规划。搜索“敏捷开发、PHP、轻量级框架”后，CodeIgniter被选中。（实际上是，没有别的可选-，-）然后用半天时间来熟悉，发现确实挺敏捷的。这篇是总结文不是技术文，所以不在如何开发上画太多笔墨。CI的官方论坛说得挺清楚的。<br />
 简单统计了一下，整个软件大致在4000行左右，从开始到现在大约用了一周的有效时间，没有达到我预期7天的1万行的目标。一方面是因为开发框架比较好用，另一方面，我的代码风格一向比较紧凑，不撑场面，最大的一个控制器也就只有300多行。所以还像前面说的，工作量不算大。
 </div>
 
-
 <div><h3>关于sewiki</h3>
 题目的名字是“基于wiki的协同写作系统”，名为“伪基写作”，就是又假又搞基的意思。整个软件实现的功能基本是版本控制和论坛的合体。现在的版本中，用到的最复杂的逻辑是一个拓扑排序判环，其他都是民工级代码。而且漏洞无数，毫无安全性可言。不知道有没有人有兴趣一起来改改，恐怕是没有人。
 </div>
-
 
 <div><h3>几个土鳖的地方</h3>
 <ul>
     <li><h4>添加无限个章节依赖盒</h4>
 在添加章节依赖的功能上，用jQuery写了一个与Cpanel中“添加上传盒”功能类似的“添加章节依赖盒”。<a href="http://blog.oneplus.info/wp-content/uploads/2011/06/01.jpg"><img src="http://blog.oneplus.info/wp-content/uploads/2011/06/01.jpg" alt="" title="01" width="347" height="138" class="aligncenter size-full wp-image-322" /></a>基本思路是
     <ol>
-        <li>需要一个num_rows表示盒子数。准备一个table，其中一个button占一行，命名其id为"buttonid"。还需要用一个"hidden"的input接num_rows的值</li>
+        <li>需要一个num_rows表示盒子数。准备一个table，其中一个button占一行，命名其id为&quot;buttonid&quot;。还需要用一个&quot;hidden&quot;的input接num_rows的值</li>
         <li>在页面被装载时将num_rows设置为1</li>
-        <li>在button上添加一个监听器。如果按下按钮，就用$("#buttonid").before()在表格中添加一行。</li>
+        <li>在button上添加一个监听器。如果按下按钮，就用$(&ldquo;#buttonid&rdquo;).before()在表格中添加一行。</li>
         <li>每次添加时，num_rows要加一，那个hidden的input的value用num_rows更新，以让后端知道用户一共添加了几个盒子。</li>
     </ol>
 现在看起来好像也没啥，不过这破玩意我搞了两个小时，摔！</li>
@@ -91,64 +92,59 @@ ZF不可靠，只好重新规划。搜索“敏捷开发、PHP、轻量级框架
     <li><h4>从本地上传文件到textarea</h4>
 这玩意也是用jQuery实现的，万能的JQ啊。<a href="http://blog.oneplus.info/wp-content/uploads/2011/06/02.jpg"><img src="http://blog.oneplus.info/wp-content/uploads/2011/06/02.jpg" alt="" title="02" width="320" height="367" class="aligncenter size-full wp-image-323" /></a>思路是：
     <ol>
-        <li>准备一个button，再准备一个不能显示的&lt;input id="file" type="file"&gt;</li>
-        <li>给button添加一个监听器。如果按下按钮，就$("#file").trigger('click')，这下就弹出那个文件上传的框了。效果就好像是按button后弹出来的一样。</li>
-        <li>然后，其实我也不知道然后怎么弄。就用firebug和alert胡乱调试，居然看到一条"data:text/plain;base64,"接着就是乱码。然后我就觉得可能是搞了base64加密，所以就写了一段我也说不清的非常鬼畜的代码，完全搞不懂他是怎么对的。<div>
-  <pre class="prettyprint linenums 1"><code class=''>$(&amp;quot;#load_button&amp;quot;).click(function(){
-        $(&amp;quot;#load_box&amp;quot;).trigger('click').change(function(){
-            var fobj = document.getElementById(&amp;quot;load_box&amp;quot;);
+        <li>准备一个button，再准备一个不能显示的&lt;input id=&ldquo;file&rdquo; type=&ldquo;file&rdquo;&gt;</li>
+        <li>给button添加一个监听器。如果按下按钮，就$(&ldquo;#file&rdquo;).trigger(&lsquo;click&rsquo;)，这下就弹出那个文件上传的框了。效果就好像是按button后弹出来的一样。</li>
+        <li>然后，其实我也不知道然后怎么弄。就用firebug和alert胡乱调试，居然看到一条&quot;data:text/plain;base64,&ldquo;接着就是乱码。然后我就觉得可能是搞了base64加密，所以就写了一段我也说不清的非常鬼畜的代码，完全搞不懂他是怎么对的。{% highlight %}
+    $(&rdquo;#load_button&quot;).click(function(){
+        $(&ldquo;#load_box&rdquo;).trigger(&lsquo;click&rsquo;).change(function(){
+            var fobj = document.getElementById(&ldquo;load_box&rdquo;);
             if(fobj) {
                 var file = fobj.files.item(0);
                 if(file) {
                     var filename = file.getAsDataURL();
                     filename = filename.substring(23, filename.lenght);
-                    $(&amp;quot;#edit_area&amp;quot;).val($.base64Decode(filename));
+                    $(&ldquo;#edit_area&rdquo;).val($.base64Decode(filename));
                 }
             }
         });
-    });</code></pre>
-</div>
-</li>
+    });{% endhighlight %}</li>
     </ol>
 话说回来，好像整个开发中，纠结了的、花了时间的地方全在前端上，界面还那么难看…
     </li>
 </ul>
 </div>
 
-
 <div><h3>Google Code SVN</h3>
 这件事上我是真圡了。在用过GIT的情况下，我还是搞了1天才搞懂SVN怎么用。具体怎么用，在前面的一张图里。<br />
 现在项目可以从<a href="http://code.google.com/p/sewiki">http://code.google.com/p/sewiki</a>那里，好像还有几处功能逻辑改变了但是没commit。
 </div>
 
-
 <div><h3>有关开发习惯</h3>整个开发基本是按照issues、sub-issues、bugs的方式进行的，跟pureweb一起做HOJ时学到的，非常受用。</div>
 
-
 <div><h3>无聊的YY</h3>这算是大学以来最大的程序了。想一想，自己从去年退役到现在，在web开发上面虽然长进不是很大，但是也算会了一点东西，掌握了一些做民工的技能，可以拿个写着“web开发”的小牌蹲道边了。</div>
-
 
 </div>
 
 <div id="disqus_thread"></div>
 <script type="text/javascript">
-    var disqus_shortname = 'yjliu'; // required: replace example with your forum shortname
-    /* * * DON'T EDIT BELOW THIS LINE * * */
-    (function() {
-        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
+var disqus_shortname = 'yjliu'; // required: replace example with your forum shortname
+/* * * DON'T EDIT BELOW THIS LINE * * */
+(function() {
+ var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+ dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+ (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+ })();
 </script>
 <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 <a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
 
-</div>
+  </div>
 
-<footer>
-    &copy; <a href="#">Static Oneplus</a> 2014 | 
-    This site is built by <a href="">Level0</a>.
-</footer>
+  <footer class="text-center">
+    &copy; <a href="#">Static Oneplus</a> 2010 - 2014 |
+    This site is built by <a href="http://middlemanapp.com/" target="_blank">Middleman</a> and
+    <a href="http://getbootstrap.com/">bootstrap</a>.
+  </footer>
 </div>
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
@@ -159,7 +155,7 @@ MathJax.Hub.Config({
 });
 </script>
 <script type="text/javascript"
-    src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
+src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
 <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
 </body>
 </html>
