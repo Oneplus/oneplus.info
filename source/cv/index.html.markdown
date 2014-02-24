@@ -7,20 +7,20 @@ layout : page
 
 Master student, *Language analysis group* in [HIT-SCIR](http://ir.hit.edu.cn)
 
-<< [yjliu@ir.hit.edu.cn](mailto:yjliu@ir.hit.edu.cn) >>
+mail: [yjliu@ir.hit.edu.cn](mailto:yjliu@ir.hit.edu.cn)
 
 ### SPECIALTIES
 
-Natural Language Processing, Chinese Word Segmentation, Dependency Parsing, Machine Learning.
+Natural Language Processing, Chinese Word Segmentation, Dependency Parsing, Machine Transition, Machine Learning.
 
 My superviser is [Wanxiang Che](http://ir.hit.edu.cn/~car).
 
 ### PUBLICATION
 
-* __Yijia Liu__, Wanxiang Che, Ting Liu *Enhancing Chinese Word Segmentation with Character Clustering*, In The Twelfth China National Conference on Computational Linguistics, CCL 2013. 2013
-* __Yijia Liu__, Wanxiang Che, Ting Liu, Meishan Zhang *A Comparison Study of Sequence Labeling Based Chinese Word Segmentation, POS tagging Models*, In Journal of Chinese Information Processing. 2013
-* __Yijia Liu__, Meishan Zhang, Wanxiang Che, Ting Liu, Yihe Deng *Micro blogs Oriented Word Segmentation System*, In Proceedings of the Second CIPS-SIGHAN Joint Conference on Chinese Language Processing. 2012
-* Meishan Zhang, Wanxiang Che, __Yijia Liu__, Zhenghua Li, Ting Liu *HIT Dependency Parsing: Bootstrap Aggregating Heterogeneous Parsers*, In Shared Task on Domain Adaptation for Parsing the Web,At the First Workshop on Syntactic Analysis of Non-Canonical Language (SANCL). 2012
+* __Yijia Liu__, Wanxiang Che, Ting Liu [*Enhancing Chinese Word Segmentation with Character Clustering*](http://link.springer.com/chapter/10.1007%2F978-3-642-41491-6_6#page-1), In The Twelfth China National Conference on Computational Linguistics, CCL 2013. 2013
+* __Yijia Liu__, Wanxiang Che, Ting Liu, Meishan Zhang [*A Comparison Study of Sequence Labeling Based Chinese Word Segmentation, POS tagging Models*](http://d.e.wanfangdata.com.hk/Conference.aspx?ID=Conference_7748118)(in Chinese), In Journal of Chinese Information Processing. 2013
+* __Yijia Liu__, Meishan Zhang, Wanxiang Che, Ting Liu, Yihe Deng [*Micro blogs Oriented Word Segmentation System*](https://aclweb.org/anthology/W/W12/W12-6316.pdf), In Proceedings of the Second CIPS-SIGHAN Joint Conference on Chinese Language Processing. 2012
+* Meishan Zhang, Wanxiang Che, __Yijia Liu__, Zhenghua Li, Ting Liu [*HIT Dependency Parsing: Bootstrap Aggregating Heterogeneous Parsers*](https://sites.google.com/site/sancl2012/home/programme), In Shared Task on Domain Adaptation for Parsing the Web,At the First Workshop on Syntactic Analysis of Non-Canonical Language (SANCL). 2012
 
 ### WORKING EXPERIENCE
 

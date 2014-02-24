@@ -124,23 +124,25 @@ comments:
 实例被称为Event，一个实例是Outcome与Context的二元组。
 
 为了表示数据，我们从数据中抽取了一系列的特征。特征的全体可以看做是n个特征函数组成的一个集合。每个特征函数可以是从Context到0-1的二值函数。比方说这样的
+
 $$
-f(x,y)=\begin{aligned} 1 & if\ x="is"\ and\ y=v \\ 0 & otherwise \end{aligned}
+f(x,y)=\{ \begin{aligned} 1 & if\ x="is"\ and\ y=v \\ 0 & otherwise \end{aligned}
 $$
+
 一组特征函数就将Context从上下文空间映射到特征空间上了。
 
 现在，我们观察到一组数据集，通过简单的统计可以知道任意一个Context x和Outcome y的组合的联合概率。有了联合概率，可以计算观察到的某一特征函数f的期望，也就是 $E\_{ref}(f)= \sum\_{x,y}{\tilde{p}(x,y)f(x,y)}$，称为观察期望/经验期望。
 
 假设我们有一个模型给出p(y|x)的值，那么我们可以从这个模型的角度求出这个特征函数的期望，即$ E_q(f)=\sum\_{x,y}{\tilde{p}(x)p(y|x)f(x,y)}$，称为模型期望。
 
-我们希望我们的模型能够很好地反应这些数据中蕴含的现象。那么从模型角度看到的f的期望就应该等于从数据观察到的f的期望。也就是$ E_q(f)=E_{ref}(f) $
+我们希望我们的模型能够很好地反应这些数据中蕴含的现象。那么从模型角度看到的f的期望就应该等于从数据观察到的f的期望。也就是$ E\_q(f)=E\_{ref}(f) $
 
-假设我们有n个特征函数，那么我们就有n组等式$ E_q(f_i)=E_{ref}(f_i), i \in {1,2,...,n}$。
+假设我们有n个特征函数，那么我们就有n组等式$ E\_q(f\_i)=E\_{ref}(f\_i), i \in {1,2,...,n}$。
 
 假设我们有那么那么多的模型，也可以认为是概率分布。他们组成一个空间$ \mathcal{P} $，而满足上面一系列特征函数期望构成的等式的概率分布构成了$ \mathcal{P}$的一个子集
 
 $$
-\mathcal{C}=\{p|p\in \mathcal{P} \quad and \ E_q(f_i)=E_{ref}{f_i},\ i \in (1,2,...,n)\}
+\mathcal{C}=\{p|p\in \mathcal{P} \quad and \ E_q(f_i)=E\_{ref}{f\_i},\ i \in (1,2,...,n)\}
 $$
 
 现在要找一个合适的模型描述数据，也就是在$ \mathcal{P} $中搜索一个p。
@@ -149,24 +151,29 @@ $$
 对于一个模型p，它的熵的定义是这样$ H(p)=-\sum\_{x,y}\tilde{p}(x)p(y|x)\log{p(y|x)}$。
 熵越大，可能性就越平均地被分配，因而我们的最终目标是最大化一个模型的熵。
 而由于有前面的约束等式，这个问题变成了一个有约束的最优化问题
+
 $$
-find p* = arg{max_{p\in C}{H(p)}}
+find p * = arg{max\_{p\in C}{H(p)}}
 $$
 
 然后引入拉格朗日乘子$\lambda$，将等式约束的优化转换成无约束的最优化，得到
+
 $$
-\Lambda(p,\lambda)=H(p)+\lambda\sum_i(E_q(f_i)-E_{ref}(f_i))
+\Lambda(p,\lambda)=H(p)+\lambda\sum_i(E_q(f_i)-E\_{ref}(f\_i))
 $$
 
 求导解p，得到一个与$\lambda$有关的函数
+
 $$
-p_{\lambda}(y|x)=\frac{1}{Z_{\lambda}(x)}\exp(\sum_i{\lambda_i f_i(x,y)})
+p\_{\lambda}(y|x)=\frac{1}{Z\_{\lambda}(x)}\exp(\sum_i{\lambda_i f_i(x,y)})
 $$
 
-其中，$Z_\lambda(x)=\sum_y{\exp(\sum_i \lambda_i f_i(x,y))}$ 。
-将$p_{\lambda}$带入无约束优化的式子中，得到
+其中，$Z\_\lambda(x)=\sum_y{\exp(\sum_i \lambda_i f_i(x,y))}$ 。
+
+将$p\_{\lambda}$带入无约束优化的式子中，得到
+
 $$
-\Psi(\lambda)=\Lambda(p,\lambda)=-\sum_x\tilde{p}\log{Z_\lambda(x)}+\sum_i{\lambda_i E_{ref}(f_i)}
+\Psi(\lambda)=\Lambda(p,\lambda)=-\sum_x\tilde{p}\log{Z\_\lambda(x)}+\sum_i{\lambda_i E\_{ref}(f_i)}
 $$
 
 推导到这里，我们基本得到了算法要做的工作，就是从数据中估计出一个特征函数的权向量$\lambda$。最大化$ \Psi(\lambda) $。
@@ -187,14 +194,16 @@ $$
 <li>循环$ \lambda_i^{(t+1)}=\lambda_i^{(t)}+\frac{1}{C}\log{\frac{E_{ref}(f_i)}{E_q(f_i)}} $</li>
 <li>重复2到收敛</li>
 </ol>
-其中，$ C=\max_{x,y}\sum_{i=1}^n{f_i(x,y)} $。
+其中，$ C=\max\_{x,y}\sum\_{i=1}^n{f\_i(x,y)} $。
 
 
-根据上面算法，在最大熵模型的实现过程中，我们需要计算的值包括经验期望$E_{ref}(f)$和各轮迭代过后的模型期望$E_q(f)$。
+根据上面算法，在最大熵模型的实现过程中，我们需要计算的值包括经验期望$E\_{ref}(f)$和各轮迭代过后的模型期望$E\_q(f)$。
 
-经验期望$ E_{ref}(f_i)= \sum_{x,y}{\tilde{p}(x,y)f_i(x,y)} $，求$ E_{ref}(f_i)$只需要统计训练数据中符合$f_i$的(x,y)二元组的个数，然后除以训练实例的个数N。
+经验期望$ E\_{ref}(f_i)= \sum\_{x,y}{\tilde{p}(x,y)f_i(x,y)} $，求$ E\_{ref}(f_i)$只需要统计训练数据中符合$f_i$的(x,y)二元组的个数，然后除以训练实例的个数N。
 
-模型期望需要首先求p(y|x)。这个条件概率可以通过简单地将所有(x,y)符合的$f_i$和对应的参数$\lambda_i$乘起来后相加。归一化因子是各个Outcome y的p(y|x)的和。在求得p(y|x)后，要求$E_q(f_i)$，只需要枚举所有符合$f_i$的(x,y)对应的p(y|x)，乘以Context x出现的次数再除以N就可以。
+模型期望需要首先求$p(y\|x)$。
+这个条件概率可以通过简单地将所有(x,y)符合的$f_i$和对应的参数$\lambda_i$乘起来后相加。
+归一化因子是各个Outcome y的$p(y\|x)$的和。在求得$p(y\|x)$后，要求$E_q(f_i)$，只需要枚举所有符合$f_i$的(x,y)对应的$p(y\|x)$，乘以Context x出现的次数再除以N就可以。
 
 模型期望有了，经验期望有了，把他们一股脑儿放到算法里面去迭代就好了。
 
@@ -204,9 +213,9 @@ $$
 如果训练数据和测试数据的偏置比较大。
 我们训练的模型很可能无法再测试数据上取得比较好的效果。
 解决这一问题的一般套路是用给待估计的参数一个先验分布做MAP，这里也不例外。
-如果假设$\lambda$服从Gauss分布，优化的目标函数就变成了$L_{\tilde{p}}^{'}(\Lambda)=L_p(\Lambda)+\sum_i{\log{\frac{1}{\sqrt{2\pi\sigma_i^2}}}}-\frac{\lambda_i^2}{2\sigma_i^2}$
+如果假设$\lambda$服从Gauss分布，优化的目标函数就变成了$L\_{\tilde{p}}^{'}(\Lambda)=L_p(\Lambda)+\sum_i{\log{\frac{1}{\sqrt{2\pi\sigma_i^2}}}}-\frac{\lambda_i^2}{2\sigma_i^2}$
 
-在使用高斯先验平滑模型后，GIS的更新变成解$ E_{ref}(f_i)=E_q(f_i)e^{C\delta_i}+\frac{\lambda_i+\delta_i}{\sigma_i^2} $。
+在使用高斯先验平滑模型后，GIS的更新变成解$ E\_{ref}(f_i)=E_q(f_i)e^{C\delta_i}+\frac{\lambda_i+\delta_i}{\sigma_i^2} $。
 其中，$\lambda_i$是本轮迭代的参数，$\delta_i$是更新$\lambda_i$的增量。
 上面的方程是没有解析解的，不过可以用牛顿法解除数值解。
 
