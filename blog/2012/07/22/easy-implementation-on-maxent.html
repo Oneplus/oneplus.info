@@ -60,12 +60,14 @@ blockquote p { font-size: 14px; }
 为了下面讨论的方便，将类别称为Outcome，将每个实例的上下文环境叫做Context。
 实例被称为Event，一个实例是Outcome与Context的二元组。</p>
 
-<p>为了表示数据，我们从数据中抽取了一系列的特征。特征的全体可以看做是n个特征函数组成的一个集合。每个特征函数可以是从Context到0-1的二值函数。比方说这样的
-<script type="math/tex">% <![CDATA[
+<p>为了表示数据，我们从数据中抽取了一系列的特征。特征的全体可以看做是n个特征函数组成的一个集合。每个特征函数可以是从Context到0-1的二值函数。比方说这样的</p>
 
-f(x,y)=\begin{aligned} 1 & if\ x="is"\ and\ y=v \\ 0 & otherwise \end{aligned}
+<script type="math/tex; mode=display">% <![CDATA[
+
+f(x,y)=\{ \begin{aligned} 1 & if\ x="is"\ and\ y=v \\ 0 & otherwise \end{aligned}
  %]]></script>
-一组特征函数就将Context从上下文空间映射到特征空间上了。</p>
+
+<p>一组特征函数就将Context从上下文空间映射到特征空间上了。</p>
 
 <p>现在，我们观察到一组数据集，通过简单的统计可以知道任意一个Context x和Outcome y的组合的联合概率。有了联合概率，可以计算观察到的某一特征函数f的期望，也就是 $E_{ref}(f)= \sum_{x,y}{\tilde{p}(x,y)f(x,y)}$，称为观察期望/经验期望。</p>
 
@@ -86,7 +88,7 @@ f(x,y)=\begin{aligned} 1 & if\ x="is"\ and\ y=v \\ 0 & otherwise \end{aligned}
 <p>假设我们有那么那么多的模型，也可以认为是概率分布。他们组成一个空间$ \mathcal{P} $，而满足上面一系列特征函数期望构成的等式的概率分布构成了$ \mathcal{P}$的一个子集</p>
 
 <script type="math/tex; mode=display">
-\mathcal{C}=\{p|p\in \mathcal{P} \quad and \ E_q(f_i)=E_{ref}{f_i},\ i \in (1,2,...,n)\}
+\mathcal{C}=\{p|p\in \mathcal{P} \quad and \ E_q(f_i)=E\_{ref}{f\_i},\ i \in (1,2,...,n)\}
 </script>
 
 <p>现在要找一个合适的模型描述数据，也就是在$ \mathcal{P} $中搜索一个p。
@@ -94,26 +96,31 @@ f(x,y)=\begin{aligned} 1 & if\ x="is"\ and\ y=v \\ 0 & otherwise \end{aligned}
 
 <p>对于一个模型p，它的熵的定义是这样$ H(p)=-\sum_{x,y}\tilde{p}(x)p(y|x)\log{p(y|x)}$。
 熵越大，可能性就越平均地被分配，因而我们的最终目标是最大化一个模型的熵。
-而由于有前面的约束等式，这个问题变成了一个有约束的最优化问题
-<script type="math/tex">
-find p* = arg{max_{p\in C}{H(p)}}
-</script></p>
+而由于有前面的约束等式，这个问题变成了一个有约束的最优化问题</p>
 
-<p>然后引入拉格朗日乘子$\lambda$，将等式约束的优化转换成无约束的最优化，得到
-<script type="math/tex">
-\Lambda(p,\lambda)=H(p)+\lambda\sum_i(E_q(f_i)-E_{ref}(f_i))
-</script></p>
+<script type="math/tex; mode=display">
+find p * = arg{max\_{p\in C}{H(p)}}
+</script>
 
-<p>求导解p，得到一个与$\lambda$有关的函数
-<script type="math/tex">
-p_{\lambda}(y|x)=\frac{1}{Z_{\lambda}(x)}\exp(\sum_i{\lambda_i f_i(x,y)})
-</script></p>
+<p>然后引入拉格朗日乘子$\lambda$，将等式约束的优化转换成无约束的最优化，得到</p>
 
-<p>其中，$Z<em>\lambda(x)=\sum_y{\exp(\sum_i \lambda_i f_i(x,y))}$ 。
-将$p</em>{\lambda}$带入无约束优化的式子中，得到
-<script type="math/tex">
-\Psi(\lambda)=\Lambda(p,\lambda)=-\sum_x\tilde{p}\log{Z_\lambda(x)}+\sum_i{\lambda_i E_{ref}(f_i)}
-</script></p>
+<script type="math/tex; mode=display">
+\Lambda(p,\lambda)=H(p)+\lambda\sum_i(E_q(f_i)-E\_{ref}(f\_i))
+</script>
+
+<p>求导解p，得到一个与$\lambda$有关的函数</p>
+
+<script type="math/tex; mode=display">
+p\_{\lambda}(y|x)=\frac{1}{Z\_{\lambda}(x)}\exp(\sum_i{\lambda_i f_i(x,y)})
+</script>
+
+<p>其中，$Z_\lambda(x)=\sum_y{\exp(\sum_i \lambda_i f_i(x,y))}$ 。</p>
+
+<p>将$p_{\lambda}$带入无约束优化的式子中，得到</p>
+
+<script type="math/tex; mode=display">
+\Psi(\lambda)=\Lambda(p,\lambda)=-\sum_x\tilde{p}\log{Z\_\lambda(x)}+\sum_i{\lambda_i E\_{ref}(f_i)}
+</script>
 
 <p>推导到这里，我们基本得到了算法要做的工作，就是从数据中估计出一个特征函数的权向量$\lambda$。最大化$ \Psi(\lambda) $。</p>
 
@@ -132,23 +139,15 @@ p_{\lambda}(y|x)=\frac{1}{Z_{\lambda}(x)}\exp(\sum_i{\lambda_i f_i(x,y)})
 <li>循环$ \lambda_i^{(t+1)}=\lambda_i^{(t)}+\frac{1}{C}\log{\frac{E_{ref}(f_i)}{E_q(f_i)}} $</li>
 <li>重复2到收敛</li>
 </ol>
-<p>其中，$ C=\max<em>{x,y}\sum</em>{i=1}^n{f_i(x,y)} $。</p>
+<p>其中，$ C=\max_{x,y}\sum_{i=1}^n{f_i(x,y)} $。</p>
 
 <p>根据上面算法，在最大熵模型的实现过程中，我们需要计算的值包括经验期望$E_{ref}(f)$和各轮迭代过后的模型期望$E_q(f)$。</p>
 
-<p>经验期望$ E<em>{ref}(f_i)= \sum</em>{x,y}{\tilde{p}(x,y)f_i(x,y)} $，求$ E_{ref}(f_i)$只需要统计训练数据中符合$f_i$的(x,y)二元组的个数，然后除以训练实例的个数N。</p>
+<p>经验期望$ E_{ref}(f_i)= \sum_{x,y}{\tilde{p}(x,y)f_i(x,y)} $，求$ E_{ref}(f_i)$只需要统计训练数据中符合$f_i$的(x,y)二元组的个数，然后除以训练实例的个数N。</p>
 
-<table>
-  <tbody>
-    <tr>
-      <td>模型期望需要首先求p(y</td>
-      <td>x)。这个条件概率可以通过简单地将所有(x,y)符合的$f_i$和对应的参数$\lambda_i$乘起来后相加。归一化因子是各个Outcome y的p(y</td>
-      <td>x)的和。在求得p(y</td>
-      <td>x)后，要求$E_q(f_i)$，只需要枚举所有符合$f_i$的(x,y)对应的p(y</td>
-      <td>x)，乘以Context x出现的次数再除以N就可以。</td>
-    </tr>
-  </tbody>
-</table>
+<p>模型期望需要首先求$p(y|x)$。
+这个条件概率可以通过简单地将所有(x,y)符合的$f_i$和对应的参数$\lambda_i$乘起来后相加。
+归一化因子是各个Outcome y的$p(y|x)$的和。在求得$p(y|x)$后，要求$E_q(f_i)$，只需要枚举所有符合$f_i$的(x,y)对应的$p(y|x)$，乘以Context x出现的次数再除以N就可以。</p>
 
 <p>模型期望有了，经验期望有了，把他们一股脑儿放到算法里面去迭代就好了。</p>
 
