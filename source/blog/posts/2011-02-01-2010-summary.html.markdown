@@ -1,0 +1,139 @@
+---
+layout: post
+status: publish
+published: true
+title: 写在过年前
+author: Oneplus
+author_login: oneplus
+author_email: oneplus.lau@gmail.com
+author_url: http://blog.oneplus.info
+excerpt: 在提笔前，猛然想到iSea神牛在今年regional五站结束后<a href="http://hi.baidu.com/%D2%BB%CE%BB%C1%E3/blog/item/0c46b1cced1756410eb34508.html">总结</a>道“<em>OpenLegend的2010，平心而论，是辉煌的</em>”。这句话给我很大触动。虽然主要原因是OL在2010年的卓越表现让参加了这个赛季的所有选手刮目相看，不过现在，我却更看重“辉煌”二字。简洁有力，有<strong><font
+  color="red">1a</font></strong>的感觉。
+wordpress_id: 73
+wordpress_url: http://blog.oneplus.info/?p=73
+date: 2011-02-01 01:53:22.000000000 +08:00
+categories:
+- 不可控制
+- 还要咋地
+tags:
+- Summary
+- HIT
+- ACM Group
+- '2010'
+- 烧耳机
+- 伪文青
+comments:
+- id: 23
+  author: kinslover
+  author_email: kinslover@gmail.com
+  author_url: http://kinslover.info
+  date: !binary |-
+    MjAxMS0wMi0wMSAwMzowMzo1NSArMDgwMA==
+  date_gmt: !binary |-
+    MjAxMS0wMS0zMSAxOTowMzo1NSArMDgwMA==
+  content: 太令人膜拜了！！！
+- id: 24
+  author: Oneplus
+  author_email: oneplus.lau@gmail.com
+  author_url: http://blog.oneplus.info
+  date: !binary |-
+    MjAxMS0wMi0wMSAwODozNToyMCArMDgwMA==
+  date_gmt: !binary |-
+    MjAxMS0wMi0wMSAwMDozNToyMCArMDgwMA==
+  content: ! "<a href=\"#comment-23\" rel=\"nofollow\">@kinslover </a> \r\nKins这么晚还不睡…"
+- id: 25
+  author: kinslover
+  author_email: kinslover@gmail.com
+  author_url: http://kinslover.info
+  date: !binary |-
+    MjAxMS0wMi0wMSAxMjoyMzozMCArMDgwMA==
+  date_gmt: !binary |-
+    MjAxMS0wMi0wMSAwNDoyMzozMCArMDgwMA==
+  content: ! "<a href=\"#comment-24\" rel=\"nofollow\">@Oneplus </a> \r\n每天梦游状态中。。。"
+- id: 27
+  author: Robin
+  author_email: lvzhandong@gmail.com
+  author_url: http://robin47.com
+  date: !binary |-
+    MjAxMS0wMi0wMiAwOToyMjozMSArMDgwMA==
+  date_gmt: !binary |-
+    MjAxMS0wMi0wMiAwMToyMjozMSArMDgwMA==
+  content: 发现我已经好久不能写这么长的文了
+- id: 28
+  author: xiaodao
+  author_email: lychees67@gmail.com
+  author_url: http://www.shuizilong.com/house
+  date: !binary |-
+    MjAxMS0wMi0wMyAxMzoyOTozNCArMDgwMA==
+  date_gmt: !binary |-
+    MjAxMS0wMi0wMyAwNToyOTozNCArMDgwMA==
+  content: ! "不可控力量。。。\r\n啊。。必须膜拜。#。。~"
+- id: 29
+  author: Canoe
+  author_email: CanoeFZH@gmail.com
+  author_url: ''
+  date: !binary |-
+    MjAxMS0wMi0wMyAyMzoyOTozNSArMDgwMA==
+  date_gmt: !binary |-
+    MjAxMS0wMi0wMyAxNToyOTozNSArMDgwMA==
+  content: ! "今年上学期渐渐意识到了学长说的关于工大ACM的那些东西，另看了sunner的那个博客，受益了。\r\nbless everyone。"
+- id: 32
+  author: sdfond
+  author_email: sdfond@gmail.com
+  author_url: ''
+  date: !binary |-
+    MjAxMS0wMi0yMyAxOTo1MDoyNiArMDgwMA==
+  date_gmt: !binary |-
+    MjAxMS0wMi0yMyAxMTo1MDoyNiArMDgwMA==
+  content: ! "软件学院就是工大的缩影，里面死板官样的事情多了去，当软件学院的TA一定很郁闷。。而且你说的那个Pan老师，我早就看他不爽了，呵呵~\r\n\r\nP.S.
+    机器人竞赛打个酱油就+5了是么，现在这些加分政策搞的真是越来越花哨了。"
+- id: 59
+  author: '578559967'
+  author_email: 578559967@qq.com
+  author_url: ''
+  date: !binary |-
+    MjAxMS0wMy0xMyAyMjowODozMCArMDgwMA==
+  date_gmt: !binary |-
+    MjAxMS0wMy0xMyAxNDowODozMCArMDgwMA==
+  content: 额。。。一佳学长要忙这么多事啊。。。真是厉害。。。我就光我这点破事就累得不行。。。orz。。。。。。又弄acm，又能拿一等奖学金，好厉害。。。
+---
+
+在提笔前，猛然想到iSea神牛在今年regional五站结束后<a href="http://hi.baidu.com/%D2%BB%CE%BB%C1%E3/blog/item/0c46b1cced1756410eb34508.html">总结</a>道“<em>OpenLegend的2010，平心而论，是辉煌的</em>”。这句话给我很大触动。虽然主要原因是OL在2010年的卓越表现让参加了这个赛季的所有选手刮目相看，不过现在，我却更看重“辉煌”二字。简洁有力，有<strong><font color="red">1a</font></strong>的感觉。
+
+自己的ACM生涯在2010年结束了。过程中体会了太多酸甜苦辣，是生命中宝贵的财富。有的时候，我会问自己为什么要从事这一竞赛项目。回忆起大一的时候因为dalord的宣讲，说ACM获奖加学分，ACM选手的出路是如何如何好，就业是如何如何好。那时候很多人在HOJ刷题，自己也没有什么主见，就也加入这一集体了。不过，当时lord说过什么，PPT上的照片是什么，已经记不住了，那些04、05的神人的学分加溢出的事情也被zyh同学实现了，所以觉得那不是难以实现的，甚至有一点小不屑。唯一还记得xiaoE在一次宣讲时，说到ACM能够带来什么时有点语塞，最后的结论是“<strong>你能学到很多</strong>”。现在想来，这句才是真的。
+
+其实，大部分ACM选手的出路谈不上Outstanding，如果没有好看的成绩单或者在竞技的巅峰时期没能拿到很高的奖项，在选择上有时是挺勉强的。同时，算法竞赛中，参赛者养成的项目能力缺乏，只会C/C++，对于项目开发的经验不足，实际上在退役后已经被很多热衷于项目工程的人远远落在后面。而且当年非常看重的加分神话也被“<del>扶倒下的机器人加五分</del>”无情的击破了。所以，路牛说得好，“ACM是哈工大最没有性价比的比赛”。这是真的，但是，<strong>ac is a drug</strong>。代码和代码的快感；气球和气球的喜悦，从精神的角度，带来了项目或者论文不能带来的高峰体验，让人越陷越深，并且心甘情愿。当然，外出旅游、印了icpc的证书还有培养的思维能力和读写代码的能力，作为甜品，已经让人很饱了。
+
+如果单纯就为了挣个钱，过个好日子，娶个漂亮媳妇。做个“性价比很高的竞赛”，从中捞个不痛不痒的成绩，然后全身而退，挣一些没有什么嚼头的考试成绩。保研或者出国，其实在这个制度不怎么健全、诚信缺失挺严重的社会中也不是行不通的。今年Sunner教育过我说，“在中国，会抄要比会做有出路”，话中也有无奈，叹气了。
+
+以上的一些想法很大程度上影响了自己对于毕业后的打算。当然，哥哥的影响或者说建议，也具有决定性作用。
+
+影响自己打算的还有另一件事，就是今年软件学院的助教课。说来可笑，自己在regional备战的关键阶段还每周日跑去二区做六个小时的助教。做这个决定，自己都觉得有些荒谬。但是能怎么办呢，从lord通知我要从集训队找五个人去做软件助教后，这件事就开始荒谬了。chenyuanqin和debugcool已经做了计算机软件的双份助教了，t01自然是不会找他们，t04相对于我们更有夺金的可能，所以也没考虑他们。在问到裴、立邦、wujiawei时，他们都没兴趣。Cai和Lambyy作为我的队友，自然不会让他们去牺牲，而且Cai还任一门选修课。所以，那时就决定牺牲自己了。
+
+前几次上课，还和助教潘老师在出勤方面发生矛盾。那时我们比赛找人代课，他朝我们都要条子结果我们没有心理准备，完全是措手不及。后来慢慢磨合，也算把这学期的十次实验完成了。唯一出乎我意料的是，在2010年结束，C程序设计语言已经考完试、结了课的时候，我们被以“迎接教务处检查”为名要求重披作业共4次，这意味着我们要将各自的200余份word文档，各打开4-5次。从最开始的<strong>写评语</strong>，到“<strong>每项都写东西，你就写阅</strong>”，到“<strong>评语内容有阅是不合格</strong>”。每次批大致要花15个小时，刨去我偷工减料，粗略地估算自己花在这些学生根本看不到的无意义的反馈上的有效时间大概是50个小时。而这些时间，大多数是我在无聊无奈，过几天就有考试的条件下度过的。
+
+和我们一样罹难的Sunner曾经写过<a href="http://blog.sunner.cn/2011/01/how-hit-zheteng-us/">博客</a>泄愤。我们做学生助教的，顶多只能在buzz上写一句“<em>求通报批评，我是真的真的不想再伺候软件学院的作业了</em>”，记得那时是<strong>第三次冲击</strong>(囧脸)。
+
+从这件事上暴露的工大的那种<strong>形式化、无实效</strong>的做事风格，还有外表严谨，实质混乱的运转机制加剧了我对于本科毕业后逃离工大的愿望。但是，从目前的情况来看，自己在大一下和大二上两学期的低迷成绩让这件事变得难于实现。这也是为什么我在前面说，“<em>大部分ACM选手的出路谈不上Outstanding</em>”。来年还要多多努力。
+
+除了在软件学院助教这件事上面的牺牲，Group的大事小情也占用了自己很大的休息时间。这半年来，从扫地到维护HOJ，到外出比赛找地方住，到组织周赛、校赛、讲座、总结会。住过上海、也去过大世界批发市场，一边是一个管理者，一边又是一个工作者，说实话是非常疲惫。但是，艰难的日子也在咖啡和一些信念的陪伴下熬过来了，现在觉得挺释然充实的。唯一觉得自己做得不对的是，上个学期，替低年级同学挡住了很多本来应该他们做的事情。这些做法有不好的地方，要给新队员成长的机会。
+
+面对这个学期一坨一坨的事情，本来是洗干净脖子打算接受<strong>好好学习之剑</strong>的惩罚的。但是，一个意料之内的操作系统满分，和一个意料之外的形式语言94让这学期的成绩一下子高了起来。结果这学期有希望拿一等奖学金了……不过，上课考试真的是提不起兴致，vhdl到最后一次实验时精神的确已经到了崩溃的边缘，完全放弃了，否则那科应该会更好一些。
+
+由于自己已经完全成为一个工科男，过去一年来在文化道德思想方面没有任何进步。当然，在工大那个环境中，没有退步成猥琐男已经不错的事情了。下笔写本文前，粗略地把自己的百度空间翻了一下，访问量最高的都是那些解题报告什么的。要真正谈什么技术，好像也谈不上；说是理论研究，其实也没什么理论。写文，思想还是比较浅。Google Reader里面订阅的大部分是ACM圈里那些神牛的博客，再就是技术博客，文化方面的很少。<a href="http://www.douban.com/people/41458604/">豆瓣</a>倒是成了自己唯一在使用的SNS。喜欢那里简洁的风格和不紧不慢的文逼气质，足够满足一个伪文青的全部需求了。
+
+又一年过去后，自己的音乐品味没有任何改善，还是处于一种恶俗的凑热闹的欣赏态度。而且今年好像听舞曲有点多，受美帝国主义的腐朽文化的侵蚀太深。唯一一点进步是，品味有向民谣靠拢的趋势，还有，终于学会静下心来听一听古典了。花600大洋购入的PX 100 ii低频极好，听史塔克的巴赫无伴奏大提琴组曲时感觉很好。<del>另一张感觉很好的是Lamb of God的As the Palaces Burn，属于重口味。</del>
+
+还有一方面，就是在感情方面毫无进步，真的是懒得去想了。
+
+这篇文章起初叫“<em>旧一年的总结</em>”。但是，<strong>总结</strong>太过官腔和伪学术，我就想到哪写到哪。到这里，才发现好长。
+
+一年来的写过的一些文章
+
+<ul>
+<li><a href="http://hi.baidu.com/prayan1988/blog/item/47d045b5ee484b7e8ad4b23b.html">字符串总结[i]</a></li>
+<li><a href="http://hi.baidu.com/prayan1988/blog/item/86a90e8efeadc3f7513d929f.html">字符串总结[ii]</a></li>
+<li><del>这个本来打算再写一个后缀数组的[iii]，结果流产了。</del></li>
+<li><a href="http://hi.baidu.com/prayan1988/blog/item/59928031c5635192a9018e9b.html">二分图中的最大-最小关系</a></li>
+<li><a href="http://hi.baidu.com/prayan1988/blog/item/3ee0bfa53c12b2e79052ee8a.html">fuzhou regional the end of my icpc life</a></li>
+

@@ -1,0 +1,53 @@
+---
+layout: post
+status: publish
+published: true
+title: Sunner的毕业寄语
+author: Oneplus
+author_login: oneplus
+author_email: oneplus.lau@gmail.com
+author_url: http://blog.oneplus.info
+excerpt: ! "几天前，为毕业晚会剪了学院老师的寄语视频。其间为了整体效果，把很多老师的寄语剪得支离破碎，导致好几段逻辑比较严密的访谈看起来都比较突兀。这里在征得了sunner的同意后，把他那段寄语单独拿了出来，算是我把事情交代清楚了。\r\nPS：那处NG我就不说啥了。\r\n"
+wordpress_id: 603
+wordpress_url: http://blog.oneplus.info/?p=603
+date: 2012-06-27 01:57:29.000000000 +08:00
+categories:
+- 可以控制
+tags:
+- 毕业
+- sunner
+comments:
+- id: 832
+  author: icek
+  author_email: zhuxi910511@163.com
+  author_url: http://icek.me
+  date: !binary |-
+    MjAxMi0wNi0yNyAwOTozMDowNCArMDgwMA==
+  date_gmt: !binary |-
+    MjAxMi0wNi0yNyAwMTozMDowNCArMDgwMA==
+  content: 踩个脚印
+- id: 2187
+  author: Ryan
+  author_email: ryanliu1991@gmail.com
+  author_url: ''
+  date: !binary |-
+    MjAxMy0wMy0xNCAxNzoxODowOSArMDgwMA==
+  date_gmt: !binary |-
+    MjAxMy0wMy0xNCAwOToxODowOSArMDgwMA==
+  content: 衣服哪里买的？
+---
+几天前，为毕业晚会剪了学院老师的寄语视频。其间为了整体效果，把很多老师的寄语剪得支离破碎，导致好几段逻辑比较严密的访谈看起来都比较突兀。这里在征得了sunner的同意后，把他那段寄语单独拿了出来，算是我把事情交代清楚了。
+
+PS：那处NG我就不说啥了。
+
+<strong>视频原片</strong>
+
+<p><div align="center"><embed src="http://player.youku.com/player.php/sid/XNDIwNDE1ODEy/v.swf" allowFullScreen="true" quality="high" width="480" height="400" allowScriptAccess="always" type="application/x-shockwave-flash"></embed></div></p>
+
+<strong>访谈录</strong>
+
+<div style="background:#000; color:#fff; padding:10px">
+&nbsp;&nbsp;&nbsp;&nbsp;Hi，08级的同学们。你们好，恭喜你们终于悲催地毕业了。为什么悲催呢。你们上大学开始就注定了你们是悲催的一届。因为你们是在2012年毕业。世界末日啊。刚毕业就碰上世界末日，这是很悲催的事情。
+&nbsp;&nbsp;&nbsp;&nbsp;你知道，毕业，最主要的意味着，在我的感觉来说，它是获得了一个真正的自由。自由啦，却世界末日了。
+&nbsp;&nbsp;&nbsp;&nbsp;其实很多人说上了大学就开始可以享受自由了。但是在工大这样的环境里面。这个什么规格严格啊，功夫到家啊这一切把你严格地限死了。所以在大学里面我们通常享受不到太多的自由。即便有一些自由的地方，因为你们没有经历过自由，所以不懂得如何利用它。所以，大学四年里面，回想一下，自由自在做的事情是什么呢。大概也就是玩玩dota、泡泡妞、什么什么这个样子的了。其他就很少了。但是从现在开始，你们真正的获得自由了。这是完全完全不一样的一个体验。因为现在开始，你可以按照自己的意愿决定自己的人生。决定自己将来每一步，做得每一件事情。你不用再看别人的脸色，甚至来说。你们的经济也可以开始趋向于独立。经济独立了，那么，腰板就硬起来了。
+&nbsp;&nbsp;&nbsp;&nbsp;不过坦率的说，其实在我看来我觉得现在这个社会上大多数人还是不懂得享受这个自由。他们仍然是喜欢按照循规蹈矩的，按照别人划定的路线去走，去做。所以呢，要是我建议你们什么呢。我倒是建议你们能够按照自己的想法，自己的理想发自自己内心的想干什么就干什么不要去太过多于听从前辈们的建议。前辈们的建议到底是什么样的东西呢，我经常做这样的一个比喻：就是说，如果他们为我们划定的路线是好的，或者他们走过的路线是好的那么现在的世界一定是非常美妙的。但是现在的世界明显不是美妙的。所以，他们一定是有问题的。如果我们按照他们所说的去做的话，其结果就是把这个世界变得更加不美妙。因此，我希望你们成为一个完全不同的一代的人。那就是说，2012作为一个分水岭。把他，让他，2012肯定不是世界末日。但是因为你们的存在，他能成为旧世界的末日。你们能够创建一个新的世界，完全发自自己内心的去做自己想做的事情。而且事情一定要对得起自己的良心。只要对得起自己的良心，那么现在就已经是一个非常非常伟大的人了。</div>

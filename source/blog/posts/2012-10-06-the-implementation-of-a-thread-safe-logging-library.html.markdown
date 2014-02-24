@@ -1,0 +1,190 @@
+---
+layout: post
+status: publish
+published: true
+title: 实现一个线程安全的logging库
+author: Oneplus
+author_login: oneplus
+author_email: oneplus.lau@gmail.com
+author_url: http://blog.oneplus.info
+excerpt: ! "#### Introduction\r\n\r\nLog是用来记录程序事件的一系列打印信息，和调试时的printf大法有点像。Log和我所接触的工作关系还是比较密切的。比方说，打印一下模型的加载时间、句子的解析速度、开发集上准确率什么的。由于接下来一段时间的工作需要写多线程，网上的logging库又不怎么习惯，所以计划造一个Log库的轮子。这篇文章中大概会讨论下面两方面内容：\r\n<ul><li>用singleton模式实现logging库</li>\r\n<li>Singleton模式的线程安全</li></ul>\r\n\r\n"
+wordpress_id: 726
+wordpress_url: http://blog.oneplus.info/?p=726
+date: 2012-10-06 12:33:27.000000000 +08:00
+categories:
+- 可以控制
+- 挨踢民工
+tags:
+- C++
+- 设计模式
+comments:
+- id: 1103
+  author: discover
+  author_email: discoverfly@gmail.com
+  author_url: ''
+  date: !binary |-
+    MjAxMi0xMC0wNiAyMDozODoxMCArMDgwMA==
+  date_gmt: !binary |-
+    MjAxMi0xMC0wNiAxMjozODoxMCArMDgwMA==
+  content: ! "我也感觉操作系统的东西都还给sunner了。\r\n上次腾讯笔试的时候，问了singleton怎么实现，没达上来。"
+- id: 1107
+  author: Oneplus
+  author_email: oneplus.lau@gmail.com
+  author_url: http://blog.oneplus.info
+  date: !binary |-
+    MjAxMi0xMC0wNiAyMzowNjoxNSArMDgwMA==
+  date_gmt: !binary |-
+    MjAxMi0xMC0wNiAxNTowNjoxNSArMDgwMA==
+  content: 这种东西就是看过就知道，不用就忘。
+- id: 1117
+  author: ronaflx
+  author_email: 900831flx@gmail.com
+  author_url: ''
+  date: !binary |-
+    MjAxMi0xMC0wOCAyMDoxNjowMiArMDgwMA==
+  date_gmt: !binary |-
+    MjAxMi0xMC0wOCAxMjoxNjowMiArMDgwMA==
+  content: 我想知道开头那段注释的开源协议是怎么生成的……
+- id: 1120
+  author: icek
+  author_email: zhuxi910511@163.com
+  author_url: http://icek.me
+  date: !binary |-
+    MjAxMi0xMC0wOSAxMzoyNTo1MiArMDgwMA==
+  date_gmt: !binary |-
+    MjAxMi0xMC0wOSAwNToyNTo1MiArMDgwMA==
+  content: 锁是什么。。。好吃么。。。
+- id: 1154
+  author: ditsing
+  author_email: ditsing@gmail.com
+  author_url: http://ditsing.com
+  date: !binary |-
+    MjAxMi0xMC0xOCAxNDowMDoyNCArMDgwMA==
+  date_gmt: !binary |-
+    MjAxMi0xMC0xOCAwNjowMDoyNCArMDgwMA==
+  content: ! "求问关于Sinleton的问题。其实线程安全的方法二在某些情况下还是很不错的：\r\n用一次可能冗余的初始化，换来了get_logger()不需要加锁。这种情况下甚至根本不需要get_logger，直接写成静态函数就好了。\r\n我总觉得每次都get_logger略蛋疼。"
+- id: 3159
+  author: fandywang
+  author_email: ofandywang@gmail.com
+  author_url: http://weibo.com/lfwang
+  date: !binary |-
+    MjAxMy0wNy0yMCAxNzozOToxMyArMDgwMA==
+  date_gmt: !binary |-
+    MjAxMy0wNy0yMCAwOTozOToxMyArMDgwMA==
+  content: 推荐使用 Google glog 库，很酷
+---
+### Introduction
+
+Log是用来记录程序事件的一系列打印信息，和调试时的printf大法有点像。Log和我所接触的工作关系还是比较密切的。比方说，打印一下模型的加载时间、句子的解析速度、开发集上准确率什么的。由于接下来一段时间的工作需要写多线程，网上的logging库又不怎么习惯，所以计划造一个Log库的轮子。这篇文章中大概会讨论下面两方面内容：
+
+* 用singleton模式实现logging库
+* Singleton模式的线程安全
+
+### Singleton
+
+单件(Singleton)是设计模式的一种。如果你的程序中有某个类在程序整个的生命周期中只能被实例化一次，那么这个类就可以用单件模式来实现。直白一点说，有时候单件扮演了和全局变量类似的角色。在实际应用场景中，我们的程序中只被实例化的例子有很多，比如说：存储配置项的类。但实际并不是所有符合单件模式情景的类都要用单件来实现，不过这个已经超出本文讨论范围了。
+从OO的视角看打印log的对象(Logger)也具有只被实例化一次的特点。所以，用单件模式来实现Logger问题不大。
+
+首先把设计模式书上的代码抄一遍：
+
+~~~cpp
+class Singleton {
+   public:
+       static Singleton* getInstance( );
+   private:
+       Singleton( );
+       static Singleton* instance;
+};
+~~~
+
+
+然后，要做的就是往里面填一个打印log的函数，这个也是很容易实现的。实现后的效果如下。
+
+~~~ cpp
+class logger {
+public:
+    static logger * get_logger() {
+        if (_instance == NULL) { _instance = new logger(); }
+        return _instance;
+    }
+
+    void write_log(int i) {
+        fprintf(stderr, "%%levelname%% ");
+        fprintf(stderr, "log: %d\n", i);
+    }
+private:
+    static logger * _instance;
+protected:
+    logger() { }
+};
+
+logger * logger::_instance = NULL;
+
+int main() {
+    logger::get_logger()->write_log(10);
+    return 0;
+}
+~~~
+
+当然也可以用变长参数和宏函数配合把这个做得有点酷，不过那些也不是本文要讨论的。
+到这里，使用Singleton实现logger的任务已经完成得差不多了。接下来要做的是使上面的代码线程安全。
+
+### 线程安全
+
+相比解释线程安全(Threads Safety)的概念，我觉得说明线程不安全更加容易。就拿前面说到的logger做例子。如果我开若干个线程，每个线程调用`logger::get_logger()->write_log(tid);`搞不好就会出现如下图的情况
+
+<a href="http://blog.oneplus.info/wp-content/uploads/2012/10/thread_safety.png"><img src="http://blog.oneplus.info/wp-content/uploads/2012/10/thread_safety.png" alt="" title="thread_safety" width="266" height="52" class="aligncenter size-full wp-image-728" /></a>
+
+这里就出现两个线程都向stderr打印，导致打印信息混乱了。如果write_log函数中做更复杂的操作，出现这种混乱的可能性会变得更大。造成这一现象的原因就是多个线程抢占同一文件句柄，是生产者消费者问题的一个具体情境。解决方法就是给write_log上互斥锁。把write_log函数改成下面的样子就好了。
+
+~~~cpp 
+void write_log(int i) {
+    EnterCriticalSection();
+    fprintf(stderr, "%%levelname%% ");
+    fprintf(stderr, "log: %d\n", i);
+    LeaveCriticalSection();
+}
+~~~
+
+不过，给write_log上锁也并不能完全保证logger线程安全，另一个非常隐蔽资源抢占会发生在单件实例化的那个时间上。如果logger并没被初始化，并且又有多个线程同时要去初始化它，而在初始化时发生上下文切换，那么这个logger就会被实例化多次。
+
+<a href="http://www.codeproject.com/Articles/96942/Singleton-Design-Pattern-and-Thread-Safety">这里</a>提供了三种解决方法，第一种是直接在判断单件是否被实例化前加锁，代码如下：
+
+~~~cpp 
+static logger * get_logger() {
+    EnterCriticalSection();
+    if (_instance == NULL) { _instance = new logger(); }
+    LeaveCriticalSection();
+    return _instance;
+}
+~~~
+
+由于加互斥锁是一件比较耗时的工作，每次get_logger时都调用会加锁，解锁，程序的速度会受到影响。总之，这种方法是比较不赞的。
+
+第二种是在程序一开始就将它实例化（这种方法给人感觉也不怎么好）。弊端是如果这个单件在整个程序生命中都没有被调用，那么这次实例化就浪费了。当然浪费掉的还包括一些系统资源。
+
+第三种方法在第一种方法上进行改进，把加锁放在if判断里面，或者说在加锁外放一层if判断，代码是这样的：
+
+~~~cpp 
+static logger * get_logger() {
+    if (_instance == NULL) {
+        EnterCriticalSection();
+        if (_instance == NULL) {_instance = new logger(); }
+        LeaveCriticalSection();
+    }
+    return _instance;
+}
+~~~
+这种方法的好处是避免了每次get_logger都加锁，不过在某些情景上和第一种方法是一样的。
+### printf
+在实验过程中，我发现如果write_log只调用一次printf，并不会出现前面谈线程安全时的输出混乱。查了一下发现，printf本身具有操作原子性。所以，如果write_log函数只由一个printf组成，那一处的锁也可以忽略。
+最后形成的代码放在github的<a href="https://github.com/Oneplus/libutilities/tree/master/src/logging">这里</a>。
+牢骚几句，感觉操作系统很多基础知识都还给sunner了，罪过。
+
+### 参考
+<ul>
+<li><a href="https://computing.llnl.gov/tutorials/pthreads/">POSIX Threads Programming</a></li>
+<li><a href="http://www.codeproject.com/Articles/96942/Singleton-Design-Pattern-and-Thread-Safety">Singleton Design Pattern and Thread Safety</a></li>
+<li><a href="http://stackoverflow.com/questions/467938/stdout-thread-safe-in-c-on-linux">stdout thread-safe in C on Linux?</a></li>
+</ul>
+

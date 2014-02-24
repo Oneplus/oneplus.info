@@ -1,0 +1,29 @@
+<% wrap_layout :base do %>
+<div style="color:#999;">
+  <small><%= current_article.date.strftime("%Y/%m/%d - ") %>by
+    <%= current_article.data.author %>
+
+    <% current_article.tags.each do |tag| %>
+      &bull; <%= link_to tag, tag_path(tag, 'blog') %>
+    <% end %>
+  </small>
+</div>
+<h2><%= current_article.data.title %></h2>
+<hr />
+<div>
+  <%= yield %>
+</div>
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+var disqus_shortname = 'yjliu'; // required: replace example with your forum shortname
+/* * * DON'T EDIT BELOW THIS LINE * * */
+(function() {
+ var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+ dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+ (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+ })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+<% end %>

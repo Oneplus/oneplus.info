@@ -1,0 +1,221 @@
+---
+layout: post
+status: publish
+published: true
+title: 新开始
+author: Oneplus
+author_login: oneplus
+author_email: oneplus.lau@gmail.com
+author_url: http://blog.oneplus.info
+excerpt: 经过一些酝酿和准备，前天在gegehost上置办下这个新空间，昨天进行了一番装修，结果原来蓝色清澈的模板变得灰突突的。不过这些都是无所谓的事情啦~以后会搬到这里，虽然现在它还空荡荡的。
+wordpress_id: 5
+wordpress_url: http://blog.oneplus.info/?p=5
+date: 2011-01-15 03:41:00.000000000 +08:00
+categories:
+- 不可控制
+- 煮鱼作文以记之
+tags:
+- 搬家
+- Wordpress
+comments:
+- id: 2
+  author: GTmac
+  author_email: gtmacchc@gmail.com
+  author_url: http://gtmac.info
+  date: !binary |-
+    MjAxMS0wMS0xNSAwNDoyMDoxNyArMDgwMA==
+  date_gmt: !binary |-
+    MjAxMS0wMS0xNSAwNDoyMDoxNyArMDgwMA==
+  content: sofa~~
+- id: 3
+  author: nonleft
+  author_email: 851952855@qq.com
+  author_url: ''
+  date: !binary |-
+    MjAxMS0wMS0xNSAwNTowMDowNyArMDgwMA==
+  date_gmt: !binary |-
+    MjAxMS0wMS0xNSAwNTowMDowNyArMDgwMA==
+  content: ! "物理翻墙吧 你应该该具备的条件都具备了吧 考个G什么的对你也不是什么难事 \r\n动手真是快啊 果然 是执行力强的人\r\nbtw：我们实验室的人看了你的头像和文章都以为你是个"
+- id: 4
+  author: Oneplus
+  author_email: oneplus.lau@gmail.com
+  author_url: http://blog.oneplus.info
+  date: !binary |-
+    MjAxMS0wMS0xNSAwNToyMDoxMiArMDgwMA==
+  date_gmt: !binary |-
+    MjAxMS0wMS0xNSAwNToyMDoxMiArMDgwMA==
+  content: ! "<a href=\"#comment-3\" rel=\"nofollow\">@nonleft </a> \r\n呵呵，已经被误认数次了。\r\n其实我回复的目的是想看看头像好使不。"
+- id: 5
+  author: Canoe
+  author_email: CanoeFZH@gmail.com
+  author_url: ''
+  date: !binary |-
+    MjAxMS0wMS0xNSAwNjoxMzoyNSArMDgwMA==
+  date_gmt: !binary |-
+    MjAxMS0wMS0xNSAwNjoxMzoyNSArMDgwMA==
+  content: 看看学长的博客，顺便看看会给我一个神马头像
+- id: 7
+  author: discover
+  author_email: discoverfly@gmail.com
+  author_url: ''
+  date: !binary |-
+    MjAxMS0wMS0xNSAwNjo0MToyMSArMDgwMA==
+  date_gmt: !binary |-
+    MjAxMS0wMS0xNSAwNjo0MToyMSArMDgwMA==
+  content: 占个位，支持学长，谢谢学长的帮助。
+- id: 8
+  author: FallingFlowers
+  author_email: FallingFlowers@Gmail.com
+  author_url: ''
+  date: !binary |-
+    MjAxMS0wMS0xNSAwNzowMjozMyArMDgwMA==
+  date_gmt: !binary |-
+    MjAxMS0wMS0xNSAwNzowMjozMyArMDgwMA==
+  content: 加油~
+- id: 9
+  author: 小雨
+  author_email: 7lemonsoul@gmail.com
+  author_url: http://www.7lemon.net
+  date: !binary |-
+    MjAxMS0wMS0xNSAxNzowNzo0MiArMDgwMA==
+  date_gmt: !binary |-
+    MjAxMS0wMS0xNSAwOTowNzo0MiArMDgwMA==
+  content: 加勒个油～
+- id: 10
+  author: Lambyy
+  author_email: lambyy.hit@gmail.com
+  author_url: ''
+  date: !binary |-
+    MjAxMS0wMS0xNSAxODo1MDozOCArMDgwMA==
+  date_gmt: !binary |-
+    MjAxMS0wMS0xNSAxMDo1MDozOCArMDgwMA==
+  content: 饿 啊 我是来打酱油的..
+- id: 11
+  author: yangjing
+  author_email: afphoenix@gmail.com
+  author_url: ''
+  date: !binary |-
+    MjAxMS0wMS0xNSAxODo1ODoyNyArMDgwMA==
+  date_gmt: !binary |-
+    MjAxMS0wMS0xNSAxMDo1ODoyNyArMDgwMA==
+  content: 啊，我是来围观的。
+- id: 12
+  author: kinslover
+  author_email: kinslover@gmail.com
+  author_url: http://kinslover.info
+  date: !binary |-
+    MjAxMS0wMS0xNSAyMTo0ODoxMyArMDgwMA==
+  date_gmt: !binary |-
+    MjAxMS0wMS0xNSAxMzo0ODoxMyArMDgwMA==
+  content: 人气好旺啊~~
+- id: 13
+  author: luyi0619
+  author_email: luyi0619@gmail.com
+  author_url: ''
+  date: !binary |-
+    MjAxMS0wMS0xNSAyMzo0MDo0NiArMDgwMA==
+  date_gmt: !binary |-
+    MjAxMS0wMS0xNSAxNTo0MDo0NiArMDgwMA==
+  content: ! "求加链接啊 \r\nluyi0619.org"
+- id: 14
+  author: ronaflx
+  author_email: 900831flx@gmail.com
+  author_url: ''
+  date: !binary |-
+    MjAxMS0wMS0xNiAxODoyMjo0NSArMDgwMA==
+  date_gmt: !binary |-
+    MjAxMS0wMS0xNiAxMDoyMjo0NSArMDgwMA==
+  content: 人气很旺，顶学长，那个空间是不是就废了？
+- id: 15
+  author: xiaodao
+  author_email: lychees67@gmail.com
+  author_url: http://www.shuizilong.com/house
+  date: !binary |-
+    MjAxMS0wMS0xOSAxNDozMDoyNiArMDgwMA==
+  date_gmt: !binary |-
+    MjAxMS0wMS0xOSAwNjozMDoyNiArMDgwMA==
+  content: ! "恭贺学长乔迁新居，撒个花ing  ...\r\n.. ^&amp;/(∩_∩)/@#..."
+- id: 16
+  author: Oneplus
+  author_email: oneplus.lau@gmail.com
+  author_url: http://blog.oneplus.info
+  date: !binary |-
+    MjAxMS0wMS0xOSAxODoxNjoyMyArMDgwMA==
+  date_gmt: !binary |-
+    MjAxMS0wMS0xOSAxMDoxNjoyMyArMDgwMA==
+  content: ! "<a href=\"#comment-15\" rel=\"nofollow\">@xiaodao </a> \r\n岛主，友链更一下啊。"
+- id: 17
+  author: 站长工具
+  author_email: wsprite@tom.com
+  author_url: http://www.wsprite.com
+  date: !binary |-
+    MjAxMS0wMS0yMCAwODoyMDo0MyArMDgwMA==
+  date_gmt: !binary |-
+    MjAxMS0wMS0yMCAwMDoyMDo0MyArMDgwMA==
+  content: 博主的文章很不错，我是站长工具-站长精灵的作者，一款专业的SEO工具软件（可以帮您提高博客的流量），想跟您交换个链接，不知可否
+- id: 18
+  author: Williammed
+  author_email: williampei1988@126.com
+  author_url: ''
+  date: !binary |-
+    MjAxMS0wMS0yMCAyMDo0Mjo0MyArMDgwMA==
+  date_gmt: !binary |-
+    MjAxMS0wMS0yMCAxMjo0Mjo0MyArMDgwMA==
+  content: 呵呵~~人气好旺啊~有自己的空间就是爽啊
+- id: 19
+  author: xiaodao
+  author_email: lychees67@gmail.com
+  author_url: http://www.shuizilong.com/house
+  date: !binary |-
+    MjAxMS0wMS0yMiAxNzo1MzowMSArMDgwMA==
+  date_gmt: !binary |-
+    MjAxMS0wMS0yMiAwOTo1MzowMSArMDgwMA==
+  content: ! "<a href=\"#comment-16\" rel=\"nofollow\">@Oneplus </a> \r\n嗯嗯。～"
+- id: 20
+  author: icek
+  author_email: zhuxi910511@163.com
+  author_url: ''
+  date: !binary |-
+    MjAxMS0wMS0yNiAyMTowODoyNiArMDgwMA==
+  date_gmt: !binary |-
+    MjAxMS0wMS0yNiAxMzowODoyNiArMDgwMA==
+  content: 恭喜学长有了自己的空间 羡慕中
+- id: 31
+  author: 窗灯焰
+  author_email: belief-greta@foxmail.com
+  author_url: ''
+  date: !binary |-
+    MjAxMS0wMi0wOSAxMDowNzo1NSArMDgwMA==
+  date_gmt: !binary |-
+    MjAxMS0wMi0wOSAwMjowNzo1NSArMDgwMA==
+  content: 以为你是林黛玉 不想竟是个贾宝玉 嘻嘻  不要介意呵
+- id: 42
+  author: 阿姨洗铁路
+  author_email: gg605007@163.com
+  author_url: ''
+  date: !binary |-
+    MjAxMS0wMy0wMSAxMToxNDoxMyArMDgwMA==
+  date_gmt: !binary |-
+    MjAxMS0wMy0wMSAwMzoxNDoxMyArMDgwMA==
+  content: 学长我是来要个你以前老站的地址的，我去八卦下。
+- id: 43
+  author: Oneplus
+  author_email: oneplus.lau@gmail.com
+  author_url: http://blog.oneplus.info
+  date: !binary |-
+    MjAxMS0wMy0wMSAxMTozMjowNSArMDgwMA==
+  date_gmt: !binary |-
+    MjAxMS0wMy0wMSAwMzozMjowNSArMDgwMA==
+  content: 原博客地址 http://hi.baidu.com/prayan1988/ 不过没有什么太有价值的东西。
+---
+经过一些酝酿和准备，前天在gegehost上置办下这个新空间，昨天进行了一番装修，结果原来蓝色清澈的模板变得灰突突的。不过这些都是无所谓的事情啦~以后会搬到这里，虽然现在它还空荡荡的。
+
+小时候，家里为了自己上学，办过几次家 。每次搬家，都要请来帮忙的亲戚朋友吃吃喝喝。即使是那几年困难的时候，也保持着这种乐观的趣味。现在想来，爸妈在看待问题时，虽然有酸气，但总归是朴实自然的，要比我这种苦逼强得多。
+
+新博搭建过程中，<a href="http://www.7lemon.net">小雨</a>给我提供了很多帮助，这里要多多谢谢。还有<a href="http://www.nonleft.me">王珑</a>那小子，后我一天买的地，居然和我同一台主机。等有钱了一起买个vps吧，你小子就可以用ssh在上面胡作非为了。像我这种就敢蔫吧淘的，有个HOJ，没事折腾折腾，就不错了。
+
+搬家欣喜，本是应该招来要好的朋友，弄几听喝了会拉肚子的哈尔滨啤酒。但是，冬天人懒，三顿并作一顿，早就没有热闹热闹的心情了。加上还有一科考试，小有不释然。
+
+大学读到现在，基本上算是淡定了。身边的那些交过心也勾过心的同学们，该出国的，会出国；该保研的，会保研。而自己基本就是35%国外，65%国内，能不能物理翻墙还得看造化。&ldquo;人生匆匆，不可放松&rdquo;啊。
+
+这个博客将主要用来记录一些学习过程中的心得体会，还有生活中发生的那些可以控制和不可控制的事情。当然，空间在手，折腾自然是难免的啦~希望大家喜欢这里，还望多多指教啊。
