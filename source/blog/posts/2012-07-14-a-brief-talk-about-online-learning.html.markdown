@@ -1,4 +1,5 @@
 ---
+latex: true
 layout: post
 status: publish
 published: true

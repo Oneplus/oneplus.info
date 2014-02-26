@@ -1,6 +1,7 @@
 ###
 # Blog settings
 ###
+require 'builder'
 Time.zone = "Asia/Singapore"
 
 activate :blog do |blog|
@@ -55,6 +56,7 @@ activate :blog do |note|
 end
 
 page "/feed.xml", layout: false
+page "/sitemap.xml", layout: false
 
 ###
 # Compass
