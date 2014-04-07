@@ -46,23 +46,36 @@ blockquote p { font-size: 14px; }
 <h2>Grep的若干小技巧</h2>
 <hr />
 <div>
-  <p><strong><em>匹配不符合模式的字符串</em></strong></p>
+  <h3 id="section">匹配不符合模式的字符串</h3>
 
 <pre class="highlight shell">grep -v <span class="s2">"pattern"</span> file
 </pre>
-<p><strong><em>模板中含有\t</em></strong></p>
+<h3 id="t">模板中含有\t</h3>
 
 <pre class="highlight shell">grep -P <span class="s2">"^</span><span class="se">\t</span><span class="s2">"</span> file
 </pre>
-<p><strong><em>两文件差集（B.txt-A.txt）</em></strong></p>
+<h3 id="btxt-atxt">两文件差集（B.txt-A.txt）</h3>
 
 <pre class="highlight shell">grep -F -v -f A.txt B.txt
 </pre>
-<h3 id="section">参考</h3>
+<h3 id="atxtbtxt">用A.txt文件中的词表查B.txt</h3>
+
+<pre class="highlight plaintext">grep -f A.txt B.txt
+</pre>
+<p>与Pipe配合</p>
+
+<pre class="highlight plaintext">cat B.txt | grep -f A.txt
+</pre>
+<p>还有</p>
+
+<pre class="highlight plaintext">cat A.txt | grep -f - B.txt
+</pre>
+<h3 id="section-1">参考</h3>
 
 <ul>
   <li><a href="http://www.uccs.edu/~ahitchco/grep/">Drew’s grep tutorial</a></li>
   <li><a href="http://blog.csdn.net/autofei/article/details/6579320">LINUX Shell下求两个文件交集和差集的办法</a></li>
+  <li><a href="http://stackoverflow.com/questions/17863301/how-to-grep-with-a-list-of-words">How to grep with a list of words</a></li>
 </ul>
 
 
