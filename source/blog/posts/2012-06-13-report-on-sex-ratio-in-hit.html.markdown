@@ -315,39 +315,49 @@ comments:
 ### 数据来源
 本次调研的数据来源大致有以下几个方面。首先通过教务处照片图床的一个广为人知的漏洞获得08-11级全体本科生学号的列表。然后，将列表提供学号用作用户名和密码请求体育部的健康成绩网站，由于该网站包含一些基本的性别、年级、自然班等信息，从其响应的页面基本可以获得本次调研所需要的全部信息。通过对于爬虫爬取过程中日志的分析，可以确定爬取过程中没有出现异常。之后，从教务处网站中“院系设置”一页获得了一个(学号,院系)的映射表，过滤掉没有出现在映射表中的91-99几个系。最后用几个简单的脚本，完成全部的数据处理，获得共16498行数据。
 
-<a id="more"></a><a id="more-535"></a>
 ### 调研及结果
 关于本次调研，我们主要关注下面几个方面的数据：
-<ul>
-<li>08-11级全体的男女比例</li>
-<li>四个年级男女比例的变化情况</li>
-<li>各学院男女比例排序</li>
-<li>一些最值情况</li>
-</ul>
+* 08-11级全体的男女比例
+* 四个年级男女比例的变化情况
+* 各学院男女比例排序
+* 一些最值情况
 
 #### 男女比例总体情况
 首先，我们阐示的一个事实是08-11级本科生全体中的男女比例。经统计发现，在四个年级16498行数据中，男生共12791行，女生共3707行。男女比为3.45049。远低于期望值7。
+
 <a href="http://blog.oneplus.info/wp-content/uploads/2012/06/report-1-copy.jpg"><img src="http://blog.oneplus.info/wp-content/uploads/2012/06/report-1-copy.jpg" alt="" title="general sex ratio across 4 grades" height="250" class="aligncenter size-full wp-image-538" /></a>
 
 #### 男女比例变化情况
 在接下来的一项统计中，我们关注的是四年来，工大男女比例的变化情况。通过对各年级男女比例的统计，我们绘制如下曲线：
+
 <a href="http://blog.oneplus.info/wp-content/uploads/2012/06/time-curve.jpg"><img src="http://blog.oneplus.info/wp-content/uploads/2012/06/time-curve.jpg" alt="" title="time-curve" width="400" class="aligncenter size-full wp-image-538"/></a>
+
 从总体趋势来讲，工大的男女比例呈逐年降低的趋势，其中，08、09两年，男女比例有大幅度下降，10、11两年基本持平。同时，参照对逐年增长的学生人数的统计结果，可以得到的结论是：工大女生越来越多。
 
-<a href="http://blog.oneplus.info/wp-content/uploads/2012/06/report-2-copy.jpg"><img style="float:left" src="http://blog.oneplus.info/wp-content/uploads/2012/06/report-2-copy.jpg" alt="" title="report-2 copy" width="180" class="size-full wp-image-545" /></a>
+<div class="row">
+<div class="col-md-10">
 
-#### 各学院男女比例排序
-通过对各个学院的男女比例的统计中，我们基本得到各学院男女比例排序如左图
+<h4>各学院男女比例排序</h4>
 
-其中排名靠前的几个学院包括：机电工程学院学院、交通科学与工程学院学院、能源科学与工程学院学院、土木工程学院学院。管理、建筑、人文、外语、法学院五个学院，女生总数超过男生。
-而通过数据分析，管理学院因其较大的学生基数以及比较合理的男女比例，成为全效学院中，女生人数最多的学院，建筑学院位列其次。
-#### 各班男女比统计情况
-在下一项统计中，我们将关注的重点放在各小班的男女比例情况上。几项统计结论如下：
+<p>通过对各个学院的男女比例的统计中，我们基本得到各学院男女比例排序如左图
+</p>
+
+<p>其中排名靠前的几个学院包括：机电工程学院学院、交通科学与工程学院学院、能源科学与工程学院学院、土木工程学院学院。管理、建筑、人文、外语、法学院五个学院，女生总数超过男生。
+</p>
+
+<p>而通过数据分析，管理学院因其较大的学生基数以及比较合理的男女比例，成为全效学院中，女生人数最多的学院，建筑学院位列其次。
+</p>
+
+<h4>各班男女比统计情况</h4>
+
+<a href="http://blog.oneplus.info/wp-content/uploads/2012/06/girl-ratio-distribution.jpg"><img src="http://blog.oneplus.info/wp-content/uploads/2012/06/girl-ratio-distribution.jpg" alt="" title="girl-ratio-distribution" width="370" class="size-full wp-image-551" /></a>
+
+<p>在下一项统计中，我们将关注的重点放在各小班的男女比例情况上。几项统计结论如下：</p>
+
 <ul>
-<li>在682个班级中，女生比例的均值为0.23，方差为0.036。女生比例基本服从高斯分布。<a href="http://blog.oneplus.info/wp-content/uploads/2012/06/girl-ratio-distribution.jpg"><img style="float:right" src="http://blog.oneplus.info/wp-content/uploads/2012/06/girl-ratio-distribution.jpg" alt="" title="girl-ratio-distribution" width="370" class="size-full wp-image-551" /></a></li>
+<li>在682个班级中，女生比例的均值为0.23，方差为0.036。女生比例基本服从高斯分布。</li>
 <li>在参加统计的08-11级682个班级中，有28个班级没有女生。</li>
-<li>在有女生的班级中，1136005班以40比1的比例成为男女比最高的班级。1129102、0836106、0804201三个班以33比1的比例并列第二。
-<img style="float:right" src="http://blog.oneplus.info/wp-content/uploads/2012/06/report-3-copy.jpg" alt="" title="report-3 copy" width="130" /></li>
+<li>在有女生的班级中，1136005班以40比1的比例成为男女比最高的班级。1129102、0836106、0804201三个班以33比1的比例并列第二。</li>
 <li>在全部682个班级中，共有571个班级男生比女生多，占总体的83.72%。</li>
 <li>1034103、0923101等六个班男女比为非常和谐的1。</li>
 <li>同时，我们惊喜地发现，0815201、0921204、1012003、0911103四个班只有女生，没有男生。而且0815201有15名女生。</li>
@@ -355,9 +365,21 @@ comments:
 <li>1022001和0824201两个班女生最多，为23人。</li>
 </ul>
 
+<img src="http://blog.oneplus.info/wp-content/uploads/2012/06/report-3-copy.jpg" alt="" title="report-3 copy" width="130" />
+</div>
+
+<div class="col-md-2">
+
+<a href="http://blog.oneplus.info/wp-content/uploads/2012/06/report-2-copy.jpg"><img src="http://blog.oneplus.info/wp-content/uploads/2012/06/report-2-copy.jpg" alt="" title="report-2 copy" width="180" class="size-full wp-image-545" /></a>
+
+</div>
+
+</div>
+
 ### 结论
+
 进过本次调研，我们基本可以否定流传多年的7比1的男女比例。同时，也看到工大男女比逐年降低的喜人形势。希望本次调研的结果可以给读者带来一些参考，在繁重的工作学习中获得某种程度的放松。
 
 ### 版权声明与免责声明
-<p style="background:#CCC">本文所阐示的数据、观点完全出自个人行为，不具有任何可靠性。请勿将其用于任何正式商业、科研活动。如发生使用行为，作者不负任何责任。同时，为了避免信息传播过程中产生的丢失、变换，本文内容及使用图片不欢迎任何形式的转载，演绎，感谢您的支持。
 
+<p style="background:#CCC">本文所阐示的数据、观点完全出自个人行为，不具有任何可靠性。请勿将其用于任何正式商业、科研活动。如发生使用行为，作者不负任何责任。同时，为了避免信息传播过程中产生的丢失、变换，本文内容及使用图片不欢迎任何形式的转载，演绎，感谢您的支持。</p>
