@@ -54,6 +54,7 @@ blockquote p { font-size: 14px; }
     BalancerMember http://192.168.6.38:6888/ 
 <span class="gp">&lt;/Proxy&gt; </span>
 </pre>
+
 <p>这里不一定要在<code>httpd.conf</code>中直接添加<code>ProxyPass / balancer</code>。另一种实现方法是向<code>httpd.conf</code>中添加<code>Include conf/httpd-proxy.conf</code>，然后把<code>ProxyPass</code>写到<code>httpd-proxy.conf</code>中。</p>
 
 <p>下面详细介绍这段配置文件的含义：</p>
@@ -66,6 +67,7 @@ blockquote p { font-size: 14px; }
 
 <pre class="highlight shell">BalancerMember http://192.168.6.37:6888/ 
 </pre>
+
 <p>表示将<code>http://192.168.6.37:6888/</code>注册到负载均衡中。</p>
 
 <p>上述所示的负载均衡是轮询型负载均衡，除此之外，还有按权重分配负载均衡策略，权重请求响应负载均衡策略。其中，前者按照请求次数分配负载，后者则按照请求负载分配负载。举个例子讲：按照前者，如果有4次请求，3次被分配到机器A、1次被分配到机器B。按照后者，有1000bytes的请求，750bytes被分配给A、250bytes被分配给B。具体参考下面的链接</p>

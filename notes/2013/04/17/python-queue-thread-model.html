@@ -77,31 +77,31 @@ blockquote p { font-size: 14px; }
 
     <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
-            <span class="nb">id</span><span class="n">x</span><span class="p">,</span> <span class="n">item</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">d</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+            <span class="n">idx</span><span class="p">,</span> <span class="n">item</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">d</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
             <span class="c"># segment section</span>
             <span class="n">sleep</span><span class="p">(</span><span class="n">random</span><span class="p">()</span> <span class="o">*</span> <span class="mi">5</span><span class="p">)</span>
             <span class="c"># output section</span>
-            <span class="n">d</span><span class="o">.</span><span class="n">output</span><span class="p">(</span> <span class="nb">id</span><span class="n">x</span><span class="p">,</span> <span class="n">item</span> <span class="p">)</span>
+            <span class="n">d</span><span class="o">.</span><span class="n">output</span><span class="p">(</span> <span class="n">idx</span><span class="p">,</span> <span class="n">item</span> <span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">d</span><span class="o">.</span><span class="n">task_done</span><span class="p">()</span>
 
 <span class="k">class</span> <span class="nc">Dispatcher</span><span class="p">(</span><span class="n">Queue</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">Queue</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="nb">id</span><span class="n">x</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">idx</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">box</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">lock</span> <span class="o">=</span> <span class="n">Lock</span><span class="p">()</span>
 
-    <span class="k">def</span> <span class="nf">output</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="n">x</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">output</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">lock</span><span class="o">.</span><span class="n">acquire</span><span class="p">()</span>
-        <span class="k">if</span> <span class="nb">id</span><span class="n">x</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="nb">id</span><span class="n">x</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">box</span><span class="p">[</span><span class="nb">id</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">item</span>
-        <span class="k">elif</span> <span class="nb">id</span><span class="n">x</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="nb">id</span><span class="n">x</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">idx</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">idx</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">box</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">item</span>
+        <span class="k">elif</span> <span class="n">idx</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">idx</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_output</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="nb">id</span><span class="n">x</span> <span class="o">+=</span> <span class="mi">1</span>
-            <span class="k">while</span> <span class="bp">self</span><span class="o">.</span><span class="nb">id</span><span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">box</span><span class="p">:</span>
-                <span class="n">item</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">box</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="nb">id</span><span class="n">x</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">idx</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">while</span> <span class="bp">self</span><span class="o">.</span><span class="n">idx</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">box</span><span class="p">:</span>
+                <span class="n">item</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">box</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">idx</span><span class="p">]</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">_output</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
-                <span class="bp">self</span><span class="o">.</span><span class="nb">id</span><span class="n">x</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">idx</span> <span class="o">+=</span> <span class="mi">1</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">lock</span><span class="o">.</span><span class="n">release</span><span class="p">()</span>
 
@@ -117,11 +117,12 @@ blockquote p { font-size: 14px; }
 
     <span class="n">num</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="nb">open</span><span class="p">(</span><span class="s">"data"</span><span class="p">,</span> <span class="s">"r"</span><span class="p">):</span>
-        <span class="n">d</span><span class="o">.</span><span class="n">put</span><span class="p">(</span> <span class="p">(</span><span class="n">num</span><span class="p">,</span> <span class="n">line</span><span class="o">.</span><span class="nb">str</span><span class="n">ip</span><span class="p">())</span> <span class="p">)</span>
+        <span class="n">d</span><span class="o">.</span><span class="n">put</span><span class="p">(</span> <span class="p">(</span><span class="n">num</span><span class="p">,</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span> <span class="p">)</span>
         <span class="n">num</span> <span class="o">+=</span> <span class="mi">1</span>
 
     <span class="n">d</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
 </pre>
+
 <p>在300句的条件下，单线程的处理速度约为750s=12m，开4个线程后3m可以处理完成，并且输出是有序的。</p>
 
 <p>其他语言应该可以仿照这个方式编写程序，对于没有同步队列的语言，实现时可以参考这个http://hg.python.org/cpython/file/2.7/Lib/Queue.py</p>

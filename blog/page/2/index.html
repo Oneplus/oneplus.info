@@ -35,6 +35,25 @@ blockquote p { font-size: 14px; }
     <div id="content">
   <div class="row">
  <div class="col-md-1">
+    <h2 class="pull-right">29<br />
+    <small>Apr</small></h2>
+  </div>
+  <div class="col-md-11">
+    <h2><a href="/blog/2012/04/29/dynamic-member-in-python-class.html">Python对象的动态成员与__dict__</a></h2>
+    <p>在写一些python脚本时，我很喜欢用optparse module中的OptionParser对象来解析一些命令行参数。一个简单的例子如下，</p>
+
+<pre class="highlight python"><span class="n">parser</span> <span class="o">=</span> <span class="n">OptionParser</span><span class="p">()</span>
+<span class="n">parser</span><span class="o">.</span><span class="n">add_option</span><span class="p">(</span><span class="s">"-f"</span><span class="p">,</span> <span class="s">"--file"</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="s">"filename"</span><span class="p">)</span>
+<span class="p">(</span><span class="n">options</span><span class="p">,</span> <span class="n">args</span><span class="p">)</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
+</pre>
+
+<p>然后，使用options.filename可以调用–file指定的参数，这似乎也没什么神奇的。但是，在第一次用OptionParser...</p>
+    <a href="/blog/2012/04/29/dynamic-member-in-python-class.html">[READ MORE]</a>
+  </div>
+  <hr />
+</div>
+<div class="row">
+ <div class="col-md-1">
     <h2 class="pull-right">27<br />
     <small>Apr</small></h2>
   </div>
@@ -180,22 +199,6 @@ blockquote p { font-size: 14px; }
 TRACE: 09-29 07:43: * 0 [1] Week up.
 TRACE: 09-29 07:43: * 0 [2] Fresh my mind and make plan for...</pre>
     <a href="/blog/2011/09/29/log-of-mental-disorder.html">[READ MORE]</a>
-  </div>
-  <hr />
-</div>
-<div class="row">
- <div class="col-md-1">
-    <h2 class="pull-right"> 7<br />
-    <small>Aug</small></h2>
-  </div>
-  <div class="col-md-11">
-    <h2><a href="/blog/2011/08/07/two-weeks-holiday.html">Two weeks holiday</a></h2>
-    <p>从上月18号到今天，在北京已经两个多星期。现在住在回龙观地铁站旁边，上班要乘两站地铁，并不算远。同住的有王珑珑、朱涛还有王耀学长。房子有97m<sup>2</sup>，次卧学长住。主卧我们三个，并不挤。条件很好。</p>
-
-<p>两位腾讯的同学要乘班车，所以设了早上七点一刻的闹钟。结果，这个闹钟只对我有效。经过一段时间的训练，我已经形成对于闹钟的预测能力，大概在七点前就醒了。</p>
-
-<p>醒得早在合租过程中的一个好处是不会紧张洗手间，可以洗得再从容一点。洗完后还可以去卧室连着的小阳台简单的望望窗外的树。北京天气不好，经常又闷又热，唯有...</p>
-    <a href="/blog/2011/08/07/two-weeks-holiday.html">[READ MORE]</a>
   </div>
   <hr />
 </div>

@@ -1,0 +1,351 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+<title>
+  Parallel and HPC with Python (or numpy) |  Static Oneplus
+</title>
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap-responsive.min.css">
+<style type="text/css">
+.prettyprint ol.linenums > li { list-style-type: decimal; }
+.nav { }
+.nav li { float: left; width: 70px; }
+.content { padding: 30px 0; }
+body, h1, h2, h3, h4 { font-family: "Fjalla One","Georgia","Helvetica Neue",Arial,sans-serif;}
+header { width: 100%; height: 80px;}
+blockquote p { font-size: 14px; }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <header class="header">
+    <h1 class="site_title">Static Oneplus <small>不可控制论</small></h1>
+    <ul class="nav pull-right">
+      <li><a href="/">Home</a></li>
+      <li><a href="/cv">CV</a></li>
+      <li><a href="/blog">Blog</a></li>
+      <li><a href="/notes">Notes</a></li>
+      <li><a href="/feed.xml">RSS</a></li>
+    </ul>
+  </header>
+
+  <div class="content">
+    <div style="color:#999;">
+  <small>2014/04/25 - by
+    Oneplus
+
+    
+  </small>
+</div>
+<h2>Parallel and HPC with Python (or numpy)</h2>
+<hr />
+<div>
+  <p>For guys working with natural language processing problems, it’s daily task to process
+tons of data. To handle the millions of lines of sentences, I would prefer C/C++ or
+Java in the past, especially at certain scenario like performing machine learning algorithm
+onto the data. However, in this days, I wrote a very slow python program (and working around
+<code>numpy</code>, it’s an important clue for future story). After wasting too much time on this single
+thread program, I decided to parallel it.</p>
+
+<h3 id="buzz-in-the-task">Buzz in the task</h3>
+
+<p>Let me briefly introduce my task (It’s usually important for choosing the appropriate
+parallel model). I have a collection of data which contains about 200 thousand entries.
+My algorithm is some kind of <code>loop-loop</code> and can be illustrated as the following pseudocode.</p>
+
+<pre class="highlight python"><span class="k">while</span> <span class="ow">not</span> <span class="n">terminal</span><span class="o">-</span><span class="n">condition</span><span class="p">:</span>
+    <span class="n">init</span><span class="p">(</span><span class="n">global_vector</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">instance</span> <span class="ow">in</span> <span class="n">instances</span><span class="p">:</span>
+        <span class="n">global_vector</span> <span class="o">+=</span> <span class="n">time</span><span class="o">-</span><span class="n">consuming</span><span class="o">-</span><span class="n">process</span><span class="p">(</span><span class="n">instance</span><span class="p">)</span>
+    <span class="n">do</span><span class="o">-</span><span class="n">something</span><span class="p">(</span><span class="n">global_vector</span><span class="p">)</span>
+</pre>
+
+<p>Since the <code>time-consuming-process</code> is very time consuming, we can easily use a <code>producer</code>
+to distribute these tasks onto several <code>consumers</code>. What a textbook parallel model! To
+make it more clear, also for convenience of future discussion, let me put it into some
+meaningless but runnable code.</p>
+
+<pre class="highlight python"><span class="c">#!/usr/bin/env python</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">time</span>
+
+<span class="n">nr_instances</span> <span class="o">=</span> <span class="mi">2000</span>
+<span class="n">nr_dim</span> <span class="o">=</span> <span class="mi">257241</span>
+
+<span class="k">def</span> <span class="nf">do_something</span><span class="p">(</span><span class="n">vector</span><span class="p">):</span>
+    <span class="k">pass</span>
+
+<span class="k">def</span> <span class="nf">consumer</span><span class="p">():</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>                 <span class="c"># use to simulate the time consuming</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">nr_dim</span><span class="p">)</span>      <span class="c"># numpy array operation.</span>
+    <span class="n">ret</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">nr_dim</span><span class="p">)</span>
+    <span class="n">ret</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">nr_dim</span><span class="p">,</span> <span class="mi">20</span><span class="p">)]</span> <span class="o">+=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">ret</span>
+
+<span class="k">def</span> <span class="nf">producer</span><span class="p">():</span>
+    <span class="n">global_vector</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">nr_dim</span><span class="p">)</span>
+    <span class="n">instances</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="n">nr_instances</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">instance</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">instances</span><span class="p">):</span>
+        <span class="n">global_vector</span> <span class="o">+=</span> <span class="n">consumer</span><span class="p">()</span>
+    <span class="n">do_something</span><span class="p">(</span><span class="n">global_vector</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">__name__</span><span class="o">==</span><span class="s">"__main__"</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+        <span class="n">producer</span><span class="p">()</span>
+        <span class="k">print</span> <span class="s">"iter </span><span class="si">%</span><span class="s">d is done."</span> <span class="o">%</span> <span class="n">i</span>
+</pre>
+
+<p>A simple <code>time</code> command shows the above code runs <code>1m29.155s</code> on my server.</p>
+
+<h3 id="threading">Threading</h3>
+
+<p>As I mentioned before, I decide to paralled the above code. First thing that came into
+my mind is the <strong>threading</strong>. According to my past experience, multi-threaded programming
+is always the best choice when you have a server with several cores.</p>
+
+<p>Distributing the producer’s to several thread can be painless done with python <code>threading</code>
+module. The producer’s job is dividing the instances into several groups, feed them to each
+of the thread and wait all these threads finish their work. A wrapper for the consumer is
+implemented for recieveing data and invoke meta-consumer process.</p>
+
+<p>After a slight modification on the above program, it became the multi-threaded version.</p>
+
+<pre class="highlight python"><span class="c">#!/usr/bin/env python</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">threading</span>
+<span class="kn">from</span> <span class="nn">basic</span> <span class="kn">import</span> <span class="n">consumer</span><span class="p">,</span> <span class="n">do_something</span><span class="p">,</span> <span class="n">nr_instances</span><span class="p">,</span> <span class="n">nr_dim</span>
+
+<span class="n">nr_threads</span> <span class="o">=</span> <span class="mi">4</span>
+
+<span class="k">def</span> <span class="nf">consumer_wrapper</span><span class="p">(</span><span class="n">instances</span><span class="p">,</span> <span class="n">results</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
+    <span class="n">global_vector</span><span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">nr_dim</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">instance</span> <span class="ow">in</span> <span class="n">instances</span><span class="p">:</span>
+        <span class="n">global_vector</span> <span class="o">+=</span> <span class="n">consumer</span><span class="p">()</span>
+    <span class="n">results</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="n">global_vector</span>
+
+<span class="k">def</span> <span class="nf">producer</span><span class="p">():</span>
+    <span class="n">global_vector</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">nr_dim</span><span class="p">)</span>
+    <span class="n">instances</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="n">nr_instances</span><span class="p">)</span>
+    <span class="n">threads</span> <span class="o">=</span> <span class="p">[</span><span class="bp">None</span><span class="p">]</span> <span class="o">*</span> <span class="n">nr_threads</span>
+    <span class="n">results</span> <span class="o">=</span> <span class="p">[</span><span class="bp">None</span><span class="p">]</span> <span class="o">*</span> <span class="n">nr_threads</span>
+    <span class="n">fence</span> <span class="o">=</span> <span class="n">nr_instances</span> <span class="o">/</span> <span class="n">nr_threads</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="n">nr_threads</span><span class="p">):</span>
+        <span class="n">chunk</span> <span class="o">=</span> <span class="n">instances</span><span class="p">[</span><span class="n">i</span><span class="o">*</span><span class="n">fence</span><span class="p">:</span> <span class="p">(</span><span class="n">L</span> <span class="k">if</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="o">==</span><span class="n">nr_instances</span> <span class="k">else</span> <span class="n">i</span><span class="o">*</span><span class="n">fence</span><span class="o">+</span><span class="n">fence</span><span class="p">)]</span>
+        <span class="n">threads</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">consumer_wrapper</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">chunk</span><span class="p">,</span> <span class="n">results</span><span class="p">,</span> <span class="n">i</span><span class="p">))</span>
+        <span class="n">threads</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="n">nr_threads</span><span class="p">):</span>
+        <span class="n">threads</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
+    <span class="n">global_vector</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">results</span><span class="p">)</span>
+    <span class="n">do_something</span><span class="p">(</span><span class="n">global_vector</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">__name__</span><span class="o">==</span><span class="s">"__main__"</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+        <span class="n">producer</span><span class="p">()</span>
+        <span class="k">print</span> <span class="s">"iter </span><span class="si">%</span><span class="s">d is done."</span> <span class="o">%</span> <span class="n">i</span>
+</pre>
+
+<p>I was expecting that the multi-threaded version will bring 2 to 3 times speed up if I
+config the program with 4 threads. However, this code run <code>1m33.678s</code> on the same server.
+I can’t even believe that a multi-threaded program runs slower than the single-threaded
+program.</p>
+
+<p>After a survey on this issue, I found the answer. It suffer from the Python GIL which
+prevent the script running on two cores. There are lots of article talking about the
+GIL problems, so I won’t write more on this. The conclusion is that <em>multi-threaded in
+Python doesn’t work for my task</em>.</p>
+
+<h3 id="multiprocessing">Multiprocessing</h3>
+
+<p>The failure of multi-threaded program drive me to seek for some alternative and I found
+the <code>multiprocessing</code> module. At the begining of its document page, it says,</p>
+
+<blockquote>
+  <p><em>effectively side-stepping the Global Interpreter Lock by using subprocesses instead of threads</em></p>
+</blockquote>
+
+<p>To my understanding, the mechanism of multiprocessing module is treating the each thread
+as a process. When creating a thread, it actually copy(fork) the entire processing into
+a new process.</p>
+
+<pre class="highlight python"><span class="c">#!/usr/bin/env python</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">from</span> <span class="nn">multiprocessing</span> <span class="kn">import</span> <span class="n">Pool</span>
+<span class="kn">from</span> <span class="nn">basic</span> <span class="kn">import</span> <span class="n">consumer</span><span class="p">,</span> <span class="n">do_something</span><span class="p">,</span> <span class="n">nr_dim</span><span class="p">,</span> <span class="n">nr_instances</span>
+
+<span class="n">nr_threads</span> <span class="o">=</span> <span class="mi">4</span>
+
+<span class="k">def</span> <span class="nf">consumer_wrapper</span><span class="p">(</span><span class="n">instances</span><span class="p">):</span>
+    <span class="n">global_vector</span><span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">nr_dim</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">instance</span> <span class="ow">in</span> <span class="n">instances</span><span class="p">:</span>
+        <span class="n">global_vector</span> <span class="o">+=</span> <span class="n">consumer</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">global_vector</span>
+
+<span class="k">def</span> <span class="nf">producer</span><span class="p">():</span>
+    <span class="n">instances</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="n">nr_instances</span><span class="p">)</span>
+    <span class="n">pool</span> <span class="o">=</span> <span class="n">Pool</span><span class="p">(</span><span class="n">processes</span> <span class="o">=</span> <span class="n">nr_threads</span><span class="p">)</span>
+    <span class="n">L</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">instances</span><span class="p">)</span>
+    <span class="n">fence</span> <span class="o">=</span> <span class="n">nr_instances</span> <span class="o">/</span> <span class="n">nr_threads</span>
+    <span class="n">arguments</span> <span class="o">=</span> <span class="p">[(</span><span class="n">instances</span><span class="p">[</span><span class="n">i</span><span class="o">*</span><span class="n">fence</span><span class="p">:(</span><span class="n">L</span> <span class="k">if</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="o">==</span><span class="n">nr_threads</span> <span class="k">else</span> <span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">fence</span><span class="p">)])</span> \
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="n">nr_threads</span><span class="p">)]</span>
+
+    <span class="n">global_vector</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">pool</span><span class="o">.</span><span class="nb">map</span><span class="p">(</span><span class="n">consumer_wrapper</span><span class="p">,</span> <span class="n">arguments</span><span class="p">))</span>
+    <span class="n">pool</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="n">pool</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
+    <span class="n">do_something</span><span class="p">(</span><span class="n">global_vector</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">__name__</span><span class="o">==</span><span class="s">"__main__"</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+        <span class="n">producer</span><span class="p">()</span>
+        <span class="k">print</span> <span class="s">"iter </span><span class="si">%</span><span class="s">d fin"</span> <span class="o">%</span> <span class="n">i</span>
+</pre>
+
+<p>It takes <code>0m33.970s</code> for the multiprocessing version to run. The multiprocessing module
+bring in about 2.5 times speed up.</p>
+
+<p>However, one disappointing feature of multiprocessing is it copy entire program, therefore
+resulting in large memory consumption. This feature make it very unscalable if the <em>single
+process version</em> consume a lot of memory. In my experiments, my script consume 8G memory.
+If I apply it to 8 processors, the program explode into 64G (or more), almost reach the
+limit of the server.</p>
+
+<h3 id="mpi">MPI</h3>
+
+<p>The first time I meet <code>MPI</code> is that I read some source code of a machine-translation toolkit.
+The MPI module is embeded in a mess of C++ code and make it very difficult to understand.</p>
+
+<p>Now it came to me again because the document page claims that</p>
+
+<blockquote>
+  <p>MPI is not an IEEE or ISO standard, but has in fact, become the “industry standard”
+for writing message passing programs on HPC platforms.</p>
+</blockquote>
+
+<p>My supervisor also endorse it. It seems a widely used library for parallel programming.
+And its Python embedding also makes it less painful (or painless) to use.</p>
+
+<p>In MPI, the producer-consumer model can be very clearly implemented by letting the zero-ranked
+(or master) program distribute the instances (or tasks), keep recieveing data from consumer.
+Running status of the consumers can be easily obtain by check the <code>tag</code> field of the recieved
+data.</p>
+
+<p>Revisiting my problem, the MPI version is shown blow.</p>
+
+<pre class="highlight python"><span class="c">#!/usr/bin/env python</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">from</span> <span class="nn">mpi4py</span> <span class="kn">import</span> <span class="n">MPI</span>
+<span class="kn">from</span> <span class="nn">basic</span> <span class="kn">import</span> <span class="n">consumer</span><span class="p">,</span> <span class="n">do_something</span><span class="p">,</span> <span class="n">nr_dim</span><span class="p">,</span> <span class="n">nr_instances</span>
+
+<span class="n">READY</span><span class="p">,</span> <span class="n">START</span><span class="p">,</span> <span class="n">DONE</span><span class="p">,</span> <span class="n">EXIT</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span>
+<span class="n">comm</span> <span class="o">=</span> <span class="n">MPI</span><span class="o">.</span><span class="n">COMM_WORLD</span>
+<span class="n">size</span> <span class="o">=</span> <span class="n">comm</span><span class="o">.</span><span class="n">size</span>
+<span class="n">rank</span> <span class="o">=</span> <span class="n">comm</span><span class="o">.</span><span class="n">rank</span>
+<span class="n">status</span> <span class="o">=</span> <span class="n">MPI</span><span class="o">.</span><span class="n">Status</span><span class="p">()</span>
+
+<span class="k">def</span> <span class="nf">consumer_daemon</span><span class="p">():</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">MPI</span><span class="o">.</span><span class="n">Get_processor_name</span><span class="p">()</span>
+    <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+        <span class="n">comm</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">tag</span><span class="o">=</span><span class="n">READY</span><span class="p">)</span>
+        <span class="n">task</span> <span class="o">=</span> <span class="n">comm</span><span class="o">.</span><span class="n">recv</span><span class="p">(</span><span class="n">source</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">tag</span><span class="o">=</span><span class="n">MPI</span><span class="o">.</span><span class="n">ANY_TAG</span><span class="p">,</span> <span class="n">status</span><span class="o">=</span><span class="n">status</span><span class="p">)</span>
+        <span class="n">tag</span> <span class="o">=</span> <span class="n">status</span><span class="o">.</span><span class="n">Get_tag</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">tag</span> <span class="o">==</span> <span class="n">START</span><span class="p">:</span>
+            <span class="n">instances</span> <span class="o">=</span> <span class="n">task</span>
+            <span class="n">global_vector</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">nr_dim</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">instance</span> <span class="ow">in</span> <span class="n">instances</span><span class="p">:</span>
+                <span class="n">global_vector</span> <span class="o">+=</span> <span class="n">consumer</span><span class="p">()</span>
+            <span class="n">comm</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">global_vector</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">tag</span><span class="o">=</span><span class="n">DONE</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">tag</span> <span class="o">==</span> <span class="n">EXIT</span><span class="p">:</span>
+            <span class="k">break</span>
+    <span class="n">comm</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">tag</span><span class="o">=</span><span class="n">EXIT</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">producer</span><span class="p">():</span>
+    <span class="n">instances</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="n">nr_instances</span><span class="p">)</span>
+    <span class="n">L</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">instances</span><span class="p">)</span>
+    <span class="n">fence</span> <span class="o">=</span> <span class="n">L</span><span class="o">/</span> <span class="p">(</span><span class="n">size</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">arguments</span> <span class="o">=</span> <span class="p">[(</span><span class="n">instances</span><span class="p">[</span><span class="n">i</span><span class="o">*</span><span class="n">fence</span><span class="p">:(</span><span class="n">L</span> <span class="k">if</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="o">==</span><span class="n">size</span><span class="o">-</span><span class="mi">1</span> <span class="k">else</span> <span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">fence</span><span class="p">)])</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="n">size</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">size</span><span class="p">):</span>
+        <span class="n">comm</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">arguments</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">dest</span><span class="o">=</span><span class="n">i</span><span class="p">,</span> <span class="n">tag</span><span class="o">=</span><span class="n">START</span><span class="p">)</span>
+    <span class="n">finished</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">global_vector</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">nr_dim</span><span class="p">)</span>
+    <span class="k">while</span> <span class="n">finished</span> <span class="o">&lt;</span> <span class="n">size</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">comm</span><span class="o">.</span><span class="n">recv</span><span class="p">(</span><span class="n">source</span><span class="o">=</span><span class="n">MPI</span><span class="o">.</span><span class="n">ANY_SOURCE</span><span class="p">,</span> <span class="n">tag</span><span class="o">=</span><span class="n">MPI</span><span class="o">.</span><span class="n">ANY_TAG</span><span class="p">,</span> <span class="n">status</span><span class="o">=</span><span class="n">status</span><span class="p">)</span>
+        <span class="n">tag</span> <span class="o">=</span> <span class="n">status</span><span class="o">.</span><span class="n">Get_tag</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">tag</span> <span class="o">==</span> <span class="n">DONE</span><span class="p">:</span>
+            <span class="n">global_vector</span> <span class="o">+=</span> <span class="n">data</span>
+            <span class="n">finished</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="n">do_something</span><span class="p">(</span><span class="n">global_vector</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">__name__</span><span class="o">==</span><span class="s">"__main__"</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">rank</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+            <span class="n">producer</span><span class="p">()</span>
+            <span class="k">print</span> <span class="s">"iter </span><span class="si">%</span><span class="s">d is done."</span> <span class="o">%</span> <span class="n">i</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">size</span><span class="p">):</span>
+            <span class="n">comm</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="n">i</span><span class="p">,</span> <span class="n">tag</span><span class="o">=</span><span class="n">EXIT</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">consumer_daemon</span><span class="p">()</span>
+</pre>
+<p>Under same settings, the above program runs <code>0m31.332s</code> and it memory performance is better
+than the multiprocessing version. One reason for the faster speed, I think, is the consumer
+wasn’t shut down between each iterations.</p>
+
+<h3 id="summary">Summary</h3>
+
+<p>When it comes to the topic of paralleling in Python, my advice is avoid using <code>threading</code>
+especially with some code that will trigger GIL. If the task only takes a little memory,
+my advice is the <code>multiprocessing</code>, because it’s easier to use and easier to switch from
+threading-oriented program. If you decide to make it a <em>real</em> paralleled program (aka, 
+using it on multi-cores server or even across several servers), mpi4py is no doubt a better
+choice.</p>
+
+<h4 id="reference">Reference</h4>
+
+<ul>
+  <li>There are also some unlucky guys who found Python threading is slower: <a href="http://stackoverflow.com/questions/3121109/python-threading-unexpectedly-slower">Python threading unexpectedly slower</a></li>
+  <li>Introduction to MPI : <a href="https://computing.llnl.gov/tutorials/mpi/">Message Passing Interface (MPI)</a></li>
+  <li>And the Python embedding : <a href="http://mpi4py.scipy.org/">MPI4Py - SciPy</a></li>
+  <li>And some fancy examples! : <a href="https://github.com/jbornschein/mpi4py-examples">jbornschein/mpi4py-examples</a></li>
+</ul>
+
+</div>
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+var disqus_shortname = 'yjliu'; // required: replace example with your forum shortname
+/* * * DON'T EDIT BELOW THIS LINE * * */
+(function() {
+ var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+ dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+ (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+ })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+  </div>
+
+  <footer class="text-center">
+    &copy; <a href="http://yjliu.net/">Static Oneplus</a> 2010 - 2014 |
+    This site is built by <a href="http://middlemanapp.com/" target="_blank">Middleman</a> and
+    <a href="http://getbootstrap.com/">bootstrap</a>.
+  </footer>
+</div>
+
+
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+ (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+ })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-20774106-1', 'yjliu.net');
+ga('send', 'pageview');
+</script>
+<script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
+</body>
+</html>

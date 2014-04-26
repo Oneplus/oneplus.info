@@ -69,8 +69,8 @@ blockquote p { font-size: 14px; }
 
 <span class="n">sourceNumState</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
 <span class="n">targetNumState</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
-<span class="nb">hash</span><span class="n">edSourceNumState</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
-<span class="nb">hash</span><span class="n">edTargetNumState</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+<span class="n">hashedSourceNumState</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+<span class="n">hashedTargetNumState</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
 
 <span class="n">distance</span> <span class="o">=</span> <span class="p">[</span>
 	<span class="p">[</span><span class="mi">0</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)]</span> <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
@@ -124,31 +124,31 @@ blockquote p { font-size: 14px; }
 		<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span>
 
 <span class="k">class</span> <span class="nc">hash</span><span class="p">():</span>
-	<span class="nb">hash</span><span class="n">Table</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">SIZE</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+	<span class="n">hashTable</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">SIZE</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 	
 	<span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 		<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">SIZE</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span>
-			<span class="bp">self</span><span class="o">.</span><span class="nb">hash</span><span class="n">Table</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">hashTable</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
 
 	<span class="k">def</span> <span class="nf">findHashPosition</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
-		<span class="nb">hash</span><span class="n">ID</span> <span class="o">=</span> <span class="n">value</span> <span class="o">%</span> <span class="n">SIZE</span>
-		<span class="k">while</span> <span class="bp">self</span><span class="o">.</span><span class="nb">hash</span><span class="n">Table</span><span class="p">[</span><span class="nb">hash</span><span class="n">ID</span><span class="p">]</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="nb">hash</span><span class="n">Table</span><span class="p">[</span><span class="nb">hash</span><span class="n">ID</span><span class="p">]</span> <span class="o">!=</span> <span class="n">value</span><span class="p">:</span>
+		<span class="n">hashID</span> <span class="o">=</span> <span class="n">value</span> <span class="o">%</span> <span class="n">SIZE</span>
+		<span class="k">while</span> <span class="bp">self</span><span class="o">.</span><span class="n">hashTable</span><span class="p">[</span><span class="n">hashID</span><span class="p">]</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">hashTable</span><span class="p">[</span><span class="n">hashID</span><span class="p">]</span> <span class="o">!=</span> <span class="n">value</span><span class="p">:</span>
 			<span class="c"># print 'in while', self.hashTable[hashID]</span>
-			<span class="nb">hash</span><span class="n">ID</span> <span class="o">=</span> <span class="nb">hash</span><span class="n">ID</span> <span class="o">+</span> <span class="mi">1</span>
-			<span class="k">if</span> <span class="nb">hash</span><span class="n">ID</span> <span class="o">==</span> <span class="n">SIZE</span><span class="p">:</span>
-				<span class="nb">hash</span><span class="n">ID</span> <span class="o">=</span> <span class="mi">0</span>
-		<span class="k">return</span> <span class="nb">hash</span><span class="n">ID</span>
+			<span class="n">hashID</span> <span class="o">=</span> <span class="n">hashID</span> <span class="o">+</span> <span class="mi">1</span>
+			<span class="k">if</span> <span class="n">hashID</span> <span class="o">==</span> <span class="n">SIZE</span><span class="p">:</span>
+				<span class="n">hashID</span> <span class="o">=</span> <span class="mi">0</span>
+		<span class="k">return</span> <span class="n">hashID</span>
 			
 	<span class="k">def</span> <span class="nf">findHashValue</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">position</span><span class="p">):</span>
 		<span class="k">if</span> <span class="n">position</span> <span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span><span class="o">=</span> <span class="n">SIZE</span> <span class="ow">or</span> <span class="n">position</span> <span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span> <span class="mi">0</span><span class="p">:</span>
 			<span class="k">return</span> <span class="o">-</span><span class="mi">1</span>
 		<span class="k">else</span><span class="p">:</span>
-			<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="nb">hash</span><span class="n">Table</span><span class="p">[</span><span class="n">position</span><span class="p">]</span>
+			<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">hashTable</span><span class="p">[</span><span class="n">position</span><span class="p">]</span>
 			
 	<span class="k">def</span> <span class="nf">insertHash</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
 		<span class="n">position</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">findHashPosition</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
 		<span class="c"># print 'insertHash:: hash position :', position</span>
-		<span class="bp">self</span><span class="o">.</span><span class="nb">hash</span><span class="n">Table</span><span class="p">[</span><span class="n">position</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">hashTable</span><span class="p">[</span><span class="n">position</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
 		<span class="k">return</span> <span class="n">position</span>
 		
 <span class="k">class</span> <span class="nc">priority_queue</span><span class="p">():</span>
@@ -183,7 +183,7 @@ blockquote p { font-size: 14px; }
 	
 	<span class="k">def</span> <span class="nf">getF</span><span class="p">(</span> <span class="bp">self</span><span class="p">,</span> <span class="n">p</span> <span class="p">):</span>
 		<span class="c"># print self.queue[ p ]</span>
-		<span class="k">return</span> <span class="n">f</span><span class="p">[</span> <span class="nb">hash</span><span class="n">Table</span><span class="o">.</span><span class="n">findHashPosition</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">queue</span><span class="p">[</span> <span class="n">p</span> <span class="p">])</span> <span class="p">]</span>
+		<span class="k">return</span> <span class="n">f</span><span class="p">[</span> <span class="n">hashTable</span><span class="o">.</span><span class="n">findHashPosition</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">queue</span><span class="p">[</span> <span class="n">p</span> <span class="p">])</span> <span class="p">]</span>
 	
 	<span class="k">def</span> <span class="nf">siftUp</span><span class="p">(</span> <span class="bp">self</span><span class="p">,</span> <span class="n">p</span> <span class="p">):</span>
 		<span class="n">i</span> <span class="o">=</span> <span class="n">p</span> <span class="o">/</span> <span class="mi">2</span>
@@ -214,8 +214,8 @@ blockquote p { font-size: 14px; }
 				<span class="n">i</span> <span class="o">=</span> <span class="n">j</span> <span class="o">*</span> <span class="mi">2</span>
 		<span class="bp">self</span><span class="o">.</span><span class="n">queue</span><span class="p">[</span> <span class="n">j</span> <span class="p">]</span> <span class="o">=</span> <span class="n">tmp</span>
 
-<span class="nb">open</span><span class="n">Table</span> <span class="o">=</span> <span class="n">priority_queue</span><span class="p">()</span>
-<span class="nb">hash</span><span class="n">Table</span> <span class="o">=</span> <span class="nb">hash</span><span class="p">()</span>
+<span class="n">openTable</span> <span class="o">=</span> <span class="n">priority_queue</span><span class="p">()</span>
+<span class="n">hashTable</span> <span class="o">=</span> <span class="nb">hash</span><span class="p">()</span>
 <span class="n">closeTable</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">SIZE</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 		
 <span class="k">def</span> <span class="nf">convertToNum</span><span class="p">(</span> <span class="n">arrayState</span> <span class="p">):</span>
@@ -286,64 +286,64 @@ blockquote p { font-size: 14px; }
 			
 	<span class="n">sourceNumState</span> <span class="o">=</span> <span class="n">convertToNum</span><span class="p">(</span><span class="n">srcArrayState</span><span class="p">)</span>
 	<span class="n">targetNumState</span> <span class="o">=</span> <span class="n">convertToNum</span><span class="p">(</span><span class="n">tagArrayState</span><span class="p">)</span>
-	<span class="nb">hash</span><span class="n">edSourceNumState</span> <span class="o">=</span> <span class="nb">hash</span><span class="n">Table</span><span class="o">.</span><span class="n">insertHash</span><span class="p">(</span><span class="n">sourceNumState</span><span class="p">)</span>
-	<span class="nb">hash</span><span class="n">edTargetNumState</span> <span class="o">=</span> <span class="nb">hash</span><span class="n">Table</span><span class="o">.</span><span class="n">insertHash</span><span class="p">(</span><span class="n">targetNumState</span><span class="p">)</span>
+	<span class="n">hashedSourceNumState</span> <span class="o">=</span> <span class="n">hashTable</span><span class="o">.</span><span class="n">insertHash</span><span class="p">(</span><span class="n">sourceNumState</span><span class="p">)</span>
+	<span class="n">hashedTargetNumState</span> <span class="o">=</span> <span class="n">hashTable</span><span class="o">.</span><span class="n">insertHash</span><span class="p">(</span><span class="n">targetNumState</span><span class="p">)</span>
 	
 	<span class="c"># print 'sourceNumState :', sourceNumState, hashedSourceNumState</span>
-	<span class="n">g</span><span class="p">[</span> <span class="nb">hash</span><span class="n">edSourceNumState</span> <span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-	<span class="n">f</span><span class="p">[</span> <span class="nb">hash</span><span class="n">edSourceNumState</span> <span class="p">]</span> <span class="o">=</span> <span class="n">getEstimateValue</span><span class="p">(</span><span class="n">srcArrayState</span><span class="p">)</span>
-	<span class="n">f</span><span class="p">[</span> <span class="nb">hash</span><span class="n">edTargetNumState</span> <span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
-	<span class="nb">open</span><span class="n">Table</span><span class="o">.</span><span class="n">push</span><span class="p">(</span> <span class="n">node</span><span class="p">(</span><span class="n">sourceNumState</span><span class="p">,</span> <span class="n">f</span><span class="p">[</span> <span class="nb">hash</span><span class="n">edSourceNumState</span> <span class="p">])</span> <span class="p">)</span>
+	<span class="n">g</span><span class="p">[</span> <span class="n">hashedSourceNumState</span> <span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+	<span class="n">f</span><span class="p">[</span> <span class="n">hashedSourceNumState</span> <span class="p">]</span> <span class="o">=</span> <span class="n">getEstimateValue</span><span class="p">(</span><span class="n">srcArrayState</span><span class="p">)</span>
+	<span class="n">f</span><span class="p">[</span> <span class="n">hashedTargetNumState</span> <span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+	<span class="n">openTable</span><span class="o">.</span><span class="n">push</span><span class="p">(</span> <span class="n">node</span><span class="p">(</span><span class="n">sourceNumState</span><span class="p">,</span> <span class="n">f</span><span class="p">[</span> <span class="n">hashedSourceNumState</span> <span class="p">])</span> <span class="p">)</span>
 	
 	<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
-		<span class="n">currentNumState</span> <span class="o">=</span> <span class="nb">open</span><span class="n">Table</span><span class="o">.</span><span class="n">top</span><span class="p">()</span><span class="o">.</span><span class="n">key</span>
+		<span class="n">currentNumState</span> <span class="o">=</span> <span class="n">openTable</span><span class="o">.</span><span class="n">top</span><span class="p">()</span><span class="o">.</span><span class="n">key</span>
 		<span class="n">currentArrayState</span> <span class="o">=</span> <span class="n">convertToArray</span><span class="p">(</span> <span class="n">currentNumState</span> <span class="p">)</span>
-		<span class="nb">hash</span><span class="n">edCurrentNumState</span> <span class="o">=</span> <span class="nb">hash</span><span class="n">Table</span><span class="o">.</span><span class="n">insertHash</span><span class="p">(</span> <span class="n">currentNumState</span> <span class="p">)</span>
-		<span class="nb">open</span><span class="n">Table</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+		<span class="n">hashedCurrentNumState</span> <span class="o">=</span> <span class="n">hashTable</span><span class="o">.</span><span class="n">insertHash</span><span class="p">(</span> <span class="n">currentNumState</span> <span class="p">)</span>
+		<span class="n">openTable</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
 		<span class="c"># print 'currentNumState :', currentNumState, hashedCurrentNumState</span>
 		<span class="c"># raw_input(&amp;quot;Press ENTER to exit&amp;quot;)</span>
 		
 		<span class="k">if</span> <span class="n">currentNumState</span> <span class="o">==</span> <span class="n">targetNumState</span><span class="p">:</span>
 			<span class="n">stack</span> <span class="o">=</span> <span class="p">[]</span>
 			<span class="n">traceNumState</span> <span class="o">=</span> <span class="n">currentNumState</span>
-			<span class="nb">hash</span><span class="n">edTraceNumState</span> <span class="o">=</span> <span class="nb">hash</span><span class="n">Table</span><span class="o">.</span><span class="n">insertHash</span><span class="p">(</span><span class="n">traceNumState</span><span class="p">)</span>
-			<span class="k">while</span> <span class="nb">hash</span><span class="n">edTraceNumState</span> <span class="o">!=</span> <span class="nb">hash</span><span class="n">edSourceNumState</span><span class="p">:</span>
-				<span class="n">stack</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="n">step</span><span class="p">[</span> <span class="nb">hash</span><span class="n">edTraceNumState</span> <span class="p">]</span> <span class="p">)</span>
-				<span class="nb">hash</span><span class="n">edTraceNumState</span> <span class="o">=</span> <span class="n">path</span><span class="p">[</span> <span class="nb">hash</span><span class="n">edTraceNumState</span> <span class="p">]</span>
+			<span class="n">hashedTraceNumState</span> <span class="o">=</span> <span class="n">hashTable</span><span class="o">.</span><span class="n">insertHash</span><span class="p">(</span><span class="n">traceNumState</span><span class="p">)</span>
+			<span class="k">while</span> <span class="n">hashedTraceNumState</span> <span class="o">!=</span> <span class="n">hashedSourceNumState</span><span class="p">:</span>
+				<span class="n">stack</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="n">step</span><span class="p">[</span> <span class="n">hashedTraceNumState</span> <span class="p">]</span> <span class="p">)</span>
+				<span class="n">hashedTraceNumState</span> <span class="o">=</span> <span class="n">path</span><span class="p">[</span> <span class="n">hashedTraceNumState</span> <span class="p">]</span>
 
 			<span class="k">for</span> <span class="n">move</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span> <span class="n">stack</span> <span class="p">):</span>
 				<span class="k">print</span> <span class="n">move</span>
 			<span class="k">break</span>
 		
-		<span class="n">closeTable</span><span class="p">[</span> <span class="nb">hash</span><span class="n">edCurrentNumState</span> <span class="p">]</span> <span class="o">=</span> <span class="mi">2</span>
+		<span class="n">closeTable</span><span class="p">[</span> <span class="n">hashedCurrentNumState</span> <span class="p">]</span> <span class="o">=</span> <span class="mi">2</span>
 		<span class="n">emptyPosition</span> <span class="o">=</span> <span class="n">getEmptyPositionInArray</span><span class="p">(</span> <span class="n">currentArrayState</span> <span class="p">)</span>
 		
-		<span class="k">for</span> <span class="nb">next</span><span class="n">Position</span> <span class="ow">in</span> <span class="n">adjancy</span><span class="p">[</span> <span class="n">emptyPosition</span> <span class="p">]:</span>
-			<span class="nb">next</span><span class="n">ArrayState</span> <span class="o">=</span> <span class="p">[]</span>
+		<span class="k">for</span> <span class="n">nextPosition</span> <span class="ow">in</span> <span class="n">adjancy</span><span class="p">[</span> <span class="n">emptyPosition</span> <span class="p">]:</span>
+			<span class="n">nextArrayState</span> <span class="o">=</span> <span class="p">[]</span>
 			<span class="k">for</span> <span class="n">ii</span> <span class="ow">in</span> <span class="n">currentArrayState</span><span class="p">:</span>
-				<span class="nb">next</span><span class="n">ArrayState</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">ii</span><span class="p">))</span>
+				<span class="n">nextArrayState</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">ii</span><span class="p">))</span>
 			
-			<span class="nb">next</span><span class="n">ArrayState</span><span class="p">[</span> <span class="n">emptyPosition</span> <span class="p">]</span> <span class="o">=</span> <span class="n">currentArrayState</span><span class="p">[</span> <span class="nb">next</span><span class="n">Position</span> <span class="p">]</span>
-			<span class="nb">next</span><span class="n">ArrayState</span><span class="p">[</span> <span class="nb">next</span><span class="n">Position</span> <span class="p">]</span>  <span class="o">=</span> <span class="s">'0'</span>
+			<span class="n">nextArrayState</span><span class="p">[</span> <span class="n">emptyPosition</span> <span class="p">]</span> <span class="o">=</span> <span class="n">currentArrayState</span><span class="p">[</span> <span class="n">nextPosition</span> <span class="p">]</span>
+			<span class="n">nextArrayState</span><span class="p">[</span> <span class="n">nextPosition</span> <span class="p">]</span>  <span class="o">=</span> <span class="s">'0'</span>
 			
 			<span class="c"># print 'nextArrayState :', nextArrayState</span>
-			<span class="nb">next</span><span class="n">NumState</span> <span class="o">=</span> <span class="n">convertToNum</span><span class="p">(</span> <span class="nb">next</span><span class="n">ArrayState</span> <span class="p">)</span>
+			<span class="n">nextNumState</span> <span class="o">=</span> <span class="n">convertToNum</span><span class="p">(</span> <span class="n">nextArrayState</span> <span class="p">)</span>
 			
-			<span class="nb">hash</span><span class="n">edNextNumState</span> <span class="o">=</span> <span class="nb">hash</span><span class="n">Table</span><span class="o">.</span><span class="n">insertHash</span><span class="p">(</span> <span class="nb">next</span><span class="n">NumState</span> <span class="p">);</span>
+			<span class="n">hashedNextNumState</span> <span class="o">=</span> <span class="n">hashTable</span><span class="o">.</span><span class="n">insertHash</span><span class="p">(</span> <span class="n">nextNumState</span> <span class="p">);</span>
 			
-			<span class="k">if</span> <span class="n">closeTable</span><span class="p">[</span> <span class="nb">hash</span><span class="n">edNextNumState</span> <span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-				<span class="n">closeTable</span><span class="p">[</span> <span class="nb">hash</span><span class="n">edNextNumState</span> <span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
-				<span class="n">g</span><span class="p">[</span> <span class="nb">hash</span><span class="n">edNextNumState</span> <span class="p">]</span> <span class="o">=</span> <span class="n">g</span><span class="p">[</span> <span class="nb">hash</span><span class="n">edCurrentNumState</span> <span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
-				<span class="n">f</span><span class="p">[</span> <span class="nb">hash</span><span class="n">edNextNumState</span> <span class="p">]</span> <span class="o">=</span> <span class="n">g</span><span class="p">[</span> <span class="nb">hash</span><span class="n">edNextNumState</span> <span class="p">]</span> <span class="o">+</span> <span class="n">getEstimateValue</span><span class="p">(</span> <span class="n">currentArrayState</span> <span class="p">)</span>
-				<span class="n">path</span><span class="p">[</span> <span class="nb">hash</span><span class="n">edNextNumState</span> <span class="p">]</span> <span class="o">=</span> <span class="nb">hash</span><span class="n">edCurrentNumState</span>
-				<span class="n">step</span><span class="p">[</span> <span class="nb">hash</span><span class="n">edNextNumState</span> <span class="p">]</span> <span class="o">=</span> <span class="n">moves</span><span class="p">[</span> <span class="n">emptyPosition</span> <span class="p">][</span> <span class="n">adjancy</span><span class="p">[</span> <span class="n">emptyPosition</span> <span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="p">(</span> <span class="nb">next</span><span class="n">Position</span> <span class="p">)</span> <span class="p">]</span>
-				<span class="nb">open</span><span class="n">Table</span><span class="o">.</span><span class="n">push</span><span class="p">(</span> <span class="n">node</span><span class="p">(</span><span class="nb">next</span><span class="n">NumState</span><span class="p">,</span> <span class="n">f</span><span class="p">[</span><span class="nb">hash</span><span class="n">edNextNumState</span><span class="p">])</span> <span class="p">)</span>
-			<span class="k">elif</span> <span class="n">closeTable</span><span class="p">[</span> <span class="nb">hash</span><span class="n">edNextNumState</span> <span class="p">]</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">g</span><span class="p">[</span> <span class="nb">hash</span><span class="n">edCurrentNumState</span> <span class="p">]</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span> <span class="n">g</span><span class="p">[</span> <span class="nb">hash</span><span class="n">edNextNumState</span> <span class="p">]:</span>
-				<span class="n">g</span><span class="p">[</span> <span class="nb">hash</span><span class="n">edNextNumState</span> <span class="p">]</span> <span class="o">=</span> <span class="n">g</span><span class="p">[</span> <span class="nb">hash</span><span class="n">edCurrentNumState</span> <span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
-				<span class="n">f</span><span class="p">[</span> <span class="nb">hash</span><span class="n">edNextNumState</span> <span class="p">]</span> <span class="o">=</span> <span class="n">g</span><span class="p">[</span> <span class="nb">hash</span><span class="n">edNextNumState</span> <span class="p">]</span> <span class="o">+</span> <span class="n">getEstimateValue</span><span class="p">(</span> <span class="n">currentArrayState</span> <span class="p">)</span>
-				<span class="n">path</span><span class="p">[</span> <span class="nb">hash</span><span class="n">edNextNumState</span> <span class="p">]</span> <span class="o">=</span> <span class="nb">hash</span><span class="n">edCurrentNumState</span>
-				<span class="n">step</span><span class="p">[</span> <span class="nb">hash</span><span class="n">edNextNumState</span> <span class="p">]</span> <span class="o">=</span> <span class="n">moves</span><span class="p">[</span> <span class="n">emptyPosition</span> <span class="p">][</span> <span class="n">adjancy</span><span class="p">[</span> <span class="n">emptyPosition</span> <span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="p">(</span> <span class="nb">next</span><span class="n">Position</span> <span class="p">)</span> <span class="p">]</span>
-				<span class="nb">open</span><span class="n">Table</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+			<span class="k">if</span> <span class="n">closeTable</span><span class="p">[</span> <span class="n">hashedNextNumState</span> <span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+				<span class="n">closeTable</span><span class="p">[</span> <span class="n">hashedNextNumState</span> <span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+				<span class="n">g</span><span class="p">[</span> <span class="n">hashedNextNumState</span> <span class="p">]</span> <span class="o">=</span> <span class="n">g</span><span class="p">[</span> <span class="n">hashedCurrentNumState</span> <span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
+				<span class="n">f</span><span class="p">[</span> <span class="n">hashedNextNumState</span> <span class="p">]</span> <span class="o">=</span> <span class="n">g</span><span class="p">[</span> <span class="n">hashedNextNumState</span> <span class="p">]</span> <span class="o">+</span> <span class="n">getEstimateValue</span><span class="p">(</span> <span class="n">currentArrayState</span> <span class="p">)</span>
+				<span class="n">path</span><span class="p">[</span> <span class="n">hashedNextNumState</span> <span class="p">]</span> <span class="o">=</span> <span class="n">hashedCurrentNumState</span>
+				<span class="n">step</span><span class="p">[</span> <span class="n">hashedNextNumState</span> <span class="p">]</span> <span class="o">=</span> <span class="n">moves</span><span class="p">[</span> <span class="n">emptyPosition</span> <span class="p">][</span> <span class="n">adjancy</span><span class="p">[</span> <span class="n">emptyPosition</span> <span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="p">(</span> <span class="n">nextPosition</span> <span class="p">)</span> <span class="p">]</span>
+				<span class="n">openTable</span><span class="o">.</span><span class="n">push</span><span class="p">(</span> <span class="n">node</span><span class="p">(</span><span class="n">nextNumState</span><span class="p">,</span> <span class="n">f</span><span class="p">[</span><span class="n">hashedNextNumState</span><span class="p">])</span> <span class="p">)</span>
+			<span class="k">elif</span> <span class="n">closeTable</span><span class="p">[</span> <span class="n">hashedNextNumState</span> <span class="p">]</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">g</span><span class="p">[</span> <span class="n">hashedCurrentNumState</span> <span class="p">]</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span> <span class="n">g</span><span class="p">[</span> <span class="n">hashedNextNumState</span> <span class="p">]:</span>
+				<span class="n">g</span><span class="p">[</span> <span class="n">hashedNextNumState</span> <span class="p">]</span> <span class="o">=</span> <span class="n">g</span><span class="p">[</span> <span class="n">hashedCurrentNumState</span> <span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
+				<span class="n">f</span><span class="p">[</span> <span class="n">hashedNextNumState</span> <span class="p">]</span> <span class="o">=</span> <span class="n">g</span><span class="p">[</span> <span class="n">hashedNextNumState</span> <span class="p">]</span> <span class="o">+</span> <span class="n">getEstimateValue</span><span class="p">(</span> <span class="n">currentArrayState</span> <span class="p">)</span>
+				<span class="n">path</span><span class="p">[</span> <span class="n">hashedNextNumState</span> <span class="p">]</span> <span class="o">=</span> <span class="n">hashedCurrentNumState</span>
+				<span class="n">step</span><span class="p">[</span> <span class="n">hashedNextNumState</span> <span class="p">]</span> <span class="o">=</span> <span class="n">moves</span><span class="p">[</span> <span class="n">emptyPosition</span> <span class="p">][</span> <span class="n">adjancy</span><span class="p">[</span> <span class="n">emptyPosition</span> <span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="p">(</span> <span class="n">nextPosition</span> <span class="p">)</span> <span class="p">]</span>
+				<span class="n">openTable</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
 	
 <span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
 	<span class="n">sourceArrayState</span> <span class="o">=</span> <span class="n">getSourceState</span><span class="p">()</span>
@@ -360,6 +360,7 @@ blockquote p { font-size: 14px; }
 <span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">'__main__'</span><span class="p">:</span>
 	<span class="n">main</span><span class="p">()</span>
 </pre>
+
 <p><a href="http://blog.oneplus.info/wp-content/uploads/2011/04/haha.jpg"><img src="http://blog.oneplus.info/wp-content/uploads/2011/04/haha.jpg" alt="" title="haha" width="530" height="318" class="aligncenter size-full wp-image-184" /></a></p>
 
 </div>

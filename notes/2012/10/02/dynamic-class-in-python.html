@@ -56,8 +56,9 @@ blockquote p { font-size: 14px; }
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="nb">type</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nb">file</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">cls</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">Exception</span><span class="p">(</span><span class="s">"No such class"</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="nb">Exception</span><span class="p">(</span><span class="s">"No such class"</span><span class="p">)</span>
 </pre>
+
 <p>测试一下</p>
 
 <pre class="highlight python"><span class="n">format</span> <span class="o">=</span> <span class="s">"segment"</span>
@@ -67,6 +68,7 @@ blockquote p { font-size: 14px; }
 <span class="n">reader</span> <span class="o">=</span> <span class="n">createObject</span><span class="p">(</span><span class="n">format</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="o">+</span> <span class="n">format</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
 <span class="c"># Raise Exception "No such class"</span>
 </pre>
+
 </div>
 
 <div id="disqus_thread"></div>

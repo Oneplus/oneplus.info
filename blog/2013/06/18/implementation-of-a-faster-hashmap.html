@@ -100,6 +100,7 @@ stl中的string基本没法持久化，不用想了。
 	<span class="n">pool</span> <span class="o">=</span> <span class="n">new_pool</span><span class="p">;</span>
 <span class="p">}</span>
 </pre>
+
 <h3 id="section-1">性能优化</h3>
 
 <p>虽然hashmap中hash function是很大程度上影响性能的因素，但是这也是我们不能控制的事情。
@@ -143,6 +144,7 @@ stl中的string基本没法持久化，不用想了。
 </span>  <span class="kt">int</span> <span class="n">__next_off</span><span class="p">;</span> <span class="c1">// 存后继节点在node_pool中的偏移量
 </span><span class="p">};</span>
 </pre>
+
 <p>因为池子的地址会动态变化，不能直接在hash node中保存指针，存偏移量就没有问题了。</p>
 
 <p>一共有三个pool，一个存key，一个存value，一个存hash node，另外一个指针数组（或者偏移量数组）存hashtable的头结点，就设计成如下图那样了。</p>
@@ -165,6 +167,7 @@ stl中的string基本没法持久化，不用想了。
 
 <pre class="highlight plaintext">nice -n-20 ionice -c1 -n0 python bench.py
 </pre>
+
 <p>保证了进程的优先级。</p>
 
 <p>实验在xeon5650 2.67GHz的服务器上进行，gcc版本是比较老的4.1.2。</p>

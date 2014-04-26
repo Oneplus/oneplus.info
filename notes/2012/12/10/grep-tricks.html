@@ -50,26 +50,32 @@ blockquote p { font-size: 14px; }
 
 <pre class="highlight shell">grep -v <span class="s2">"pattern"</span> file
 </pre>
+
 <h3 id="t">模板中含有\t</h3>
 
 <pre class="highlight shell">grep -P <span class="s2">"^</span><span class="se">\t</span><span class="s2">"</span> file
 </pre>
+
 <h3 id="btxt-atxt">两文件差集（B.txt-A.txt）</h3>
 
 <pre class="highlight shell">grep -F -v -f A.txt B.txt
 </pre>
+
 <h3 id="atxtbtxt">用A.txt文件中的词表查B.txt</h3>
 
 <pre class="highlight plaintext">grep -f A.txt B.txt
 </pre>
+
 <p>与Pipe配合</p>
 
 <pre class="highlight plaintext">cat B.txt | grep -f A.txt
 </pre>
+
 <p>还有</p>
 
 <pre class="highlight plaintext">cat A.txt | grep -f - B.txt
 </pre>
+
 <h3 id="section-1">参考</h3>
 
 <ul>

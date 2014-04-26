@@ -51,10 +51,12 @@ blockquote p { font-size: 14px; }
 <pre class="highlight c"><span class="n">line_count</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">;</span>
 <span class="n">write_log</span><span class="p">(</span><span class="s">"process %d lines"</span><span class="p">,</span> <span class="n">line_count</span><span class="p">);</span>
 </pre>
+
 <p>打印出</p>
 
 <pre class="highlight plaintext">process 1000 lines
 </pre>
+
 <h3 id="section-1">方法</h3>
 
 <p>实现方法是使用stdarg.h中提供的变长参数接口。<code>vprintf</code>、<code>vsprintf</code>、<code>vfprintf</code>等等，我们可以用如下的方法实现<code>write_log</code>函数：</p>
@@ -68,6 +70,7 @@ blockquote p { font-size: 14px; }
     <span class="p">...</span>
 <span class="p">}</span>
 </pre>
+
 </div>
 
 <div id="disqus_thread"></div>

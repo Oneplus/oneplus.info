@@ -132,6 +132,7 @@ blockquote p { font-size: 14px; }
     <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
 </pre>
+
 <h4 id="default-password">Default Password</h4>
 
 <p>判断输入字符串是不是”wujiawei”…</p>
@@ -255,6 +256,7 @@ blockquote p { font-size: 14px; }
     <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
 </pre>
+
 <h4 id="the-final-battle-of-daydream">The Final Battle of Daydream</h4>
 
 <p><strong>[By jerrybond]</strong>本题很容易想到的解法是，申请一个大小为300,000的布尔数组，用来标记哪些数字出现过，哪些没有，这样很容易就能找到丢失的两个数字了。时间复杂度O(n)，空间复杂度也是O(n)。但遗憾的是，在1024K 的内存限制下，这种做法是行不通的。</p>
@@ -295,6 +297,7 @@ blockquote p { font-size: 14px; }
     <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
 </pre>
+
 <h4 id="costume-party">Costume Party</h4>
 
 <p><strong>[By chenyuanqin]</strong>很明显，可以抽象成一个图论模型：每个女生当成一个点，所有认识的人之间连接一条边。每一种服装就是一种颜色。那么，就是用m种颜色给这个图点染色，每条边的两个顶点颜色不能一样，计算染色方案。</p>
@@ -402,6 +405,7 @@ blockquote p { font-size: 14px; }
     <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
 </pre>
+
 <p>短小暴力赤裸版见下。</p>
 
 <pre class="highlight cpp"><span class="cp">#include &lt;iostream&gt;
@@ -460,6 +464,7 @@ blockquote p { font-size: 14px; }
     <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
 </pre>
+
 <h4 id="go-home">Go Home</h4>
 
 <p><strong>[By icek]</strong>此题本意是考察堆优化dijkstra变形，事实上用动态规划，拆点最短路什么的都可以做。</p>
@@ -594,6 +599,7 @@ blockquote p { font-size: 14px; }
     <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
 </pre>
+
 <p>这个题我是用搜索做的，写了一个短小版，见下。</p>
 
 <pre class="highlight cpp"><span class="cp">#include &lt;iostream&gt;
@@ -651,7 +657,8 @@ blockquote p { font-size: 14px; }
     <span class="p">}</span>
     <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
-</pre><p>#### Alex’s Problem</p>
+</pre>
+<p>#### Alex’s Problem</p>
 
 <p><strong>[By Alex]</strong>根据所给的三个点确定平面，然后求出此平面与正方体的12条棱的交点（平行的不算），保留坐标三个值均在[-100,100]的交点，去掉重复的后就得到了需要求面积的多边形的全部顶点。此时可以根据顶点个数和位置判断界面类型，截面可能是三角形，平行四边形，梯形，五边形和六边形，然后再去算面积。这里还有一种更为简单的方法，需要用到以下定理：</p>
 
@@ -852,6 +859,7 @@ blockquote p { font-size: 14px; }
     <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
 </pre>
+
 <h4 id="zhou-yi-ii">Zhou Yi II</h4>
 
 <p>系列题，可以参考<a href="http://acm.hit.edu.cn/judge/show.php?Proid=2989">这里</a></p>

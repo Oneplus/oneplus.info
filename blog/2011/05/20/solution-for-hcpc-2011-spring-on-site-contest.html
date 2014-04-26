@@ -215,6 +215,7 @@ blockquote p { font-size: 14px; }
     <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
 </pre>
+
 <h4 id="seven-roads">Seven Roads</h4>
 
 <p><strong>[by Darkgt]</strong>此题是求平面点中共线最多的点数，对于一般的情况需要O(n<sup>2</sup>logn)的复杂度，枚举一个点需要O(n)复杂度，验证需要O(nlogn)。</p>
@@ -295,6 +296,7 @@ blockquote p { font-size: 14px; }
     <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
 </pre>
+
 <h4 id="shortest-path">Shortest Path</h4>
 
 <p><strong>[by Darkgt]</strong>如果用s[i]表示到达第i个位置所需最少步数，可以发现s[i-1]≤s[i]，具有dp的性质，但dp的复杂度无法解决此题。发现s[i]=p的位置是连续的并且由s[i]=p-1的位置转移到，于是每次可以转移s值相等的一个区间，复杂度O(n)。</p>
@@ -331,6 +333,7 @@ blockquote p { font-size: 14px; }
     <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
 </pre>
+
 <h4 id="power-supply-system">Power-supply System</h4>
 
 <p><strong>[by sevenzero]</strong>这题我和Xnozero合出来防AK的，题目是从CF64的E改的，原题是个n<sup>3</sup>的树DP，我想了n<sup>2</sup>的办法于是将原题数据改大了，考虑到刷刷的存在，为了增加难度就加了双连通分量的缩点，好吧，已经基本不可做了。</p>
@@ -545,6 +548,7 @@ inm[root]即为最终答案，整个过程可以用记忆化搜索实现。</p>
     <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
 </pre>
+
 <h4 id="play-beans-beans">Play Beans Beans</h4>
 
 <p><strong>[by Lambyy]</strong>水题一枚, 题意可能比较绕, 但自认为题意描述很清楚, 基本按题意模拟下来即可, 第一组Sample 数据即蕴含了本题最大的Trick, 即在每一个Round过程中新产生的空白点, 是不会被进行操作的, 否则Sample就得7了, 相信大部分过了的人都考虑到了这种情况.
@@ -676,6 +680,7 @@ inm[root]即为最终答案，整个过程可以用记忆化搜索实现。</p>
     <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
 </pre>
+
 <h4 id="dictionary">Dictionary</h4>
 
 <p>处理XML，求到行首距离为Q的标签的属性。可以一边读入一边递归着求。也可以都读入后去掉正文，再递归处理，总之是递归着做，比较简单。校验时觉得属性名有空格太坑又没什么意思，就把有空格的数据去掉。</p>
@@ -720,6 +725,7 @@ inm[root]即为最终答案，整个过程可以用记忆化搜索实现。</p>
     <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
 </pre>
+
 <h4 id="find-the-fraction">Find the Fraction</h4>
 
 <p><strong>[by Lambyy]</strong>这题基本上算是纯数学题吧, 且在ACM数论中针对分数领域题目出的少之又少, 所以此题算是冷门题.</p>
@@ -883,6 +889,7 @@ inm[root]即为最终答案，整个过程可以用记忆化搜索实现。</p>
     <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
 </pre>
+
 <h4 id="zero-pair">Zero Pair</h4>
 
 <p><strong>[by Xnozero]</strong>将<code>a*b=rev(a)*rev(b)</code>转化为<code>a/rev(a)=rev(b)/b</code>,预处理出范围内的 rev(a)的值,将a/rev(a)的分子分母约分后存入MAP，再对b进行类似的处理，从MAP中找到对应的值，统计总数即可。</p>
@@ -960,6 +967,7 @@ inm[root]即为最终答案，整个过程可以用记忆化搜索实现。</p>
     <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
 </pre>
+
 <div>_____________________________解题报告分割线_____________________________</div>
 
 <p>比赛现场的情况是这样的</p>

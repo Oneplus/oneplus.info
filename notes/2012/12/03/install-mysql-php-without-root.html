@@ -71,6 +71,7 @@ tar zxvf cmake-2.8.4.tar.gz
 ./configure --prefix<span class="o">=</span><span class="nv">$HOME</span>/local/cmake
 make &amp; make install
 </pre>
+
 <p>安装了CMake之后，开始编译安装MySQL。</p>
 
 <pre class="highlight shell"><span class="nv">PORT</span><span class="o">=</span>12345 <span class="c"># 找一个没有人用的端口</span>
@@ -85,6 +86,7 @@ cmake -DCMAKE_INSTALL_PREFIX<span class="o">=</span><span class="nv">$HOME</span
 -DWITH_INNOBASE_STORAGE_ENGINE<span class="o">=</span>1 .
 make &amp; make install
 </pre>
+
 <p>经过一通编译，MySQL已经安装在$HOME/local/mysql下面了。</p>
 
 <p>现在，需要启动mysql服务了。
@@ -105,10 +107,12 @@ source ~/.bash_profile
 --tmpdir<span class="o">=</span><span class="nv">$HOME</span>/local/mysql/tmp <span class="se">\</span>
 --user<span class="o">=</span><span class="nv">$USER</span>
 </pre>
+
 <p>然后创建mysqld，首先将mysql的配置文件拷贝到$HOME/.my.cnf，命令是：</p>
 
 <pre class="highlight shell">cp <span class="nv">$HOME</span>/mysql/support-files/my-small.cnf <span class="nv">$HOME</span>/.my.cnf
 </pre>
+
 <p>其中，
 ~~~bash
 [client]
@@ -133,6 +137,7 @@ basedir=$HOME/local/mysql
 
 <pre class="highlight shell">mysqld_safe --defaults-file<span class="o">=</span><span class="nv">$HOME</span>/.my.cnf --socket<span class="o">=</span><span class="nv">$HOME</span>/local/mysql/my.sock &amp;
 </pre>
+
 <p>接下来就可以mysql测试一下是否成功了。</p>
 
 <p>关于mysql，还有一些需要注意的是：当在本地上链接MySQL时，如果指定mysql通过localhost访问，那么mysql并不是通过web端口127.0.0.1:port进行访问的，而是通过一种名为mysql.sock的socket文件进行访问。
@@ -143,6 +148,7 @@ basedir=$HOME/local/mysql
 mysql.default_socket <span class="o">=</span> /home/yjliu/local/mysql/my.sock
 mysql.default_port <span class="o">=</span> 47389
 </pre>
+
 <p>参考：</p>
 
 <ul>
@@ -170,11 +176,13 @@ tar xvf php-5.3.19.tar.bz2
 --enable-debug <span class="c">#支持调试</span>
 make &amp; make install
 </pre>
+
 <p>这里重要的一步是在configure中指定mysql位置和开启fpm支持。
 这些都完成后，就可以启动php服务了。</p>
 
 <pre class="highlight shell">./sbin/php-fpm
 </pre>
+
 <p>如果我们想指定一些配置文件的位置，就可以用
 ~~~bash
 ./sbin/php-fpm -c ./lib/php-easy.ini
@@ -196,6 +204,7 @@ make &amp; make install
     include fastcgi_params;
 <span class="o">}</span>
 </pre>
+
 <p>就想干啥干啥了 =)</p>
 
 </div>

@@ -128,7 +128,8 @@ o。保存之后，站点会暂时坏掉。不过把wordpress相关的文件移�
 <pre class="highlight plaintext">RewriteCond %{HTTP_HOST} ^blog.oneplus.info$
 RewriteCond %{REQUEST_URI} ^/feed$ [NC]
 RewriteRule .* http://blog.oneplus.info/feed [NC,L,R=301]
-</pre><p>它的含义是把所有主机名为blog.oneplus.info，URI为/feed的请求都重定向到blog.oneplus.info/feed下。</p>
+</pre>
+<p>它的含义是把所有主机名为blog.oneplus.info，URI为/feed的请求都重定向到blog.oneplus.info/feed下。</p>
 
 <p>添加完重写规则后可以通过访问blog.oneplus.info/feed来测试一下重写规则是否生效。
 还有一些其他网站提供mod_rewrite的测试，比如说<a href="http://martinmelin.se/rewrite-rule-tester/">这里</a>，重定向失败的话可以把.htaccess投到这个网站中，找些样例测试一下。</p>
@@ -170,6 +171,7 @@ if ($values == false) {
 	echo $values;
 }
 </pre>
+
 <p>对于主页的请求，先去看看cache过没过期，没过期就直接返回cache的结果，这样可以减少不少网络传输。其中，cache类我是参考<a href="http://www.mangguo.org/the-simple-php-cache-class/">这篇</a>的。</p>
 
 <h3 id="section-1">总结</h3>

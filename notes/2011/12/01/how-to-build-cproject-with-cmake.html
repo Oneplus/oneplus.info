@@ -60,15 +60,18 @@ blockquote p { font-size: 14px; }
  |- ./data/
  |- ./src/
 </pre>
+
 <p>在./src下面写CMakeLists.txt。它做的事情只有一件：指定将某些源文件编译成可执行程序，具体内容：</p>
 
 <pre class="highlight shell">ADD_EXECUTABLE<span class="o">(</span>wordseg, Alphabet.cpp, ...<span class="o">)</span>
 </pre>
+
 <p>由于要写一堆x.cpp，最好的办法是写一个小脚本:</p>
 
 <pre class="highlight shell">ls <span class="k">*</span>.cpp | <span class="se">\</span>
 awk <span class="s1">'BEGIN{print "ADD_EXECUTABLE(wordseg,"}{print "\t"$0";"}'</span>
 </pre>
+
 <p>同时还要在项目的根目录下写CMakeLists.txt，它做的事情有：</p>
 
 <ol>
