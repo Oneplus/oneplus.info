@@ -130,8 +130,9 @@ the `multiprocessing` module. At the begining of its document page, it says,
 
 > _effectively side-stepping the Global Interpreter Lock by using subprocesses instead of threads_
 
-To my understanding, its mechanism is treating the each thread as a process. When creating
-a thread, it actually copy(fork) the entire processing into a new process. 
+To my understanding, the mechanism of multiprocessing module is treating the each thread
+as a process. When creating a thread, it actually copy(fork) the entire processing into
+a new process.
 
 ~~~
 #!/usr/bin/env python
@@ -166,10 +167,109 @@ if __name__=="__main__":
         producer()
         print "iter %d fin" % i
 ~~~
-It takes `0m33.970s` for the multiprocessing version to run.
+
+It takes `0m33.970s` for the multiprocessing version to run. The multiprocessing module
+bring in about 2.5 times speed up.
+
+However, one disappointing feature of multiprocessing is it copy entire program, therefore
+resulting in large memory consumption. This feature make it very unscalable if the _single
+process version_ consume a lot of memory. In my experiments, my script consume 8G memory.
+If I apply it to 8 processors, the program explode into 64G (or more), almost reach the
+limit of the server.
 
 ### MPI
 
+The first time I meet `MPI` is that I read some source code of a machine-translation toolkit.
+The MPI module is embeded in a mess of C++ code and make it very difficult to understand.
+
+Now it came to me again because the document page claims that
+
+> MPI is not an IEEE or ISO standard, but has in fact, become the "industry standard"
+for writing message passing programs on HPC platforms.
+
+My supervisor also endorse it. It seems a widely used library for parallel programming.
+And its Python embedding also makes it less painful (or painless) to use.
+
+In MPI, the producer-consumer model can be very clearly implemented by letting the zero-ranked
+(or master) program distribute the instances (or tasks), keep recieveing data from consumer.
+Running status of the consumers can be easily obtain by check the `tag` field of the recieved
+data.
+
+Revisiting my problem, the MPI version is shown blow.
+
+~~~
+#!/usr/bin/env python
+import numpy as np
+import time
+from mpi4py import MPI
+from basic import consumer, do_something, nr_dim, nr_instances
+
+READY, START, DONE, EXIT = 0, 1, 2, 3
+comm = MPI.COMM_WORLD
+size = comm.size
+rank = comm.rank
+status = MPI.Status()
+
+def consumer_daemon():
+    name = MPI.Get_processor_name()
+    while True:
+        comm.send(None, dest=0, tag=READY)
+        task = comm.recv(source=0, tag=MPI.ANY_TAG, status=status)
+        tag = status.Get_tag()
+
+        if tag == START:
+            instances = task
+            global_vector = np.zeros(nr_dim)
+            for instance in instances:
+                global_vector += consumer()
+            comm.send(global_vector, dest=0, tag=DONE)
+        elif tag == EXIT:
+            break
+    comm.send(None, dest=0, tag=EXIT)
+
+def producer():
+    instances = range(nr_instances)
+    L = len(instances)
+    fence = L/ (size - 1)
+    arguments = [(instances[i*fence:(L if i+1==size-1 else (i+1)*fence)]) for i in xrange(size - 1)]
+    for i in xrange(1, size):
+        comm.send(arguments[i-1], dest=i, tag=START)
+    finished = 0
+    global_vector = np.zeros(nr_dim)
+    while finished < size - 1:
+        data = comm.recv(source=MPI.ANY_SOURCE, tag=MPI.ANY_TAG, status=status)
+        tag = status.Get_tag()
+        if tag == DONE:
+            global_vector += data
+            finished += 1
+    do_something(global_vector)
+
+if __name__=="__main__":
+    if rank == 0:
+        for i in xrange(5):
+            producer()
+            print "iter %d is done." % i
+        for i in xrange(1, size):
+            comm.send(None, dest=i, tag=EXIT)
+    else:
+        consumer_daemon()
+~~~
+Under same settings, the above program runs `0m31.332s` and it memory performance is better
+than the multiprocessing version. One reason for the faster speed, I think, is the consumer
+wasn't shut down between each iterations.
+
 ### Summary
 
+When it comes to the topic of paralleling in Python, my advice is avoid using `threading`
+especially with some code that will trigger GIL. If the task only takes a little memory,
+my advice is the `multiprocessing`, because it's easier to use and easier to switch from
+threading-oriented program. If you decide to make it a _real_ paralleled program (aka, 
+using it on multi-cores server or even across several servers), mpi4py is no doubt a better
+choice.
 
+#### Reference
+
+* There are also some unlucky guys who found Python threading is slower: [Python threading unexpectedly slower](http://stackoverflow.com/questions/3121109/python-threading-unexpectedly-slower)
+* Introduction to MPI : [Message Passing Interface (MPI)](https://computing.llnl.gov/tutorials/mpi/)
+* And the Python embedding : [MPI4Py - SciPy](http://mpi4py.scipy.org/)
+* And some fancy examples! : [jbornschein/mpi4py-examples](https://github.com/jbornschein/mpi4py-examples)
