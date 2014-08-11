@@ -17,6 +17,7 @@ My supervisor is [Wanxiang Che](http://ir.hit.edu.cn/~car).
 
 #### PUBLICATION
 
+* __Yijia Liu__, Yue Zhang, Wanxiang Che and Ting Liu [*Domain Adaptation for CRF-based Chinese Word Segmentation using Free Annotations (To Appear)*](#) EMNLP 2014.
 * __Yijia Liu__, Wanxiang Che, Ting Liu [*Enhancing Chinese Word Segmentation with Character Clustering*](http://link.springer.com/chapter/10.1007%2F978-3-642-41491-6_6#page-1), In The Twelfth China National Conference on Computational Linguistics, CCL 2013. 2013
 * __Yijia Liu__, Wanxiang Che, Ting Liu, Meishan Zhang [*A Comparison Study of Sequence Labeling Based Chinese Word Segmentation, POS tagging Models*](http://d.e.wanfangdata.com.hk/Conference.aspx?ID=Conference_7748118)(in Chinese), In Journal of Chinese Information Processing. 2013
 * __Yijia Liu__, Meishan Zhang, Wanxiang Che, Ting Liu, Yihe Deng [*Micro blogs Oriented Word Segmentation System*](https://aclweb.org/anthology/W/W12/W12-6316.pdf), In Proceedings of the Second CIPS-SIGHAN Joint Conference on Chinese Language Processing. 2012 [[code]](https://github.com/Oneplus/libweicws)
@@ -29,7 +30,7 @@ My supervisor is [Wanxiang Che](http://ir.hit.edu.cn/~car).
 
 #### EDUCATION EXPERIENCE
 
-* Harbin Institute of Technology (HIT) M.S., Computer Science, (2012 - Present)
+* Harbin Institute of Technology (HIT) M.S., Computer Science, (2012 - 2014)
 * Harbin Institute of Technology (HIT) B.E., Computer Science, (2008 - 2012)
 
 #### TEACHING EXPERIENCE
