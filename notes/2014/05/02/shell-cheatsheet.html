@@ -56,34 +56,34 @@ blockquote p { font-size: 14px; }
 
 <p>一般用来将切分的句子编程变成一个词一行(词列表)。</p>
 
-<pre class="highlight plaintext">sed -r -e 's/[[:space:]]/\n/g'
-</pre>
+<pre class="highlight plaintext"><code>sed -r -e 's/[[:space:]]/\n/g'
+</code></pre>
 
 <h3 id="section-1">对于无序的词列表按照词频排序</h3>
 
 <p>这个在做词频统计时特别有用</p>
 
-<pre class="highlight plaintext">sort | uniq -c | sort -rn
-</pre>
+<pre class="highlight plaintext"><code>sort | uniq -c | sort -rn
+</code></pre>
 
 <h3 id="awk">让awk打印第一列之后的数据</h3>
 
 <p>原理是把第一列清空，然后打印全列</p>
 
-<pre class="highlight plaintext">awk '{$1=""; print $0}'
-</pre>
+<pre class="highlight plaintext"><code>awk '{$1=""; print $0}'
+</code></pre>
 
 <h3 id="section-2">统计词列表中最长的词</h3>
 
-<pre class="highlight plaintext">awk '{print $0" "length}' | sort -k2 -nr | head -1
-</pre>
+<pre class="highlight plaintext"><code>awk '{print $0" "length}' | sort -k2 -nr | head -1
+</code></pre>
 
 <h3 id="section-3">去掉符合模式的某些行</h3>
 
 <p><code>grep -v</code>已经提供这个功能了</p>
 
-<pre class="highlight plaintext">grep -v
-</pre>
+<pre class="highlight plaintext"><code>grep -v
+</code></pre>
 
 </div>
 

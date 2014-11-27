@@ -57,7 +57,7 @@ blockquote p { font-size: 14px; }
 
 <p>答案是可以的。通过纯虚析构函数，可以防止抽象类被实例化。但是，这里有一个逻辑上的矛盾。由于抽象类往往与具体类对应，从类的继承关系来看，抽象类往往是某些类的基类，如果有继承关系存在，派生类就需要知道基类的析构函数。所以，类似于</p>
 
-<pre class="highlight cpp"><span class="k">class</span> <span class="nc">fruit</span> <span class="p">{</span>
+<pre class="highlight cpp"><code><span class="k">class</span> <span class="nc">fruit</span> <span class="p">{</span>
 <span class="k">public</span><span class="o">:</span>
     <span class="n">fruit</span><span class="p">()</span> <span class="p">{}</span>
     <span class="c1">//virtual ~fruit() = 0;
@@ -82,7 +82,7 @@ blockquote p { font-size: 14px; }
 
     <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">name</span><span class="p">;</span>
 <span class="p">};</span>
-</pre>
+</code></pre>
 
 <p>的代码不能编译通过。</p>
 
@@ -95,7 +95,7 @@ blockquote p { font-size: 14px; }
 
 <p>在没有C++时，C程序员可以在结构体中保存函数指针的方法来实现一些简单的重写(override)，比如一个链表，喜欢面向对象的程序员或许会把它写成：</p>
 
-<pre class="highlight c"><span class="k">typedef</span> <span class="k">struct</span> <span class="n">_list_node</span> <span class="n">node_t</span><span class="p">;</span>
+<pre class="highlight c"><code><span class="k">typedef</span> <span class="k">struct</span> <span class="n">_list_node</span> <span class="n">node_t</span><span class="p">;</span>
 <span class="k">typedef</span> <span class="k">struct</span> <span class="n">_list</span>      <span class="n">list_t</span><span class="p">;</span>
 
 <span class="k">struct</span> <span class="n">_list_node</span> <span class="p">{</span>
@@ -109,20 +109,20 @@ blockquote p { font-size: 14px; }
     <span class="kt">void</span> <span class="p">(</span><span class="o">*</span><span class="n">init</span><span class="p">)(</span><span class="n">list_t</span> <span class="o">*</span><span class="n">list</span><span class="p">);</span>
     <span class="kt">void</span> <span class="p">(</span><span class="o">*</span><span class="n">append</span><span class="p">)(</span><span class="n">list_t</span> <span class="o">*</span><span class="n">list</span><span class="p">,</span> <span class="kt">int</span> <span class="n">data</span><span class="p">);</span>
 <span class="p">};</span>
-</pre>
+</code></pre>
 
 <p>然后定义一些不同的append的方式把list-&gt;append的函数指针指向这些函数名，也从一定程度上实现了面向对象中的封装。</p>
 
 <p>而C++对于函数的实现思路与上面大致类似。对于每个类都保存一组函数指针的表。在发生类的继承关系后，由编译器处理各函数指针指向的函数入口。在调用成员函数时，通过这个表找到对应函数的入口地址。对于这段代码：</p>
 
-<pre class="highlight cpp"><span class="n">fruit</span> <span class="o">*</span><span class="n">fruits</span> <span class="o">=</span> <span class="p">(</span><span class="n">fruit</span> <span class="o">*</span><span class="p">)</span><span class="n">calloc</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">fruit</span><span class="p">));</span>
+<pre class="highlight cpp"><code><span class="n">fruit</span> <span class="o">*</span><span class="n">fruits</span> <span class="o">=</span> <span class="p">(</span><span class="n">fruit</span> <span class="o">*</span><span class="p">)</span><span class="n">calloc</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">fruit</span><span class="p">));</span>
 <span class="n">fruits</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">apple</span><span class="p">(</span><span class="s">"ipad"</span><span class="p">);</span>
 <span class="n">fruits</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">banana</span><span class="p">(</span><span class="s">"what"</span><span class="p">);</span>
 
 <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">;</span> <span class="o">++</span> <span class="n">i</span><span class="p">)</span> <span class="p">{</span>
     <span class="p">(</span><span class="n">fruits</span> <span class="o">+</span> <span class="n">i</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">taste</span><span class="p">();</span>
 <span class="p">}</span>
-</pre>
+</code></pre>
 
 <p>用VS2008调试，发现fruits变量所指向的内存中，__vfptr(是前面提到的虚指针)的值为0，也就是在调用taste方法时，找不到正确的函数入口，所以出现了segment fault。</p>
 
@@ -134,9 +134,9 @@ blockquote p { font-size: 14px; }
 
 <p>这个，显然是不能的。比方说，如下代码</p>
 
-<pre class="highlight cpp"><span class="n">fruit</span> <span class="o">*</span><span class="n">app</span> <span class="o">=</span> <span class="k">new</span> <span class="n">apple</span><span class="p">();</span>
+<pre class="highlight cpp"><code><span class="n">fruit</span> <span class="o">*</span><span class="n">app</span> <span class="o">=</span> <span class="k">new</span> <span class="n">apple</span><span class="p">();</span>
 <span class="n">app</span><span class="o">-&gt;</span><span class="n">smell</span><span class="p">();</span>
-</pre>
+</code></pre>
 
 <p>编译不过。这也是我觉得C/C++相对于动态语言非常不灵活的一方面。</p>
 

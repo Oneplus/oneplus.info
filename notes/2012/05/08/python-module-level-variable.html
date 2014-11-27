@@ -50,54 +50,54 @@ blockquote p { font-size: 14px; }
 
 <p>__init__.py</p>
 
-<pre class="highlight python"><span class="n">__all__</span><span class="o">=</span><span class="p">[</span><span class="s">'sleep'</span><span class="p">,</span> <span class="s">'wake'</span><span class="p">,</span> <span class="s">'settings'</span><span class="p">]</span>
+<pre class="highlight python"><code><span class="n">__all__</span><span class="o">=</span><span class="p">[</span><span class="s">'sleep'</span><span class="p">,</span> <span class="s">'wake'</span><span class="p">,</span> <span class="s">'settings'</span><span class="p">]</span>
 
 <span class="kn">from</span> <span class="nn">sleep</span> <span class="kn">import</span> <span class="n">fall_asleep</span>
 <span class="kn">from</span> <span class="nn">wake</span> <span class="kn">import</span> <span class="n">wake_up</span>
-</pre>
+</code></pre>
 
 <p>settings.py</p>
 
-<pre class="highlight python"><span class="n">z</span><span class="o">=-</span><span class="mi">1</span>
+<pre class="highlight python"><code><span class="n">z</span><span class="o">=-</span><span class="mi">1</span>
 <span class="n">zz</span><span class="o">=-</span><span class="mi">1</span>
 <span class="n">zzz</span><span class="o">=-</span><span class="mi">1</span>
-</pre>
+</code></pre>
 
 <p>sleep.py</p>
 
-<pre class="highlight python"><span class="kn">import</span> <span class="nn">zz.settings</span>
+<pre class="highlight python"><code><span class="kn">import</span> <span class="nn">zz.settings</span>
 
 <span class="k">def</span> <span class="nf">fall_asleep</span><span class="p">():</span>
     <span class="n">zz</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">z</span><span class="o">=</span><span class="mi">1</span>
     <span class="n">zz</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">zz</span><span class="o">=</span><span class="mi">2</span>
     <span class="n">zz</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">zzz</span><span class="o">=</span><span class="mi">3</span>
-</pre>
+</code></pre>
 
 <p>wake.py</p>
 
-<pre class="highlight python"><span class="kn">import</span> <span class="nn">zz.settings</span>
+<pre class="highlight python"><code><span class="kn">import</span> <span class="nn">zz.settings</span>
 
 <span class="k">def</span> <span class="nf">wake_up</span><span class="p">():</span>
     <span class="k">print</span> <span class="s">"</span><span class="si">%</span><span class="s">d </span><span class="si">%</span><span class="s">d </span><span class="si">%</span><span class="s">d"</span> <span class="o">%</span> <span class="p">(</span><span class="n">zz</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">z</span><span class="p">,</span>
         <span class="n">zz</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">zz</span><span class="p">,</span> <span class="n">zz</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">zzz</span><span class="p">)</span>
-</pre>
+</code></pre>
 
 <p>测试文件是这样的：</p>
 
 <p>test.py</p>
 
-<pre class="highlight python"><span class="kn">import</span> <span class="nn">zz</span>
+<pre class="highlight python"><code><span class="kn">import</span> <span class="nn">zz</span>
 
 <span class="n">zz</span><span class="o">.</span><span class="n">wake_up</span><span class="p">()</span>
 <span class="n">zz</span><span class="o">.</span><span class="n">fall_sleep</span><span class="p">()</span>
 <span class="n">zz</span><span class="o">.</span><span class="n">wake_up</span><span class="p">()</span>
-</pre>
+</code></pre>
 
 <p>实验结果是这样的</p>
 
-<pre class="highlight shell">-1 -1 -1
+<pre class="highlight shell"><code>-1 -1 -1
 1 2 3
-</pre>
+</code></pre>
 
 
 </div>

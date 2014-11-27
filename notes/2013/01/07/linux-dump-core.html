@@ -45,8 +45,8 @@ blockquote p { font-size: 14px; }
 <hr />
 <div>
   <h3 id="dump-core">查看现在系统dump core的情况</h3>
-<pre class="highlight plaintext">ulimit -c
-</pre>
+<pre class="highlight plaintext"><code>ulimit -c
+</code></pre>
 <p>结果表示core文件的大小。如果显示0，则不会dump core，显示unlimited不限制core文件大小</p>
 
 <h3 id="dump-core-1">打开dump core</h3>
@@ -63,16 +63,16 @@ ulimit -S -c unlimited &gt; /dev/null 2&gt;&amp;1
 
 <p>我遇到一个问题，即使在root下，用vi无法编辑这个文件。所以在root下用</p>
 
-<pre class="highlight shell"><span class="nb">echo</span> <span class="s2">"1"</span> &gt; /proc/sys/kernel/core_uses_pid
-</pre>
+<pre class="highlight shell"><code><span class="nb">echo</span> <span class="s2">"1"</span> &gt; /proc/sys/kernel/core_uses_pid
+</code></pre>
 
 <h3 id="core">使core文件花样更多</h3>
 
 <p><code>/proc/sys/kernel/core_pattern</code>这个文件制定了core文件保存位置和文件格式。可以在core文件中添加一些比较友好的信息，比如产生core的进程，core产生的时间等等。
 具体也是在root下。</p>
 
-<pre class="highlight shell"><span class="nb">echo</span> <span class="s2">"./core-%e-%p-%t"</span> &gt; /proc/sys/kernel/core_pattern
-</pre>
+<pre class="highlight shell"><code><span class="nb">echo</span> <span class="s2">"./core-%e-%p-%t"</span> &gt; /proc/sys/kernel/core_pattern
+</code></pre>
 
 <p>至于更多奇怪的play，可以参考最后一个link。</p>
 

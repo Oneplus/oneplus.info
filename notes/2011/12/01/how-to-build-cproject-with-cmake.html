@@ -54,23 +54,23 @@ blockquote p { font-size: 14px; }
 
 <p>使用cmake工具可以很方便地构建项目，只需要简单地写几个CMakeLists.txt就可以了。我采用的文件夹构架为：</p>
 
-<pre class="highlight shell">./
+<pre class="highlight shell"><code>./
  |- ./bin/
  |- ./build/
  |- ./data/
  |- ./src/
-</pre>
+</code></pre>
 
 <p>在./src下面写CMakeLists.txt。它做的事情只有一件：指定将某些源文件编译成可执行程序，具体内容：</p>
 
-<pre class="highlight shell">ADD_EXECUTABLE<span class="o">(</span>wordseg, Alphabet.cpp, ...<span class="o">)</span>
-</pre>
+<pre class="highlight shell"><code>ADD_EXECUTABLE<span class="o">(</span>wordseg, Alphabet.cpp, ...<span class="o">)</span>
+</code></pre>
 
 <p>由于要写一堆x.cpp，最好的办法是写一个小脚本:</p>
 
-<pre class="highlight shell">ls <span class="k">*</span>.cpp | <span class="se">\</span>
+<pre class="highlight shell"><code>ls <span class="k">*</span>.cpp | <span class="se">\</span>
 awk <span class="s1">'BEGIN{print "ADD_EXECUTABLE(wordseg,"}{print "\t"$0";"}'</span>
-</pre>
+</code></pre>
 
 <p>同时还要在项目的根目录下写CMakeLists.txt，它做的事情有：</p>
 

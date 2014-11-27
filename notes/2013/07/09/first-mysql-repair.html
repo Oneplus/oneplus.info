@@ -48,8 +48,8 @@ blockquote p { font-size: 14px; }
 <div>
   <p>实验室服务器的硬盘满了，结果导致一个线上服务的MySQL数据库的两个表坏了。具体症状是<code>desc cdb_searchindex</code>显示</p>
 
-<pre class="highlight shell">ERROR 1017 <span class="o">(</span>HY000<span class="o">)</span>: Can<span class="s1">'t find file: '</span>cdb_searchindex<span class="s1">' (errno: 2)
-</span></pre>
+<pre class="highlight shell"><code>ERROR 1017 <span class="o">(</span>HY000<span class="o">)</span>: Can<span class="s1">'t find file: '</span>cdb_searchindex<span class="s1">' (errno: 2)
+</span></code></pre>
 
 <p>这是要通过/etc/my.cnf(或者同类的mysql配置文件)找到数据文件的位置。定位后进入文件夹，<code>ls cdb_searchindex*</code>一看，只剩一个cdb_searchindex.frm文件了。</p>
 
@@ -57,8 +57,8 @@ blockquote p { font-size: 14px; }
 
 <p>第一步是确定这个表的引擎类型，命令是:</p>
 
-<pre class="highlight shell">show table status from <span class="sb">`</span>discuz<span class="sb">`</span>;
-</pre>
+<pre class="highlight shell"><code>show table status from <span class="sb">`</span>discuz<span class="sb">`</span>;
+</code></pre>
 
 <p>一看都是MyISAM，恢复起来就相对比较容易了。</p>
 
@@ -66,15 +66,15 @@ blockquote p { font-size: 14px; }
 
 <p>第三步是在mysql中用</p>
 
-<pre class="highlight shell">repair table cdb_searchindex USE_FRM;
-</pre>
+<pre class="highlight shell"><code>repair table cdb_searchindex USE_FRM;
+</code></pre>
 
 <p>就可以恢复了。</p>
 
 <p>第四步用</p>
 
-<pre class="highlight shell">mysqlcheck discuz;
-</pre>
+<pre class="highlight shell"><code>mysqlcheck discuz;
+</code></pre>
 
 <p>没啥问题就OK了。</p>
 

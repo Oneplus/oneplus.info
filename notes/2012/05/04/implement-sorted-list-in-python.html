@@ -46,7 +46,7 @@ blockquote p { font-size: 14px; }
 <div>
   <p>具体思路是用二分保list有序+插入</p>
 
-<pre class="highlight python"><span class="k">class</span> <span class="nc">SortedList</span><span class="p">(</span><span class="nb">list</span><span class="p">):</span>
+<pre class="highlight python"><code><span class="k">class</span> <span class="nc">SortedList</span><span class="p">(</span><span class="nb">list</span><span class="p">):</span>
     <span class="n">K</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">K</span><span class="o">=-</span><span class="mi">1</span><span class="p">):</span>
@@ -58,7 +58,7 @@ blockquote p { font-size: 14px; }
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">K</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
             <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">==</span><span class="bp">self</span><span class="o">.</span><span class="n">K</span><span class="o">+</span><span class="mi">1</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-</pre>
+</code></pre>
 
 <p>这里还有一个限size的操作，之前写了一个<code>self=self[1:]</code>，结果不对。还不清楚是为什么，留一个问题在这里。</p>
 

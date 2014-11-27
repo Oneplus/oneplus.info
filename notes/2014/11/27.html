@@ -3,7 +3,7 @@
 <head>
 <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
 <title>
-  R语言中动态安装库 |  Static Oneplus
+   Static Oneplus
 </title>
 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap-responsive.min.css">
@@ -32,40 +32,22 @@ blockquote p { font-size: 14px; }
   </header>
 
   <div class="content">
-    <div style="color:#999;">
-  <small>2012/11/29 - by
-    
+    <div id="content">
+  <h1>Archive for
+  
+    Nov 27 2014
+  
+</h1>
 
-    
-      &bull; <a href="/notes/tags/r.html">R</a>
-    
-  </small>
-</div>
-<h2>R语言中动态安装库</h2>
-<hr />
-<div>
-  <p>在一个R脚本中，我们使用了某些library，但是发现运行环境中没有这个library，如果能检测一下有没有这个包，没有就自动安装该多好。而R中非常方便地支持这些，只要联网。</p>
 
-<p>代码如下：</p>
+<ul>
+  
+    <li><a href="/notes/2014/11/27/valgrind-cheatsheet.html">Valgrind Cheatsheet</a> <span>Nov 27</span></li>
+  
+</ul>
 
-<pre class="highlight r"><code><span class="n">site</span><span class="o">&lt;-</span><span class="s2">"http://cran.r-project.org"</span>
-<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">require</span><span class="p">(</span><span class="s2">"ggplot2"</span><span class="p">))</span> <span class="p">{</span> <span class="n">install.package</span><span class="p">(</span><span class="s2">"ggplot2"</span><span class="p">,</span> <span class="n">repos</span><span class="o">=</span><span class="n">site</span><span class="p">)</span> <span class="p">}</span>
-</code></pre>
 
 </div>
-
-<div id="disqus_thread"></div>
-<script type="text/javascript">
-var disqus_shortname = 'yjliu'; // required: replace example with your forum shortname
-/* * * DON'T EDIT BELOW THIS LINE * * */
-(function() {
- var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
- dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
- (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
- })();
-</script>
-<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
 
   </div>
 

@@ -82,7 +82,7 @@ blockquote p { font-size: 14px; }
 
 <p>具体算法是维护两个栈，一个放操作数，一个放操作符。判断扫描到的字符。如果是左括号，直接放入操作符栈，如果是右括号，就一直弹栈到遇到左括号，如果是操作数，直接放入操作数栈。如果是操作符，要判断栈顶和扫描字符的优先级，后者高则把后者放到操作数栈，否则一直弹栈到后者高于前者。</p>
 
-<pre class="highlight cpp"><span class="cp">#include &lt;iostream&gt;
+<pre class="highlight cpp"><code><span class="cp">#include &lt;iostream&gt;
 #include &lt;cstring&gt;
 #include &lt;cmath&gt;
 #define PRINT(x) cout &lt;&lt;(#x)&lt;&lt;&amp;quot; &amp;quot;&lt;&lt;x&lt;&lt;endl;
@@ -131,7 +131,7 @@ blockquote p { font-size: 14px; }
     <span class="p">}</span>
     <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
-</pre>
+</code></pre>
 
 <h4 id="default-password">Default Password</h4>
 
@@ -150,7 +150,7 @@ blockquote p { font-size: 14px; }
 
 <p>加上negative单词情况后，就先将negative单词从从sensitive information中除去，如果它前面是第i个单词就在一个数组neg中把neg[i]标记为negative单词。再加一个转移方程dp[i][j]=0 (neg[j]与internet information的第i个单词相同)，即出现了internet information中出现了negative单词，sensitive information的前j个单词组成的所有子序列不可能最后转移到dp[n][m]，故将dp[i][j]置0。最后dp[n][m]为答案，n是internet information中单词数，m是sensitive information中非负单词数。</p>
 
-<pre class="highlight cpp"><span class="cp">#include &lt;vector&gt;
+<pre class="highlight cpp"><code><span class="cp">#include &lt;vector&gt;
 #include &lt;list&gt;
 #include &lt;map&gt;
 #include &lt;set&gt;
@@ -255,7 +255,7 @@ blockquote p { font-size: 14px; }
     <span class="p">}</span>
     <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
-</pre>
+</code></pre>
 
 <h4 id="the-final-battle-of-daydream">The Final Battle of Daydream</h4>
 
@@ -271,7 +271,7 @@ blockquote p { font-size: 14px; }
 
 <p>剩下的就是解一元二次方程的事情了。</p>
 
-<pre class="highlight cpp"><span class="cp">#include &lt;cstdio&gt;
+<pre class="highlight cpp"><code><span class="cp">#include &lt;cstdio&gt;
 #include &lt;cstring&gt;
 #include &lt;cmath&gt;
 #define sqr(x) ((x)*(x))
@@ -296,7 +296,7 @@ blockquote p { font-size: 14px; }
     <span class="p">}</span>
     <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
-</pre>
+</code></pre>
 
 <h4 id="costume-party">Costume Party</h4>
 
@@ -307,7 +307,7 @@ blockquote p { font-size: 14px; }
 
 <p>不断进行2操作，那么G将会变成一个个的完全图，然后分别用1来计算即可。</p>
 
-<pre class="highlight cpp"><span class="cp">#include &lt;iostream&gt;
+<pre class="highlight cpp"><code><span class="cp">#include &lt;iostream&gt;
 #include &lt;stdio.h&gt;
 #include &lt;stdlib.h&gt;
 #include &lt;algorithm&gt;
@@ -404,11 +404,11 @@ blockquote p { font-size: 14px; }
     <span class="p">}</span>
     <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
-</pre>
+</code></pre>
 
 <p>短小暴力赤裸版见下。</p>
 
-<pre class="highlight cpp"><span class="cp">#include &lt;iostream&gt;
+<pre class="highlight cpp"><code><span class="cp">#include &lt;iostream&gt;
 #include &lt;vector&gt;
 #include &lt;queue&gt;
 #include &lt;cstring&gt;
@@ -463,7 +463,7 @@ blockquote p { font-size: 14px; }
     <span class="p">}</span>
     <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
-</pre>
+</code></pre>
 
 <h4 id="go-home">Go Home</h4>
 
@@ -473,7 +473,7 @@ blockquote p { font-size: 14px; }
 
 <p>因为堆优化dijkstra中以时间最小来维护堆，所以当要对终点做拓展的时候直接退出，就可以保证所用时间最小，输出最小值即可。</p>
 
-<pre class="highlight cpp"><span class="cp">#include &lt;iostream&gt;
+<pre class="highlight cpp"><code><span class="cp">#include &lt;iostream&gt;
 #include &lt;cstdio&gt;
 #include &lt;algorithm&gt;
 #include &lt;cstring&gt;
@@ -598,11 +598,11 @@ blockquote p { font-size: 14px; }
     <span class="p">}</span>
     <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
-</pre>
+</code></pre>
 
 <p>这个题我是用搜索做的，写了一个短小版，见下。</p>
 
-<pre class="highlight cpp"><span class="cp">#include &lt;iostream&gt;
+<pre class="highlight cpp"><code><span class="cp">#include &lt;iostream&gt;
 #include &lt;vector&gt;
 #include &lt;queue&gt;
 #include &lt;cstring&gt;
@@ -657,7 +657,7 @@ blockquote p { font-size: 14px; }
     <span class="p">}</span>
     <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
-</pre>
+</code></pre>
 <p>#### Alex’s Problem</p>
 
 <p><strong>[By Alex]</strong>根据所给的三个点确定平面，然后求出此平面与正方体的12条棱的交点（平行的不算），保留坐标三个值均在[-100,100]的交点，去掉重复的后就得到了需要求面积的多边形的全部顶点。此时可以根据顶点个数和位置判断界面类型，截面可能是三角形，平行四边形，梯形，五边形和六边形，然后再去算面积。这里还有一种更为简单的方法，需要用到以下定理：</p>
@@ -672,7 +672,7 @@ blockquote p { font-size: 14px; }
 
 <p>我们已经得到了所有的顶点，只需要把它们按多边形顺序顺时针或逆时针排序，而这件事也是很简单的，因为对于任何一个点，它的下一个点是跟它共面的。排好后按照上面的公式很容易就能求出面积了。</p>
 
-<pre class="highlight cpp"><span class="cp">#include &lt;cstdlib&gt;
+<pre class="highlight cpp"><code><span class="cp">#include &lt;cstdlib&gt;
 #include &lt;cstring&gt;
 #include &lt;cstdio&gt;
 #include &lt;cmath&gt;
@@ -858,7 +858,7 @@ blockquote p { font-size: 14px; }
     <span class="p">}</span>
     <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
-</pre>
+</code></pre>
 
 <h4 id="zhou-yi-ii">Zhou Yi II</h4>
 

@@ -14,7 +14,7 @@
     <link rel="alternate" href="http://yjliu.net/blog/2014/04/25/parallel-in-python.html"/>
     <id>http://yjliu.net/blog/2014/04/25/parallel-in-python.html</id>
     <published>2014-04-24T16:00:00Z</published>
-    <updated>2014-04-26T14:51:36+08:00</updated>
+    <updated>2014-11-20T09:24:26+08:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -31,19 +31,19 @@ thread program, I decided to parallel it.&lt;/p&gt;
 parallel model). I have a collection of data which contains about 200 thousand entries.
 My algorithm is some kind of &lt;code&gt;loop-loop&lt;/code&gt; and can be illustrated as the following pseudocode.&lt;/p&gt;
 
-&lt;pre class="highlight python"&gt;&lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="ow"&gt;not&lt;/span&gt; &lt;span class="n"&gt;terminal&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;condition&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+&lt;pre class="highlight python"&gt;&lt;code&gt;&lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="ow"&gt;not&lt;/span&gt; &lt;span class="n"&gt;terminal&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;condition&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
     &lt;span class="n"&gt;init&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;global_vector&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
     &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;instance&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;instances&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
         &lt;span class="n"&gt;global_vector&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;consuming&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;process&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;instance&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
     &lt;span class="n"&gt;do&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;something&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;global_vector&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/pre&gt;
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Since the &lt;code&gt;time-consuming-process&lt;/code&gt; is very time consuming, we can easily use a &lt;code&gt;producer&lt;/code&gt;
 to distribute these tasks onto several &lt;code&gt;consumers&lt;/code&gt;. What a textbook parallel model! To
 make it more clear, also for convenience of future discussion, let me put it into some
 meaningless but runnable code.&lt;/p&gt;
 
-&lt;pre class="highlight python"&gt;&lt;span class="c"&gt;#!/usr/bin/env python&lt;/span&gt;
+&lt;pre class="highlight python"&gt;&lt;code&gt;&lt;span class="c"&gt;#!/usr/bin/env python&lt;/span&gt;
 &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;numpy&lt;/span&gt; &lt;span class="kn"&gt;as&lt;/span&gt; &lt;span class="nn"&gt;np&lt;/span&gt;
 &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;time&lt;/span&gt;
 
@@ -71,7 +71,7 @@ meaningless but runnable code.&lt;/p&gt;
     &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="nb"&gt;xrange&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
         &lt;span class="n"&gt;producer&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
         &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="s"&gt;"iter &lt;/span&gt;&lt;span class="si"&gt;%&lt;/span&gt;&lt;span class="s"&gt;d is done."&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt;
-&lt;/pre&gt;
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;A simple &lt;code&gt;time&lt;/code&gt; command shows the above code runs &lt;code&gt;1m29.155s&lt;/code&gt; on my server.&lt;/p&gt;
 
@@ -88,7 +88,7 @@ implemented for recieveing data and invoke meta-consumer process.&lt;/p&gt;
 
 &lt;p&gt;After a slight modification on the above program, it became the multi-threaded version.&lt;/p&gt;
 
-&lt;pre class="highlight python"&gt;&lt;span class="c"&gt;#!/usr/bin/env python&lt;/span&gt;
+&lt;pre class="highlight python"&gt;&lt;code&gt;&lt;span class="c"&gt;#!/usr/bin/env python&lt;/span&gt;
 &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;numpy&lt;/span&gt; &lt;span class="kn"&gt;as&lt;/span&gt; &lt;span class="nn"&gt;np&lt;/span&gt;
 &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;time&lt;/span&gt;
 &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;threading&lt;/span&gt;
@@ -121,7 +121,7 @@ implemented for recieveing data and invoke meta-consumer process.&lt;/p&gt;
     &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="nb"&gt;xrange&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
         &lt;span class="n"&gt;producer&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
         &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="s"&gt;"iter &lt;/span&gt;&lt;span class="si"&gt;%&lt;/span&gt;&lt;span class="s"&gt;d is done."&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt;
-&lt;/pre&gt;
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;I was expecting that the multi-threaded version will bring 2 to 3 times speed up if I
 config the program with 4 threads. However, this code run &lt;code&gt;1m33.678s&lt;/code&gt; on the same server.
@@ -146,7 +146,7 @@ the &lt;code&gt;multiprocessing&lt;/code&gt; module. At the begining of its docu
 as a process. When creating a thread, it actually copy(fork) the entire processing into
 a new process.&lt;/p&gt;
 
-&lt;pre class="highlight python"&gt;&lt;span class="c"&gt;#!/usr/bin/env python&lt;/span&gt;
+&lt;pre class="highlight python"&gt;&lt;code&gt;&lt;span class="c"&gt;#!/usr/bin/env python&lt;/span&gt;
 &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;numpy&lt;/span&gt; &lt;span class="kn"&gt;as&lt;/span&gt; &lt;span class="nn"&gt;np&lt;/span&gt;
 &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;time&lt;/span&gt;
 &lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;multiprocessing&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;Pool&lt;/span&gt;
@@ -177,7 +177,7 @@ a new process.&lt;/p&gt;
     &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="nb"&gt;xrange&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
         &lt;span class="n"&gt;producer&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
         &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="s"&gt;"iter &lt;/span&gt;&lt;span class="si"&gt;%&lt;/span&gt;&lt;span class="s"&gt;d fin"&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt;
-&lt;/pre&gt;
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;It takes &lt;code&gt;0m33.970s&lt;/code&gt; for the multiprocessing version to run. The multiprocessing module
 bring in about 2.5 times speed up.&lt;/p&gt;
@@ -210,7 +210,7 @@ data.&lt;/p&gt;
 
 &lt;p&gt;Revisiting my problem, the MPI version is shown blow.&lt;/p&gt;
 
-&lt;pre class="highlight python"&gt;&lt;span class="c"&gt;#!/usr/bin/env python&lt;/span&gt;
+&lt;pre class="highlight python"&gt;&lt;code&gt;&lt;span class="c"&gt;#!/usr/bin/env python&lt;/span&gt;
 &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;numpy&lt;/span&gt; &lt;span class="kn"&gt;as&lt;/span&gt; &lt;span class="nn"&gt;np&lt;/span&gt;
 &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;time&lt;/span&gt;
 &lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;mpi4py&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;MPI&lt;/span&gt;
@@ -265,7 +265,7 @@ data.&lt;/p&gt;
             &lt;span class="n"&gt;comm&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;send&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;None&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;dest&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;tag&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;EXIT&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
     &lt;span class="k"&gt;else&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
         &lt;span class="n"&gt;consumer_daemon&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
-&lt;/pre&gt;
+&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Under same settings, the above program runs &lt;code&gt;0m31.332s&lt;/code&gt; and it memory performance is better
 than the multiprocessing version. One reason for the faster speed, I think, is the consumer
 wasn’t shut down between each iterations.&lt;/p&gt;
@@ -294,7 +294,7 @@ choice.&lt;/p&gt;
     <link rel="alternate" href="http://yjliu.net/blog/2013/08/05/summary-on-first-year-as-graduate-student.html"/>
     <id>http://yjliu.net/blog/2013/08/05/summary-on-first-year-as-graduate-student.html</id>
     <published>2013-08-04T17:07:11Z</published>
-    <updated>2014-04-26T09:17:48+08:00</updated>
+    <updated>2014-11-20T09:24:26+08:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -353,7 +353,7 @@ choice.&lt;/p&gt;
     <link rel="alternate" href="http://yjliu.net/blog/2013/07/21/luxation.html"/>
     <id>http://yjliu.net/blog/2013/07/21/luxation.html</id>
     <published>2013-07-21T04:28:17Z</published>
-    <updated>2014-04-26T09:17:48+08:00</updated>
+    <updated>2014-11-20T09:24:26+08:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -385,7 +385,7 @@ choice.&lt;/p&gt;
     <link rel="alternate" href="http://yjliu.net/blog/2013/06/18/implementation-of-a-faster-hashmap.html"/>
     <id>http://yjliu.net/blog/2013/06/18/implementation-of-a-faster-hashmap.html</id>
     <published>2013-06-18T13:54:02Z</published>
-    <updated>2014-04-26T09:17:48+08:00</updated>
+    <updated>2014-11-20T09:24:26+08:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -433,14 +433,14 @@ stl中的string基本没法持久化，不用想了。
 
 &lt;p&gt;这样的话，数据固化的问题基本可以沿着这个思路解决。简单的代码可以写成这样&lt;/p&gt;
 
-&lt;pre class="highlight cpp"&gt;&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;pool_cap&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;new_size&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;pool_size&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="n"&gt;element_size&lt;/span&gt;&lt;span class="p"&gt;)))&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;pre class="highlight cpp"&gt;&lt;code&gt;&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;pool_cap&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;new_size&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;pool_size&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="n"&gt;element_size&lt;/span&gt;&lt;span class="p"&gt;)))&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
 	&lt;span class="n"&gt;pool_cap&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="n"&gt;new_size&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
 	&lt;span class="n"&gt;Element_type&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;new_pool&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="n"&gt;Element_type&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;pool_cap&lt;/span&gt;&lt;span class="p"&gt;];&lt;/span&gt;
 	&lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;copy&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;pool&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;pool&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;pool_size&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;new_pool&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
 	&lt;span class="k"&gt;delete&lt;/span&gt; &lt;span class="p"&gt;[](&lt;/span&gt;&lt;span class="n"&gt;pool&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
 	&lt;span class="n"&gt;pool&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;new_pool&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 &lt;span class="p"&gt;}&lt;/span&gt;
-&lt;/pre&gt;
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;h3 id="section-1"&gt;性能优化&lt;/h3&gt;
 
@@ -476,7 +476,7 @@ stl中的string基本没法持久化，不用想了。
 
 &lt;p&gt;到这里基本上整个数据结构的设计就出来了。Hash node设计成&lt;/p&gt;
 
-&lt;pre class="highlight cpp"&gt;&lt;span class="k"&gt;struct&lt;/span&gt; &lt;span class="n"&gt;hash_node_t&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;pre class="highlight cpp"&gt;&lt;code&gt;&lt;span class="k"&gt;struct&lt;/span&gt; &lt;span class="n"&gt;hash_node_t&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
 &lt;span class="k"&gt;public&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
   &lt;span class="kt"&gt;unsigned&lt;/span&gt; &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;__key_off&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="c1"&gt;// 存key在key_pool中的偏移量
 &lt;/span&gt;  &lt;span class="kt"&gt;unsigned&lt;/span&gt; &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;__val_off&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="c1"&gt;// 存value在value_pool中的偏移量
@@ -484,7 +484,7 @@ stl中的string基本没法持久化，不用想了。
 &lt;/span&gt;  &lt;span class="kt"&gt;unsigned&lt;/span&gt; &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;__hash_val&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="c1"&gt;// 存hashvalue，用于加速
 &lt;/span&gt;  &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;__next_off&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="c1"&gt;// 存后继节点在node_pool中的偏移量
 &lt;/span&gt;&lt;span class="p"&gt;};&lt;/span&gt;
-&lt;/pre&gt;
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;因为池子的地址会动态变化，不能直接在hash node中保存指针，存偏移量就没有问题了。&lt;/p&gt;
 
@@ -506,8 +506,8 @@ stl中的string基本没法持久化，不用想了。
 
 &lt;p&gt;参与对比的hashmap有__gnu_cxx::hash_map，google_sparse_hash，google_dense_hash，几种hashtable都做了类似的封装。benchmark用到的代码地址在&lt;a href="https://github.com/Oneplus/libutilities/tree/master/benchmark/smartmap"&gt;这里&lt;/a&gt;。运行的时候用&lt;/p&gt;
 
-&lt;pre class="highlight plaintext"&gt;nice -n-20 ionice -c1 -n0 python bench.py
-&lt;/pre&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;nice -n-20 ionice -c1 -n0 python bench.py
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;保证了进程的优先级。&lt;/p&gt;
 
@@ -536,7 +536,7 @@ stl中的string基本没法持久化，不用想了。
     <link rel="alternate" href="http://yjliu.net/blog/2012/10/13/restruct-my-blog.html"/>
     <id>http://yjliu.net/blog/2012/10/13/restruct-my-blog.html</id>
     <published>2012-10-13T13:58:33Z</published>
-    <updated>2014-04-26T09:17:48+08:00</updated>
+    <updated>2014-11-20T09:24:26+08:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -605,10 +605,10 @@ o。保存之后，站点会暂时坏掉。不过把wordpress相关的文件移�
 
 &lt;p&gt;这里要用到前面说过的比较麻烦的&lt;code&gt;mod_rewrite&lt;/code&gt;。做法是在web根目录下的.htaccess中添加重写条件和重写规则。现在我对feed的重写规则是这样的&lt;/p&gt;
 
-&lt;pre class="highlight plaintext"&gt;RewriteCond %{HTTP_HOST} ^blog.oneplus.info$
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;RewriteCond %{HTTP_HOST} ^blog.oneplus.info$
 RewriteCond %{REQUEST_URI} ^/feed$ [NC]
 RewriteRule .* http://blog.oneplus.info/feed [NC,L,R=301]
-&lt;/pre&gt;
+&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;它的含义是把所有主机名为blog.oneplus.info，URI为/feed的请求都重定向到blog.oneplus.info/feed下。&lt;/p&gt;
 
 &lt;p&gt;添加完重写规则后可以通过访问blog.oneplus.info/feed来测试一下重写规则是否生效。
@@ -630,7 +630,7 @@ RewriteRule .* http://blog.oneplus.info/feed [NC,L,R=301]
 
 &lt;p&gt;起初，我想了好久如何在query.php上做cache，后来才发现，最应该做cache的是主页这一端。所以在主页中添加了下面的代码：&lt;/p&gt;
 
-&lt;pre class="highlight plaintext"&gt;$cache = new Cache(3600, &amp;amp;quot;some_path&amp;amp;quot;);
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;$cache = new Cache(3600, &amp;amp;quot;some_path&amp;amp;quot;);
 
 $key = &amp;amp;quot;last_post&amp;amp;quot;;
 $values = $cache-&amp;amp;gt;get( $key );
@@ -650,7 +650,7 @@ if ($values == false) {
 } else {
 	echo $values;
 }
-&lt;/pre&gt;
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;对于主页的请求，先去看看cache过没过期，没过期就直接返回cache的结果，这样可以减少不少网络传输。其中，cache类我是参考&lt;a href="http://www.mangguo.org/the-simple-php-cache-class/"&gt;这篇&lt;/a&gt;的。&lt;/p&gt;
 
@@ -667,7 +667,7 @@ if ($values == false) {
     <link rel="alternate" href="http://yjliu.net/blog/2012/10/06/the-implementation-of-a-thread-safe-logging-library.html"/>
     <id>http://yjliu.net/blog/2012/10/06/the-implementation-of-a-thread-safe-logging-library.html</id>
     <published>2012-10-06T04:33:27Z</published>
-    <updated>2014-04-26T09:17:48+08:00</updated>
+    <updated>2014-11-20T09:24:26+08:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -687,18 +687,18 @@ if ($values == false) {
 
 &lt;p&gt;首先把设计模式书上的代码抄一遍：&lt;/p&gt;
 
-&lt;pre class="highlight cpp"&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Singleton&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;pre class="highlight cpp"&gt;&lt;code&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Singleton&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
    &lt;span class="k"&gt;public&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
        &lt;span class="k"&gt;static&lt;/span&gt; &lt;span class="n"&gt;Singleton&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;getInstance&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt; &lt;span class="p"&gt;);&lt;/span&gt;
    &lt;span class="k"&gt;private&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
        &lt;span class="n"&gt;Singleton&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt; &lt;span class="p"&gt;);&lt;/span&gt;
        &lt;span class="k"&gt;static&lt;/span&gt; &lt;span class="n"&gt;Singleton&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;instance&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 &lt;span class="p"&gt;};&lt;/span&gt;
-&lt;/pre&gt;
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;然后，要做的就是往里面填一个打印log的函数，这个也是很容易实现的。实现后的效果如下。&lt;/p&gt;
 
-&lt;pre class="highlight cpp"&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;logger&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;pre class="highlight cpp"&gt;&lt;code&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;logger&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
 &lt;span class="k"&gt;public&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
     &lt;span class="k"&gt;static&lt;/span&gt; &lt;span class="n"&gt;logger&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;get_logger&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
         &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;_instance&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="nb"&gt;NULL&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="n"&gt;_instance&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="n"&gt;logger&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
@@ -721,7 +721,7 @@ if ($values == false) {
     &lt;span class="n"&gt;logger&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;get_logger&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="n"&gt;write_log&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
     &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 &lt;span class="p"&gt;}&lt;/span&gt;
-&lt;/pre&gt;
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;当然也可以用变长参数和宏函数配合把这个做得有点酷，不过那些也不是本文要讨论的。
 到这里，使用Singleton实现logger的任务已经完成得差不多了。接下来要做的是使上面的代码线程安全。&lt;/p&gt;
@@ -734,25 +734,25 @@ if ($values == false) {
 
 &lt;p&gt;这里就出现两个线程都向stderr打印，导致打印信息混乱了。如果write_log函数中做更复杂的操作，出现这种混乱的可能性会变得更大。造成这一现象的原因就是多个线程抢占同一文件句柄，是生产者消费者问题的一个具体情境。解决方法就是给write_log上互斥锁。把write_log函数改成下面的样子就好了。&lt;/p&gt;
 
-&lt;pre class="highlight cpp"&gt;&lt;span class="kt"&gt;void&lt;/span&gt; &lt;span class="nf"&gt;write_log&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;pre class="highlight cpp"&gt;&lt;code&gt;&lt;span class="kt"&gt;void&lt;/span&gt; &lt;span class="nf"&gt;write_log&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
     &lt;span class="n"&gt;EnterCriticalSection&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
     &lt;span class="n"&gt;fprintf&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;stderr&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;"%%levelname%% "&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
     &lt;span class="n"&gt;fprintf&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;stderr&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;"log: %d&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s"&gt;"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
     &lt;span class="n"&gt;LeaveCriticalSection&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
 &lt;span class="p"&gt;}&lt;/span&gt;
-&lt;/pre&gt;
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;不过，给write_log上锁也并不能完全保证logger线程安全，另一个非常隐蔽资源抢占会发生在单件实例化的那个时间上。如果logger并没被初始化，并且又有多个线程同时要去初始化它，而在初始化时发生上下文切换，那么这个logger就会被实例化多次。&lt;/p&gt;
 
 &lt;p&gt;&lt;a href="http://www.codeproject.com/Articles/96942/Singleton-Design-Pattern-and-Thread-Safety"&gt;这里&lt;/a&gt;提供了三种解决方法，第一种是直接在判断单件是否被实例化前加锁，代码如下：&lt;/p&gt;
 
-&lt;pre class="highlight cpp"&gt;&lt;span class="k"&gt;static&lt;/span&gt; &lt;span class="n"&gt;logger&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="nf"&gt;get_logger&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;pre class="highlight cpp"&gt;&lt;code&gt;&lt;span class="k"&gt;static&lt;/span&gt; &lt;span class="n"&gt;logger&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="nf"&gt;get_logger&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
     &lt;span class="n"&gt;EnterCriticalSection&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
     &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;_instance&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="nb"&gt;NULL&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="n"&gt;_instance&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="n"&gt;logger&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
     &lt;span class="n"&gt;LeaveCriticalSection&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
     &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;_instance&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 &lt;span class="p"&gt;}&lt;/span&gt;
-&lt;/pre&gt;
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;由于加互斥锁是一件比较耗时的工作，每次get_logger时都调用会加锁，解锁，程序的速度会受到影响。总之，这种方法是比较不赞的。&lt;/p&gt;
 
@@ -760,7 +760,7 @@ if ($values == false) {
 
 &lt;p&gt;第三种方法在第一种方法上进行改进，把加锁放在if判断里面，或者说在加锁外放一层if判断，代码是这样的：&lt;/p&gt;
 
-&lt;pre class="highlight cpp"&gt;&lt;span class="k"&gt;static&lt;/span&gt; &lt;span class="n"&gt;logger&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="nf"&gt;get_logger&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;pre class="highlight cpp"&gt;&lt;code&gt;&lt;span class="k"&gt;static&lt;/span&gt; &lt;span class="n"&gt;logger&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="nf"&gt;get_logger&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
     &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;_instance&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="nb"&gt;NULL&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
         &lt;span class="n"&gt;EnterCriticalSection&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
         &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;_instance&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="nb"&gt;NULL&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="n"&gt;_instance&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="n"&gt;logger&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
@@ -768,7 +768,7 @@ if ($values == false) {
     &lt;span class="p"&gt;}&lt;/span&gt;
     &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;_instance&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 &lt;span class="p"&gt;}&lt;/span&gt;
-&lt;/pre&gt;
+&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;这种方法的好处是避免了每次get_logger都加锁，不过在某些情景上和第一种方法是一样的。
 ### printf
 在实验过程中，我发现如果write_log只调用一次printf，并不会出现前面谈线程安全时的输出混乱。查了一下发现，printf本身具有操作原子性。所以，如果write_log函数只由一个printf组成，那一处的锁也可以忽略。

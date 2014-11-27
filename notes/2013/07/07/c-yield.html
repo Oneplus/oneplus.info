@@ -46,7 +46,7 @@ blockquote p { font-size: 14px; }
 <div>
   <p>C/C++中没有yield语法，有的时候想用产生器，自己实现一个循环会感觉很麻烦。C/C++应该如何实现产生器呢？</p>
 
-<pre class="highlight cpp"><span class="k">class</span> <span class="nc">FibonacciGenerator</span> <span class="p">{</span>
+<pre class="highlight cpp"><code><span class="k">class</span> <span class="nc">FibonacciGenerator</span> <span class="p">{</span>
 <span class="k">public</span><span class="o">:</span>
   <span class="n">FibonacciGenerator</span><span class="p">()</span> <span class="o">:</span> <span class="n">a</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">b</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">state</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="p">{}</span>
   <span class="kt">int</span> <span class="n">generate</span><span class="p">()</span> <span class="p">{</span>
@@ -63,7 +63,7 @@ blockquote p { font-size: 14px; }
   <span class="kt">int</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">;</span>
   <span class="kt">int</span> <span class="n">state</span><span class="p">;</span>
 <span class="p">}</span>
-</pre>
+</code></pre>
 
 <p>这个代码真的很神奇，我也没搞懂他是如何运行的，但是循环式的generator似乎可以这么写。</p>
 

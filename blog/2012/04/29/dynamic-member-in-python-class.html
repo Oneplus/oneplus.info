@@ -48,23 +48,23 @@ blockquote p { font-size: 14px; }
 <div>
   <p>在写一些python脚本时，我很喜欢用optparse module中的OptionParser对象来解析一些命令行参数。一个简单的例子如下，</p>
 
-<pre class="highlight python"><span class="n">parser</span> <span class="o">=</span> <span class="n">OptionParser</span><span class="p">()</span>
+<pre class="highlight python"><code><span class="n">parser</span> <span class="o">=</span> <span class="n">OptionParser</span><span class="p">()</span>
 <span class="n">parser</span><span class="o">.</span><span class="n">add_option</span><span class="p">(</span><span class="s">"-f"</span><span class="p">,</span> <span class="s">"--file"</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="s">"filename"</span><span class="p">)</span>
 <span class="p">(</span><span class="n">options</span><span class="p">,</span> <span class="n">args</span><span class="p">)</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
-</pre>
+</code></pre>
 
 <p>然后，使用options.filename可以调用–file指定的参数，这似乎也没什么神奇的。但是，在第一次用OptionParser时，我那个充满C惯性思维的大脑却很严重地shock了。因为，options对象的成员在调用期间才产生，这不科学啊。</p>
 
 <p>结果这个问题被搁置了大半年，今天早上又想起来，心血来潮看了一眼optparse的源代码，</p>
 
-<pre class="highlight plaintext">self.__dict__.update(dict)
-</pre>
+<pre class="highlight plaintext"><code>self.__dict__.update(dict)
+</code></pre>
 
 <p>然后一下子，我似乎明白了什么。</p>
 
 <p>首先，每个python对象中都用一个字典来保存其命名空间，也就是<code>__dict__</code>。举栗来讲，C.x实际上是被翻译成<code>C.__dict__["x"]</code>。那么，runtime地向C中添加一些成员就是小case了。一个栗子程序如下：</p>
 
-<pre class="highlight python"><span class="k">class</span> <span class="nc">C</span><span class="p">:</span>
+<pre class="highlight python"><code><span class="k">class</span> <span class="nc">C</span><span class="p">:</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="mi">1</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="mi">2</span>
@@ -78,14 +78,14 @@ blockquote p { font-size: 14px; }
 <span class="n">c</span><span class="o">.</span><span class="n">regist</span><span class="p">(</span><span class="s">"func"</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="s">""</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s">"=&gt;"</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="s">"&lt;="</span><span class="p">]))</span>
 <span class="k">print</span> <span class="n">c</span><span class="o">.</span><span class="n">__dict__</span>
 <span class="k">print</span> <span class="n">c</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">c</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="n">c</span><span class="o">.</span><span class="n">z</span><span class="p">,</span> <span class="n">c</span><span class="o">.</span><span class="n">func</span><span class="p">(</span><span class="s">"__dict__"</span><span class="p">)</span>
-</pre>
+</code></pre>
 
 <p>运行结果是</p>
 
-<pre class="highlight json"><span class="p">{</span><span class="err">'y'</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="err">'x'</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">}</span><span class="w">
+<pre class="highlight json"><code><span class="p">{</span><span class="err">'y'</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="err">'x'</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">}</span><span class="w">
 </span><span class="p">{</span><span class="err">'y'</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="err">'x'</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="err">'z'</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="err">'func'</span><span class="p">:</span><span class="w"> </span><span class="err">&lt;function</span><span class="w"> </span><span class="err">&lt;lambda&gt;</span><span class="w"> </span><span class="err">at</span><span class="w"> </span><span class="mi">0</span><span class="err">x</span><span class="mi">2</span><span class="err">b</span><span class="mi">55</span><span class="err">c</span><span class="mi">97</span><span class="err">de</span><span class="mi">668</span><span class="err">&gt;</span><span class="p">}</span><span class="w">
 </span><span class="mi">1</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="err">=&gt;__dict__&lt;=</span><span class="w">
-</span></pre>
+</span></code></pre>
 
 <p>不过问题就这样解决了，真是不甘心。所以发个博客吧。
 P勒个S：这之前，还看过C中实现命令行解析的类库，<a href="http://argtable.sourceforge.net/">argtable</a>。C语言真是好难啊。</p>

@@ -86,7 +86,7 @@ blockquote p { font-size: 14px; }
 
 <p><em>[by jerrybond]</em> 计算各点到中心的距离，按距离大小将点排序，合并距离相等的点。问题转化为最大子段和问题。由于本题有动态更新每点的值，普通动态规划解决这个问题的复杂度为<em>O(QC<sup>2</sup>)</em>，对于本题数据范围不适用。需要线段树进行维护。</p>
 
-<pre class="highlight cpp"><span class="cp">#include&lt;math.h&gt;
+<pre class="highlight cpp"><code><span class="cp">#include&lt;math.h&gt;
 #include&lt;stdio.h&gt;
 #include&lt;string.h&gt;
 #include&lt;stdlib.h&gt;
@@ -214,7 +214,7 @@ blockquote p { font-size: 14px; }
     <span class="p">}</span>
     <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
-</pre>
+</code></pre>
 
 <h4 id="seven-roads">Seven Roads</h4>
 
@@ -222,7 +222,7 @@ blockquote p { font-size: 14px; }
 
 <p>此题明确所有的点最多只在7条直线上，因此如果随机选取一个点有大于1/7的概率取到最多点数的直线，如果每组数据只随机取30个点用来验证，在最坏的情况下有(6/7)<sup>30</sup>≤1%的概率算法错误，由于最多只有30组数据，理论上可以跑对全部数据。当然，适当增加或减小枚举的点数，可以影响程序的正确率和速度。</p>
 
-<pre class="highlight cpp"><span class="cp">#include &lt;stdio.h&gt;
+<pre class="highlight cpp"><code><span class="cp">#include &lt;stdio.h&gt;
 #include &lt;algorithm&gt;
 #include &lt;iostream&gt;
 #include &lt;cmath&gt;
@@ -295,13 +295,13 @@ blockquote p { font-size: 14px; }
     <span class="p">}</span>
     <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
-</pre>
+</code></pre>
 
 <h4 id="shortest-path">Shortest Path</h4>
 
 <p><strong>[by Darkgt]</strong>如果用s[i]表示到达第i个位置所需最少步数，可以发现s[i-1]≤s[i]，具有dp的性质，但dp的复杂度无法解决此题。发现s[i]=p的位置是连续的并且由s[i]=p-1的位置转移到，于是每次可以转移s值相等的一个区间，复杂度O(n)。</p>
 
-<pre class="highlight cpp"><span class="cp">#include &lt;cstdio&gt;
+<pre class="highlight cpp"><code><span class="cp">#include &lt;cstdio&gt;
 #include &lt;algorithm&gt;
 </span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
 <span class="k">const</span> <span class="kt">int</span> <span class="n">M</span> <span class="o">=</span> <span class="mi">100005</span><span class="p">;</span>
@@ -332,7 +332,7 @@ blockquote p { font-size: 14px; }
     <span class="p">}</span>
     <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
-</pre>
+</code></pre>
 
 <h4 id="power-supply-system">Power-supply System</h4>
 
@@ -352,7 +352,7 @@ blockquote p { font-size: 14px; }
 <code>out[i][j]=min(sigma(out[son(i).k][j+1])+f[j],inm[i])。</code>
 inm[root]即为最终答案，整个过程可以用记忆化搜索实现。</p>
 
-<pre class="highlight cpp">
+<pre class="highlight cpp"><code>
 <span class="cp">#include &lt;vector&gt;
 #include &lt;list&gt;
 #include &lt;map&gt;
@@ -547,14 +547,14 @@ inm[root]即为最终答案，整个过程可以用记忆化搜索实现。</p>
     <span class="p">}</span>
     <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
-</pre>
+</code></pre>
 
 <h4 id="play-beans-beans">Play Beans Beans</h4>
 
 <p><strong>[by Lambyy]</strong>水题一枚, 题意可能比较绕, 但自认为题意描述很清楚, 基本按题意模拟下来即可, 第一组Sample 数据即蕴含了本题最大的Trick, 即在每一个Round过程中新产生的空白点, 是不会被进行操作的, 否则Sample就得7了, 相信大部分过了的人都考虑到了这种情况.
 定位为简单模拟题, 基本全场题, 没想卡人……</p>
 
-<pre class="highlight cpp"><span class="cp">#include &lt;cstdio&gt;
+<pre class="highlight cpp"><code><span class="cp">#include &lt;cstdio&gt;
 #include &lt;cstring&gt;
 </span><span class="k">const</span> <span class="kt">int</span> <span class="n">N</span> <span class="o">=</span> <span class="mi">32</span><span class="p">;</span>
 
@@ -679,13 +679,13 @@ inm[root]即为最终答案，整个过程可以用记忆化搜索实现。</p>
     <span class="p">}</span>
     <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
-</pre>
+</code></pre>
 
 <h4 id="dictionary">Dictionary</h4>
 
 <p>处理XML，求到行首距离为Q的标签的属性。可以一边读入一边递归着求。也可以都读入后去掉正文，再递归处理，总之是递归着做，比较简单。校验时觉得属性名有空格太坑又没什么意思，就把有空格的数据去掉。</p>
 
-<pre class="highlight cpp"><span class="cp">#include &lt;iostream&gt;
+<pre class="highlight cpp"><code><span class="cp">#include &lt;iostream&gt;
 #include &lt;sstream&gt;
 #include &lt;cstring&gt;
 #include &lt;vector&gt;
@@ -724,7 +724,7 @@ inm[root]即为最终答案，整个过程可以用记忆化搜索实现。</p>
     <span class="p">}</span>
     <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
-</pre>
+</code></pre>
 
 <h4 id="find-the-fraction">Find the Fraction</h4>
 
@@ -763,7 +763,7 @@ inm[root]即为最终答案，整个过程可以用记忆化搜索实现。</p>
 
 <p>关于本题结论 以及更多关于Farey Sequence 的知识, 请参考论文<a href="http://wenku.baidu.com/view/40edb37a32d7375a41780c9.html">《一类分数问题的研究》</a>.</p>
 
-<pre class="highlight cpp"><span class="cp">#include &lt;cstdio&gt;
+<pre class="highlight cpp"><code><span class="cp">#include &lt;cstdio&gt;
 #include &lt;cstring&gt;
 #include &lt;cmath&gt;
 </span><span class="k">const</span> <span class="kt">int</span> <span class="n">N</span> <span class="o">=</span> <span class="mi">100010</span><span class="p">;</span>
@@ -888,13 +888,13 @@ inm[root]即为最终答案，整个过程可以用记忆化搜索实现。</p>
     <span class="p">}</span>
     <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
-</pre>
+</code></pre>
 
 <h4 id="zero-pair">Zero Pair</h4>
 
 <p><strong>[by Xnozero]</strong>将<code>a*b=rev(a)*rev(b)</code>转化为<code>a/rev(a)=rev(b)/b</code>,预处理出范围内的 rev(a)的值,将a/rev(a)的分子分母约分后存入MAP，再对b进行类似的处理，从MAP中找到对应的值，统计总数即可。</p>
 
-<pre class="highlight cpp"><span class="cp">#include&lt;iostream&gt;
+<pre class="highlight cpp"><code><span class="cp">#include&lt;iostream&gt;
 #include&lt;map&gt;
 #include&lt;cstdio&gt;
 #include&lt;cstring&gt;
@@ -966,7 +966,7 @@ inm[root]即为最终答案，整个过程可以用记忆化搜索实现。</p>
     <span class="p">}</span>
     <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
-</pre>
+</code></pre>
 
 <div>_____________________________解题报告分割线_____________________________</div>
 

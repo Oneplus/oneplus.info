@@ -3,7 +3,7 @@
 <head>
 <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
 <title>
-  R语言中动态安装库 |  Static Oneplus
+  Valgrind Cheatsheet |  Static Oneplus
 </title>
 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap-responsive.min.css">
@@ -33,24 +33,48 @@ blockquote p { font-size: 14px; }
 
   <div class="content">
     <div style="color:#999;">
-  <small>2012/11/29 - by
-    
+  <small>2014/11/27 - by
+    Oneplus
 
     
-      &bull; <a href="/notes/tags/r.html">R</a>
+      &bull; <a href="/notes/tags/valgrind.html">valgrind</a>
     
   </small>
 </div>
-<h2>R语言中动态安装库</h2>
+<h2>Valgrind Cheatsheet</h2>
 <hr />
 <div>
-  <p>在一个R脚本中，我们使用了某些library，但是发现运行环境中没有这个library，如果能检测一下有没有这个包，没有就自动安装该多好。而R中非常方便地支持这些，只要联网。</p>
+  <p>Valgrind is a great tools for dynamic checking.</p>
 
-<p>代码如下：</p>
+<h3 id="basic-usage">Basic Usage</h3>
 
-<pre class="highlight r"><code><span class="n">site</span><span class="o">&lt;-</span><span class="s2">"http://cran.r-project.org"</span>
-<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">require</span><span class="p">(</span><span class="s2">"ggplot2"</span><span class="p">))</span> <span class="p">{</span> <span class="n">install.package</span><span class="p">(</span><span class="s2">"ggplot2"</span><span class="p">,</span> <span class="n">repos</span><span class="o">=</span><span class="n">site</span><span class="p">)</span> <span class="p">}</span>
+<p>The most basic use of <code>valgrind</code> is checking memory leak.</p>
+
+<pre class="highlight plaintext"><code>valgrind --tool=memcheck --leak-check=full &lt;program&gt;
 </code></pre>
+
+<h3 id="profiling-with-calgrind">Profiling with calgrind</h3>
+
+<p>The second use of <code>valgrind</code> is to show the dynamic running time for certain
+function and the invoking relation between functions.</p>
+
+<pre class="highlight plaintext"><code>valgrind --tool=callgrind &lt;program&gt;
+</code></pre>
+
+<p>To visualize the calgrind result, my best practice is an combination <code>gprof2dot.py</code>
+and <code>graphviz</code>. <code>gprof2dot.py</code> can be obtained from <code>pypi</code> or the project
+<a href="https://code.google.com/p/jrfonseca/wiki/Gprof2Dot">homepage</a>.
+Luckily, the author is still maintaining this tools.</p>
+
+<p>Combining these tools can be easily done by the following commands:</p>
+
+<pre class="highlight plaintext"><code>valgrind --tool=callgrind --callgrind-out-file=/tmp/callgrind.output
+./gprof2dot.py --format=callgrind --output=/tmp/call.dot
+dot -Tpng -o /tmp/graph.png /tmp/call.dot
+</code></pre>
+
+<p>At the end, you will get a .png file representing the function executing time and
+relations between their invoking.</p>
 
 </div>
 

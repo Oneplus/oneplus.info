@@ -55,19 +55,19 @@ thread program, I decided to parallel it.</p>
 parallel model). I have a collection of data which contains about 200 thousand entries.
 My algorithm is some kind of <code>loop-loop</code> and can be illustrated as the following pseudocode.</p>
 
-<pre class="highlight python"><span class="k">while</span> <span class="ow">not</span> <span class="n">terminal</span><span class="o">-</span><span class="n">condition</span><span class="p">:</span>
+<pre class="highlight python"><code><span class="k">while</span> <span class="ow">not</span> <span class="n">terminal</span><span class="o">-</span><span class="n">condition</span><span class="p">:</span>
     <span class="n">init</span><span class="p">(</span><span class="n">global_vector</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">instance</span> <span class="ow">in</span> <span class="n">instances</span><span class="p">:</span>
         <span class="n">global_vector</span> <span class="o">+=</span> <span class="n">time</span><span class="o">-</span><span class="n">consuming</span><span class="o">-</span><span class="n">process</span><span class="p">(</span><span class="n">instance</span><span class="p">)</span>
     <span class="n">do</span><span class="o">-</span><span class="n">something</span><span class="p">(</span><span class="n">global_vector</span><span class="p">)</span>
-</pre>
+</code></pre>
 
 <p>Since the <code>time-consuming-process</code> is very time consuming, we can easily use a <code>producer</code>
 to distribute these tasks onto several <code>consumers</code>. What a textbook parallel model! To
 make it more clear, also for convenience of future discussion, let me put it into some
 meaningless but runnable code.</p>
 
-<pre class="highlight python"><span class="c">#!/usr/bin/env python</span>
+<pre class="highlight python"><code><span class="c">#!/usr/bin/env python</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">time</span>
 
@@ -95,7 +95,7 @@ meaningless but runnable code.</p>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
         <span class="n">producer</span><span class="p">()</span>
         <span class="k">print</span> <span class="s">"iter </span><span class="si">%</span><span class="s">d is done."</span> <span class="o">%</span> <span class="n">i</span>
-</pre>
+</code></pre>
 
 <p>A simple <code>time</code> command shows the above code runs <code>1m29.155s</code> on my server.</p>
 
@@ -112,7 +112,7 @@ implemented for recieveing data and invoke meta-consumer process.</p>
 
 <p>After a slight modification on the above program, it became the multi-threaded version.</p>
 
-<pre class="highlight python"><span class="c">#!/usr/bin/env python</span>
+<pre class="highlight python"><code><span class="c">#!/usr/bin/env python</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">time</span>
 <span class="kn">import</span> <span class="nn">threading</span>
@@ -145,7 +145,7 @@ implemented for recieveing data and invoke meta-consumer process.</p>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
         <span class="n">producer</span><span class="p">()</span>
         <span class="k">print</span> <span class="s">"iter </span><span class="si">%</span><span class="s">d is done."</span> <span class="o">%</span> <span class="n">i</span>
-</pre>
+</code></pre>
 
 <p>I was expecting that the multi-threaded version will bring 2 to 3 times speed up if I
 config the program with 4 threads. However, this code run <code>1m33.678s</code> on the same server.
@@ -170,7 +170,7 @@ the <code>multiprocessing</code> module. At the begining of its document page, i
 as a process. When creating a thread, it actually copy(fork) the entire processing into
 a new process.</p>
 
-<pre class="highlight python"><span class="c">#!/usr/bin/env python</span>
+<pre class="highlight python"><code><span class="c">#!/usr/bin/env python</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">time</span>
 <span class="kn">from</span> <span class="nn">multiprocessing</span> <span class="kn">import</span> <span class="n">Pool</span>
@@ -201,7 +201,7 @@ a new process.</p>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
         <span class="n">producer</span><span class="p">()</span>
         <span class="k">print</span> <span class="s">"iter </span><span class="si">%</span><span class="s">d fin"</span> <span class="o">%</span> <span class="n">i</span>
-</pre>
+</code></pre>
 
 <p>It takes <code>0m33.970s</code> for the multiprocessing version to run. The multiprocessing module
 bring in about 2.5 times speed up.</p>
@@ -234,7 +234,7 @@ data.</p>
 
 <p>Revisiting my problem, the MPI version is shown blow.</p>
 
-<pre class="highlight python"><span class="c">#!/usr/bin/env python</span>
+<pre class="highlight python"><code><span class="c">#!/usr/bin/env python</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">time</span>
 <span class="kn">from</span> <span class="nn">mpi4py</span> <span class="kn">import</span> <span class="n">MPI</span>
@@ -289,7 +289,7 @@ data.</p>
             <span class="n">comm</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="n">i</span><span class="p">,</span> <span class="n">tag</span><span class="o">=</span><span class="n">EXIT</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">consumer_daemon</span><span class="p">()</span>
-</pre>
+</code></pre>
 <p>Under same settings, the above program runs <code>0m31.332s</code> and it memory performance is better
 than the multiprocessing version. One reason for the faster speed, I think, is the consumer
 wasn’t shut down between each iterations.</p>

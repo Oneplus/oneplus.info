@@ -48,12 +48,12 @@ blockquote p { font-size: 14px; }
 
 <p>在apache的配置文件<code>httpd.conf</code>中加入</p>
 
-<pre class="highlight shell">ProxyPass / balancer://proxy/         <span class="c">#注意这里以"/"结尾 </span>
+<pre class="highlight shell"><code>ProxyPass / balancer://proxy/         <span class="c">#注意这里以"/"结尾 </span>
 &lt;Proxy balancer://proxy&gt; 
     BalancerMember http://192.168.6.37:6888/ 
     BalancerMember http://192.168.6.38:6888/ 
 <span class="gp">&lt;/Proxy&gt; </span>
-</pre>
+</code></pre>
 
 <p>这里不一定要在<code>httpd.conf</code>中直接添加<code>ProxyPass / balancer</code>。另一种实现方法是向<code>httpd.conf</code>中添加<code>Include conf/httpd-proxy.conf</code>，然后把<code>ProxyPass</code>写到<code>httpd-proxy.conf</code>中。</p>
 
@@ -65,8 +65,8 @@ blockquote p { font-size: 14px; }
   <li><code>balancer://proxy</code>表示要配置负载均衡，<code>proxy</code>表示负载均衡名，也可以改成其他名字，比如说<code>redmine_cluster</code>。</li>
 </ul>
 
-<pre class="highlight shell">BalancerMember http://192.168.6.37:6888/ 
-</pre>
+<pre class="highlight shell"><code>BalancerMember http://192.168.6.37:6888/ 
+</code></pre>
 
 <p>表示将<code>http://192.168.6.37:6888/</code>注册到负载均衡中。</p>
 

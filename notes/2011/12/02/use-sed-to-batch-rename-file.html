@@ -46,27 +46,27 @@ blockquote p { font-size: 14px; }
 <div>
   <h3 id="sed">Sed批量去拓展名</h3>
 
-<pre class="highlight shell">|- dev.gb.conll06.raw
+<pre class="highlight shell"><code>|- dev.gb.conll06.raw
 |- test.gb.conll06.raw
 |- train.gb.conll06.raw
-</pre>
+</code></pre>
 
 <p>想要去掉其中的后缀<code>.raw</code>，用个小脚本就可以搞定：</p>
 
-<pre class="highlight shell"><span class="k">for </span>file <span class="k">in</span> <span class="sb">`</span>ls<span class="sb">`</span>; <span class="k">do </span>mv <span class="nv">$file</span> <span class="sb">`</span><span class="nb">echo</span> <span class="nv">$file</span> | sed <span class="s1">'s/\.raw$//'</span><span class="sb">`</span>; <span class="k">done</span>
-</pre>
+<pre class="highlight shell"><code><span class="k">for </span>file <span class="k">in</span> <span class="sb">`</span>ls<span class="sb">`</span>; <span class="k">do </span>mv <span class="nv">$file</span> <span class="sb">`</span><span class="nb">echo</span> <span class="nv">$file</span> | sed <span class="s1">'s/\.raw$//'</span><span class="sb">`</span>; <span class="k">done</span>
+</code></pre>
 
 <h3 id="sed-1">Sed批量添加拓展名</h3>
 
-<pre class="highlight shell">|- dev.gb.conll06
+<pre class="highlight shell"><code>|- dev.gb.conll06
 |- test.gb.conll06
 |- train.gb.conll06
-</pre>
+</code></pre>
 
 <p>同理，一个小脚本可以搞定：</p>
 
-<pre class="highlight shell"><span class="k">for </span>file <span class="k">in</span> <span class="sb">`</span>ls<span class="sb">`</span>; <span class="k">do </span>mv <span class="nv">$file</span> <span class="sb">`</span><span class="nb">echo</span> <span class="nv">$file</span> | sed <span class="s1">'s/$/\.raw//'</span><span class="sb">`</span>; <span class="k">done</span>
-</pre>
+<pre class="highlight shell"><code><span class="k">for </span>file <span class="k">in</span> <span class="sb">`</span>ls<span class="sb">`</span>; <span class="k">do </span>mv <span class="nv">$file</span> <span class="sb">`</span><span class="nb">echo</span> <span class="nv">$file</span> | sed <span class="s1">'s/$/\.raw//'</span><span class="sb">`</span>; <span class="k">done</span>
+</code></pre>
 
 </div>
 

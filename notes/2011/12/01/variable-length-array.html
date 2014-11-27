@@ -48,20 +48,20 @@ blockquote p { font-size: 14px; }
 
 <p>我想实现一个可以像printf一样带参数模板的log打印函数，在调用</p>
 
-<pre class="highlight c"><span class="n">line_count</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">;</span>
+<pre class="highlight c"><code><span class="n">line_count</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">;</span>
 <span class="n">write_log</span><span class="p">(</span><span class="s">"process %d lines"</span><span class="p">,</span> <span class="n">line_count</span><span class="p">);</span>
-</pre>
+</code></pre>
 
 <p>打印出</p>
 
-<pre class="highlight plaintext">process 1000 lines
-</pre>
+<pre class="highlight plaintext"><code>process 1000 lines
+</code></pre>
 
 <h3 id="section-1">方法</h3>
 
 <p>实现方法是使用stdarg.h中提供的变长参数接口。<code>vprintf</code>、<code>vsprintf</code>、<code>vfprintf</code>等等，我们可以用如下的方法实现<code>write_log</code>函数：</p>
 
-<pre class="highlight c"><span class="kt">void</span> <span class="n">write_log</span><span class="p">(</span><span class="kt">int</span> <span class="n">lvl</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">fmt</span><span class="p">,</span> <span class="p">...){</span>
+<pre class="highlight c"><code><span class="kt">void</span> <span class="n">write_log</span><span class="p">(</span><span class="kt">int</span> <span class="n">lvl</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">fmt</span><span class="p">,</span> <span class="p">...){</span>
     <span class="p">...</span>
     <span class="kt">va_list</span> <span class="n">list</span><span class="p">;</span>
     <span class="n">va_start</span><span class="p">(</span><span class="n">list</span><span class="p">,</span> <span class="n">fmt</span><span class="p">);</span>
@@ -69,7 +69,7 @@ blockquote p { font-size: 14px; }
     <span class="n">va_end</span><span class="p">(</span><span class="n">list</span><span class="p">);</span>
     <span class="p">...</span>
 <span class="p">}</span>
-</pre>
+</code></pre>
 
 </div>
 

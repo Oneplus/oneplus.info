@@ -68,7 +68,7 @@ blockquote p { font-size: 14px; }
 
 <p>本来是打算用自己的笔记本作演示，但由于堵车迟到，这件事就只好作罢。结果原来准备的用matlab画Sierpinski triangle的动画泡汤了。这里贴出土鳖的matlab代码，路过轻拍。</p>
 
-<pre class="highlight matlab"><span class="k">function</span> <span class="n">Sierpinski</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">d</span><span class="p">)</span>
+<pre class="highlight matlab"><code><span class="k">function</span> <span class="n">Sierpinski</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">d</span><span class="p">)</span>
 <span class="k">if</span><span class="p">(</span> <span class="n">d</span> <span class="o">==</span> <span class="mi">0</span> <span class="p">)</span>
     <span class="nb">axis</span> <span class="n">off</span><span class="p">;</span>
     <span class="nb">hold</span> <span class="n">on</span><span class="p">;</span>
@@ -92,7 +92,7 @@ blockquote p { font-size: 14px; }
 <span class="n">y3</span> <span class="o">=</span> <span class="n">y</span> <span class="o">+</span> <span class="n">d</span> <span class="o">*</span> <span class="n">l</span> <span class="o">*</span> <span class="nb">sqrt</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="p">/</span> <span class="mi">3</span><span class="p">;</span>
 
 <span class="nb">fill</span><span class="p">([</span><span class="n">x1</span> <span class="n">x2</span> <span class="n">x3</span><span class="p">],</span> <span class="p">[</span><span class="n">y1</span> <span class="n">y2</span> <span class="n">y3</span><span class="p">],</span> <span class="s1">'w'</span><span class="p">);</span>
-</pre>
+</code></pre>
 
 <p>不能使用笔记本的另一个坏处就是，原计划进行的课程录音杯具了。下节课早点去二区，心平气和地把这件事做清楚吧。</p>
 

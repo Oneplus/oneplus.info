@@ -48,22 +48,22 @@ blockquote p { font-size: 14px; }
 <div>
   <p>print(data)后的结果是</p>
 
-<pre class="highlight shell">C     BROWN.P   MI.P
+<pre class="highlight shell"><code>C     BROWN.P   MI.P
 0     0.9216 0.9282
 30    0.9240 0.9282
 100   0.9255 0.9282
-</pre>
+</code></pre>
 
 <p>现想要在一张图中画两条曲线。横轴为C，纵轴分别为BROWN.P和MI.P，如何做？</p>
 
 <p>其实很简单</p>
 
-<pre class="highlight r"><span class="n">p1</span><span class="o">&lt;-</span><span class="n">ggplot</span><span class="p">(</span><span class="n">brown.results</span><span class="p">,</span> <span class="n">aes</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">C</span><span class="p">))</span> <span class="o">+</span> 
+<pre class="highlight r"><code><span class="n">p1</span><span class="o">&lt;-</span><span class="n">ggplot</span><span class="p">(</span><span class="n">brown.results</span><span class="p">,</span> <span class="n">aes</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">C</span><span class="p">))</span> <span class="o">+</span> 
             <span class="n">geom_point</span><span class="p">(</span><span class="n">aes</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">BROWN.P</span><span class="p">),</span> <span class="p">)</span> <span class="o">+</span> 
             <span class="n">geom_line</span><span class="p">(</span><span class="n">aes</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">BROWN.P</span><span class="p">,</span> <span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">"cyan"</span><span class="p">))</span> <span class="o">+</span>
             <span class="n">geom_point</span><span class="p">(</span><span class="n">aes</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">MI.P</span><span class="p">))</span> <span class="o">+</span> 
             <span class="n">geom_line</span><span class="p">(</span><span class="n">aes</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">MI.P</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">"red"</span><span class="p">))</span>
-</pre>
+</code></pre>
 
 </div>
 

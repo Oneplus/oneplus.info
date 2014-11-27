@@ -42,10 +42,10 @@ blockquote p { font-size: 14px; }
     <h2><a href="/blog/2012/04/29/dynamic-member-in-python-class.html">Python对象的动态成员与__dict__</a></h2>
     <p>在写一些python脚本时，我很喜欢用optparse module中的OptionParser对象来解析一些命令行参数。一个简单的例子如下，</p>
 
-<pre class="highlight python"><span class="n">parser</span> <span class="o">=</span> <span class="n">OptionParser</span><span class="p">()</span>
+<pre class="highlight python"><code><span class="n">parser</span> <span class="o">=</span> <span class="n">OptionParser</span><span class="p">()</span>
 <span class="n">parser</span><span class="o">.</span><span class="n">add_option</span><span class="p">(</span><span class="s">"-f"</span><span class="p">,</span> <span class="s">"--file"</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="s">"filename"</span><span class="p">)</span>
 <span class="p">(</span><span class="n">options</span><span class="p">,</span> <span class="n">args</span><span class="p">)</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
-</pre>
+</code></pre>
 
 <p>然后，使用options.filename可以调用–file指定的参数，这似乎也没什么神奇的。但是，在第一次用OptionParser...</p>
     <a href="/blog/2012/04/29/dynamic-member-in-python-class.html">[READ MORE]</a>
@@ -175,13 +175,15 @@ blockquote p { font-size: 14px; }
     <h4 id="section">问题零：虚函数与纯虚函数有什么区别</h4>
 
 <ul>
-<li>定义一个函数为虚函数，不代表函数为不被实现的函数。定义他为虚函数是为了允许用基类的指针来调用子类的这个函数。</li>
+  <li>定义一个函数为虚函数，不代表函数为不被实现的函数。定义他为虚函数是为了允许用基类的指针来调用子类的这个函数。</li>
   <li>定义一个函数为纯虚函数，才代表函数没有被实现。定义他是为了实现一个接口，起到一个规范的作用，规范继承这个。类的程序员必须实现这个函数。</li>
-</ul><p>（上面这段转载自<a href="http://www.cppblog.com/ElliottZC/archive/2007/07/20/28417.html">这里</a>，我觉得解释得非常清楚）</p>
+</ul>
+
+<p>（上面这段转载自<a href="http://www.cppblog.com/ElliottZC/archive/2007/07/20/28417.html">这里</a>，我觉得解释得非常清楚）</p>
 
 <h4 id="section-1">问题一：抽象类的析构函数可以是纯虚函数吗</h4>
 
-<p>答案是可以的。通过纯虚析构函数，可以防止抽象类被实例化。但是，这里有一个逻辑上的矛盾。由于抽象类往往与具体类对应，...</p>
+<p>答案是可以的。通过纯虚析构函数，可以防止抽象类被实例化。但是，这里有一个逻辑上的矛盾。由于抽象类往往与具...</p>
     <a href="/blog/2012/01/19/some-tips-on-virtual-function-in-cpp.html">[READ MORE]</a>
   </div>
   <hr />
@@ -193,11 +195,11 @@ blockquote p { font-size: 14px; }
   </div>
   <div class="col-md-11">
     <h2><a href="/blog/2011/09/29/log-of-mental-disorder.html">Log of Mental Disorder</a></h2>
-    <pre class="highlight plaintext">09-29 07:43 Mental_Disorder. Open process log by --- oneplus
+    <pre class="highlight plaintext"><code>09-29 07:43 Mental_Disorder. Open process log by --- oneplus
 =====================================================
 &lt;a id="more"&gt;&lt;/a&gt;&lt;a id="more-369"&gt;&lt;/a&gt;
 TRACE: 09-29 07:43: * 0 [1] Week up.
-TRACE: 09-29 07:43: * 0 [2] Fresh my mind and make plan for...</pre>
+TRACE: 09-29 07:43: * 0 [2] Fresh my mind and make plan for...</code></pre>
     <a href="/blog/2011/09/29/log-of-mental-disorder.html">[READ MORE]</a>
   </div>
   <hr />

@@ -132,7 +132,7 @@ blockquote p { font-size: 14px; }
   <li>然后，其实我也不知道然后怎么弄。就用firebug和alert胡乱调试，居然看到一条”data:text/plain;base64,”接着就是乱码。然后我就觉得可能是搞了base64加密，所以就写了一段我也说不清的非常鬼畜的代码，完全搞不懂他是怎么对的。</li>
 </ol>
 
-<pre class="highlight javascript"><span class="nx">$</span><span class="p">(</span><span class="s2">"#load_button"</span><span class="p">).</span><span class="nx">click</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+<pre class="highlight javascript"><code><span class="nx">$</span><span class="p">(</span><span class="s2">"#load_button"</span><span class="p">).</span><span class="nx">click</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
     <span class="nx">$</span><span class="p">(</span><span class="s2">"#load_box"</span><span class="p">).</span><span class="nx">trigger</span><span class="p">(</span><span class="s1">'click'</span><span class="p">).</span><span class="nx">change</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
         <span class="kd">var</span> <span class="nx">fobj</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">"load_box"</span><span class="p">);</span>
         <span class="k">if</span><span class="p">(</span><span class="nx">fobj</span><span class="p">)</span> <span class="p">{</span>
@@ -145,7 +145,7 @@ blockquote p { font-size: 14px; }
         <span class="p">}</span>
     <span class="p">});</span>
 <span class="p">});</span>
-</pre>
+</code></pre>
 
 <p>话说回来，好像整个开发中，纠结了的、花了时间的地方全在前端上，界面还那么难看…</p>
 

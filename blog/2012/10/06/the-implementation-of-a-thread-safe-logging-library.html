@@ -62,18 +62,18 @@ blockquote p { font-size: 14px; }
 
 <p>首先把设计模式书上的代码抄一遍：</p>
 
-<pre class="highlight cpp"><span class="k">class</span> <span class="nc">Singleton</span> <span class="p">{</span>
+<pre class="highlight cpp"><code><span class="k">class</span> <span class="nc">Singleton</span> <span class="p">{</span>
    <span class="k">public</span><span class="o">:</span>
        <span class="k">static</span> <span class="n">Singleton</span><span class="o">*</span> <span class="n">getInstance</span><span class="p">(</span> <span class="p">);</span>
    <span class="k">private</span><span class="o">:</span>
        <span class="n">Singleton</span><span class="p">(</span> <span class="p">);</span>
        <span class="k">static</span> <span class="n">Singleton</span><span class="o">*</span> <span class="n">instance</span><span class="p">;</span>
 <span class="p">};</span>
-</pre>
+</code></pre>
 
 <p>然后，要做的就是往里面填一个打印log的函数，这个也是很容易实现的。实现后的效果如下。</p>
 
-<pre class="highlight cpp"><span class="k">class</span> <span class="nc">logger</span> <span class="p">{</span>
+<pre class="highlight cpp"><code><span class="k">class</span> <span class="nc">logger</span> <span class="p">{</span>
 <span class="k">public</span><span class="o">:</span>
     <span class="k">static</span> <span class="n">logger</span> <span class="o">*</span> <span class="n">get_logger</span><span class="p">()</span> <span class="p">{</span>
         <span class="k">if</span> <span class="p">(</span><span class="n">_instance</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span> <span class="n">_instance</span> <span class="o">=</span> <span class="k">new</span> <span class="n">logger</span><span class="p">();</span> <span class="p">}</span>
@@ -96,7 +96,7 @@ blockquote p { font-size: 14px; }
     <span class="n">logger</span><span class="o">::</span><span class="n">get_logger</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">write_log</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
     <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
-</pre>
+</code></pre>
 
 <p>当然也可以用变长参数和宏函数配合把这个做得有点酷，不过那些也不是本文要讨论的。
 到这里，使用Singleton实现logger的任务已经完成得差不多了。接下来要做的是使上面的代码线程安全。</p>
@@ -109,25 +109,25 @@ blockquote p { font-size: 14px; }
 
 <p>这里就出现两个线程都向stderr打印，导致打印信息混乱了。如果write_log函数中做更复杂的操作，出现这种混乱的可能性会变得更大。造成这一现象的原因就是多个线程抢占同一文件句柄，是生产者消费者问题的一个具体情境。解决方法就是给write_log上互斥锁。把write_log函数改成下面的样子就好了。</p>
 
-<pre class="highlight cpp"><span class="kt">void</span> <span class="nf">write_log</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+<pre class="highlight cpp"><code><span class="kt">void</span> <span class="nf">write_log</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="p">)</span> <span class="p">{</span>
     <span class="n">EnterCriticalSection</span><span class="p">();</span>
     <span class="n">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span> <span class="s">"%%levelname%% "</span><span class="p">);</span>
     <span class="n">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span> <span class="s">"log: %d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">i</span><span class="p">);</span>
     <span class="n">LeaveCriticalSection</span><span class="p">();</span>
 <span class="p">}</span>
-</pre>
+</code></pre>
 
 <p>不过，给write_log上锁也并不能完全保证logger线程安全，另一个非常隐蔽资源抢占会发生在单件实例化的那个时间上。如果logger并没被初始化，并且又有多个线程同时要去初始化它，而在初始化时发生上下文切换，那么这个logger就会被实例化多次。</p>
 
 <p><a href="http://www.codeproject.com/Articles/96942/Singleton-Design-Pattern-and-Thread-Safety">这里</a>提供了三种解决方法，第一种是直接在判断单件是否被实例化前加锁，代码如下：</p>
 
-<pre class="highlight cpp"><span class="k">static</span> <span class="n">logger</span> <span class="o">*</span> <span class="nf">get_logger</span><span class="p">()</span> <span class="p">{</span>
+<pre class="highlight cpp"><code><span class="k">static</span> <span class="n">logger</span> <span class="o">*</span> <span class="nf">get_logger</span><span class="p">()</span> <span class="p">{</span>
     <span class="n">EnterCriticalSection</span><span class="p">();</span>
     <span class="k">if</span> <span class="p">(</span><span class="n">_instance</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span> <span class="n">_instance</span> <span class="o">=</span> <span class="k">new</span> <span class="n">logger</span><span class="p">();</span> <span class="p">}</span>
     <span class="n">LeaveCriticalSection</span><span class="p">();</span>
     <span class="k">return</span> <span class="n">_instance</span><span class="p">;</span>
 <span class="p">}</span>
-</pre>
+</code></pre>
 
 <p>由于加互斥锁是一件比较耗时的工作，每次get_logger时都调用会加锁，解锁，程序的速度会受到影响。总之，这种方法是比较不赞的。</p>
 
@@ -135,7 +135,7 @@ blockquote p { font-size: 14px; }
 
 <p>第三种方法在第一种方法上进行改进，把加锁放在if判断里面，或者说在加锁外放一层if判断，代码是这样的：</p>
 
-<pre class="highlight cpp"><span class="k">static</span> <span class="n">logger</span> <span class="o">*</span> <span class="nf">get_logger</span><span class="p">()</span> <span class="p">{</span>
+<pre class="highlight cpp"><code><span class="k">static</span> <span class="n">logger</span> <span class="o">*</span> <span class="nf">get_logger</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">if</span> <span class="p">(</span><span class="n">_instance</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
         <span class="n">EnterCriticalSection</span><span class="p">();</span>
         <span class="k">if</span> <span class="p">(</span><span class="n">_instance</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span><span class="n">_instance</span> <span class="o">=</span> <span class="k">new</span> <span class="n">logger</span><span class="p">();</span> <span class="p">}</span>
@@ -143,7 +143,7 @@ blockquote p { font-size: 14px; }
     <span class="p">}</span>
     <span class="k">return</span> <span class="n">_instance</span><span class="p">;</span>
 <span class="p">}</span>
-</pre>
+</code></pre>
 <p>这种方法的好处是避免了每次get_logger都加锁，不过在某些情景上和第一种方法是一样的。
 ### printf
 在实验过程中，我发现如果write_log只调用一次printf，并不会出现前面谈线程安全时的输出混乱。查了一下发现，printf本身具有操作原子性。所以，如果write_log函数只由一个printf组成，那一处的锁也可以忽略。
