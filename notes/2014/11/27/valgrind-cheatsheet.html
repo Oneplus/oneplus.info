@@ -68,8 +68,8 @@ Luckily, the author is still maintaining this tools.</p>
 
 <p>Combining these tools can be easily done by the following commands:</p>
 
-<pre class="highlight plaintext"><code>valgrind --tool=callgrind --callgrind-out-file=/tmp/callgrind.output
-./gprof2dot.py --format=callgrind --output=/tmp/call.dot
+<pre class="highlight plaintext"><code>valgrind --tool=callgrind --callgrind-out-file=/tmp/callgrind.output &lt;program&gt;
+./gprof2dot.py --format=callgrind --output=/tmp/call.dot -w /tmp/callgrind.output
 dot -Tpng -o /tmp/graph.png /tmp/call.dot
 </code></pre>
 
