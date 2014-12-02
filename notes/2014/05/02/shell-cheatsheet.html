@@ -85,6 +85,18 @@ blockquote p { font-size: 14px; }
 <pre class="highlight plaintext"><code>grep -v
 </code></pre>
 
+<h3 id="section-4">批量替换命名空间</h3>
+
+<pre class="highlight plaintext"><code>for f in `find ./src -type f`; do sed 's/oldnamespace/newnamespace' $f &gt; x; mv x $f; done
+</code></pre>
+
+<h3 id="section-5">生成 02, …, 24</h3>
+
+<p>用Perl更方便一点，Perl in Shell。</p>
+
+<pre class="highlight plaintext"><code>perl -e 'for{$i=2;$i&lt;=24;$i++}{printf("%02d\n", $i)}'
+</code></pre>
+
 </div>
 
 <div id="disqus_thread"></div>
