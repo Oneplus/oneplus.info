@@ -49,3 +49,17 @@ awk '{print $0" "length}' | sort -k2 -nr | head -1
 ~~~
 grep -v
 ~~~
+
+### 批量替换命名空间
+
+~~~
+for f in `find ./src -type f`; do sed 's/oldnamespace/newnamespace' $f > x; mv x $f; done
+~~~
+
+### 生成 02, ..., 24
+
+用Perl更方便一点，Perl in Shell。
+
+~~~
+perl -e 'for{$i=2;$i<=24;$i++}{printf("%02d\n", $i)}'
+~~~

@@ -2,9 +2,11 @@
 layout: note
 title: Valgrind Cheatsheet
 author: Oneplus
-category: ["Linux", "CPP"]
+category: ["Linux", "Programming"]
 tags:
     - "valgrind"
+    - "cpp"
+    - "profiling"
 ---
 
 Valgrind is a great tools for dynamic checking.
