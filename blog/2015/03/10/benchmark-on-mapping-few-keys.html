@@ -71,7 +71,7 @@ They are:</p>
 I choose the <code>std::map</code> and hope it can win a round in this special situation.
 <code>boost::container::flat_map</code> is suggested by <a href="http://stackoverflow.com/questions/15625225/map-vs-unordered-map-for-few-elements">this StackOverflow question</a>.
 It seems the key are ordered and stored in a list in <code>boost::container::flat_map</code>, rather than a tree like the <code>std::map</code> does.
-Expectingly, this data structure should
+Expectingly, this data structure should have some nice memory allocation feature compared with the <code>std::map</code>.
 The <strong>Hashtable</strong> group is actually my old friends and I used <code>google::dense_hash_map</code> and <code>std::unordered_map</code> a lot.</p>
 
 <h3 id="results">Results</h3>
