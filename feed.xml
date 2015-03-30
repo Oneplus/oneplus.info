@@ -5,10 +5,35 @@
   <id>http://yjliu.net/blog</id>
   <link href="http://yjliu.net/blog"/>
   <link href="http://yjliu.net/feed.xml" rel="self"/>
-  <updated>2015-03-09T16:00:00Z</updated>
+  <updated>2015-03-28T16:00:00Z</updated>
   <author>
     <name>Oneplus</name>
   </author>
+  <entry>
+    <title>ZGen v0.2.0 Released</title>
+    <link rel="alternate" href="http://yjliu.net/blog/2015/03/29/zgen-release.html"/>
+    <id>http://yjliu.net/blog/2015/03/29/zgen-release.html</id>
+    <published>2015-03-28T16:00:00Z</published>
+    <updated>2015-03-30T17:00:19+08:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;[&lt;a href="http://sourceforge.net/projects/zgen/"&gt;Sourceforge Project Home&lt;/a&gt;]
+[&lt;a href="https://github.com/Oneplus/ZGen"&gt;Github Mirror&lt;/a&gt;]&lt;/p&gt;
+
+&lt;p&gt;I’ve been worked on the ZGen project since Sept. the last year. It’s a linearization system that constructs natural language
+sentences from bags of words, given optional input syntactic constraints. Depending on the amount of input constraints, ZGen
+can perform free ordering, partial tree linearization and full tree linearization. It’s the system I used in my NAACL2015 
+paper: &lt;em&gt;Transition-Based Syntactic Linearization&lt;/em&gt;. Any feedback is welcome!&lt;/p&gt;
+
+&lt;p&gt;Sentence generation is an interesting but less studied topic, partly because the complexity of the generation system. The
+current version of ZGen can never make up a generation system, but hopefully it can perform generation from logic form or
+key words or a sentence topic.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;ZGen&lt;/strong&gt; is named after the &lt;em&gt;ZPar&lt;/em&gt; project from my supervisor and corporator Dr. Yue Zhang. He must be marching on the road of
+&lt;em&gt;ZNLP&lt;/em&gt; :-)&lt;/p&gt;
+</content>
+  </entry>
   <entry>
     <title>A benchmark on mapping few keys</title>
     <link rel="alternate" href="http://yjliu.net/blog/2015/03/10/benchmark-on-mapping-few-keys.html"/>
@@ -666,137 +691,6 @@ stl中的string基本没法持久化，不用想了。
 &lt;/ul&gt;
 
 &lt;p&gt;话说好久没写博客了。&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>小记博客重组织</title>
-    <link rel="alternate" href="http://yjliu.net/blog/2012/10/13/restruct-my-blog.html"/>
-    <id>http://yjliu.net/blog/2012/10/13/restruct-my-blog.html</id>
-    <published>2012-10-13T13:58:33Z</published>
-    <updated>2014-11-20T09:24:26+08:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;&lt;a href="http://oneplus.info"&gt;oneplus.info&lt;/a&gt;这个域名和它使用的主机空间是我在2011年初买下的。到现在，就快有两年的时间了。两年之间，这个里产生了38篇博文，接受了2.4万次PV，其中《&lt;a href="http://blog.oneplus.info/archives/535"&gt;哈工大男女比例调研报告&lt;/a&gt;》和《&lt;a href="http://blog.oneplus.info/archives/455"&gt;关于一个点歌社交网络的构想&lt;/a&gt;》两篇得到了豆瓣九点首页的推荐。总的来讲，我对博客中提供的内容还是比较用心。&lt;/p&gt;
-
-&lt;p&gt;虽然这个博客的一直以来的表现也没什么差错，但是我却在很早以前就产生了重新组织网站结构的想法。建站之初，没什么经验（现在我也没什么经验），直接把wordpress安装在web根目录public_html下，oneplus.info的域名也直接定位到博客上。到了现在，觉得有必要在这里加一个主页，把原来的博客移到blog.oneplus.info的域名下。出于这个考虑，这周在业余时间里完成了这两项工作。&lt;/p&gt;
-
-&lt;h3 id="wordpress"&gt;WordPress迁移&lt;/h3&gt;
-
-&lt;p&gt;在迁移之前，我的&lt;code&gt;public_html&lt;/code&gt;是这样的：&lt;/p&gt;
-
-&lt;p&gt;&lt;a href="http://blog.oneplus.info/wp-content/uploads/2012/10/before.jpg"&gt;&lt;img src="http://blog.oneplus.info/wp-content/uploads/2012/10/before.jpg" alt="" title="before" width="399" height="282" class="aligncenter size-full wp-image-764" /&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;我希望它变成这样，&lt;/p&gt;
-
-&lt;p&gt;&lt;a href="http://blog.oneplus.info/wp-content/uploads/2012/10/after.jpg"&gt;&lt;img src="http://blog.oneplus.info/wp-content/uploads/2012/10/after.jpg" alt="" title="after" width="398" height="152" class="aligncenter size-full wp-image-765" /&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;并且可以通过blog.oneplus.info来访问。&lt;/p&gt;
-
-&lt;p&gt;要实现上面的效果，首先要做的工作是把blog.oneplus.info解析到主机的IP上。
-这个只需要在DNS服务商处给主域添加一个A记录，使得HOST_NAME为blog.oneplus.info的http请求发送给我的主机。
-我的DNS服务商是Godaddy，在Domain Manager面板上添加记录如下。&lt;/p&gt;
-
-&lt;p&gt;&lt;a href="http://blog.oneplus.info/wp-content/uploads/2012/10/godaddy.jpg"&gt;&lt;img src="http://blog.oneplus.info/wp-content/uploads/2012/10/godaddy.jpg" alt="" title="godaddy" width="550" class="aligncenter size-full wp-image-766" /&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;添加后大概一个小时就生效了。&lt;/p&gt;
-
-&lt;p&gt;在DNS服务的工作做完后，要做的是使得主机能够处理这个请求。
-通过Google发现，这个问题大致可以通过三种途径解决，它们分别是：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;配置apache服务器，添加Virtual Host&lt;/li&gt;
-  &lt;li&gt;通过mod_rewrite模块把blog相关的请求重定向到blog.oneplus.info/blog/下&lt;/li&gt;
-  &lt;li&gt;在cpanel中添加子域&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;这里面，对于用cpanel管理的主机，由于用户不能接触httpd，第一种方法不能实现。
-第二种方法有点麻烦，具体做法可以google”.htaccess”、”重定向”、”二级域名”这几个关键字。
-第三种方法最简单，只要在cpanel的子域一项中添加一个名为blog.oneplus.info的子域就好了，非常傻瓜。&lt;/p&gt;
-
-&lt;p&gt;在主机可以处理blog.oneplus.info的请求之后，下一步就是wordpress的搬家了。
-由于，我使用的wordpress版本是3.3.1，而且是站内移动，搬家这件事就变得非常简单。
-具体做法是在&lt;code&gt;设置-&amp;gt;;常规&lt;/code&gt;中将&lt;code&gt;WordPress地址&lt;/code&gt;和&lt;code&gt;站点地址&lt;/code&gt;都写成blog.oneplus.inf
-o。保存之后，站点会暂时坏掉。不过把wordpress相关的文件移动到blog文件夹下，修改就生效了。&lt;/p&gt;
-
-&lt;p&gt;进行这些操作后，blog.oneplus.info便可以正常访问了。但是，还有一个问题是，博客中有一些图片的链接还指向blog.oneplus.info/wp-content/，科学的做法是把数据库的导出，然后把所有blog.oneplus.info改成blog.oneplus.info再导入。&lt;/p&gt;
-
-&lt;p&gt;这些都做完了，博客的迁移工作基本就完成了。整个过程都没什么难度，但是我忽略了最早的一步，白白浪费了一个晚上的时间。&lt;/p&gt;
-
-&lt;h3 id="feed"&gt;Feed重定向&lt;/h3&gt;
-
-&lt;p&gt;博客迁移之后，我的博客从下面几个方面会受到影响：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;博客的订阅&lt;/li&gt;
-  &lt;li&gt;搜索引擎排名&lt;/li&gt;
-  &lt;li&gt;wumii的喜欢按钮&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;对于写博客的人，第二项虽然很重要，但是能做的其实不太多（而且我挺反感SEO的，虽然我是学信息检索的）。
-所以，服务好自己的订阅用户才是要紧事。&lt;/p&gt;
-
-&lt;p&gt;现在的情景是由于feed的输出地址发生了改变，原来通过blog.oneplus.info/feed进行的订阅失效了。
-打开Google Reader，查看自己博客的订阅，发现Statistic中显示Parsing Error。
-好在主域还在我的手里，只要把blog.oneplus.info/feed的请求重定向到blog.oneplus.info/feed就行了。&lt;/p&gt;
-
-&lt;p&gt;这里要用到前面说过的比较麻烦的&lt;code&gt;mod_rewrite&lt;/code&gt;。做法是在web根目录下的.htaccess中添加重写条件和重写规则。现在我对feed的重写规则是这样的&lt;/p&gt;
-
-&lt;pre class="highlight plaintext"&gt;&lt;code&gt;RewriteCond %{HTTP_HOST} ^blog.oneplus.info$
-RewriteCond %{REQUEST_URI} ^/feed$ [NC]
-RewriteRule .* http://blog.oneplus.info/feed [NC,L,R=301]
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;它的含义是把所有主机名为blog.oneplus.info，URI为/feed的请求都重定向到blog.oneplus.info/feed下。&lt;/p&gt;
-
-&lt;p&gt;添加完重写规则后可以通过访问blog.oneplus.info/feed来测试一下重写规则是否生效。
-还有一些其他网站提供mod_rewrite的测试，比如说&lt;a href="http://martinmelin.se/rewrite-rule-tester/"&gt;这里&lt;/a&gt;，重定向失败的话可以把.htaccess投到这个网站中，找些样例测试一下。&lt;/p&gt;
-
-&lt;p&gt;至于第三项，我倒确实把男女比那篇的一百多个“喜欢”给丢了，不过I don’t care&lt;/p&gt;
-
-&lt;h3 id="section"&gt;主页&lt;/h3&gt;
-
-&lt;p&gt;完成博客迁移后，我发觉应该给blog.oneplus.info写一个主页。最后决定在里面写一个个人简介（留着吹牛用）。
-这次，我想尝试一下css框架（平时在实验室里也没机会），于是把bootstrap、blueprint、foundation几个框架都试了试。最后还是决定用bootstrap，原因是我在网上找到了它对ie6做的patch。
-至于为什么要兼容ie6，这篇豆瓣&lt;a href="http://www.douban.com/note/241422302/"&gt;日记&lt;/a&gt;记录了原因。&lt;/p&gt;
-
-&lt;p&gt;后来我觉得应该在主页中加一个最近发布的博客。
-直接查库当然是个好选择，但是我还想在ir.hit.edu.cn/~yjliu/上面做个镜像。
-所以在主机上写了一个小php - query来查库。
-这样，blog.oneplus.info和ir.hit.edu.cn/~yjliu/都可以通过查这个网页获得最近的文章。
-不过，我的主机在国外，国内访问速度慢，而且这个网页的更新频率实在不高。做cache是必须的。&lt;/p&gt;
-
-&lt;p&gt;起初，我想了好久如何在query.php上做cache，后来才发现，最应该做cache的是主页这一端。所以在主页中添加了下面的代码：&lt;/p&gt;
-
-&lt;pre class="highlight plaintext"&gt;&lt;code&gt;$cache = new Cache(3600, &amp;amp;quot;some_path&amp;amp;quot;);
-
-$key = &amp;amp;quot;last_post&amp;amp;quot;;
-$values = $cache-&amp;amp;gt;get( $key );
-
-if ($values == false) {
-	$page = '';
-	$handler = fopen('some_url', 'r');
-
-	while(!feof($handler)){
-		$page .= fread( $handler, 1048576 );
-	}
-	fclose( $handler );
-	
-	$values = $page;
-	$cache-&amp;amp;gt;put( $key, $values );
-	echo $values;
-} else {
-	echo $values;
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;对于主页的请求，先去看看cache过没过期，没过期就直接返回cache的结果，这样可以减少不少网络传输。其中，cache类我是参考&lt;a href="http://www.mangguo.org/the-simple-php-cache-class/"&gt;这篇&lt;/a&gt;的。&lt;/p&gt;
-
-&lt;h3 id="section-1"&gt;总结&lt;/h3&gt;
-
-&lt;p&gt;至此，博客的重组织工作告于段落。现在可以通过&lt;a href="http://www.oneplus.info"&gt;www.oneplus.info&lt;/a&gt;访问我的主页，也可以通过&lt;a href="http://blog.oneplus.info"&gt;blog.oneplus.info&lt;/a&gt;访问博客。
-虽然还有一些想做的工作，不过我还有别的事情，不能在这上面花太多时间，就这样吧。&lt;/p&gt;
-
-&lt;p&gt;PS: 这篇的另一目的是测试一下Feed输出是否正常。&lt;/p&gt;
 </content>
   </entry>
 </feed>

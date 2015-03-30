@@ -35,6 +35,29 @@ blockquote p { font-size: 14px; }
     <div id="content">
   <div class="row">
  <div class="col-md-1">
+    <h2 class="pull-right">19<br />
+    <small>Jan</small></h2>
+  </div>
+  <div class="col-md-11">
+    <h2><a href="/blog/2012/01/19/some-tips-on-virtual-function-in-cpp.html">C++笔记 - 虚函数几个小问题</a></h2>
+    <h4 id="section">问题零：虚函数与纯虚函数有什么区别</h4>
+
+<ul>
+  <li>定义一个函数为虚函数，不代表函数为不被实现的函数。定义他为虚函数是为了允许用基类的指针来调用子类的这个函数。</li>
+  <li>定义一个函数为纯虚函数，才代表函数没有被实现。定义他是为了实现一个接口，起到一个规范的作用，规范继承这个。类的程序员必须实现这个函数。</li>
+</ul>
+
+<p>（上面这段转载自<a href="http://www.cppblog.com/ElliottZC/archive/2007/07/20/28417.html">这里</a>，我觉得解释得非常清楚）</p>
+
+<h4 id="section-1">问题一：抽象类的析构函数可以是纯虚函数吗</h4>
+
+<p>答案是可以的。通过纯虚析构函数，可以防止抽象类被实例化。但是，这里有一个逻辑上的矛盾。由于抽象类往往与具...</p>
+    <a href="/blog/2012/01/19/some-tips-on-virtual-function-in-cpp.html">[READ MORE]</a>
+  </div>
+  <hr />
+</div>
+<div class="row">
+ <div class="col-md-1">
     <h2 class="pull-right">29<br />
     <small>Sep</small></h2>
   </div>
@@ -231,32 +254,13 @@ TRACE: 09-29 07:43: * 0 [2] Fresh my mind and make plan for...</code></pre>
   </div>
   <hr />
 </div>
-<div class="row">
- <div class="col-md-1">
-    <h2 class="pull-right"> 7<br />
-    <small>Apr</small></h2>
-  </div>
-  <div class="col-md-11">
-    <h2><a href="/blog/2011/04/07/farewell.html">送别</a></h2>
-    <p>中午的时候和xiaodao同学进行了一次简单的交谈，大致的内容是向他询问何时能够返回学校，答复比较让人失望。交谈之前，我很期望这次交谈可以确定一个比较切实的返校时间表，实际结果是这次对话并没有获得任何具有确定性的内容。从交谈来看，xiaodao的家人对于他返回学校的阻力是挺大的。作为一个局外人，对于问题细节过多的猜测是不好的。不过从从和Cai的朋友关系上来讲，也从学校竞赛成绩的角度上讲，我都迫切地希望xiaodao能回到学校，开始正常的学习和训练生活。Cai需要一位有实力，有思维的队友和他...</p>
-    <a href="/blog/2011/04/07/farewell.html">[READ MORE]</a>
-  </div>
-  <hr />
-</div>
 
 <div class="row text-center">
-  
     <div class="col-md-12">
       <hr />
-      
         <a href="/blog/page/2/">Previous</a>
-      
-      
          3 / 5
-    
-    
       <a href="/blog/page/4/">Next</a>
-    
   </div>
 </div>
 
@@ -265,7 +269,7 @@ TRACE: 09-29 07:43: * 0 [2] Fresh my mind and make plan for...</code></pre>
   </div>
 
   <footer class="text-center">
-    &copy; <a href="http://yjliu.net/">Static Oneplus</a> 2010 - 2014 |
+    &copy; <a href="http://yjliu.net/">Static Oneplus</a> 2010 - 2015 |
     This site is built by <a href="http://middlemanapp.com/" target="_blank">Middleman</a> and
     <a href="http://getbootstrap.com/">bootstrap</a>.
   </footer>
