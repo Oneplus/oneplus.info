@@ -2,8 +2,10 @@
 <html>
 <head>
 <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+<meta name="msvalidate.01" content="67E7EDB1C51D8636FBFDE580F4C6BFD1" />
+<meta name="baidu-site-verification" content="SS7G439MNv" />
 <title>
-  Shell的一些小技巧 |  Static Oneplus
+  Tips for Shell |  Static Oneplus
 </title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <!--<link rel="stylesheet" href=""> -->
@@ -38,58 +40,118 @@ blockquote p { font-size: 14px; }
 
       &bull; <a href="/notes/tags/shell.html">shell</a>
       &bull; <a href="/notes/tags/sed.html">sed</a>
+      &bull; <a href="/notes/tags/awk.html">awk</a>
       &bull; <a href="/notes/tags/sort.html">sort</a>
       &bull; <a href="/notes/tags/uniq.html">uniq</a>
   </small>
 </div>
-<h2>Shell的一些小技巧</h2>
+<h2>Tips for Shell</h2>
 <hr />
 <div>
-  <p>会逐步在这个note里面整理一些实用的shell小命令。解决的主要问题是自然语言处理。</p>
+  <p>There will be some case-based tips for Shell.</p>
 
-<h3 id="section">将连续空格替换为,或回车</h3>
+<h3 id="replace-the-sequence-space-with-newline">1. Replace the sequence space with newline</h3>
 
-<p>一般用来将切分的句子编程变成一个词一行(词列表)。</p>
+<p>Input example</p>
+
+<pre class="highlight plaintext"><code>a b  c   d
+</code></pre>
+
+<p>Output example</p>
+
+<pre class="highlight plaintext"><code>a
+b
+c
+d
+</code></pre>
+
+<h4 id="summary">Summary</h4>
+
+<p><code>sed</code> is the best solution.</p>
+
+<h4 id="solution">Solution</h4>
 
 <pre class="highlight plaintext"><code>sed -r -e 's/[[:space:]]/\n/g'
 </code></pre>
 
-<h3 id="section-1">对于无序的词列表按照词频排序</h3>
+<h3 id="sort-the-unordered-word-list-with-duplication-by-frequency">2. Sort the unordered word list (with duplication) by frequency</h3>
 
-<p>这个在做词频统计时特别有用</p>
+<h4 id="summary-1">Summary</h4>
+
+<p>It is very useful when counting word frequency.</p>
+
+<h4 id="solution-1">Solution</h4>
 
 <pre class="highlight plaintext"><code>sort | uniq -c | sort -rn
 </code></pre>
 
-<h3 id="awk">让awk打印第一列之后的数据</h3>
+<h3 id="awk-print-line-without-first-column">3. Awk print line without first column</h3>
 
-<p>原理是把第一列清空，然后打印全列</p>
+<h4 id="summary-2">Summary</h4>
+
+<p>This command actually clear the first column from the file.</p>
+
+<h4 id="solution-2">Solution</h4>
 
 <pre class="highlight plaintext"><code>awk '{$1=""; print $0}'
 </code></pre>
 
-<h3 id="section-2">统计词列表中最长的词</h3>
+<h3 id="show-the-longest-line-in-the-file">4. Show the longest line in the file</h3>
+
+<h4 id="summary-3">Summary</h4>
+
+<p>Taking advantage of the const <code>length</code> in <code>awk</code></p>
+
+<h4 id="solution-3">Solution</h4>
 
 <pre class="highlight plaintext"><code>awk '{print $0" "length}' | sort -k2 -nr | head -1
 </code></pre>
 
-<h3 id="section-3">去掉符合模式的某些行</h3>
+<h3 id="ignore-line-that-match-some-pattern">5. Ignore line that match some pattern</h3>
 
-<p><code>grep -v</code>已经提供这个功能了</p>
+<h4 id="summary-and-solution">Summary and Solution</h4>
+
+<p>Using</p>
 
 <pre class="highlight plaintext"><code>grep -v
 </code></pre>
 
-<h3 id="section-4">批量替换命名空间</h3>
+<h3 id="batchly-replace-namespace">6. Batchly replace namespace</h3>
 
-<pre class="highlight plaintext"><code>for f in `find ./src -type f`; do sed 's/oldnamespace/newnamespace' $f &gt; x; mv x $f; done
+<h4 id="summary-4">Summary</h4>
+
+<p>Using <code>for</code> to loop over the file and <code>sed</code> to perform the replacement.</p>
+
+<h4 id="solution-4">Solution</h4>
+
+<pre class="highlight plaintext"><code>for f in `find ./src -type f`; do sed -i 's/oldnamespace/newnamespace' $f; done
 </code></pre>
 
-<h3 id="section-5">生成 02, …, 24</h3>
+<h3 id="generate-02--24-sequence">7. Generate 02, …, 24 sequence</h3>
 
-<p>用Perl更方便一点，Perl in Shell。</p>
+<h4 id="summary-5">Summary</h4>
+
+<p><code>Perl</code> can be a better solution.</p>
+
+<h4 id="solution-5">Solution</h4>
 
 <pre class="highlight plaintext"><code>perl -e 'for{$i=2;$i&lt;=24;$i++}{printf("%02d\n", $i)}'
+</code></pre>
+
+<h3 id="command-line-calculator">8. Command line calculator</h3>
+
+<h4 id="awk-solution">Awk Solution</h4>
+
+<pre class="highlight plaintext"><code>awk '{print 1/10}'
+</code></pre>
+
+<p>and additional enter is needed</p>
+
+<h4 id="perl-solution">Perl Solution</h4>
+
+<p>More flexiable (with formatting).</p>
+
+<pre class="highlight plaintext"><code>perl -e 'printf("%f\n", 1./10);'
 </code></pre>
 
 </div>
