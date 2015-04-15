@@ -5,7 +5,7 @@
 <meta name="msvalidate.01" content="67E7EDB1C51D8636FBFDE580F4C6BFD1" />
 <meta name="baidu-site-verification" content="SS7G439MNv" />
 <title>
-   Static Oneplus
+  Useful code snippets with C++ boost |  Static Oneplus
 </title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <!--<link rel="stylesheet" href=""> -->
@@ -34,19 +34,48 @@ blockquote p { font-size: 14px; }
   </header>
 
   <div class="content">
-    <div id="content">
-  <h1>Archive for
-    Jun 2012
-</h1>
+    <div style="color:#999;">
+  <small>2015/04/15 - by
+    Oneplus
 
+      &bull; <a href="/notes/tags/c-c.html">C/C++</a>
+      &bull; <a href="/notes/tags/boost.html">boost</a>
+  </small>
+</div>
+<h2>Useful code snippets with C++ boost</h2>
+<hr />
+<div>
+  <h2 id="is-punctuation">Is Punctuation</h2>
 
-<ul>
-    <li><a href="/notes/2012/06/01/python-convert-dict-to-kwargs.html">Python中将dict转换为kwargs</a> <span>Jun  1</span></li>
-    <li><a href="/notes/2012/06/01/apache-load-balance.html">Apache负载均衡</a> <span>Jun  1</span></li>
-</ul>
+<p>It’s very straight forward to use <code>boost.regex</code> as a solution. We can match the
+input string with a regex like</p>
 
+<pre class="highlight plaintext"><code>if (boost::regex_match(",", boost::regex("[[:punct:]]"))) {
+  std::cout &lt;&lt; "is punctuation." &lt;&lt; std::endl;
+}
+</code></pre>
+
+<p>If the ICU is also in our consideration, code should be modified as</p>
+
+<pre class="highlight plaintext"><code>if (boost::u32regex_match("！", boost::make_u32regex("[[:P*:]]"))) {
+  std::cout &lt;&lt; "is unicode punctuation." &lt;&lt; std::endl;
+}
+</code></pre>
 
 </div>
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+var disqus_shortname = 'yjliu'; // required: replace example with your forum shortname
+/* * * DON'T EDIT BELOW THIS LINE * * */
+(function() {
+ var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+ dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+ (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+ })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
 
   </div>
 
