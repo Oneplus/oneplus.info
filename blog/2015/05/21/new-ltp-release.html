@@ -1,0 +1,373 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+<meta name="msvalidate.01" content="67E7EDB1C51D8636FBFDE580F4C6BFD1" />
+<meta name="baidu-site-verification" content="SS7G439MNv" />
+<title>
+  New neural parser added to LTP |  Static Oneplus
+</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<!--<link rel="stylesheet" href=""> -->
+<style type="text/css">
+.prettyprint ol.linenums > li { list-style-type: decimal; }
+.nav { }
+.nav li { float: left; width: 70px; }
+.content { padding: 30px 0; }
+body, h1, h2, h3, h4 { font-family: "Fjalla One","Georgia","Helvetica Neue",Arial,sans-serif;}
+header { width: 100%; height: 80px;}
+blockquote p { font-size: 14px; }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <header class="header">
+    <h1 class="site_title">Static Oneplus <small>不可控制论</small></h1>
+    <ul class="nav pull-right">
+      <li><a href="/">Home</a></li>
+      <li><a href="/cv">CV</a></li>
+      <li><a href="/blog">Blog</a></li>
+      <li><a href="/notes">Notes</a></li>
+      <li><a href="/feed.xml">RSS</a></li>
+    </ul>
+  </header>
+
+  <div class="content">
+    <div style="color:#999;">
+  <small>2015/05/21 - by
+    Oneplus
+
+      &bull; <a href="/blog/tags/nlp.html">NLP</a>
+  </small>
+</div>
+<h2>New neural parser added to LTP</h2>
+<hr />
+<div>
+  <p>[<a href="https://github.com/HIT-SCIR/ltp/releases/tag/v3.3.0">Github</a>]
+[<a href="http://pan.baidu.com/share/link?shareid=1988562907&amp;amp;uk=2738088569#path=%252Fltp-models%252F3.3.0">Pre-trained Model</a>]</p>
+
+<p>We recently added a new dependency parser to LTP.
+This parser is a transiton-based neural network parser, which mainly based on Chen and Manning (2014).
+Besides the parser originally described in their work, additional features are also incorporated in our parser, including global feature (Zhang and Nivre, 2011), word cluster and dynamic oracle (Goldberg et. al. 2014).
+Dr. Jiang Guo developed the prototype for this parser in his <em>ACL2015</em> work.</p>
+
+<p>For quick summary, our new parser’s main features includes</p>
+
+<ul>
+  <li>Fast linear parsing time: over 8,000 tokens/second.</li>
+  <li>High parsing accuracy: 85.24 (UAS) on CTB5</li>
+</ul>
+
+<p>and the key techniques includes</p>
+
+<ul>
+  <li>Linear time transition-based parsing.</li>
+  <li>Neural network classifier with cubic active function</li>
+  <li>Supporting clustering features and global features</li>
+  <li>Supporting learning from dynamic oracle</li>
+</ul>
+
+<h3 id="word-cluster">Word Cluster</h3>
+
+<p>Word cluster can be the most reliable feature acrossing the syntactic tasks, including POS tagging, NER and parsing.
+Thus, the performance improvement we gain from word cluster is as expected.
+In our system, word cluster is added to as another ‘POS tag’.</p>
+
+<h3 id="global-feature">Global Feature</h3>
+
+<p>Zhang and Nivre (2012) study the problem of interaction between searching and learning. Their work can be summarized as</p>
+
+<ul>
+  <li>local learning + greedy search: [good]</li>
+  <li>local learning + beam search: [bad]</li>
+  <li>global learning + greedy search: [bad]</li>
+  <li>global learning + beam search: [good]</li>
+</ul>
+
+<p>They also say that</p>
+
+<ul>
+  <li>local learning + global features: [bad]</li>
+  <li>global learning + global features: [good]</li>
+</ul>
+
+<p>We also found that global features contribute nothing if they are added to the parser standalone.
+But we found that when coupled with word cluster, the global feature can further help.
+Thus, this feature is add in our released version.</p>
+
+<h3 id="dynamic-oracle">Dynamic Oracle</h3>
+
+<p>Dynamic oracle is another reliable stuff!
+On the NLTK’s issues list, Dr. Honnibal (author of spaCy) quoted that</p>
+
+<blockquote>
+  <p>Second, when you train the parser, you parser, you should really use the Goldberg and Nivre (2012) “dynamic oracle” strategy.</p>
+</blockquote>
+
+<p>We also found dynamic oracle works great on Chinese dataset.
+The detailed result will be presented in experiment section.</p>
+
+<h3 id="experiment">Experiment</h3>
+
+<p>We report our parser’s performance on Chinese treebank 5 and Chinese dependency treebank.
+Parsing accuray is evaluated using UAS/LAS.
+We also compare our result with the our old LTP parser and the other state-of-the-art parsers.</p>
+
+<h4 id="ctb5-experiment">CTB5 experiment</h4>
+
+<p>CTB5 data is splited according to Zhang and Clark (2008), with 16,091 for training, 1,910 for testing and 803 for development.
+An embedding trained on Gigawords xinhua news with word2vec is used as initialization embedding.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Parser</th>
+      <th>Dev.UAS</th>
+      <th>Dev.LAS</th>
+      <th>Test.UAS</th>
+      <th>Test.LAS</th>
+      <th>Test Speed(tokens/sec.)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>ZPar (b=64)</td>
+      <td>85.15</td>
+      <td>85.45</td>
+      <td>85.82</td>
+      <td>84.54</td>
+      <td>(about-) 700</td>
+    </tr>
+    <tr>
+      <td>LTP (o2sib)</td>
+      <td>84.46</td>
+      <td>82.96</td>
+      <td>84.05</td>
+      <td>82.62</td>
+      <td>40.99(?)</td>
+    </tr>
+    <tr>
+      <td>NN (e=50,h=200)</td>
+      <td>82.87</td>
+      <td>81.13</td>
+      <td>83.22</td>
+      <td>81.68</td>
+      <td>16737.41</td>
+    </tr>
+    <tr>
+      <td>NN-nondet(e=50,h=200)</td>
+      <td>83.48</td>
+      <td>81.75</td>
+      <td>83.95</td>
+      <td>82.40</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>NN-explore(e=50,h=200)</td>
+      <td>84.42</td>
+      <td>82.68</td>
+      <td>84.44</td>
+      <td>82.70</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>NN-explore+glob.feat(e=50,h=200)</td>
+      <td>84.48</td>
+      <td>82.79</td>
+      <td>84.74</td>
+      <td>83.02</td>
+      <td>14627.79</td>
+    </tr>
+    <tr>
+      <td>NN-explore+cluster(e=50,h=200)</td>
+      <td>85.08</td>
+      <td>83.26</td>
+      <td>84.98</td>
+      <td>83.28</td>
+      <td>9734.88</td>
+    </tr>
+    <tr>
+      <td>NN-explore+glob.feat+cluster(e=50,h=200)</td>
+      <td>85.16</td>
+      <td>83.54</td>
+      <td>85.24</td>
+      <td>83.61</td>
+      <td>9325.72</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="cdt-experiment">CDT experiment</h4>
+
+<p>Suggested data split is used in CDT experiment.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Parser</th>
+      <th>Dev.UAS</th>
+      <th>Dev.LAS</th>
+      <th>Test.UAS</th>
+      <th>Test.LAS</th>
+      <th>Test Speed(tokens/sec.)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>ZPar (b=64)</td>
+      <td>86.43</td>
+      <td>83.68</td>
+      <td>85.48</td>
+      <td>82.41</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>LTP (o2sib)</td>
+      <td>84.95</td>
+      <td>82.09</td>
+      <td>83.99</td>
+      <td>81.31</td>
+      <td>263.89</td>
+    </tr>
+    <tr>
+      <td>NN (e=50,h=400)</td>
+      <td>84.33</td>
+      <td>81.57</td>
+      <td>83.04</td>
+      <td>80.01</td>
+      <td>11478.48</td>
+    </tr>
+    <tr>
+      <td>NN-explore(e=50,h=400)</td>
+      <td>85.02</td>
+      <td>82.41</td>
+      <td>83.74</td>
+      <td>80.81</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>NN-explore+glob.feat(e=50,h=400)</td>
+      <td>84.81</td>
+      <td>82.23</td>
+      <td>83.56</td>
+      <td>80.65</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>NN-explore+cluster(e=50,h=400)</td>
+      <td>85.82</td>
+      <td>83.25</td>
+      <td>83.49</td>
+      <td>80.60</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>NN-explore+glob.feat+cluster(e=50,h=400)</td>
+      <td>85.80</td>
+      <td>83.19</td>
+      <td>84.11</td>
+      <td>81.17</td>
+      <td>8448.45</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="in-a-way-to-kill-old-people">“In a way to kill old people”</h3>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
+
+<p>We can see the parsing accuracy and speed benchmark with our the old LTP parser.</p>
+
+<canvas id="speed" width="200" height="300"></canvas>
+<canvas id="accuracy" width="200" height="300"></canvas>
+
+<script>
+var spd_dat = {
+    labels: ["old parser", "new parser",],
+    datasets: [
+    {
+        label: "parsing speed",
+        fillColor: "rgba(220,220,220,0.5)",
+        strokeColor: "rgba(220,220,220,0.8)",
+        highlightFill: "rgba(220,220,220,0.75)",
+        highlightStroke: "rgba(220,220,220,1)",
+        data: [263.89, 8448.45]
+    }]
+};
+var acc_dat = {
+    labels: ["old parser", "new parser",],
+    datasets: [
+    {
+        label: "parsing accuracy",
+        fillColor: "rgba(220,220,220,0.5)",
+        strokeColor: "rgba(220,220,220,0.8)",
+        highlightFill: "rgba(220,220,220,0.75)",
+        highlightStroke: "rgba(220,220,220,1)",
+        data: [83.99, 84.11]
+    }]
+};
+
+var spd_ctx= document.getElementById("speed").getContext("2d");
+new Chart(spd_ctx).Bar(spd_dat, {barShowStroke: false});
+var acc_ctx= document.getElementById("accuracy").getContext("2d");
+new Chart(acc_ctx).Bar(acc_dat, {barShowStroke: false});
+</script>
+
+<p>In a way to kill old people, as the phrase is.</p>
+
+<h3 id="reference">Reference</h3>
+
+<ul>
+  <li>Danqi Chen and Christopher Manning, 2014, A Fast and Accurate Dependency Parser using Neural Networks, In Proc. <em>EMNLP2014</em></li>
+  <li>Yue Zhang and Joakim Nivre, 2011, Transition-based Dependency Parsing with Rich Non-local Features, In Proc <em>ACL2011</em></li>
+  <li>Yoav Goldberg, Francesco Sartorioand Giorgio Satta, 2014, A Tabular Method for Dynamic Oracles in Transition-Based Parsing, In <em>TACL2014</em></li>
+  <li>Jiang Guo, Wanxiang Che, David Yarowsky, Haifeng Wang and Ting Liu, 2015, Cross-lingual Dependency Parsing Based on Distributed Representations, (to apper) In Proc <em>ACL2015</em></li>
+  <li>Yue Zhang and Joakim Nivre, 2012, Analyzing the Effect of Global Learning and Beam-Search on Transition-Based Dependency Parsing, In Proc <em>COLING2012</em></li>
+  <li>Yue Zhang and Stephen Clark, A Tale of Two Parsers: Investigating and Combining Graph-based and Transition-based Dependency Parsing, In Proc <em>ACL2008</em></li>
+</ul>
+
+<style>
+table{ border-collapse: collapse; border-spacing: 0; border:2px solid #ff0000; width: 100%; }
+th{ border:2px solid #000000; }
+td{ border:1px solid #000000; }
+</style>
+
+
+</div>
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+var disqus_shortname = 'yjliu'; // required: replace example with your forum shortname
+/* * * DON'T EDIT BELOW THIS LINE * * */
+(function() {
+ var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+ dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+ (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+ })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+  </div>
+
+  <footer class="text-center">
+    &copy; <a href="http://yjliu.net/">Static Oneplus</a> 2010 - 2015 |
+    This site is built by <a href="http://middlemanapp.com/" target="_blank">Middleman</a> and
+    <a href="http://getbootstrap.com/">bootstrap</a>.
+  </footer>
+</div>
+
+
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+ (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+ })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-20774106-1', 'yjliu.net');
+ga('send', 'pageview');
+</script>
+<script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
+</body>
+</html>
