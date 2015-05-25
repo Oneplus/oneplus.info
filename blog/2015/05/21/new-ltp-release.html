@@ -117,7 +117,8 @@ We also compare our result with the our old LTP parser and the other state-of-th
 <h4 id="ctb5-experiment">CTB5 experiment</h4>
 
 <p>CTB5 data is splited according to Zhang and Clark (2008), with 16,091 for training, 1,910 for testing and 803 for development.
-An embedding trained on Gigawords xinhua news with word2vec is used as initialization embedding.</p>
+Word embedding trained on Gigawords xinhua news with word2vec is used as initialization embedding.
+Brown clustering result with 1000 clusters on the same data are also used in our experiment.</p>
 
 <table>
   <thead>
@@ -200,7 +201,8 @@ An embedding trained on Gigawords xinhua news with word2vec is used as initializ
 
 <h4 id="cdt-experiment">CDT experiment</h4>
 
-<p>Suggested data split is used in CDT experiment.</p>
+<p>Suggested data split is used in CDT experiment.
+Embedding and cluster settings are almost identical to the CTB5 experiment except that data are segmented with a PKU standard segmentor.</p>
 
 <table>
   <thead>
@@ -273,11 +275,14 @@ An embedding trained on Gigawords xinhua news with word2vec is used as initializ
   </tbody>
 </table>
 
+<p>Generally speaking, the dynamic oracle shows to improve parsing accuracy on both dataset.
+What’s more, brown cluster is also a great feature to boost up the score.</p>
+
 <h3 id="in-a-way-to-kill-old-people">“In a way to kill old people”</h3>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
 
-<p>We can see the parsing accuracy and speed benchmark with our the old LTP parser.</p>
+<p>We can see the parsing accuracy and speed benchmark with our the old LTP parser in the following chart.</p>
 
 <canvas id="speed" width="200" height="300"></canvas>
 <canvas id="accuracy" width="200" height="300"></canvas>

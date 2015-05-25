@@ -14,7 +14,7 @@
     <link rel="alternate" href="http://yjliu.net/blog/2015/05/21/new-ltp-release.html"/>
     <id>http://yjliu.net/blog/2015/05/21/new-ltp-release.html</id>
     <published>2015-05-20T16:00:00Z</published>
-    <updated>2015-05-24T14:03:33+08:00</updated>
+    <updated>2015-05-25T15:36:25+08:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -91,7 +91,8 @@ We also compare our result with the our old LTP parser and the other state-of-th
 &lt;h4 id="ctb5-experiment"&gt;CTB5 experiment&lt;/h4&gt;
 
 &lt;p&gt;CTB5 data is splited according to Zhang and Clark (2008), with 16,091 for training, 1,910 for testing and 803 for development.
-An embedding trained on Gigawords xinhua news with word2vec is used as initialization embedding.&lt;/p&gt;
+Word embedding trained on Gigawords xinhua news with word2vec is used as initialization embedding.
+Brown clustering result with 1000 clusters on the same data are also used in our experiment.&lt;/p&gt;
 
 &lt;table&gt;
   &lt;thead&gt;
@@ -174,7 +175,8 @@ An embedding trained on Gigawords xinhua news with word2vec is used as initializ
 
 &lt;h4 id="cdt-experiment"&gt;CDT experiment&lt;/h4&gt;
 
-&lt;p&gt;Suggested data split is used in CDT experiment.&lt;/p&gt;
+&lt;p&gt;Suggested data split is used in CDT experiment.
+Embedding and cluster settings are almost identical to the CTB5 experiment except that data are segmented with a PKU standard segmentor.&lt;/p&gt;
 
 &lt;table&gt;
   &lt;thead&gt;
@@ -247,11 +249,14 @@ An embedding trained on Gigawords xinhua news with word2vec is used as initializ
   &lt;/tbody&gt;
 &lt;/table&gt;
 
+&lt;p&gt;Generally speaking, the dynamic oracle shows to improve parsing accuracy on both dataset.
+What’s more, brown cluster is also a great feature to boost up the score.&lt;/p&gt;
+
 &lt;h3 id="in-a-way-to-kill-old-people"&gt;“In a way to kill old people”&lt;/h3&gt;
 
 &lt;script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"&gt;&lt;/script&gt;
 
-&lt;p&gt;We can see the parsing accuracy and speed benchmark with our the old LTP parser.&lt;/p&gt;
+&lt;p&gt;We can see the parsing accuracy and speed benchmark with our the old LTP parser in the following chart.&lt;/p&gt;
 
 &lt;canvas id="speed" width="200" height="300"&gt;&lt;/canvas&gt;
 &lt;canvas id="accuracy" width="200" height="300"&gt;&lt;/canvas&gt;
