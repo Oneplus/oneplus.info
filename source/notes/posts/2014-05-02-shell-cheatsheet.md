@@ -1,65 +1,130 @@
 ---
 layout: note
-title: Shell的一些小技巧
+title: Tips for Shell
 author: Oneplus
 category: ["Linux"]
 tags:
     - "shell"
     - "sed"
+    - "awk"
     - "sort"
     - "uniq"
 ---
 
-会逐步在这个note里面整理一些实用的shell小命令。解决的主要问题是自然语言处理。
+There will be some case-based tips for Shell.
 
-### 将连续空格替换为,或回车
+### 1. Replace the sequence space with newline
 
-一般用来将切分的句子编程变成一个词一行(词列表)。
+Input example
+
+~~~
+a b  c   d
+~~~
+
+Output example
+
+~~~
+a
+b
+c
+d
+~~~
+
+#### Summary
+
+`sed` is the best solution.
+
+#### Solution
 
 ~~~
 sed -r -e 's/[[:space:]]/\n/g'
 ~~~
 
-### 对于无序的词列表按照词频排序
+### 2. Sort the unordered word list (with duplication) by frequency
 
-这个在做词频统计时特别有用
+#### Summary
+
+It is very useful when counting word frequency.
+
+#### Solution
 
 ~~~
 sort | uniq -c | sort -rn
 ~~~
 
-### 让awk打印第一列之后的数据
+### 3. Awk print line without first column
 
-原理是把第一列清空，然后打印全列
+#### Summary
+
+This command actually clear the first column from the file.
+
+#### Solution
 
 ~~~
 awk '{$1=""; print $0}'
 ~~~
 
-### 统计词列表中最长的词
+### 4. Show the longest line in the file
+
+#### Summary
+
+Taking advantage of the const `length` in `awk`
+
+#### Solution
 
 ~~~
 awk '{print $0" "length}' | sort -k2 -nr | head -1
 ~~~
 
-### 去掉符合模式的某些行
+### 5. Ignore line that match some pattern
 
-`grep -v`已经提供这个功能了
+#### Summary and Solution
+
+Using
 
 ~~~
 grep -v
 ~~~
 
-### 批量替换命名空间
+### 6. Batchly replace namespace
+
+#### Summary
+
+Using `for` to loop over the file and `sed` to perform the replacement.
+
+#### Solution
 
 ~~~
-for f in `find ./src -type f`; do sed 's/oldnamespace/newnamespace' $f > x; mv x $f; done
+for f in `find ./src -type f`; do sed -i 's/oldnamespace/newnamespace' $f; done
 ~~~
 
-### 生成 02, ..., 24
+### 7. Generate 02, ..., 24 sequence
 
-用Perl更方便一点，Perl in Shell。
+
+#### Summary
+
+`Perl` can be a better solution.
+
+#### Solution
 
 ~~~
 perl -e 'for{$i=2;$i<=24;$i++}{printf("%02d\n", $i)}'
+~~~
+
+### 8. Command line calculator
+
+#### Awk Solution
+
+~~~
+awk '{print 1/10}'
+~~~
+
+and additional enter is needed
+
+#### Perl Solution
+
+More flexiable (with formatting).
+
+~~~
+perl -e 'printf("%f\n", 1./10);'
 ~~~
