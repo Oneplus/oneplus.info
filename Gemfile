@@ -6,7 +6,7 @@ gem "nokogiri"
 gem "redcarpet"
 gem "rdiscount"
 gem "kramdown"
-gem "middleman", "~> 3.2.2"
+gem "middleman", "~> 3.3.12"
 gem "middleman-blog", "~> 3.5.1"
 gem "middleman-syntax"
 
