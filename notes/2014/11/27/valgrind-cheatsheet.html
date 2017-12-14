@@ -52,17 +52,15 @@ blockquote p { font-size: 14px; }
 
 <p>The most basic use of <code>valgrind</code> is checking memory leak.</p>
 
-<pre class="highlight plaintext"><code>valgrind --tool=memcheck --leak-check=full &lt;program&gt;
-</code></pre>
-
+<div class="highlight"><pre class="highlight plaintext"><code>valgrind --tool=memcheck --leak-check=full &lt;program&gt;
+</code></pre></div>
 <h3 id="profiling-with-calgrind">Profiling with calgrind</h3>
 
 <p>The second use of <code>valgrind</code> is to show the dynamic running time for certain
 function and the invoking relation between functions.</p>
 
-<pre class="highlight plaintext"><code>valgrind --tool=callgrind &lt;program&gt;
-</code></pre>
-
+<div class="highlight"><pre class="highlight plaintext"><code>valgrind --tool=callgrind &lt;program&gt;
+</code></pre></div>
 <p>To visualize the calgrind result, my best practice is an combination <code>gprof2dot.py</code>
 and <code>graphviz</code>. <code>gprof2dot.py</code> can be obtained from <code>pypi</code> or the project
 <a href="https://code.google.com/p/jrfonseca/wiki/Gprof2Dot">homepage</a>.
@@ -70,11 +68,10 @@ Luckily, the author is still maintaining this tools.</p>
 
 <p>Combining these tools can be easily done by the following commands:</p>
 
-<pre class="highlight plaintext"><code>valgrind --tool=callgrind --callgrind-out-file=/tmp/callgrind.output &lt;program&gt;
+<div class="highlight"><pre class="highlight plaintext"><code>valgrind --tool=callgrind --callgrind-out-file=/tmp/callgrind.output &lt;program&gt;
 ./gprof2dot.py --format=callgrind --output=/tmp/call.dot -w /tmp/callgrind.output
 dot -Tpng -o /tmp/graph.png /tmp/call.dot
-</code></pre>
-
+</code></pre></div>
 <p>At the end, you will get a .png file representing the function executing time and
 relations between their invoking.</p>
 
@@ -96,7 +93,7 @@ var disqus_shortname = 'yjliu'; // required: replace example with your forum sho
   </div>
 
   <footer class="text-center">
-    &copy; <a href="http://yjliu.net/">Static Oneplus</a> 2010 - 2015 |
+    &copy; <a href="http://yjliu.net/">Static Oneplus</a> 2010 - 2017 |
     This site is built by <a href="http://middlemanapp.com/" target="_blank">Middleman</a> and
     <a href="http://getbootstrap.com/">bootstrap</a>.
   </footer>

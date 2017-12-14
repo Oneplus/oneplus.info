@@ -126,8 +126,9 @@ blockquote p { font-size: 14px; }
 
 <h3 id="section-2">录了30多分钟的课堂录音</h3>
 
-<p>这节课是用自己的笔记本进行的演示，录到了课堂录音。原文件噪音非常多，用Goldwave处理了一下，果然好了不少。
-<embed src="http://acm.hit.edu.cn/~oneplus/design-2011/02-record.wma" autostart="false" />&lt;/embed&gt;</p>
+<p>这节课是用自己的笔记本进行的演示，录到了课堂录音。原文件噪音非常多，用Goldwave处理了一下，果然好了不少。</p>
+<embed src="http://acm.hit.edu.cn/~oneplus/design-2011/02-record.wma" autostart="false" />
+<p>&lt;/embed&gt;</p>
 
 <h3 id="section-3">自我检讨</h3>
 
@@ -146,7 +147,7 @@ blockquote p { font-size: 14px; }
 
 <h3 id="java">演示二分时用的Java代码</h3>
 
-<pre class="highlight java"><code><span class="kn">import</span> <span class="nn">javax.swing.*</span><span class="o">;</span>
+<div class="highlight"><pre class="highlight java"><code><span class="kn">import</span> <span class="nn">javax.swing.*</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">java.awt.*</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">java.awt.event.*</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">java.awt.Panel</span><span class="o">;</span>
@@ -154,7 +155,7 @@ blockquote p { font-size: 14px; }
 <span class="kn">import</span> <span class="nn">java.text.DecimalFormat</span><span class="o">;</span>
 
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">bisearch</span> <span class="kd">extends</span> <span class="n">JFrame</span> <span class="kd">implements</span> <span class="n">ActionListener</span> <span class="o">{</span>
-    <span class="kd">public</span> <span class="n">bisearch</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="nf">bisearch</span><span class="o">()</span> <span class="o">{</span>
         <span class="n">setLayout</span><span class="o">(</span><span class="k">new</span> <span class="n">FlowLayout</span><span class="o">(</span><span class="n">FlowLayout</span><span class="o">.</span><span class="na">LEFT</span><span class="o">));</span>
         <span class="n">setSize</span><span class="o">(</span><span class="mi">500</span><span class="o">,</span> <span class="mi">400</span><span class="o">);</span>
         <span class="n">setBackground</span><span class="o">(</span><span class="n">Color</span><span class="o">.</span><span class="na">white</span><span class="o">);</span>
@@ -167,7 +168,7 @@ blockquote p { font-size: 14px; }
         <span class="k">this</span><span class="o">.</span><span class="na">setDefaultCloseOperation</span><span class="o">(</span><span class="n">JFrame</span><span class="o">.</span><span class="na">EXIT_ON_CLOSE</span><span class="o">);</span>
     <span class="o">}</span>
     
-    <span class="kd">public</span> <span class="kt">void</span> <span class="n">init</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">init</span><span class="o">()</span> <span class="o">{</span>
         <span class="n">lowerBound</span> <span class="o">=</span> <span class="n">f</span><span class="o">(</span> <span class="n">leftBound</span> <span class="o">);</span>
         <span class="n">upperBound</span> <span class="o">=</span> <span class="n">f</span><span class="o">(</span> <span class="n">rightBound</span> <span class="o">);</span>
         <span class="n">low</span> <span class="o">=</span> <span class="mf">3.0</span><span class="o">;</span>
@@ -175,7 +176,7 @@ blockquote p { font-size: 14px; }
         <span class="c1">//System.out.println( lowerBound + " " + upperBound );</span>
     <span class="o">}</span>
     
-     <span class="kd">public</span> <span class="kt">void</span> <span class="n">paint</span><span class="o">(</span> <span class="n">Graphics</span> <span class="n">g</span> <span class="o">)</span> <span class="o">{</span>
+     <span class="kd">public</span> <span class="kt">void</span> <span class="nf">paint</span><span class="o">(</span> <span class="n">Graphics</span> <span class="n">g</span> <span class="o">)</span> <span class="o">{</span>
          <span class="n">point</span> <span class="n">p1</span> <span class="o">=</span> <span class="k">new</span> <span class="n">point</span><span class="o">();</span>
          <span class="n">point</span> <span class="n">p2</span> <span class="o">=</span> <span class="k">new</span> <span class="n">point</span><span class="o">();</span>
          <span class="n">p1</span> <span class="o">=</span> <span class="n">toPoint</span><span class="o">(</span><span class="mf">2.7</span><span class="o">,</span> <span class="mf">0.0</span> <span class="o">);</span>
@@ -199,17 +200,17 @@ blockquote p { font-size: 14px; }
          <span class="n">g</span><span class="o">.</span><span class="na">drawOval</span><span class="o">(</span> <span class="n">p2</span><span class="o">.</span><span class="na">getX</span><span class="o">()</span> <span class="o">-</span> <span class="mi">3</span><span class="o">,</span> <span class="n">p2</span><span class="o">.</span><span class="na">getY</span><span class="o">()</span> <span class="o">-</span> <span class="mi">3</span><span class="o">,</span> <span class="mi">6</span><span class="o">,</span> <span class="mi">6</span><span class="o">);</span>
          <span class="n">g</span><span class="o">.</span><span class="na">drawLine</span><span class="o">(</span> <span class="n">p1</span><span class="o">.</span><span class="na">getX</span><span class="o">(),</span> <span class="n">p1</span><span class="o">.</span><span class="na">getY</span><span class="o">(),</span> <span class="n">p1</span><span class="o">.</span><span class="na">getX</span><span class="o">(),</span> <span class="n">x_axis</span> <span class="o">);</span>
          <span class="n">g</span><span class="o">.</span><span class="na">drawLine</span><span class="o">(</span> <span class="n">p2</span><span class="o">.</span><span class="na">getX</span><span class="o">(),</span> <span class="n">p2</span><span class="o">.</span><span class="na">getY</span><span class="o">(),</span> <span class="n">p2</span><span class="o">.</span><span class="na">getX</span><span class="o">(),</span> <span class="n">x_axis</span> <span class="o">);</span>
-         <span class="k">new</span> <span class="n">DecimalFormat</span><span class="o">(</span> <span class="s">"0.00"</span> <span class="o">);</span>
+         <span class="k">new</span> <span class="nf">DecimalFormat</span><span class="o">(</span> <span class="s">"0.00"</span> <span class="o">);</span>
          <span class="n">g</span><span class="o">.</span><span class="na">drawString</span><span class="o">(</span> <span class="n">Double</span><span class="o">.</span><span class="na">toString</span><span class="o">(</span> <span class="mf">3.0</span> <span class="o">),</span> <span class="n">p1</span><span class="o">.</span><span class="na">getX</span><span class="o">(),</span> <span class="n">x_axis</span> <span class="o">+</span> <span class="mi">12</span><span class="o">);</span>
          <span class="n">g</span><span class="o">.</span><span class="na">drawString</span><span class="o">(</span> <span class="n">Double</span><span class="o">.</span><span class="na">toString</span><span class="o">(</span> <span class="mf">4.0</span> <span class="o">),</span> <span class="n">p2</span><span class="o">.</span><span class="na">getX</span><span class="o">(),</span> <span class="n">x_axis</span> <span class="o">+</span> <span class="mi">12</span><span class="o">);</span>
          <span class="c1">//System.out.println( p1.getX() + " " + p1.getY() );</span>
     <span class="o">}</span>
      
-    <span class="kd">public</span> <span class="kt">double</span> <span class="n">f</span><span class="o">(</span> <span class="kt">double</span> <span class="n">x</span> <span class="o">)</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">double</span> <span class="nf">f</span><span class="o">(</span> <span class="kt">double</span> <span class="n">x</span> <span class="o">)</span> <span class="o">{</span>
         <span class="k">return</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span> <span class="o">-</span> <span class="mf">9.8</span><span class="o">;</span>
     <span class="o">}</span>
     
-    <span class="kd">public</span> <span class="n">point</span> <span class="n">toPoint</span><span class="o">(</span> <span class="kt">double</span> <span class="n">x</span><span class="o">,</span> <span class="kt">double</span> <span class="n">y</span> <span class="o">)</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="n">point</span> <span class="nf">toPoint</span><span class="o">(</span> <span class="kt">double</span> <span class="n">x</span><span class="o">,</span> <span class="kt">double</span> <span class="n">y</span> <span class="o">)</span> <span class="o">{</span>
         <span class="kt">double</span> <span class="n">xx</span> <span class="o">=</span> <span class="o">(</span> <span class="n">x</span> <span class="o">-</span> <span class="n">leftBound</span> <span class="o">)</span> <span class="o">/</span> <span class="o">(</span> <span class="n">rightBound</span> <span class="o">-</span> <span class="n">leftBound</span> <span class="o">)</span> <span class="o">*</span> <span class="mf">500.0</span><span class="o">;</span>
         <span class="kt">double</span> <span class="n">yy</span> <span class="o">=</span> <span class="o">(</span> <span class="n">y</span> <span class="o">-</span> <span class="n">upperBound</span> <span class="o">)</span> <span class="o">/</span> <span class="o">(</span> <span class="n">lowerBound</span> <span class="o">-</span> <span class="n">upperBound</span> <span class="o">)</span> <span class="o">*</span> <span class="mf">400.0</span><span class="o">;</span>
         
@@ -217,11 +218,11 @@ blockquote p { font-size: 14px; }
         <span class="k">return</span> <span class="n">ret</span><span class="o">;</span>
     <span class="o">}</span>
     
-    <span class="kd">public</span> <span class="kt">void</span> <span class="n">actionPerformed</span><span class="o">(</span> <span class="n">ActionEvent</span> <span class="n">event</span> <span class="o">)</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">actionPerformed</span><span class="o">(</span> <span class="n">ActionEvent</span> <span class="n">event</span> <span class="o">)</span> <span class="o">{</span>
         <span class="k">if</span><span class="o">(</span> <span class="n">event</span><span class="o">.</span><span class="na">getSource</span><span class="o">()</span> <span class="o">==</span> <span class="n">nextButton</span> <span class="o">)</span> <span class="o">{</span>
             <span class="k">if</span><span class="o">(</span> <span class="n">high</span> <span class="o">-</span> <span class="n">low</span> <span class="o">&gt;</span> <span class="mf">0.001</span> <span class="o">)</span> <span class="o">{</span>
                 <span class="n">mid</span> <span class="o">=</span> <span class="o">(</span> <span class="n">low</span> <span class="o">+</span> <span class="n">high</span> <span class="o">)</span> <span class="o">*</span> <span class="mf">0.5</span><span class="o">;</span>
-                <span class="k">new</span> <span class="n">DecimalFormat</span><span class="o">(</span> <span class="s">"0.00"</span> <span class="o">);</span>
+                <span class="k">new</span> <span class="nf">DecimalFormat</span><span class="o">(</span> <span class="s">"0.00"</span> <span class="o">);</span>
                 <span class="n">point</span> <span class="n">p1</span> <span class="o">=</span> <span class="n">toPoint</span><span class="o">(</span> <span class="n">mid</span><span class="o">,</span> <span class="n">f</span><span class="o">(</span><span class="n">mid</span><span class="o">)</span> <span class="o">);</span>
                 <span class="n">getGraphics</span><span class="o">().</span><span class="na">drawOval</span><span class="o">(</span> <span class="n">p1</span><span class="o">.</span><span class="na">getX</span><span class="o">()</span> <span class="o">-</span> <span class="mi">3</span><span class="o">,</span> <span class="n">p1</span><span class="o">.</span><span class="na">getY</span><span class="o">()</span> <span class="o">-</span> <span class="mi">3</span><span class="o">,</span> <span class="mi">6</span><span class="o">,</span> <span class="mi">6</span><span class="o">);</span>
                 <span class="n">getGraphics</span><span class="o">().</span><span class="na">drawLine</span><span class="o">(</span> <span class="n">p1</span><span class="o">.</span><span class="na">getX</span><span class="o">(),</span> <span class="n">p1</span><span class="o">.</span><span class="na">getY</span><span class="o">(),</span> <span class="n">p1</span><span class="o">.</span><span class="na">getX</span><span class="o">(),</span> <span class="n">x_axis</span> <span class="o">);</span>
@@ -237,7 +238,7 @@ blockquote p { font-size: 14px; }
         <span class="o">}</span>
     <span class="o">}</span>
     
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="n">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">IOException</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">IOException</span> <span class="o">{</span>
         <span class="n">bisearch</span> <span class="n">bs</span> <span class="o">=</span> <span class="k">new</span> <span class="n">bisearch</span><span class="o">();</span>
         <span class="n">bs</span><span class="o">.</span><span class="na">setVisible</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
     <span class="o">}</span>
@@ -250,21 +251,20 @@ blockquote p { font-size: 14px; }
 <span class="o">}</span>
 
 <span class="kd">class</span> <span class="nc">point</span> <span class="o">{</span>
-    <span class="kd">public</span> <span class="n">point</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="nf">point</span><span class="o">()</span> <span class="o">{</span>
         <span class="n">x</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
         <span class="n">y</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
     <span class="o">}</span>
-    <span class="kd">public</span> <span class="n">point</span><span class="o">(</span><span class="kt">int</span> <span class="n">_x</span><span class="o">,</span> <span class="kt">int</span> <span class="n">_y</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="nf">point</span><span class="o">(</span><span class="kt">int</span> <span class="n">_x</span><span class="o">,</span> <span class="kt">int</span> <span class="n">_y</span><span class="o">)</span> <span class="o">{</span>
         <span class="n">x</span> <span class="o">=</span> <span class="n">_x</span><span class="o">;</span>
         <span class="n">y</span> <span class="o">=</span> <span class="n">_y</span><span class="o">;</span>
     <span class="o">}</span>
-    <span class="kd">public</span> <span class="kt">int</span> <span class="n">getX</span><span class="o">()</span> <span class="o">{</span> <span class="k">return</span> <span class="n">x</span><span class="o">;</span> <span class="o">}</span>
-    <span class="kd">public</span> <span class="kt">int</span> <span class="n">getY</span><span class="o">()</span> <span class="o">{</span> <span class="k">return</span> <span class="n">y</span><span class="o">;</span> <span class="o">}</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">getX</span><span class="o">()</span> <span class="o">{</span> <span class="k">return</span> <span class="n">x</span><span class="o">;</span> <span class="o">}</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">getY</span><span class="o">()</span> <span class="o">{</span> <span class="k">return</span> <span class="n">y</span><span class="o">;</span> <span class="o">}</span>
     <span class="kd">private</span> <span class="kt">int</span> <span class="n">x</span><span class="o">;</span>
     <span class="kd">private</span> <span class="kt">int</span> <span class="n">y</span><span class="o">;</span>
 <span class="o">}</span>
-</code></pre>
-
+</code></pre></div>
 <p>太懒，不想把这段代码弄成applet了，想看编译后结果的同学点击<a href="http://acm.hit.edu.cn/~oneplus/design-2011/02-bisearch.jar">这里</a>下载可执行程序啊。</p>
 
 <h3 id="section-4">杂碎</h3>
@@ -295,7 +295,7 @@ var disqus_shortname = 'yjliu'; // required: replace example with your forum sho
   </div>
 
   <footer class="text-center">
-    &copy; <a href="http://yjliu.net/">Static Oneplus</a> 2010 - 2015 |
+    &copy; <a href="http://yjliu.net/">Static Oneplus</a> 2010 - 2017 |
     This site is built by <a href="http://middlemanapp.com/" target="_blank">Middleman</a> and
     <a href="http://getbootstrap.com/">bootstrap</a>.
   </footer>

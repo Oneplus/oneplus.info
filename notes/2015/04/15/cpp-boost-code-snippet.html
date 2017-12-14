@@ -45,27 +45,31 @@ blockquote p { font-size: 14px; }
 <h2>Useful code snippets with C++ boost</h2>
 <hr />
 <div>
-  <h2 id="is-punctuation">Is Punctuation</h2>
+  <h1 id="is-punctuation">Is Punctuation</h1>
 
-<p>It’s very straight forward to use <code>boost.regex</code> as a solution. We can match the
-input string with a regex like</p>
+<p>It’s very straight forward to use <code>boost.regex</code> as a solution. We can match the input string with a regex like</p>
 
-<pre class="highlight plaintext"><code>if (boost::regex_match(",", boost::regex("[[:punct:]]"))) {
-  std::cout &lt;&lt; "is punctuation." &lt;&lt; std::endl;
+<p><code>
+if (boost::regex_match(",", boost::regex("[[:punct:]]"))) {
+      std::cout &lt;&lt; "is punctuation." &lt;&lt; std::endl;
 }
-</code></pre>
+</code></p>
 
 <p>If the ICU is also in our consideration, code should be modified as</p>
 
-<pre class="highlight plaintext"><code>if (boost::u32regex_match("！", boost::make_u32regex("[[:P*:]]"))) {
-  std::cout &lt;&lt; "is unicode punctuation." &lt;&lt; std::endl;
+<p><code>
+if (boost::u32regex_match("！", boost::make_u32regex("[[:P*:]]"))) {
+      std::cout &lt;&lt; "is unicode punctuation." &lt;&lt; std::endl;
 }
-</code></pre>
+</code></p>
 
-<h2 id="argument-parser">Argument Parser</h2>
+<h1 id="argument-parser">Argument Parser</h1>
 
-<p>Like <code>optparse.OptionParser</code> in Python, boost also provides a very nice command line
-arguments parser, in <code>&lt;boost/program_options.hpp&gt;</code>.</p>
+<p>Like <code>optparse.OptionParser</code> in Python, boost also provides a very nice command line arguments parser, in <code>&lt;boost/program_options.hpp&gt;</code>.</p>
+
+<h3 id="updates">2017-12-14 updates</h3>
+
+<p>Now, it’s <code>argparse.ArgumentParser</code>.</p>
 
 </div>
 
@@ -85,7 +89,7 @@ var disqus_shortname = 'yjliu'; // required: replace example with your forum sho
   </div>
 
   <footer class="text-center">
-    &copy; <a href="http://yjliu.net/">Static Oneplus</a> 2010 - 2015 |
+    &copy; <a href="http://yjliu.net/">Static Oneplus</a> 2010 - 2017 |
     This site is built by <a href="http://middlemanapp.com/" target="_blank">Middleman</a> and
     <a href="http://getbootstrap.com/">bootstrap</a>.
   </footer>

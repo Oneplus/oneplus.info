@@ -59,7 +59,7 @@ blockquote p { font-size: 14px; }
 
 <p>具体程序如下：</p>
 
-<pre class="highlight python"><code><span class="c">#!/usr/bin/env python</span>
+<div class="highlight"><pre class="highlight python"><code><span class="c">#!/usr/bin/env python</span>
 <span class="c"># real    3m0.263s</span>
 <span class="c"># user    0m0.016s</span>
 <span class="c"># sys     0m0.012s</span>
@@ -120,8 +120,7 @@ blockquote p { font-size: 14px; }
         <span class="n">num</span> <span class="o">+=</span> <span class="mi">1</span>
 
     <span class="n">d</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
-</code></pre>
-
+</code></pre></div>
 <p>在300句的条件下，单线程的处理速度约为750s=12m，开4个线程后3m可以处理完成，并且输出是有序的。</p>
 
 <p>其他语言应该可以仿照这个方式编写程序，对于没有同步队列的语言，实现时可以参考这个http://hg.python.org/cpython/file/2.7/Lib/Queue.py</p>
@@ -145,7 +144,7 @@ var disqus_shortname = 'yjliu'; // required: replace example with your forum sho
   </div>
 
   <footer class="text-center">
-    &copy; <a href="http://yjliu.net/">Static Oneplus</a> 2010 - 2015 |
+    &copy; <a href="http://yjliu.net/">Static Oneplus</a> 2010 - 2017 |
     This site is built by <a href="http://middlemanapp.com/" target="_blank">Middleman</a> and
     <a href="http://getbootstrap.com/">bootstrap</a>.
   </footer>

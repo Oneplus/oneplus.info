@@ -47,34 +47,30 @@ blockquote p { font-size: 14px; }
 <div>
   <p>实验室服务器的硬盘满了，结果导致一个线上服务的MySQL数据库的两个表坏了。具体症状是<code>desc cdb_searchindex</code>显示</p>
 
-<pre class="highlight shell"><code>ERROR 1017 <span class="o">(</span>HY000<span class="o">)</span>: Can<span class="s1">'t find file: '</span>cdb_searchindex<span class="s1">' (errno: 2)
-</span></code></pre>
-
+<div class="highlight"><pre class="highlight shell"><code>ERROR 1017 <span class="o">(</span>HY000<span class="o">)</span>: Can<span class="s1">'t find file: '</span>cdb_searchindex<span class="s1">' (errno: 2)
+</span></code></pre></div>
 <p>这是要通过/etc/my.cnf(或者同类的mysql配置文件)找到数据文件的位置。定位后进入文件夹，<code>ls cdb_searchindex*</code>一看，只剩一个cdb_searchindex.frm文件了。</p>
 
 <p>接下来要进行恢复了。</p>
 
 <p>第一步是确定这个表的引擎类型，命令是:</p>
 
-<pre class="highlight shell"><code>show table status from <span class="sb">`</span>discuz<span class="sb">`</span>;
-</code></pre>
-
+<div class="highlight"><pre class="highlight shell"><code>show table status from <span class="sb">`</span>discuz<span class="sb">`</span><span class="p">;</span>
+</code></pre></div>
 <p>一看都是MyISAM，恢复起来就相对比较容易了。</p>
 
 <p>第二步是在数据库文件所在的文件夹中新建<code>cdb_searchindex.MYD</code>和<code>cdb_searchindex.MYI</code>两个文件，注意权限应该是mysql的。</p>
 
 <p>第三步是在mysql中用</p>
 
-<pre class="highlight shell"><code>repair table cdb_searchindex USE_FRM;
-</code></pre>
-
+<div class="highlight"><pre class="highlight shell"><code>repair table cdb_searchindex USE_FRM<span class="p">;</span>
+</code></pre></div>
 <p>就可以恢复了。</p>
 
 <p>第四步用</p>
 
-<pre class="highlight shell"><code>mysqlcheck discuz;
-</code></pre>
-
+<div class="highlight"><pre class="highlight shell"><code>mysqlcheck discuz<span class="p">;</span>
+</code></pre></div>
 <p>没啥问题就OK了。</p>
 
 <h3 id="section">参考</h3>
@@ -101,7 +97,7 @@ var disqus_shortname = 'yjliu'; // required: replace example with your forum sho
   </div>
 
   <footer class="text-center">
-    &copy; <a href="http://yjliu.net/">Static Oneplus</a> 2010 - 2015 |
+    &copy; <a href="http://yjliu.net/">Static Oneplus</a> 2010 - 2017 |
     This site is built by <a href="http://middlemanapp.com/" target="_blank">Middleman</a> and
     <a href="http://getbootstrap.com/">bootstrap</a>.
   </footer>

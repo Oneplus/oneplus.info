@@ -14,12 +14,12 @@
     <link rel="alternate" href="http://yjliu.net/blog/2015/05/21/new-ltp-release.html"/>
     <id>http://yjliu.net/blog/2015/05/21/new-ltp-release.html</id>
     <published>2015-05-20T16:00:00Z</published>
-    <updated>2015-05-25T15:36:25+08:00</updated>
+    <updated>2017-12-13T15:33:28+08:00</updated>
     <author>
       <name>Article Author</name>
     </author>
     <content type="html">&lt;p&gt;[&lt;a href="https://github.com/HIT-SCIR/ltp/releases/tag/v3.3.0"&gt;Github&lt;/a&gt;]
-[&lt;a href="http://pan.baidu.com/share/link?shareid=1988562907&amp;amp;amp;uk=2738088569#path=%252Fltp-models%252F3.3.0"&gt;Pre-trained Model&lt;/a&gt;]&lt;/p&gt;
+[&lt;a href="http://pan.baidu.com/share/link?shareid=1988562907&amp;amp;uk=2738088569#path=%252Fltp-models%252F3.3.0"&gt;Pre-trained Model&lt;/a&gt;]&lt;/p&gt;
 
 &lt;p&gt;We recently added a new dependency parser to LTP.
 This parser is a transiton-based neural network parser, which mainly based on Chen and Manning (2014).
@@ -315,173 +315,11 @@ td{ border:1px solid #000000; }
 </content>
   </entry>
   <entry>
-    <title>ZGen v0.2.0 Released</title>
-    <link rel="alternate" href="http://yjliu.net/blog/2015/03/29/zgen-release.html"/>
-    <id>http://yjliu.net/blog/2015/03/29/zgen-release.html</id>
-    <published>2015-03-28T16:00:00Z</published>
-    <updated>2015-05-21T09:46:55+08:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;[&lt;a href="http://sourceforge.net/projects/zgen/"&gt;Sourceforge Project Home&lt;/a&gt;]
-[&lt;a href="https://github.com/Oneplus/ZGen"&gt;Github Mirror&lt;/a&gt;]&lt;/p&gt;
-
-&lt;p&gt;I’ve been working on the ZGen project since Sept. the last year. It’s a linearization system that constructs natural language
-sentences from bags of words, given optional input syntactic constraints. Depending on the amount of input constraints, ZGen
-can perform free ordering, partial tree linearization and full tree linearization. It’s the system I used in my NAACL2015 
-paper: &lt;em&gt;Transition-Based Syntactic Linearization&lt;/em&gt;. Any feedback is welcome!&lt;/p&gt;
-
-&lt;p&gt;Sentence generation is an interesting but less studied topic, partly because the complexity of the generation system. The
-current version of ZGen can never make up a generation system, but hopefully it can perform generation from logic form or
-key words or a sentence topic.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;ZGen&lt;/strong&gt; is named after the &lt;em&gt;ZPar&lt;/em&gt; project from my supervisor and corporator Dr. Yue Zhang. He must be marching on the road of
-&lt;em&gt;ZNLP&lt;/em&gt; :-)&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>A benchmark on mapping few keys</title>
-    <link rel="alternate" href="http://yjliu.net/blog/2015/03/10/benchmark-on-mapping-few-keys.html"/>
-    <id>http://yjliu.net/blog/2015/03/10/benchmark-on-mapping-few-keys.html</id>
-    <published>2015-03-09T16:00:00Z</published>
-    <updated>2015-03-10T19:36:56+08:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;Recently, I’ve worked on optimizing my transition-based parser and came across such situation:&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;I need an associated, or key-value, structure to store the cached scored for each transition action at a certain state.
-In practice, the number of transition actions is relatively small (less than 100), so I became curious about the best associated data structure for small set of keys.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;Previous posts on such performance benchmark mainly focus on the comparsion of different hash maps on large scale, like &lt;a href="http://incise.org/hash-table-benchmarks.html"&gt;this one&lt;/a&gt;.
-This post differs from theirs by setting the number of keys to a small number.
-Time consumption on &lt;em&gt;random insertion&lt;/em&gt;, &lt;em&gt;ordered insertion&lt;/em&gt;, &lt;em&gt;random retrieve&lt;/em&gt; and &lt;em&gt;ordered retrieve&lt;/em&gt; is evaluated.
-I didn’t give a try on the &lt;em&gt;delete&lt;/em&gt; operation cause there is no such operation in my problems.&lt;/p&gt;
-
-&lt;p&gt;Three types of mapping facilities are adopted in this posts.
-They are:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;Tree&lt;/strong&gt;: &lt;code&gt;std::map&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Ordered List&lt;/strong&gt;: &lt;code&gt;boost::container::flat_map&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Hashtable&lt;/strong&gt;: &lt;code&gt;std::unordered_map&lt;/code&gt;, &lt;code&gt;boost::unordered_map&lt;/code&gt;, &lt;code&gt;google::sparse_hash_map&lt;/code&gt;, &lt;code&gt;google::dense_hash_map&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;code&gt;std::map&lt;/code&gt; is a several-time loser in previous benchmark because of the O(log n) time complexity.
-I choose the &lt;code&gt;std::map&lt;/code&gt; and hope it can win a round in this special situation.
-&lt;code&gt;boost::container::flat_map&lt;/code&gt; is suggested by &lt;a href="http://stackoverflow.com/questions/15625225/map-vs-unordered-map-for-few-elements"&gt;this StackOverflow question&lt;/a&gt;.
-It seems the key are ordered and stored in a list in &lt;code&gt;boost::container::flat_map&lt;/code&gt;, rather than a tree like the &lt;code&gt;std::map&lt;/code&gt; does.
-Expectingly, this data structure should have some nice memory allocation feature compared with the &lt;code&gt;std::map&lt;/code&gt;.
-The &lt;strong&gt;Hashtable&lt;/strong&gt; group is actually my old friends and I used &lt;code&gt;google::dense_hash_map&lt;/code&gt; and &lt;code&gt;std::unordered_map&lt;/code&gt; a lot.&lt;/p&gt;
-
-&lt;h3 id="results"&gt;Results&lt;/h3&gt;
-
-&lt;p&gt;All the experiments are conducted on a Xeon(R) CPU E5-2620 @ 2.00GHz server.
-My GCC is a new-version one, the 4.8.2.
-The code used in this benchmark can be found at &lt;a href="https://gist.github.com/Oneplus/95aca812db7df06db4a6"&gt;this gist&lt;/a&gt;.
-&lt;code&gt;-O3&lt;/code&gt; optimizing level is configured in compling the code.&lt;/p&gt;
-
-&lt;p&gt;The benchmark results are shown below.&lt;/p&gt;
-
-&lt;script language="javascript" type="text/javascript" src="http://flot.googlecode.com/svn/trunk/jquery.js"&gt;&lt;/script&gt;
-
-&lt;script language="javascript" type="text/javascript" src="http://flot.googlecode.com/svn/trunk/jquery.flot.js"&gt;&lt;/script&gt;
-
-&lt;script&gt;
-series_settings = {
-    lines: { show: true },
-    points: { show: true }
-};
-grid_settings = { tickColor: '#ddd' };
-xaxis_settings = {
-    tickSize: 5,
-    tickFormatter: function(num, obj) { return num; }
-};
-yaxis_runtime_settings = {
-    tickSize: 3,
-    tickFormatter: function(num, obj) { return num + ' sec.'; }
-};
-legend_settings = {
-    position: 'nw',
-    backgroundOpacity: 0
-};
-runtime_settings = {
-    series: series_settings,
-    grid: grid_settings,
-    xaxis: xaxis_settings,
-    yaxis: yaxis_runtime_settings,
-    legend: legend_settings
-};
-
-chart_data = {"insert_ordered": [{"data": [[7, 0.409322], [10, 0.585166], [22, 1.341716], [34, 2.139042], [44, 3.038083], [59, 4.370022], [68, 4.935407], [77, 5.307655], [84, 5.844386], [94, 6.582139], [108, 8.13809], [117, 8.708292], [128, 9.185893]], "label": "GCC 4.8.2 std::map"}, {"data": [[7, 0.519962], [10, 0.759663], [22, 1.858168], [34, 3.708597], [44, 4.137573], [59, 7.066421], [68, 7.991669], [77, 8.343582], [84, 7.938728], [94, 8.793034], [108, 13.404046], [117, 13.88253], [128, 14.58537]], "label": "GCC 4.8.2 std::unordered_map"}, {"data": [[7, 0.550035], [10, 1.051826], [22, 2.03427], [34, 5.646686], [44, 6.974083], [59, 14.161613], [68, 15.367167], [77, 16.903076], [84, 16.48261], [94, 21.557487], [108, 38.543933], [117, 41.327302], [128, 39.764304]], "label": "Google sparsehash 2.0 sparse_hash_map"}, {"data": [[7, 0.164327], [10, 0.196777], [22, 0.672963], [34, 1.394658], [44, 1.434241], [59, 1.797652], [68, 2.955158], [77, 2.562484], [84, 2.776381], [94, 2.985307], [108, 3.199112], [117, 3.242178], [128, 3.226103]], "label": "Google sparsehash 2.0 dense_hash_map"}, {"data": [[7, 0.633299], [10, 0.889551], [22, 2.800967], [34, 4.726608], [44, 5.401382], [59, 8.81247], [68, 9.751447], [77, 9.189723], [84, 10.183168], [94, 12.195744], [108, 15.87413], [117, 15.845215], [128, 16.748076]], "label": "Boost 1.57 unordered_map"}, {"data": [[7, 0.439004], [10, 0.54523], [22, 0.648596], [34, 1.187385], [44, 1.370228], [59, 1.634742], [68, 2.006426], [77, 2.029157], [84, 2.198808], [94, 2.398985], [108, 2.659591], [117, 2.662692], [128, 2.822689]], "label": "Boost 1.57 container/flat_map"}], "query_ordered": [{"data": [[7, 0.442178], [10, 0.504482], [22, 0.637969], [34, 0.661629], [44, 0.758225], [59, 0.828777], [68, 0.842935], [77, 0.842343], [84, 0.834386], [94, 0.854975], [108, 0.918758], [117, 0.885608], [128, 0.889101]], "label": "GCC 4.8.2 std::map"}, {"data": [[7, 2.992673], [10, 3.446545], [22, 3.726248], [34, 3.118768], [44, 3.825269], [59, 3.088826], [68, 3.323022], [77, 3.39234], [84, 3.532552], [94, 3.777222], [108, 2.875106], [117, 2.94179], [128, 3.004405]], "label": "GCC 4.8.2 std::unordered_map"}, {"data": [[7, 1.406637], [10, 1.907112], [22, 3.981396], [34, 3.729011], [44, 5.419971], [59, 3.247684], [68, 3.848389], [77, 4.635114], [84, 4.906134], [94, 5.902078], [108, 3.05959], [117, 3.217729], [128, 3.553654]], "label": "Google sparsehash 2.0 sparse_hash_map"}, {"data": [[7, 0.71078], [10, 1.003725], [22, 1.015675], [34, 0.885142], [44, 1.093953], [59, 1.473621], [68, 0.883818], [77, 0.965263], [84, 0.941491], [94, 1.194417], [108, 1.392917], [117, 1.469674], [128, 1.496883]], "label": "Google sparsehash 2.0 dense_hash_map"}, {"data": [[7, 2.763566], [10, 3.279529], [22, 3.674283], [34, 3.613969], [44, 3.944727], [59, 3.576254], [68, 3.843012], [77, 3.70055], [84, 3.951947], [94, 4.445336], [108, 3.424645], [117, 3.374889], [128, 3.504379]], "label": "Boost 1.57 unordered_map"}, {"data": [[7, 0.578214], [10, 0.640305], [22, 0.796682], [34, 0.940796], [44, 1.019577], [59, 1.089206], [68, 1.095279], [77, 1.069663], [84, 1.071094], [94, 1.17977], [108, 1.184879], [117, 1.158933], [128, 1.239591]], "label": "Boost 1.57 container/flat_map"}], "insert_random": [{"data": [[7, 0.453461], [10, 0.636787], [22, 1.431945], [34, 2.409063], [44, 3.279204], [59, 4.396479], [68, 5.259939], [77, 5.70331], [84, 6.175281], [94, 6.765964], [108, 8.568328], [117, 9.25607], [128, 9.453532]], "label": "GCC 4.8.2 std::map"}, {"data": [[7, 0.520997], [10, 0.795826], [22, 1.849433], [34, 3.595913], [44, 4.257769], [59, 6.986665], [68, 7.913297], [77, 8.298659], [84, 7.833349], [94, 8.508522], [108, 12.582747], [117, 13.721128], [128, 14.607924]], "label": "GCC 4.8.2 std::unordered_map"}, {"data": [[7, 0.542842], [10, 1.048864], [22, 2.033791], [34, 5.626442], [44, 7.351983], [59, 14.587265], [68, 15.385357], [77, 16.365351], [84, 16.184529], [94, 18.344505], [108, 41.227187], [117, 39.37891], [128, 40.724853]], "label": "Google sparsehash 2.0 sparse_hash_map"}, {"data": [[7, 0.164012], [10, 0.196725], [22, 0.674874], [34, 1.378056], [44, 1.457056], [59, 1.766007], [68, 2.83264], [77, 2.559138], [84, 2.73269], [94, 2.969715], [108, 3.183305], [117, 3.099282], [128, 3.314104]], "label": "Google sparsehash 2.0 dense_hash_map"}, {"data": [[7, 0.62334], [10, 0.896382], [22, 2.836475], [34, 4.820623], [44, 5.454768], [59, 8.68892], [68, 9.822701], [77, 9.247], [84, 10.225132], [94, 12.206556], [108, 15.684576], [117, 15.788265], [128, 16.734827]], "label": "Boost 1.57 unordered_map"}, {"data": [[7, 0.438406], [10, 0.549438], [22, 0.69154], [34, 1.324668], [44, 1.767032], [59, 2.356399], [68, 3.339673], [77, 3.618639], [84, 3.978056], [94, 4.786716], [108, 5.719606], [117, 6.410732], [128, 7.284667]], "label": "Boost 1.57 container/flat_map"}], "query_random": [{"data": [[7, 1.437126], [10, 1.780534], [22, 2.134941], [34, 2.592437], [44, 3.032842], [59, 3.384666], [68, 3.2827], [77, 3.150921], [84, 3.359862], [94, 3.607361], [108, 4.09756], [117, 3.97718], [128, 3.939264]], "label": "GCC 4.8.2 std::map"}, {"data": [[7, 2.994385], [10, 3.449125], [22, 3.717252], [34, 3.119746], [44, 3.807377], [59, 3.093871], [68, 3.303348], [77, 3.401457], [84, 3.536373], [94, 3.763217], [108, 2.871974], [117, 2.917151], [128, 2.999574]], "label": "GCC 4.8.2 std::unordered_map"}, {"data": [[7, 1.408497], [10, 1.912621], [22, 3.993406], [34, 3.627917], [44, 5.541751], [59, 3.285898], [68, 3.889345], [77, 4.694517], [84, 4.95274], [94, 5.960179], [108, 3.090273], [117, 3.26882], [128, 3.579417]], "label": "Google sparsehash 2.0 sparse_hash_map"}, {"data": [[7, 0.712499], [10, 1.006673], [22, 1.014273], [34, 0.879282], [44, 1.097076], [59, 1.484884], [68, 0.884689], [77, 0.967289], [84, 0.941574], [94, 1.203366], [108, 1.402282], [117, 1.488052], [128, 1.504695]], "label": "Google sparsehash 2.0 dense_hash_map"}, {"data": [[7, 2.765428], [10, 3.28057], [22, 3.668774], [34, 3.626416], [44, 3.907296], [59, 3.550368], [68, 3.809431], [77, 3.702852], [84, 3.959559], [94, 4.435955], [108, 3.419833], [117, 3.369579], [128, 3.506896]], "label": "Boost 1.57 unordered_map"}, {"data": [[7, 1.643326], [10, 1.924941], [22, 2.233269], [34, 2.909318], [44, 3.297877], [59, 3.558162], [68, 3.54885], [77, 3.31426], [84, 3.584803], [94, 3.906225], [108, 4.057794], [117, 3.841046], [128, 4.066772]], "label": "Boost 1.57 container/flat_map"}]}
-$(function () {
-    $.plot($("#query_random"), chart_data['query_random'], runtime_settings);
-    $.plot($("#query_ordered"), chart_data['query_ordered'], runtime_settings);
-    $.plot($("#insert_random"), chart_data['insert_random'], runtime_settings);
-    $.plot($("#insert_ordered"), chart_data['insert_ordered'], runtime_settings);
-});
-&lt;/script&gt;
-
-&lt;style&gt;
-div.chart {
-    width: 700px;
-    height: 230px;
-}
-div.xaxis-title {
-    width: 700px;
-    text-align: center;
-    font-style: italic;
-    font-size: small;
-    color: #666;
-}
-&lt;/style&gt;
-
-&lt;p&gt;Ordered insertion&lt;/p&gt;
-
-&lt;div class="chart" id="insert_ordered"&gt;&lt;/div&gt;
-&lt;div class="xaxis-title"&gt;number of keys&lt;/div&gt;
-
-&lt;p&gt;Random insertion&lt;/p&gt;
-
-&lt;div class="chart" id="insert_random"&gt;&lt;/div&gt;
-&lt;div class="xaxis-title"&gt;number of keys&lt;/div&gt;
-
-&lt;p&gt;Ordered queries&lt;/p&gt;
-
-&lt;div class="chart" id="query_ordered"&gt;&lt;/div&gt;
-&lt;div class="xaxis-title"&gt;number of keys&lt;/div&gt;
-
-&lt;p&gt;Random queries&lt;/p&gt;
-
-&lt;div class="chart" id="query_random"&gt;&lt;/div&gt;
-&lt;div class="xaxis-title"&gt;number of keys&lt;/div&gt;
-
-&lt;h3 id="summary"&gt;Summary&lt;/h3&gt;
-&lt;p&gt;Generally speaking, the &lt;code&gt;google::dense_hash_map&lt;/code&gt; is still the best choice if you are aggressively purchasing the speed performance.
-Experimental result confirms that the &lt;code&gt;dense_hash_map&lt;/code&gt; achieves both the fastest insertion and fastest querying.&lt;/p&gt;
-
-&lt;p&gt;Also, we see that on the condition that the number of keys is relatively small, the sorted group (&lt;code&gt;std::map&lt;/code&gt; and &lt;code&gt;boost::container::flat_map&lt;/code&gt;) performs better than the hash group.
-One thing we need to note that, after the number of key increase to about 100, the sorted group starts to perform poor compared to the hash group.&lt;/p&gt;
-
-&lt;p&gt;By comparing the &lt;code&gt;std::map&lt;/code&gt; and &lt;code&gt;boost::container::flat_map&lt;/code&gt;, their performances are almost identical.
-I am a little disappointed by this fact because I always considering the &lt;code&gt;boost::container::flat_map&lt;/code&gt; as a silver bullet for the few key mapping problems.&lt;/p&gt;
-
-&lt;p&gt;For practice, there are several suggestion:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;For the mapping problem with less than 100 keys, &lt;code&gt;std::map&lt;/code&gt; is still a solution. It’s especially true if ordered keys is in your concern.&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;google::dense_hash_map&lt;/code&gt; is still number one choice, if memory and the annoying &lt;code&gt;set_empty_key()&lt;/code&gt; are both not the problems.&lt;/li&gt;
-&lt;/ul&gt;
-</content>
-  </entry>
-  <entry>
     <title>Parallel and HPC with Python (or numpy)</title>
     <link rel="alternate" href="http://yjliu.net/blog/2014/04/25/parallel-in-python.html"/>
     <id>http://yjliu.net/blog/2014/04/25/parallel-in-python.html</id>
     <published>2014-04-24T16:00:00Z</published>
-    <updated>2014-11-20T09:24:26+08:00</updated>
+    <updated>2017-12-13T15:33:28+08:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -498,20 +336,19 @@ thread program, I decided to parallel it.&lt;/p&gt;
 parallel model). I have a collection of data which contains about 200 thousand entries.
 My algorithm is some kind of &lt;code&gt;loop-loop&lt;/code&gt; and can be illustrated as the following pseudocode.&lt;/p&gt;
 
-&lt;pre class="highlight python"&gt;&lt;code&gt;&lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="ow"&gt;not&lt;/span&gt; &lt;span class="n"&gt;terminal&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;condition&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre class="highlight python"&gt;&lt;code&gt;&lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="ow"&gt;not&lt;/span&gt; &lt;span class="n"&gt;terminal&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;condition&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
     &lt;span class="n"&gt;init&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;global_vector&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
     &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;instance&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;instances&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
         &lt;span class="n"&gt;global_vector&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;consuming&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;process&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;instance&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
     &lt;span class="n"&gt;do&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;something&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;global_vector&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Since the &lt;code&gt;time-consuming-process&lt;/code&gt; is very time consuming, we can easily use a &lt;code&gt;producer&lt;/code&gt;
 to distribute these tasks onto several &lt;code&gt;consumers&lt;/code&gt;. What a textbook parallel model! To
 make it more clear, also for convenience of future discussion, let me put it into some
 meaningless but runnable code.&lt;/p&gt;
 
-&lt;pre class="highlight python"&gt;&lt;code&gt;&lt;span class="c"&gt;#!/usr/bin/env python&lt;/span&gt;
-&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;numpy&lt;/span&gt; &lt;span class="kn"&gt;as&lt;/span&gt; &lt;span class="nn"&gt;np&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre class="highlight python"&gt;&lt;code&gt;&lt;span class="c"&gt;#!/usr/bin/env python&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;numpy&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="n"&gt;np&lt;/span&gt;
 &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;time&lt;/span&gt;
 
 &lt;span class="n"&gt;nr_instances&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;2000&lt;/span&gt;
@@ -538,8 +375,7 @@ meaningless but runnable code.&lt;/p&gt;
     &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="nb"&gt;xrange&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
         &lt;span class="n"&gt;producer&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
         &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="s"&gt;"iter &lt;/span&gt;&lt;span class="si"&gt;%&lt;/span&gt;&lt;span class="s"&gt;d is done."&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;A simple &lt;code&gt;time&lt;/code&gt; command shows the above code runs &lt;code&gt;1m29.155s&lt;/code&gt; on my server.&lt;/p&gt;
 
 &lt;h3 id="threading"&gt;Threading&lt;/h3&gt;
@@ -555,8 +391,8 @@ implemented for recieveing data and invoke meta-consumer process.&lt;/p&gt;
 
 &lt;p&gt;After a slight modification on the above program, it became the multi-threaded version.&lt;/p&gt;
 
-&lt;pre class="highlight python"&gt;&lt;code&gt;&lt;span class="c"&gt;#!/usr/bin/env python&lt;/span&gt;
-&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;numpy&lt;/span&gt; &lt;span class="kn"&gt;as&lt;/span&gt; &lt;span class="nn"&gt;np&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre class="highlight python"&gt;&lt;code&gt;&lt;span class="c"&gt;#!/usr/bin/env python&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;numpy&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="n"&gt;np&lt;/span&gt;
 &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;time&lt;/span&gt;
 &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;threading&lt;/span&gt;
 &lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;basic&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;consumer&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;do_something&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;nr_instances&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;nr_dim&lt;/span&gt;
@@ -588,8 +424,7 @@ implemented for recieveing data and invoke meta-consumer process.&lt;/p&gt;
     &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="nb"&gt;xrange&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
         &lt;span class="n"&gt;producer&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
         &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="s"&gt;"iter &lt;/span&gt;&lt;span class="si"&gt;%&lt;/span&gt;&lt;span class="s"&gt;d is done."&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;I was expecting that the multi-threaded version will bring 2 to 3 times speed up if I
 config the program with 4 threads. However, this code run &lt;code&gt;1m33.678s&lt;/code&gt; on the same server.
 I can’t even believe that a multi-threaded program runs slower than the single-threaded
@@ -613,8 +448,8 @@ the &lt;code&gt;multiprocessing&lt;/code&gt; module. At the begining of its docu
 as a process. When creating a thread, it actually copy(fork) the entire processing into
 a new process.&lt;/p&gt;
 
-&lt;pre class="highlight python"&gt;&lt;code&gt;&lt;span class="c"&gt;#!/usr/bin/env python&lt;/span&gt;
-&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;numpy&lt;/span&gt; &lt;span class="kn"&gt;as&lt;/span&gt; &lt;span class="nn"&gt;np&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre class="highlight python"&gt;&lt;code&gt;&lt;span class="c"&gt;#!/usr/bin/env python&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;numpy&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="n"&gt;np&lt;/span&gt;
 &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;time&lt;/span&gt;
 &lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;multiprocessing&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;Pool&lt;/span&gt;
 &lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;basic&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;consumer&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;do_something&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;nr_dim&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;nr_instances&lt;/span&gt;
@@ -644,8 +479,7 @@ a new process.&lt;/p&gt;
     &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="nb"&gt;xrange&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
         &lt;span class="n"&gt;producer&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
         &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="s"&gt;"iter &lt;/span&gt;&lt;span class="si"&gt;%&lt;/span&gt;&lt;span class="s"&gt;d fin"&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;It takes &lt;code&gt;0m33.970s&lt;/code&gt; for the multiprocessing version to run. The multiprocessing module
 bring in about 2.5 times speed up.&lt;/p&gt;
 
@@ -677,8 +511,8 @@ data.&lt;/p&gt;
 
 &lt;p&gt;Revisiting my problem, the MPI version is shown blow.&lt;/p&gt;
 
-&lt;pre class="highlight python"&gt;&lt;code&gt;&lt;span class="c"&gt;#!/usr/bin/env python&lt;/span&gt;
-&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;numpy&lt;/span&gt; &lt;span class="kn"&gt;as&lt;/span&gt; &lt;span class="nn"&gt;np&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre class="highlight python"&gt;&lt;code&gt;&lt;span class="c"&gt;#!/usr/bin/env python&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;numpy&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="n"&gt;np&lt;/span&gt;
 &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;time&lt;/span&gt;
 &lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;mpi4py&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;MPI&lt;/span&gt;
 &lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;basic&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;consumer&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;do_something&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;nr_dim&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;nr_instances&lt;/span&gt;
@@ -732,8 +566,7 @@ data.&lt;/p&gt;
             &lt;span class="n"&gt;comm&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;send&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;None&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;dest&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;tag&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;EXIT&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
     &lt;span class="k"&gt;else&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
         &lt;span class="n"&gt;consumer_daemon&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Under same settings, the above program runs &lt;code&gt;0m31.332s&lt;/code&gt; and it memory performance is better
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Under same settings, the above program runs &lt;code&gt;0m31.332s&lt;/code&gt; and it memory performance is better
 than the multiprocessing version. One reason for the faster speed, I think, is the consumer
 wasn’t shut down between each iterations.&lt;/p&gt;
 
@@ -761,7 +594,7 @@ choice.&lt;/p&gt;
     <link rel="alternate" href="http://yjliu.net/blog/2013/08/05/summary-on-first-year-as-graduate-student.html"/>
     <id>http://yjliu.net/blog/2013/08/05/summary-on-first-year-as-graduate-student.html</id>
     <published>2013-08-04T17:07:11Z</published>
-    <updated>2014-11-20T09:24:26+08:00</updated>
+    <updated>2017-12-13T15:33:28+08:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -820,7 +653,7 @@ choice.&lt;/p&gt;
     <link rel="alternate" href="http://yjliu.net/blog/2013/07/21/luxation.html"/>
     <id>http://yjliu.net/blog/2013/07/21/luxation.html</id>
     <published>2013-07-21T04:28:17Z</published>
-    <updated>2014-11-20T09:24:26+08:00</updated>
+    <updated>2017-12-13T15:33:28+08:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -845,6 +678,283 @@ choice.&lt;/p&gt;
 &lt;p&gt;然后，一切妥当后，我拖着着这副夸张的对世界惊呆了的表情走入了孤独的夜色之中。&lt;/p&gt;
 
 &lt;p&gt;&lt;a href="http://blog.oneplus.info/wp-content/uploads/2013/07/暴走漫画-www.iPc_.me33.png"&gt;&lt;img src="http://blog.oneplus.info/wp-content/uploads/2013/07/暴走漫画-www.iPc_.me33.png" alt="" title="superize" width="118" height="145" class="aligncenter size-full wp-image-820" /&gt;&lt;/a&gt;&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
+    <title>实现一个更快一点的hashmap</title>
+    <link rel="alternate" href="http://yjliu.net/blog/2013/06/18/implementation-of-a-faster-hashmap.html"/>
+    <id>http://yjliu.net/blog/2013/06/18/implementation-of-a-faster-hashmap.html</id>
+    <published>2013-06-18T13:54:02Z</published>
+    <updated>2017-12-13T15:33:28+08:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;这段时间在写parser，难免又碰到了特征映射的问题。去年毕设做分词、词性标注时，这部分是用&lt;code&gt;__gnu_cxx::hash_map&amp;lt;string,int&amp;gt;&lt;/code&gt;来实现的。下表显示了几种数据集条件下的特征字典规模。&lt;/p&gt;
+
+&lt;table width="100%" border="1"&gt;
+&lt;tr&gt;&lt;td&gt;数据集&lt;/td&gt;&lt;td&gt;Ctb5&lt;/td&gt;&lt;td&gt;Ctb7&lt;/td&gt;&lt;td&gt;People’s Daily&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;数据规模&lt;/td&gt;&lt;td&gt;1.8W sent.&lt;/td&gt;&lt;td&gt;4.7W sent.&lt;/td&gt;&lt;td&gt;18.4W sent.&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;分词特征规模&lt;/td&gt;&lt;td&gt;203.1W&lt;/td&gt;&lt;td&gt;334.8W&lt;/td&gt;&lt;td&gt;774.9W&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;词性标注特征规模&lt;/td&gt;&lt;td&gt;158.7W&lt;/td&gt;&lt;td&gt;274.2W&lt;/td&gt;&lt;td&gt;751.3W&lt;/td&gt;&lt;/tr&gt;
+&lt;/table&gt;
+
+&lt;p&gt;对于这个级别的数据量，在特征检索过程中，特征字典的性能已经对于整个分析器的性能产生了影响。不过，分词词性标注都是序列模型，对于序列中的每个元素，只要相应进行一次抽取就可以，特征字典的性能提高一点或者降低一点，对于整体速度的影响并不是非常明显。&lt;/p&gt;
+
+&lt;p&gt;不过在parser中，特征检索的情况就有所不同了。
+主要表现就是作为一种结构学习，parser在学习模型参数以及预测过程中，需要对序列中的每两个元素抽取特征。
+假如我们有30种特征模板，30词的句子，放到词性标注任务中，需要进行&lt;code&gt;30*30=900&lt;/code&gt;次特征检索，而放到依存句法分析中，就需要进行&lt;code&gt;30*30*30=27000&lt;/code&gt;次特征检索。
+所以如果特征字典能再快点，当然是好事情。&lt;/p&gt;
+
+&lt;p&gt;另外一件让我比较不爽的事情是，c++的&lt;code&gt;hash_map&lt;/code&gt;没法很好地支持持久化。
+我想把&lt;code&gt;hash_map&lt;/code&gt;当成整段内存dump到磁盘上，没可能。
+只能一个key-value，一个key-value地处理。
+所以呢，最理想的是有这样一种&lt;code&gt;hash map&lt;/code&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;是一种动态的词典&lt;/li&gt;
+  &lt;li&gt;以string或者const char * 作为key&lt;/li&gt;
+  &lt;li&gt;性能与&lt;code&gt;__gnu_cxx::hash_map&lt;/code&gt;相近，或者更胜一筹&lt;/li&gt;
+  &lt;li&gt;能够很方便地进行持久化&lt;/li&gt;
+  &lt;li&gt;不需要考虑删除操作&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id="section"&gt;数据持久化&lt;/h3&gt;
+
+&lt;p&gt;进一步分析，要对数据进行持久化，最好的办法就是把所有的数据都放到一段内存上，dump的时候，直接把这段内存写到磁盘上；load时，直接从磁盘中读一段内存。
+池子一下子变成了一个超级好的选择。
+stl中的string基本没法持久化，不用想了。
+&lt;code&gt;const char *&lt;/code&gt;倒是不错。我们可以把所有的key都固化到一段&lt;code&gt;char *&lt;/code&gt;的buffer中。&lt;/p&gt;
+
+&lt;p&gt;对于value的固化，其实有这样一种考虑：如果value的类型是可以固化的，比如说int、double，那么也可以用池子来存这些value，但是如果是一些自建类型，比如说类啊什么的，本来就没有很直接的持久化的方法，小店也就只能伺候不周了。&lt;/p&gt;
+
+&lt;p&gt;池子固然是好想法，但我们考虑数据结构的动态性还要大于其性能考虑。
+想让池子变得动态基本就要用到stl中的allocator的技术了。
+维护一个池子长度上限以及当前长度，如果新加入的元素的规模大于池子上限，就将上限翻倍，重新给池子分配一段空间，把旧空间拷贝过去。&lt;/p&gt;
+
+&lt;p&gt;这样的话，数据固化的问题基本可以沿着这个思路解决。简单的代码可以写成这样&lt;/p&gt;
+
+&lt;div class="highlight"&gt;&lt;pre class="highlight cpp"&gt;&lt;code&gt;&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;pool_cap&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;new_size&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;pool_size&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="n"&gt;element_size&lt;/span&gt;&lt;span class="p"&gt;)))&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+	&lt;span class="n"&gt;pool_cap&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="n"&gt;new_size&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+	&lt;span class="n"&gt;Element_type&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;new_pool&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="n"&gt;Element_type&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;pool_cap&lt;/span&gt;&lt;span class="p"&gt;];&lt;/span&gt;
+	&lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;copy&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;pool&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;pool&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;pool_size&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;new_pool&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+	&lt;span class="k"&gt;delete&lt;/span&gt; &lt;span class="p"&gt;[](&lt;/span&gt;&lt;span class="n"&gt;pool&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+	&lt;span class="n"&gt;pool&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;new_pool&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3 id="section-1"&gt;性能优化&lt;/h3&gt;
+
+&lt;p&gt;虽然hashmap中hash function是很大程度上影响性能的因素，但是这也是我们不能控制的事情。
+我们能够提供的大概只有给一个合理的hashtable大小，以使得碰撞不是非常剧烈。
+什么样的hashtable大小比较合适，开大了浪费，开小了碰撞又多，看来又要上动态的hashtable了。
+不过即便是动态的hashtable，也面临resize时机的问题，爆栈上有这样一个问题“&lt;a href="http://stackoverflow.com/questions/1603712/when-should-i-do-rehashing-of-entire-hash-table/1604428#1604428"&gt;When should I do rehashing of entire hash table?&lt;/a&gt;”，第一条答案给了一个经验性的回答，翻译整理一下：&lt;/p&gt;
+&lt;blockquote&gt;首先需要明确一个量load factor的概念，这个值表示hashtable的桶的个数M和桶中元素的个数N的比值，load factor=N/M。然后看一看你所使用的hashtable的类型有关（关于load factor和hashtable类型都可以去看侯捷老师的stl源码分析的5.7.1节）。
+&lt;ul&gt;&lt;li&gt;线性探测（linear probing）：load factor在60%左右时就该resize了&lt;/li&gt;
+&lt;li&gt;二次探测（quadratic probing）：load factor在80%-85%时就该resize了&lt;/li&gt;
+&lt;li&gt;开链（separate chaining）：load factor大于150%时就该resize了&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;然后，我们还会面临一个问题，就是resize到多大呢？
+二倍当然是一个选择，但不一定是好选择，比如说二次探测的hashtable需要hashtable大小为质数，二倍了就不是质数了。
+比较好的选择是二倍以上的质数，这个&lt;a href="http://planetmath.org/goodhashtableprimes"&gt;网址&lt;/a&gt;给出了一个hashtable size的质数表。
+后来我发现stl中也有一样的质数表。&lt;/p&gt;
+
+&lt;p&gt;具体实现resize的时机是在hashmap每次insert一个元素之后，看一看是不是符合resize的机制。
+如果符合，申请一段新的hashtable，然后枚举旧的hashtable中的每个元素，把他们插入到新的hashtable中。&lt;/p&gt;
+
+&lt;p&gt;好的，到这里我们基本对于hashtable的实现心里也有数了。
+不过做出来的可能也只是hash_map的一个翻版，如何在性能上进一步提升呢？
+之前有一次讨论中，陆子龙师兄说在构造hashmap时可以将高频的key有限插入hashtable，这样从概率的角度讲，高频的key就有更多更大可能性一次就被检索到。
+这或许是一个优化的好思路，而且貌似gnu.trove已经实现了这种机制。&lt;/p&gt;
+
+&lt;p&gt;为了实现这一机制，用开链的方式显得要比其他几种容易。
+比方说保证高频key靠前，就只要保证在插入元素的时候维护链的有序性。
+因为每个链中都不会有很多元素，所以直接用类似于交换排序的思想就好了。
+维护有序性的时机主要是在某个key被重复插入后，这个key的频率增加，只要看一看这个key在链表中的前一个key是不是已经小于这个key了，如果是，就往前交换就好了。
+因为每个链都比较小，而且在频率增加前这个链是有序的，所以可以在极小时间复杂度内求出算某个key的正确位置时。&lt;/p&gt;
+
+&lt;p&gt;到这里基本上整个数据结构的设计就出来了。Hash node设计成&lt;/p&gt;
+
+&lt;div class="highlight"&gt;&lt;pre class="highlight cpp"&gt;&lt;code&gt;&lt;span class="k"&gt;struct&lt;/span&gt; &lt;span class="n"&gt;hash_node_t&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;span class="k"&gt;public&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+  &lt;span class="kt"&gt;unsigned&lt;/span&gt; &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;__key_off&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="c1"&gt;// 存key在key_pool中的偏移量
+&lt;/span&gt;  &lt;span class="kt"&gt;unsigned&lt;/span&gt; &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;__val_off&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="c1"&gt;// 存value在value_pool中的偏移量
+&lt;/span&gt;  &lt;span class="kt"&gt;unsigned&lt;/span&gt; &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;__freq&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="c1"&gt;// 存频次
+&lt;/span&gt;  &lt;span class="kt"&gt;unsigned&lt;/span&gt; &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;__hash_val&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="c1"&gt;// 存hashvalue，用于加速
+&lt;/span&gt;  &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;__next_off&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="c1"&gt;// 存后继节点在node_pool中的偏移量
+&lt;/span&gt;&lt;span class="p"&gt;};&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;因为池子的地址会动态变化，不能直接在hash node中保存指针，存偏移量就没有问题了。&lt;/p&gt;
+
+&lt;p&gt;一共有三个pool，一个存key，一个存value，一个存hash node，另外一个指针数组（或者偏移量数组）存hashtable的头结点，就设计成如下图那样了。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="http://blog.oneplus.info/wp-content/uploads/2013/06/structure.jpg"&gt;&lt;img src="http://blog.oneplus.info/wp-content/uploads/2013/06/structure.jpg" alt="Hash Table的数据结构" title="structure" width="500" class="aligncenter size-full wp-image-805" /&gt;&lt;/a&gt;
+我实现的代码放在&lt;a href="https://github.com/Oneplus/libutilities/blob/master/src/smartmap/smartmap.hpp"&gt;这里&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id="section-2"&gt;测试&lt;/h3&gt;
+
+&lt;p&gt;为了证明这个hashmap的性能，我进行了一个简单的benchmark。数据完全是模拟现实情境中首先构造特征字典，然后进行特征检索。benchmark的方法参考了&lt;a href="incise.org/hash-table-benchmarks.html"&gt;这篇博客&lt;/a&gt;中的方法。评价的大体过程是首先用一个有重复元素的key字典构建字典，然后用一个比较大规模的key集合去检索他的value。评价中采用了三个数据集，分别是ctb5，ctb6的分词特征集，和cdt的一阶句法特征集。key集是构造特征空间时用到的key，retrieve集是全特征集。各个数据的统计如下表所示&lt;/p&gt;
+
+&lt;table width="100%" border="1"&gt;
+&lt;tr&gt;&lt;td&gt;data set&lt;/td&gt;&lt;td&gt;# of keys&lt;/td&gt;&lt;td&gt;# of unique keys&lt;/td&gt;&lt;td&gt;# retrieve entries&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;CTB5&lt;/td&gt;&lt;td&gt;12.89M&lt;/td&gt;&lt;td&gt;2.2M&lt;/td&gt;&lt;td&gt;77.3M&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;CTB6&lt;/td&gt;&lt;td&gt;16.91M&lt;/td&gt;&lt;td&gt;2.7M&lt;/td&gt;&lt;td&gt;101.5M&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;CDT&lt;/td&gt;&lt;td&gt;55.6M&lt;/td&gt;&lt;td&gt;5.2M&lt;/td&gt;&lt;td&gt;198.9M&lt;/td&gt;&lt;/tr&gt;
+&lt;/table&gt;
+
+&lt;p&gt;参与对比的hashmap有__gnu_cxx::hash_map，google_sparse_hash，google_dense_hash，几种hashtable都做了类似的封装。benchmark用到的代码地址在&lt;a href="https://github.com/Oneplus/libutilities/tree/master/benchmark/smartmap"&gt;这里&lt;/a&gt;。运行的时候用&lt;/p&gt;
+
+&lt;div class="highlight"&gt;&lt;pre class="highlight plaintext"&gt;&lt;code&gt;nice -n-20 ionice -c1 -n0 python bench.py
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;保证了进程的优先级。&lt;/p&gt;
+
+&lt;p&gt;实验在xeon5650 2.67GHz的服务器上进行，gcc版本是比较老的4.1.2。&lt;/p&gt;
+
+&lt;p&gt;在实验数据集上，时间效率和内存效率分别如下表显示。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="http://blog.oneplus.info/wp-content/uploads/2013/06/speed.png"&gt;&lt;img src="http://blog.oneplus.info/wp-content/uploads/2013/06/speed.png" alt="" title="speed benchmark" width="500" class="aligncenter size-full wp-image-810" /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="http://blog.oneplus.info/wp-content/uploads/2013/06/memory.png"&gt;&lt;img src="http://blog.oneplus.info/wp-content/uploads/2013/06/memory.png" alt="" title="memory benchmark" width="500" class="aligncenter size-full wp-image-811" /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;总体上来讲是达到了我的期望。下一步打算把这个模块并入LTP中，期望还能再进一步优化！&lt;/p&gt;
+
+&lt;h3 id="section-3"&gt;参考资料&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="http://book.douban.com/subject/1110934/"&gt;STL源码分析&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://stackoverflow.com/questions/1603712/when-should-i-do-rehashing-of-entire-hash-table/1604428#1604428"&gt;When should I do rehashing of entire hash table?&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://incise.org/hash-table-benchmarks.html"&gt;Hash Table Benchmarks &lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;话说好久没写博客了。&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
+    <title>小记博客重组织</title>
+    <link rel="alternate" href="http://yjliu.net/blog/2012/10/13/restruct-my-blog.html"/>
+    <id>http://yjliu.net/blog/2012/10/13/restruct-my-blog.html</id>
+    <published>2012-10-13T13:58:33Z</published>
+    <updated>2017-12-13T15:33:28+08:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;&lt;a href="http://oneplus.info"&gt;oneplus.info&lt;/a&gt;这个域名和它使用的主机空间是我在2011年初买下的。到现在，就快有两年的时间了。两年之间，这个里产生了38篇博文，接受了2.4万次PV，其中《&lt;a href="http://blog.oneplus.info/archives/535"&gt;哈工大男女比例调研报告&lt;/a&gt;》和《&lt;a href="http://blog.oneplus.info/archives/455"&gt;关于一个点歌社交网络的构想&lt;/a&gt;》两篇得到了豆瓣九点首页的推荐。总的来讲，我对博客中提供的内容还是比较用心。&lt;/p&gt;
+
+&lt;p&gt;虽然这个博客的一直以来的表现也没什么差错，但是我却在很早以前就产生了重新组织网站结构的想法。建站之初，没什么经验（现在我也没什么经验），直接把wordpress安装在web根目录public_html下，oneplus.info的域名也直接定位到博客上。到了现在，觉得有必要在这里加一个主页，把原来的博客移到blog.oneplus.info的域名下。出于这个考虑，这周在业余时间里完成了这两项工作。&lt;/p&gt;
+
+&lt;h3 id="wordpress"&gt;WordPress迁移&lt;/h3&gt;
+
+&lt;p&gt;在迁移之前，我的&lt;code&gt;public_html&lt;/code&gt;是这样的：&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="http://blog.oneplus.info/wp-content/uploads/2012/10/before.jpg"&gt;&lt;img src="http://blog.oneplus.info/wp-content/uploads/2012/10/before.jpg" alt="" title="before" width="399" height="282" class="aligncenter size-full wp-image-764" /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;我希望它变成这样，&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="http://blog.oneplus.info/wp-content/uploads/2012/10/after.jpg"&gt;&lt;img src="http://blog.oneplus.info/wp-content/uploads/2012/10/after.jpg" alt="" title="after" width="398" height="152" class="aligncenter size-full wp-image-765" /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;并且可以通过blog.oneplus.info来访问。&lt;/p&gt;
+
+&lt;p&gt;要实现上面的效果，首先要做的工作是把blog.oneplus.info解析到主机的IP上。
+这个只需要在DNS服务商处给主域添加一个A记录，使得HOST_NAME为blog.oneplus.info的http请求发送给我的主机。
+我的DNS服务商是Godaddy，在Domain Manager面板上添加记录如下。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="http://blog.oneplus.info/wp-content/uploads/2012/10/godaddy.jpg"&gt;&lt;img src="http://blog.oneplus.info/wp-content/uploads/2012/10/godaddy.jpg" alt="" title="godaddy" width="550" class="aligncenter size-full wp-image-766" /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;添加后大概一个小时就生效了。&lt;/p&gt;
+
+&lt;p&gt;在DNS服务的工作做完后，要做的是使得主机能够处理这个请求。
+通过Google发现，这个问题大致可以通过三种途径解决，它们分别是：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;配置apache服务器，添加Virtual Host&lt;/li&gt;
+  &lt;li&gt;通过mod_rewrite模块把blog相关的请求重定向到blog.oneplus.info/blog/下&lt;/li&gt;
+  &lt;li&gt;在cpanel中添加子域&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;这里面，对于用cpanel管理的主机，由于用户不能接触httpd，第一种方法不能实现。
+第二种方法有点麻烦，具体做法可以google”.htaccess”、”重定向”、”二级域名”这几个关键字。
+第三种方法最简单，只要在cpanel的子域一项中添加一个名为blog.oneplus.info的子域就好了，非常傻瓜。&lt;/p&gt;
+
+&lt;p&gt;在主机可以处理blog.oneplus.info的请求之后，下一步就是wordpress的搬家了。
+由于，我使用的wordpress版本是3.3.1，而且是站内移动，搬家这件事就变得非常简单。
+具体做法是在&lt;code&gt;设置-&amp;gt;;常规&lt;/code&gt;中将&lt;code&gt;WordPress地址&lt;/code&gt;和&lt;code&gt;站点地址&lt;/code&gt;都写成blog.oneplus.inf
+o。保存之后，站点会暂时坏掉。不过把wordpress相关的文件移动到blog文件夹下，修改就生效了。&lt;/p&gt;
+
+&lt;p&gt;进行这些操作后，blog.oneplus.info便可以正常访问了。但是，还有一个问题是，博客中有一些图片的链接还指向blog.oneplus.info/wp-content/，科学的做法是把数据库的导出，然后把所有blog.oneplus.info改成blog.oneplus.info再导入。&lt;/p&gt;
+
+&lt;p&gt;这些都做完了，博客的迁移工作基本就完成了。整个过程都没什么难度，但是我忽略了最早的一步，白白浪费了一个晚上的时间。&lt;/p&gt;
+
+&lt;h3 id="feed"&gt;Feed重定向&lt;/h3&gt;
+
+&lt;p&gt;博客迁移之后，我的博客从下面几个方面会受到影响：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;博客的订阅&lt;/li&gt;
+  &lt;li&gt;搜索引擎排名&lt;/li&gt;
+  &lt;li&gt;wumii的喜欢按钮&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;对于写博客的人，第二项虽然很重要，但是能做的其实不太多（而且我挺反感SEO的，虽然我是学信息检索的）。
+所以，服务好自己的订阅用户才是要紧事。&lt;/p&gt;
+
+&lt;p&gt;现在的情景是由于feed的输出地址发生了改变，原来通过blog.oneplus.info/feed进行的订阅失效了。
+打开Google Reader，查看自己博客的订阅，发现Statistic中显示Parsing Error。
+好在主域还在我的手里，只要把blog.oneplus.info/feed的请求重定向到blog.oneplus.info/feed就行了。&lt;/p&gt;
+
+&lt;p&gt;这里要用到前面说过的比较麻烦的&lt;code&gt;mod_rewrite&lt;/code&gt;。做法是在web根目录下的.htaccess中添加重写条件和重写规则。现在我对feed的重写规则是这样的&lt;/p&gt;
+
+&lt;div class="highlight"&gt;&lt;pre class="highlight plaintext"&gt;&lt;code&gt;RewriteCond %{HTTP_HOST} ^blog.oneplus.info$
+RewriteCond %{REQUEST_URI} ^/feed$ [NC]
+RewriteRule .* http://blog.oneplus.info/feed [NC,L,R=301]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;它的含义是把所有主机名为blog.oneplus.info，URI为/feed的请求都重定向到blog.oneplus.info/feed下。&lt;/p&gt;
+
+&lt;p&gt;添加完重写规则后可以通过访问blog.oneplus.info/feed来测试一下重写规则是否生效。
+还有一些其他网站提供mod_rewrite的测试，比如说&lt;a href="http://martinmelin.se/rewrite-rule-tester/"&gt;这里&lt;/a&gt;，重定向失败的话可以把.htaccess投到这个网站中，找些样例测试一下。&lt;/p&gt;
+
+&lt;p&gt;至于第三项，我倒确实把男女比那篇的一百多个“喜欢”给丢了，不过I don’t care&lt;/p&gt;
+
+&lt;h3 id="section"&gt;主页&lt;/h3&gt;
+
+&lt;p&gt;完成博客迁移后，我发觉应该给blog.oneplus.info写一个主页。最后决定在里面写一个个人简介（留着吹牛用）。
+这次，我想尝试一下css框架（平时在实验室里也没机会），于是把bootstrap、blueprint、foundation几个框架都试了试。最后还是决定用bootstrap，原因是我在网上找到了它对ie6做的patch。
+至于为什么要兼容ie6，这篇豆瓣&lt;a href="http://www.douban.com/note/241422302/"&gt;日记&lt;/a&gt;记录了原因。&lt;/p&gt;
+
+&lt;p&gt;后来我觉得应该在主页中加一个最近发布的博客。
+直接查库当然是个好选择，但是我还想在ir.hit.edu.cn/~yjliu/上面做个镜像。
+所以在主机上写了一个小php - query来查库。
+这样，blog.oneplus.info和ir.hit.edu.cn/~yjliu/都可以通过查这个网页获得最近的文章。
+不过，我的主机在国外，国内访问速度慢，而且这个网页的更新频率实在不高。做cache是必须的。&lt;/p&gt;
+
+&lt;p&gt;起初，我想了好久如何在query.php上做cache，后来才发现，最应该做cache的是主页这一端。所以在主页中添加了下面的代码：&lt;/p&gt;
+
+&lt;div class="highlight"&gt;&lt;pre class="highlight plaintext"&gt;&lt;code&gt;$cache = new Cache(3600, &amp;amp;quot;some_path&amp;amp;quot;);
+
+$key = &amp;amp;quot;last_post&amp;amp;quot;;
+$values = $cache-&amp;amp;gt;get( $key );
+
+if ($values == false) {
+	$page = '';
+	$handler = fopen('some_url', 'r');
+
+	while(!feof($handler)){
+		$page .= fread( $handler, 1048576 );
+	}
+	fclose( $handler );
+	
+	$values = $page;
+	$cache-&amp;amp;gt;put( $key, $values );
+	echo $values;
+} else {
+	echo $values;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;对于主页的请求，先去看看cache过没过期，没过期就直接返回cache的结果，这样可以减少不少网络传输。其中，cache类我是参考&lt;a href="http://www.mangguo.org/the-simple-php-cache-class/"&gt;这篇&lt;/a&gt;的。&lt;/p&gt;
+
+&lt;h3 id="section-1"&gt;总结&lt;/h3&gt;
+
+&lt;p&gt;至此，博客的重组织工作告于段落。现在可以通过&lt;a href="http://www.oneplus.info"&gt;www.oneplus.info&lt;/a&gt;访问我的主页，也可以通过&lt;a href="http://blog.oneplus.info"&gt;blog.oneplus.info&lt;/a&gt;访问博客。
+虽然还有一些想做的工作，不过我还有别的事情，不能在这上面花太多时间，就这样吧。&lt;/p&gt;
+
+&lt;p&gt;PS: 这篇的另一目的是测试一下Feed输出是否正常。&lt;/p&gt;
 </content>
   </entry>
 </feed>

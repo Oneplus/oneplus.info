@@ -61,9 +61,7 @@ blockquote p { font-size: 14px; }
 <p>为了表示数据，我们从数据中抽取了一系列的特征。特征的全体可以看做是n个特征函数组成的一个集合。每个特征函数可以是从Context到0-1的二值函数。比方说这样的</p>
 
 <script type="math/tex; mode=display">% <![CDATA[
-
-f(x,y)=\{ \begin{aligned} 1 & if\ x="is"\ and\ y=v \\ 0 & otherwise \end{aligned}
- %]]></script>
+f(x,y)=\{ \begin{aligned} 1 & if\ x="is"\ and\ y=v \\ 0 & otherwise \end{aligned} %]]></script>
 
 <p>一组特征函数就将Context从上下文空间映射到特征空间上了。</p>
 
@@ -85,9 +83,7 @@ f(x,y)=\{ \begin{aligned} 1 & if\ x="is"\ and\ y=v \\ 0 & otherwise \end{aligned
 
 <p>假设我们有那么那么多的模型，也可以认为是概率分布。他们组成一个空间$ \mathcal{P} $，而满足上面一系列特征函数期望构成的等式的概率分布构成了$ \mathcal{P}$的一个子集</p>
 
-<script type="math/tex; mode=display">
-\mathcal{C}=\{p|p\in \mathcal{P} \quad and \ E_q(f_i)=E\_{ref}{f\_i},\ i \in (1,2,...,n)\}
-</script>
+<script type="math/tex; mode=display">\mathcal{C}=\{p|p\in \mathcal{P} \quad and \ E_q(f_i)=E\_{ref}{f\_i},\ i \in (1,2,...,n)\}</script>
 
 <p>现在要找一个合适的模型描述数据，也就是在$ \mathcal{P} $中搜索一个p。
 然后这时，熵突然出现了（- -b这里我也不知道怎么写，原谅我吧），从最大熵的角度来看，这个模型需要满足上面一系列特征函数期望构成的等式（换句话讲，是一些列一系列特征函数期望构成的约束），同时尽可能将可能性均匀地非配到不确定的上下文情况中。</p>
@@ -96,29 +92,21 @@ f(x,y)=\{ \begin{aligned} 1 & if\ x="is"\ and\ y=v \\ 0 & otherwise \end{aligned
 熵越大，可能性就越平均地被分配，因而我们的最终目标是最大化一个模型的熵。
 而由于有前面的约束等式，这个问题变成了一个有约束的最优化问题</p>
 
-<script type="math/tex; mode=display">
-find p * = arg{max\_{p\in C}{H(p)}}
-</script>
+<script type="math/tex; mode=display">find p * = arg{max\_{p\in C}{H(p)}}</script>
 
 <p>然后引入拉格朗日乘子$\lambda$，将等式约束的优化转换成无约束的最优化，得到</p>
 
-<script type="math/tex; mode=display">
-\Lambda(p,\lambda)=H(p)+\lambda\sum_i(E_q(f_i)-E\_{ref}(f\_i))
-</script>
+<script type="math/tex; mode=display">\Lambda(p,\lambda)=H(p)+\lambda\sum_i(E_q(f_i)-E\_{ref}(f\_i))</script>
 
 <p>求导解p，得到一个与$\lambda$有关的函数</p>
 
-<script type="math/tex; mode=display">
-p\_{\lambda}(y|x)=\frac{1}{Z\_{\lambda}(x)}\exp(\sum_i{\lambda_i f_i(x,y)})
-</script>
+<script type="math/tex; mode=display">p\_{\lambda}(y|x)=\frac{1}{Z\_{\lambda}(x)}\exp(\sum_i{\lambda_i f_i(x,y)})</script>
 
 <p>其中，$Z_\lambda(x)=\sum_y{\exp(\sum_i \lambda_i f_i(x,y))}$ 。</p>
 
 <p>将$p_{\lambda}$带入无约束优化的式子中，得到</p>
 
-<script type="math/tex; mode=display">
-\Psi(\lambda)=\Lambda(p,\lambda)=-\sum_x\tilde{p}\log{Z\_\lambda(x)}+\sum_i{\lambda_i E\_{ref}(f_i)}
-</script>
+<script type="math/tex; mode=display">\Psi(\lambda)=\Lambda(p,\lambda)=-\sum_x\tilde{p}\log{Z\_\lambda(x)}+\sum_i{\lambda_i E\_{ref}(f_i)}</script>
 
 <p>推导到这里，我们基本得到了算法要做的工作，就是从数据中估计出一个特征函数的权向量$\lambda$。最大化$ \Psi(\lambda) $。</p>
 
@@ -197,7 +185,7 @@ var disqus_shortname = 'yjliu'; // required: replace example with your forum sho
   </div>
 
   <footer class="text-center">
-    &copy; <a href="http://yjliu.net/">Static Oneplus</a> 2010 - 2015 |
+    &copy; <a href="http://yjliu.net/">Static Oneplus</a> 2010 - 2017 |
     This site is built by <a href="http://middlemanapp.com/" target="_blank">Middleman</a> and
     <a href="http://getbootstrap.com/">bootstrap</a>.
   </footer>

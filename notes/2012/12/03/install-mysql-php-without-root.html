@@ -60,31 +60,29 @@ blockquote p { font-size: 14px; }
 <p>首先，高版本MySQL使用CMake编译工具构建，构建之前需要安装CMake。
 CMake的安装方法如下：</p>
 
-<pre class="highlight shell"><code><span class="nb">cd</span> ~
-mkdir -p <span class="nb">local</span>/cmake/.src
+<div class="highlight"><pre class="highlight shell"><code><span class="nb">cd</span> ~
+mkdir <span class="nt">-p</span> <span class="nb">local</span>/cmake/.src
 <span class="nb">cd local</span>/cmake/.src
 wget http://www.cmake.org/files/v2.8/cmake-2.8.4.tar.gz
-tar zxvf cmake-2.8.4.tar.gz
+<span class="nb">tar </span>zxvf cmake-2.8.4.tar.gz
 <span class="nb">cd </span>cmake-2.8.4
-./configure --prefix<span class="o">=</span><span class="nv">$HOME</span>/local/cmake
+./configure <span class="nt">--prefix</span><span class="o">=</span><span class="nv">$HOME</span>/local/cmake
 make &amp; make install
-</code></pre>
-
+</code></pre></div>
 <p>安装了CMake之后，开始编译安装MySQL。</p>
 
-<pre class="highlight shell"><code><span class="nv">PORT</span><span class="o">=</span>12345 <span class="c"># 找一个没有人用的端口</span>
+<div class="highlight"><pre class="highlight shell"><code><span class="nv">PORT</span><span class="o">=</span>12345 <span class="c"># 找一个没有人用的端口</span>
 <span class="nb">cd</span> ~
-mkdir -p <span class="nb">local</span>/mysql/.src
+mkdir <span class="nt">-p</span> <span class="nb">local</span>/mysql/.src
 <span class="nb">cd local</span>/mysql/.src
 wget <span class="s1">'http://downloads.mysql.com/archives/mysql-5.5/mysql-5.5.27.tar.gz'</span>
-tar zxvf mysql-5.5.27.tar.gz
+<span class="nb">tar </span>zxvf mysql-5.5.27.tar.gz
 <span class="nb">cd </span>mysql-5.5.27
-cmake -DCMAKE_INSTALL_PREFIX<span class="o">=</span><span class="nv">$HOME</span>/local/mysql <span class="se">\</span>
--DMYSQL_TCP_PORT<span class="o">=</span><span class="nv">$PORT</span> <span class="se">\</span>
--DWITH_INNOBASE_STORAGE_ENGINE<span class="o">=</span>1 .
+cmake <span class="nt">-DCMAKE_INSTALL_PREFIX</span><span class="o">=</span><span class="nv">$HOME</span>/local/mysql <span class="se">\</span>
+<span class="nt">-DMYSQL_TCP_PORT</span><span class="o">=</span><span class="nv">$PORT</span> <span class="se">\</span>
+<span class="nt">-DWITH_INNOBASE_STORAGE_ENGINE</span><span class="o">=</span>1 <span class="nb">.</span>
 make &amp; make install
-</code></pre>
-
+</code></pre></div>
 <p>经过一通编译，MySQL已经安装在$HOME/local/mysql下面了。</p>
 
 <p>现在，需要启动mysql服务了。
@@ -100,17 +98,15 @@ source ~/.bash_profile
 
 <p>然后用mysql中提供的mysql_install_db脚本创建mysql数据库</p>
 
-<pre class="highlight shell"><code>mysql_install_db --basedir<span class="o">=</span><span class="nv">$HOME</span>/local/mysql <span class="se">\</span>
---datadir<span class="o">=</span><span class="nv">$HOME</span>/local/mysql/data <span class="se">\</span>
---tmpdir<span class="o">=</span><span class="nv">$HOME</span>/local/mysql/tmp <span class="se">\</span>
---user<span class="o">=</span><span class="nv">$USER</span>
-</code></pre>
-
+<div class="highlight"><pre class="highlight shell"><code>mysql_install_db <span class="nt">--basedir</span><span class="o">=</span><span class="nv">$HOME</span>/local/mysql <span class="se">\</span>
+<span class="nt">--datadir</span><span class="o">=</span><span class="nv">$HOME</span>/local/mysql/data <span class="se">\</span>
+<span class="nt">--tmpdir</span><span class="o">=</span><span class="nv">$HOME</span>/local/mysql/tmp <span class="se">\</span>
+<span class="nt">--user</span><span class="o">=</span><span class="nv">$USER</span>
+</code></pre></div>
 <p>然后创建mysqld，首先将mysql的配置文件拷贝到$HOME/.my.cnf，命令是：</p>
 
-<pre class="highlight shell"><code>cp <span class="nv">$HOME</span>/mysql/support-files/my-small.cnf <span class="nv">$HOME</span>/.my.cnf
-</code></pre>
-
+<div class="highlight"><pre class="highlight shell"><code>cp <span class="nv">$HOME</span>/mysql/support-files/my-small.cnf <span class="nv">$HOME</span>/.my.cnf
+</code></pre></div>
 <p>其中，
 ~~~bash
 [client]
@@ -133,20 +129,18 @@ basedir=$HOME/local/mysql
 
 <p>然后就是启动mysql服务</p>
 
-<pre class="highlight shell"><code>mysqld_safe --defaults-file<span class="o">=</span><span class="nv">$HOME</span>/.my.cnf --socket<span class="o">=</span><span class="nv">$HOME</span>/local/mysql/my.sock &amp;
-</code></pre>
-
+<div class="highlight"><pre class="highlight shell"><code>mysqld_safe <span class="nt">--defaults-file</span><span class="o">=</span><span class="nv">$HOME</span>/.my.cnf <span class="nt">--socket</span><span class="o">=</span><span class="nv">$HOME</span>/local/mysql/my.sock &amp;
+</code></pre></div>
 <p>接下来就可以mysql测试一下是否成功了。</p>
 
 <p>关于mysql，还有一些需要注意的是：当在本地上链接MySQL时，如果指定mysql通过localhost访问，那么mysql并不是通过web端口127.0.0.1:port进行访问的，而是通过一种名为mysql.sock的socket文件进行访问。
 如果在web服务中将mysql链接配成localhost，可能会出现一些麻烦事就是不能读写/tmp/mysql.sock而链接数据库不成功（发生在PHP中）。
 一个解决方法是使用127.0.0.1:port代替localhost，另一种解决方法是通过配置php.ini，将php.ini的如下字段进行设置然后在启动php监听时加载这个php.ini就OK了。</p>
 
-<pre class="highlight shell"><code><span class="o">[</span>MySQL]
+<div class="highlight"><pre class="highlight shell"><code><span class="o">[</span>MySQL]
 mysql.default_socket <span class="o">=</span> /home/yjliu/local/mysql/my.sock
 mysql.default_port <span class="o">=</span> 47389
-</code></pre>
-
+</code></pre></div>
 <p>参考：</p>
 
 <ul>
@@ -160,27 +154,25 @@ mysql.default_port <span class="o">=</span> 47389
 
 <p>下载PHP，编译安装就完成了：</p>
 
-<pre class="highlight shell"><code><span class="nb">cd</span> ~
-mkdir -p <span class="nb">local</span>/php5/.src
+<div class="highlight"><pre class="highlight shell"><code><span class="nb">cd</span> ~
+mkdir <span class="nt">-p</span> <span class="nb">local</span>/php5/.src
 <span class="nb">cd local</span>/php5/.src
 wget http://cn2.php.net/get/php-5.3.19.tar.bz2
 bzip2 –d php-5.3.19.tar.bz2
-tar xvf php-5.3.19.tar.bz2
+<span class="nb">tar </span>xvf php-5.3.19.tar.bz2
 <span class="nb">cd </span>php-5.3.19
-./configure --prefix<span class="o">=</span><span class="nv">$HOME</span>/local/php5 <span class="se">\</span>
---with-mysql<span class="o">=</span><span class="nv">$HOME</span>/local/mysql <span class="se">\#</span>设置mysql的安装路径
---with-curl<span class="o">=</span><span class="nv">$HOME</span>/local/cUrl <span class="se">\#</span>设置cUrl
---enable-fpm <span class="se">\ </span><span class="c">#开启fpm支持</span>
---enable-debug <span class="c">#支持调试</span>
+./configure <span class="nt">--prefix</span><span class="o">=</span><span class="nv">$HOME</span>/local/php5 <span class="se">\</span>
+<span class="nt">--with-mysql</span><span class="o">=</span><span class="nv">$HOME</span>/local/mysql <span class="se">\#</span>设置mysql的安装路径
+<span class="nt">--with-curl</span><span class="o">=</span><span class="nv">$HOME</span>/local/cUrl <span class="se">\#</span>设置cUrl
+<span class="nt">--enable-fpm</span> <span class="se">\ </span><span class="c">#开启fpm支持</span>
+<span class="nt">--enable-debug</span> <span class="c">#支持调试</span>
 make &amp; make install
-</code></pre>
-
+</code></pre></div>
 <p>这里重要的一步是在configure中指定mysql位置和开启fpm支持。
 这些都完成后，就可以启动php服务了。</p>
 
-<pre class="highlight shell"><code>./sbin/php-fpm
-</code></pre>
-
+<div class="highlight"><pre class="highlight shell"><code>./sbin/php-fpm
+</code></pre></div>
 <p>如果我们想指定一些配置文件的位置，就可以用
 ~~~bash
 ./sbin/php-fpm -c ./lib/php-easy.ini
@@ -194,15 +186,14 @@ make &amp; make install
 <p>下一步就是配置nginx，这个在nginx的example配置文件中已经非常清晰地体现了。
 只要在某个server中添加如下location就OK了。</p>
 
-<pre class="highlight shell"><code>location ~ <span class="se">\p</span>hp <span class="o">{</span>
-    root  /home/yjliu/www/main;
-    fastcgi_pass 127.0.0.1:47388;
-    fastcgi_index index.php;
-    fastcgi_param SCRIPT_FILENAME /home/yjliu/www/main<span class="nv">$fastcgi_script_name</span>;
-    include fastcgi_params;
+<div class="highlight"><pre class="highlight shell"><code>location ~ <span class="se">\p</span>hp <span class="o">{</span>
+    root  /home/yjliu/www/main<span class="p">;</span>
+    fastcgi_pass 127.0.0.1:47388<span class="p">;</span>
+    fastcgi_index index.php<span class="p">;</span>
+    fastcgi_param SCRIPT_FILENAME /home/yjliu/www/main<span class="nv">$fastcgi_script_name</span><span class="p">;</span>
+    include fastcgi_params<span class="p">;</span>
 <span class="o">}</span>
-</code></pre>
-
+</code></pre></div>
 <p>就想干啥干啥了 =)</p>
 
 </div>
@@ -223,7 +214,7 @@ var disqus_shortname = 'yjliu'; // required: replace example with your forum sho
   </div>
 
   <footer class="text-center">
-    &copy; <a href="http://yjliu.net/">Static Oneplus</a> 2010 - 2015 |
+    &copy; <a href="http://yjliu.net/">Static Oneplus</a> 2010 - 2017 |
     This site is built by <a href="http://middlemanapp.com/" target="_blank">Middleman</a> and
     <a href="http://getbootstrap.com/">bootstrap</a>.
   </footer>

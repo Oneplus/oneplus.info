@@ -90,15 +90,14 @@ stl中的string基本没法持久化，不用想了。
 
 <p>这样的话，数据固化的问题基本可以沿着这个思路解决。简单的代码可以写成这样</p>
 
-<pre class="highlight cpp"><code><span class="k">if</span> <span class="p">(</span><span class="n">pool_cap</span> <span class="o">&lt;=</span> <span class="p">(</span><span class="n">new_size</span><span class="o">=</span><span class="p">(</span><span class="n">pool_size</span><span class="o">+</span><span class="n">element_size</span><span class="p">)))</span> <span class="p">{</span>
+<div class="highlight"><pre class="highlight cpp"><code><span class="k">if</span> <span class="p">(</span><span class="n">pool_cap</span> <span class="o">&lt;=</span> <span class="p">(</span><span class="n">new_size</span><span class="o">=</span><span class="p">(</span><span class="n">pool_size</span><span class="o">+</span><span class="n">element_size</span><span class="p">)))</span> <span class="p">{</span>
 	<span class="n">pool_cap</span><span class="o">=</span><span class="p">((</span><span class="n">new_size</span><span class="p">)</span><span class="o">&lt;&lt;</span><span class="mi">1</span><span class="p">);</span>
 	<span class="n">Element_type</span> <span class="o">*</span> <span class="n">new_pool</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Element_type</span><span class="p">[</span><span class="n">pool_cap</span><span class="p">];</span>
 	<span class="n">std</span><span class="o">::</span><span class="n">copy</span><span class="p">(</span><span class="n">pool</span><span class="p">,</span> <span class="n">pool</span> <span class="o">+</span> <span class="n">pool_size</span><span class="p">,</span> <span class="n">new_pool</span><span class="p">);</span>
 	<span class="k">delete</span> <span class="p">[](</span><span class="n">pool</span><span class="p">);</span>
 	<span class="n">pool</span> <span class="o">=</span> <span class="n">new_pool</span><span class="p">;</span>
 <span class="p">}</span>
-</code></pre>
-
+</code></pre></div>
 <h3 id="section-1">性能优化</h3>
 
 <p>虽然hashmap中hash function是很大程度上影响性能的因素，但是这也是我们不能控制的事情。
@@ -133,7 +132,7 @@ stl中的string基本没法持久化，不用想了。
 
 <p>到这里基本上整个数据结构的设计就出来了。Hash node设计成</p>
 
-<pre class="highlight cpp"><code><span class="k">struct</span> <span class="n">hash_node_t</span> <span class="p">{</span>
+<div class="highlight"><pre class="highlight cpp"><code><span class="k">struct</span> <span class="n">hash_node_t</span> <span class="p">{</span>
 <span class="k">public</span><span class="o">:</span>
   <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">__key_off</span><span class="p">;</span> <span class="c1">// 存key在key_pool中的偏移量
 </span>  <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">__val_off</span><span class="p">;</span> <span class="c1">// 存value在value_pool中的偏移量
@@ -141,8 +140,7 @@ stl中的string基本没法持久化，不用想了。
 </span>  <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">__hash_val</span><span class="p">;</span> <span class="c1">// 存hashvalue，用于加速
 </span>  <span class="kt">int</span> <span class="n">__next_off</span><span class="p">;</span> <span class="c1">// 存后继节点在node_pool中的偏移量
 </span><span class="p">};</span>
-</code></pre>
-
+</code></pre></div>
 <p>因为池子的地址会动态变化，不能直接在hash node中保存指针，存偏移量就没有问题了。</p>
 
 <p>一共有三个pool，一个存key，一个存value，一个存hash node，另外一个指针数组（或者偏移量数组）存hashtable的头结点，就设计成如下图那样了。</p>
@@ -163,9 +161,8 @@ stl中的string基本没法持久化，不用想了。
 
 <p>参与对比的hashmap有__gnu_cxx::hash_map，google_sparse_hash，google_dense_hash，几种hashtable都做了类似的封装。benchmark用到的代码地址在<a href="https://github.com/Oneplus/libutilities/tree/master/benchmark/smartmap">这里</a>。运行的时候用</p>
 
-<pre class="highlight plaintext"><code>nice -n-20 ionice -c1 -n0 python bench.py
-</code></pre>
-
+<div class="highlight"><pre class="highlight plaintext"><code>nice -n-20 ionice -c1 -n0 python bench.py
+</code></pre></div>
 <p>保证了进程的优先级。</p>
 
 <p>实验在xeon5650 2.67GHz的服务器上进行，gcc版本是比较老的4.1.2。</p>
@@ -205,7 +202,7 @@ var disqus_shortname = 'yjliu'; // required: replace example with your forum sho
   </div>
 
   <footer class="text-center">
-    &copy; <a href="http://yjliu.net/">Static Oneplus</a> 2010 - 2015 |
+    &copy; <a href="http://yjliu.net/">Static Oneplus</a> 2010 - 2017 |
     This site is built by <a href="http://middlemanapp.com/" target="_blank">Middleman</a> and
     <a href="http://getbootstrap.com/">bootstrap</a>.
   </footer>

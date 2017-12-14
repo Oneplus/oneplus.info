@@ -48,13 +48,12 @@ blockquote p { font-size: 14px; }
 
 <p>在apache的配置文件<code>httpd.conf</code>中加入</p>
 
-<pre class="highlight shell"><code>ProxyPass / balancer://proxy/         <span class="c">#注意这里以"/"结尾 </span>
+<div class="highlight"><pre class="highlight shell"><code>ProxyPass / balancer://proxy/         <span class="c">#注意这里以"/"结尾 </span>
 &lt;Proxy balancer://proxy&gt; 
     BalancerMember http://192.168.6.37:6888/ 
     BalancerMember http://192.168.6.38:6888/ 
-<span class="gp">&lt;/Proxy&gt; </span>
-</code></pre>
-
+&lt;/Proxy&gt; 
+</code></pre></div>
 <p>这里不一定要在<code>httpd.conf</code>中直接添加<code>ProxyPass / balancer</code>。另一种实现方法是向<code>httpd.conf</code>中添加<code>Include conf/httpd-proxy.conf</code>，然后把<code>ProxyPass</code>写到<code>httpd-proxy.conf</code>中。</p>
 
 <p>下面详细介绍这段配置文件的含义：</p>
@@ -65,9 +64,8 @@ blockquote p { font-size: 14px; }
   <li><code>balancer://proxy</code>表示要配置负载均衡，<code>proxy</code>表示负载均衡名，也可以改成其他名字，比如说<code>redmine_cluster</code>。</li>
 </ul>
 
-<pre class="highlight shell"><code>BalancerMember http://192.168.6.37:6888/ 
-</code></pre>
-
+<div class="highlight"><pre class="highlight shell"><code>BalancerMember http://192.168.6.37:6888/ 
+</code></pre></div>
 <p>表示将<code>http://192.168.6.37:6888/</code>注册到负载均衡中。</p>
 
 <p>上述所示的负载均衡是轮询型负载均衡，除此之外，还有按权重分配负载均衡策略，权重请求响应负载均衡策略。其中，前者按照请求次数分配负载，后者则按照请求负载分配负载。举个例子讲：按照前者，如果有4次请求，3次被分配到机器A、1次被分配到机器B。按照后者，有1000bytes的请求，750bytes被分配给A、250bytes被分配给B。具体参考下面的链接</p>
@@ -96,7 +94,7 @@ var disqus_shortname = 'yjliu'; // required: replace example with your forum sho
   </div>
 
   <footer class="text-center">
-    &copy; <a href="http://yjliu.net/">Static Oneplus</a> 2010 - 2015 |
+    &copy; <a href="http://yjliu.net/">Static Oneplus</a> 2010 - 2017 |
     This site is built by <a href="http://middlemanapp.com/" target="_blank">Middleman</a> and
     <a href="http://getbootstrap.com/">bootstrap</a>.
   </footer>

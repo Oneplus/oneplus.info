@@ -85,7 +85,7 @@ blockquote p { font-size: 14px; }
 
 <p><strong>第三周</strong>，在完成了langrid的调研后，开始了这个任务。最早时，拍脑袋想了一组和电影有关的关键词</p>
 
-<pre class="highlight plaintext"><code>std::string keyWord[] = {
+<div class="highlight"><pre class="highlight plaintext"><code>std::string keyWord[] = {
 	"电影", "影视", "上映",
 	"科幻片", "喜剧片", "惊悚片", "故事片",
 	"动作片", "爱情片", "纪录片", "伦理片",
@@ -93,13 +93,11 @@ blockquote p { font-size: 14px; }
 	"好莱坞", "票房", "影院",
 	"-1"
 };
-</code></pre>
-
+</code></pre></div>
 <p>然后就在文本集中匹配这些关键词。如果一个文本中关键词出现的次数达到一个阈值就保留，否则丢弃。<span style="color:#999;">{最早在104G上实验时，这个阈值都设得很高，分别蒙了7、10、20、50，后面两组基本把整个生语料都过滤掉了，剩的都是…和更哗的}</span></p>
 
-<pre class="highlight plaintext"><code>最好看的韩国电影，韩国爱情片，喜剧片，伦理片，恐怖片，迅雷下载，BT下载，电影在线观看……
-</code></pre>
-
+<div class="highlight"><pre class="highlight plaintext"><code>最好看的韩国电影，韩国爱情片，喜剧片，伦理片，恐怖片，迅雷下载，BT下载，电影在线观看……
+</code></pre></div>
 <p>进行了这项预处理后，用<code>《(.*?)》</code>的正则表达式去匹配书名号。大致挖出来1.4W条。然后随机选了100组<span style="color:#999;">{这个样本选得很土鳖}</span>，人工地看了一下，准确率不到50%。然后就开始写bootstrapping.cpp了。</p>
 
 <p><strong>第五周</strong>，周一做报告。bootstrapping.cpp那时只能挖出一票<code>《(.*?)》的</code>、<code>《(.*?)》是</code>、<code>、(.*?)、</code>这样的模式。而且，从模式的评价上，大量包含功能词的无意义的patten的频率都很高，而像<code>电影《(.*?)》</code>这样很好的patten没有优势，甚至不能进入候选集。那时，车老师觉得是我在生成patten上存在问题。我就回去把patten的生成方式改了改，无果。</p>
@@ -161,7 +159,7 @@ var disqus_shortname = 'yjliu'; // required: replace example with your forum sho
   </div>
 
   <footer class="text-center">
-    &copy; <a href="http://yjliu.net/">Static Oneplus</a> 2010 - 2015 |
+    &copy; <a href="http://yjliu.net/">Static Oneplus</a> 2010 - 2017 |
     This site is built by <a href="http://middlemanapp.com/" target="_blank">Middleman</a> and
     <a href="http://getbootstrap.com/">bootstrap</a>.
   </footer>

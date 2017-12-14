@@ -46,28 +46,24 @@ blockquote p { font-size: 14px; }
 <div>
   <h3 id="sed">Sed批量去拓展名</h3>
 
-<pre class="highlight shell"><code>|- dev.gb.conll06.raw
+<div class="highlight"><pre class="highlight shell"><code>|- dev.gb.conll06.raw
 |- test.gb.conll06.raw
 |- train.gb.conll06.raw
-</code></pre>
-
+</code></pre></div>
 <p>想要去掉其中的后缀<code>.raw</code>，用个小脚本就可以搞定：</p>
 
-<pre class="highlight shell"><code><span class="k">for </span>file <span class="k">in</span> <span class="sb">`</span>ls<span class="sb">`</span>; <span class="k">do </span>mv <span class="nv">$file</span> <span class="sb">`</span><span class="nb">echo</span> <span class="nv">$file</span> | sed <span class="s1">'s/\.raw$//'</span><span class="sb">`</span>; <span class="k">done</span>
-</code></pre>
-
+<div class="highlight"><pre class="highlight shell"><code><span class="k">for </span>file <span class="k">in</span> <span class="sb">`</span><span class="nb">ls</span><span class="sb">`</span><span class="p">;</span> <span class="k">do </span>mv <span class="nv">$file</span> <span class="sb">`</span><span class="nb">echo</span> <span class="nv">$file</span> | sed <span class="s1">'s/\.raw$//'</span><span class="sb">`</span><span class="p">;</span> <span class="k">done</span>
+</code></pre></div>
 <h3 id="sed-1">Sed批量添加拓展名</h3>
 
-<pre class="highlight shell"><code>|- dev.gb.conll06
+<div class="highlight"><pre class="highlight shell"><code>|- dev.gb.conll06
 |- test.gb.conll06
 |- train.gb.conll06
-</code></pre>
-
+</code></pre></div>
 <p>同理，一个小脚本可以搞定：</p>
 
-<pre class="highlight shell"><code><span class="k">for </span>file <span class="k">in</span> <span class="sb">`</span>ls<span class="sb">`</span>; <span class="k">do </span>mv <span class="nv">$file</span> <span class="sb">`</span><span class="nb">echo</span> <span class="nv">$file</span> | sed <span class="s1">'s/$/\.raw//'</span><span class="sb">`</span>; <span class="k">done</span>
-</code></pre>
-
+<div class="highlight"><pre class="highlight shell"><code><span class="k">for </span>file <span class="k">in</span> <span class="sb">`</span><span class="nb">ls</span><span class="sb">`</span><span class="p">;</span> <span class="k">do </span>mv <span class="nv">$file</span> <span class="sb">`</span><span class="nb">echo</span> <span class="nv">$file</span> | sed <span class="s1">'s/$/\.raw//'</span><span class="sb">`</span><span class="p">;</span> <span class="k">done</span>
+</code></pre></div>
 </div>
 
 <div id="disqus_thread"></div>
@@ -86,7 +82,7 @@ var disqus_shortname = 'yjliu'; // required: replace example with your forum sho
   </div>
 
   <footer class="text-center">
-    &copy; <a href="http://yjliu.net/">Static Oneplus</a> 2010 - 2015 |
+    &copy; <a href="http://yjliu.net/">Static Oneplus</a> 2010 - 2017 |
     This site is built by <a href="http://middlemanapp.com/" target="_blank">Middleman</a> and
     <a href="http://getbootstrap.com/">bootstrap</a>.
   </footer>

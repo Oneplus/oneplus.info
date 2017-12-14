@@ -81,7 +81,7 @@ blockquote p { font-size: 14px; }
 
 <p>具体算法是维护两个栈，一个放操作数，一个放操作符。判断扫描到的字符。如果是左括号，直接放入操作符栈，如果是右括号，就一直弹栈到遇到左括号，如果是操作数，直接放入操作数栈。如果是操作符，要判断栈顶和扫描字符的优先级，后者高则把后者放到操作数栈，否则一直弹栈到后者高于前者。</p>
 
-<pre class="highlight cpp"><code><span class="cp">#include &lt;iostream&gt;
+<div class="highlight"><pre class="highlight cpp"><code><span class="cp">#include &lt;iostream&gt;
 #include &lt;cstring&gt;
 #include &lt;cmath&gt;
 #define PRINT(x) cout &lt;&lt;(#x)&lt;&lt;&amp;quot; &amp;quot;&lt;&lt;x&lt;&lt;endl;
@@ -130,8 +130,7 @@ blockquote p { font-size: 14px; }
     <span class="p">}</span>
     <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
-</code></pre>
-
+</code></pre></div>
 <h4 id="default-password">Default Password</h4>
 
 <p>判断输入字符串是不是”wujiawei”…</p>
@@ -149,7 +148,7 @@ blockquote p { font-size: 14px; }
 
 <p>加上negative单词情况后，就先将negative单词从从sensitive information中除去，如果它前面是第i个单词就在一个数组neg中把neg[i]标记为negative单词。再加一个转移方程dp[i][j]=0 (neg[j]与internet information的第i个单词相同)，即出现了internet information中出现了negative单词，sensitive information的前j个单词组成的所有子序列不可能最后转移到dp[n][m]，故将dp[i][j]置0。最后dp[n][m]为答案，n是internet information中单词数，m是sensitive information中非负单词数。</p>
 
-<pre class="highlight cpp"><code><span class="cp">#include &lt;vector&gt;
+<div class="highlight"><pre class="highlight cpp"><code><span class="cp">#include &lt;vector&gt;
 #include &lt;list&gt;
 #include &lt;map&gt;
 #include &lt;set&gt;
@@ -191,7 +190,7 @@ blockquote p { font-size: 14px; }
        <span class="k">return</span> <span class="n">mp</span><span class="p">[</span><span class="n">s</span><span class="p">]</span><span class="o">=</span><span class="n">n</span><span class="p">;</span>
 <span class="p">}</span>
 
-<span class="n">bool</span> <span class="nf">isc</span><span class="p">(</span><span class="kt">char</span> <span class="n">c</span><span class="p">)</span>
+<span class="kt">bool</span> <span class="nf">isc</span><span class="p">(</span><span class="kt">char</span> <span class="n">c</span><span class="p">)</span>
 <span class="p">{</span>
     <span class="k">if</span><span class="p">(</span><span class="n">c</span><span class="o">&gt;=</span><span class="sc">'A'</span><span class="o">&amp;&amp;</span><span class="n">c</span><span class="o">&lt;=</span><span class="sc">'Z'</span><span class="p">)</span> <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
     <span class="k">if</span><span class="p">(</span><span class="n">c</span><span class="o">&gt;=</span><span class="sc">'a'</span><span class="o">&amp;&amp;</span><span class="n">c</span><span class="o">&lt;=</span><span class="sc">'z'</span><span class="p">)</span> <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
@@ -254,8 +253,7 @@ blockquote p { font-size: 14px; }
     <span class="p">}</span>
     <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
-</code></pre>
-
+</code></pre></div>
 <h4 id="the-final-battle-of-daydream">The Final Battle of Daydream</h4>
 
 <p><strong>[By jerrybond]</strong>本题很容易想到的解法是，申请一个大小为300,000的布尔数组，用来标记哪些数字出现过，哪些没有，这样很容易就能找到丢失的两个数字了。时间复杂度O(n)，空间复杂度也是O(n)。但遗憾的是，在1024K 的内存限制下，这种做法是行不通的。</p>
@@ -270,7 +268,7 @@ blockquote p { font-size: 14px; }
 
 <p>剩下的就是解一元二次方程的事情了。</p>
 
-<pre class="highlight cpp"><code><span class="cp">#include &lt;cstdio&gt;
+<div class="highlight"><pre class="highlight cpp"><code><span class="cp">#include &lt;cstdio&gt;
 #include &lt;cstring&gt;
 #include &lt;cmath&gt;
 #define sqr(x) ((x)*(x))
@@ -295,8 +293,7 @@ blockquote p { font-size: 14px; }
     <span class="p">}</span>
     <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
-</code></pre>
-
+</code></pre></div>
 <h4 id="costume-party">Costume Party</h4>
 
 <p><strong>[By chenyuanqin]</strong>很明显，可以抽象成一个图论模型：每个女生当成一个点，所有认识的人之间连接一条边。每一种服装就是一种颜色。那么，就是用m种颜色给这个图点染色，每条边的两个顶点颜色不能一样，计算染色方案。</p>
@@ -306,7 +303,7 @@ blockquote p { font-size: 14px; }
 
 <p>不断进行2操作，那么G将会变成一个个的完全图，然后分别用1来计算即可。</p>
 
-<pre class="highlight cpp"><code><span class="cp">#include &lt;iostream&gt;
+<div class="highlight"><pre class="highlight cpp"><code><span class="cp">#include &lt;iostream&gt;
 #include &lt;stdio.h&gt;
 #include &lt;stdlib.h&gt;
 #include &lt;algorithm&gt;
@@ -316,8 +313,8 @@ blockquote p { font-size: 14px; }
 </span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
 <span class="cp">#define mod 9999997
 </span><span class="kt">int</span> <span class="n">n</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">k</span> <span class="p">;</span>
-<span class="n">bool</span> <span class="n">adj</span><span class="p">[</span> <span class="mi">11</span> <span class="p">][</span> <span class="mi">11</span> <span class="p">];</span>
-<span class="n">bool</span> <span class="n">del</span><span class="p">[</span> <span class="mi">11</span> <span class="p">];</span>
+<span class="kt">bool</span> <span class="n">adj</span><span class="p">[</span> <span class="mi">11</span> <span class="p">][</span> <span class="mi">11</span> <span class="p">];</span>
+<span class="kt">bool</span> <span class="n">del</span><span class="p">[</span> <span class="mi">11</span> <span class="p">];</span>
 <span class="kt">int</span> <span class="n">a</span><span class="p">[</span> <span class="mi">100001</span> <span class="p">][</span> <span class="mi">11</span> <span class="p">];</span>
 <span class="kt">void</span> <span class="nf">find_not</span><span class="p">(</span> <span class="kt">int</span><span class="o">*</span> <span class="n">a</span><span class="p">,</span> <span class="kt">int</span><span class="o">*</span> <span class="n">b</span> <span class="p">)</span>
 <span class="p">{</span>
@@ -347,7 +344,7 @@ blockquote p { font-size: 14px; }
   <span class="c1">//  ttt++;
 </span>   <span class="c1">// if ( ttt % 10000 == 0 )
 </span>   <span class="c1">// printf( &amp;quot;%d\n&amp;quot;, ttt );
-</span>    <span class="n">bool</span> <span class="n">temp</span><span class="p">[</span> <span class="mi">101</span> <span class="p">];</span>
+</span>    <span class="kt">bool</span> <span class="n">temp</span><span class="p">[</span> <span class="mi">101</span> <span class="p">];</span>
     <span class="n">adj</span><span class="p">[</span> <span class="n">v</span> <span class="p">][</span> <span class="n">u</span> <span class="p">]</span> <span class="o">=</span> <span class="n">adj</span><span class="p">[</span> <span class="n">u</span> <span class="p">][</span> <span class="n">v</span> <span class="p">]</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
     <span class="n">find_not</span><span class="p">(</span> <span class="o">&amp;</span><span class="n">a</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">b</span> <span class="p">);</span>
     <span class="n">res</span> <span class="o">+=</span> <span class="p">(</span> <span class="n">a</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span> <span class="o">?</span> <span class="n">getNum</span><span class="p">(</span> <span class="n">num</span> <span class="p">)</span> <span class="o">:</span> <span class="n">dfs</span><span class="p">(</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">num</span> <span class="p">)</span> <span class="p">);</span>
@@ -403,11 +400,10 @@ blockquote p { font-size: 14px; }
     <span class="p">}</span>
     <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
-</code></pre>
-
+</code></pre></div>
 <p>短小暴力赤裸版见下。</p>
 
-<pre class="highlight cpp"><code><span class="cp">#include &lt;iostream&gt;
+<div class="highlight"><pre class="highlight cpp"><code><span class="cp">#include &lt;iostream&gt;
 #include &lt;vector&gt;
 #include &lt;queue&gt;
 #include &lt;cstring&gt;
@@ -423,7 +419,7 @@ blockquote p { font-size: 14px; }
         <span class="k">return</span><span class="p">;</span>
     <span class="p">}</span>
     <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">kind</span><span class="p">;</span> <span class="n">i</span> <span class="o">++</span> <span class="p">)</span> <span class="p">{</span>
-        <span class="n">clr</span><span class="p">[</span><span class="n">now</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span> <span class="n">bool</span> <span class="n">flag</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+        <span class="n">clr</span><span class="p">[</span><span class="n">now</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span> <span class="kt">bool</span> <span class="n">flag</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
         <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">j</span> <span class="o">++</span><span class="p">)</span> <span class="k">if</span><span class="p">(</span><span class="n">G</span><span class="p">[</span><span class="n">now</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">&amp;&amp;</span> <span class="n">clr</span><span class="p">[</span><span class="n">now</span><span class="p">]</span> <span class="o">==</span> <span class="n">clr</span><span class="p">[</span><span class="n">j</span><span class="p">])</span> <span class="p">{</span><span class="n">flag</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span> <span class="k">break</span><span class="p">;}</span>
         <span class="k">if</span><span class="p">(</span><span class="n">flag</span><span class="p">)</span> <span class="n">dfs</span><span class="p">(</span><span class="n">now</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">kind</span><span class="p">);</span>
         <span class="n">clr</span><span class="p">[</span><span class="n">now</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
@@ -462,8 +458,7 @@ blockquote p { font-size: 14px; }
     <span class="p">}</span>
     <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
-</code></pre>
-
+</code></pre></div>
 <h4 id="go-home">Go Home</h4>
 
 <p><strong>[By icek]</strong>此题本意是考察堆优化dijkstra变形，事实上用动态规划，拆点最短路什么的都可以做。</p>
@@ -472,7 +467,7 @@ blockquote p { font-size: 14px; }
 
 <p>因为堆优化dijkstra中以时间最小来维护堆，所以当要对终点做拓展的时候直接退出，就可以保证所用时间最小，输出最小值即可。</p>
 
-<pre class="highlight cpp"><code><span class="cp">#include &lt;iostream&gt;
+<div class="highlight"><pre class="highlight cpp"><code><span class="cp">#include &lt;iostream&gt;
 #include &lt;cstdio&gt;
 #include &lt;algorithm&gt;
 #include &lt;cstring&gt;
@@ -501,7 +496,7 @@ blockquote p { font-size: 14px; }
 <span class="k">struct</span> <span class="n">node</span>
 <span class="p">{</span>
     <span class="kt">int</span> <span class="n">w</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">t</span><span class="p">;</span>
-    <span class="n">bool</span> <span class="k">operator</span> <span class="o">&lt;</span> <span class="p">(</span> <span class="k">const</span> <span class="n">node</span> <span class="o">&amp;</span><span class="n">a</span> <span class="p">)</span> <span class="k">const</span>
+    <span class="kt">bool</span> <span class="k">operator</span> <span class="o">&lt;</span> <span class="p">(</span> <span class="k">const</span> <span class="n">node</span> <span class="o">&amp;</span><span class="n">a</span> <span class="p">)</span> <span class="k">const</span>
     <span class="p">{</span>
         <span class="k">return</span> <span class="n">t</span> <span class="o">&gt;</span> <span class="n">a</span><span class="p">.</span><span class="n">t</span><span class="p">;</span>
     <span class="p">}</span>
@@ -510,10 +505,10 @@ blockquote p { font-size: 14px; }
 <span class="kt">int</span> <span class="n">n</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">C</span><span class="p">;</span>
 
 <span class="kt">int</span> <span class="n">dis</span><span class="p">[</span><span class="n">N</span><span class="p">][</span><span class="n">N</span><span class="p">];</span>
-<span class="n">bool</span> <span class="n">used</span><span class="p">[</span><span class="n">N</span><span class="p">][</span><span class="n">N</span><span class="p">];</span>
+<span class="kt">bool</span> <span class="n">used</span><span class="p">[</span><span class="n">N</span><span class="p">][</span><span class="n">N</span><span class="p">];</span>
 <span class="n">node</span> <span class="n">queue</span><span class="p">[</span><span class="n">N</span> <span class="o">*</span> <span class="n">N</span><span class="p">];</span>
 
-<span class="n">bool</span> <span class="nf">relax</span><span class="p">(</span><span class="kt">int</span> <span class="n">u</span><span class="p">,</span> <span class="kt">int</span> <span class="n">w</span><span class="p">,</span> <span class="kt">int</span> <span class="n">v</span><span class="p">,</span> <span class="kt">int</span> <span class="n">c</span><span class="p">,</span> <span class="kt">int</span> <span class="n">t</span><span class="p">)</span>
+<span class="kt">bool</span> <span class="nf">relax</span><span class="p">(</span><span class="kt">int</span> <span class="n">u</span><span class="p">,</span> <span class="kt">int</span> <span class="n">w</span><span class="p">,</span> <span class="kt">int</span> <span class="n">v</span><span class="p">,</span> <span class="kt">int</span> <span class="n">c</span><span class="p">,</span> <span class="kt">int</span> <span class="n">t</span><span class="p">)</span>
 <span class="p">{</span>
     <span class="k">if</span> <span class="p">(</span><span class="n">dis</span><span class="p">[</span><span class="n">u</span><span class="p">][</span><span class="n">w</span><span class="p">]</span> <span class="o">+</span> <span class="n">t</span> <span class="o">&lt;</span> <span class="n">dis</span><span class="p">[</span><span class="n">v</span><span class="p">][</span><span class="n">w</span> <span class="o">+</span> <span class="n">c</span><span class="p">])</span>
     <span class="p">{</span>
@@ -597,11 +592,10 @@ blockquote p { font-size: 14px; }
     <span class="p">}</span>
     <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
-</code></pre>
-
+</code></pre></div>
 <p>这个题我是用搜索做的，写了一个短小版，见下。</p>
 
-<pre class="highlight cpp"><code><span class="cp">#include &lt;iostream&gt;
+<div class="highlight"><pre class="highlight cpp"><code><span class="cp">#include &lt;iostream&gt;
 #include &lt;vector&gt;
 #include &lt;queue&gt;
 #include &lt;cstring&gt;
@@ -617,7 +611,7 @@ blockquote p { font-size: 14px; }
     <span class="kt">int</span> <span class="n">v</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">c</span><span class="p">;</span>
     <span class="n">state</span><span class="p">()</span> <span class="p">{}</span>
     <span class="n">state</span><span class="p">(</span><span class="kt">int</span> <span class="n">_v</span><span class="p">,</span> <span class="kt">int</span> <span class="n">_w</span><span class="p">,</span> <span class="kt">int</span> <span class="n">_c</span><span class="p">)</span><span class="o">:</span><span class="n">v</span><span class="p">(</span><span class="n">_v</span><span class="p">),</span><span class="n">w</span><span class="p">(</span><span class="n">_w</span><span class="p">),</span><span class="n">c</span><span class="p">(</span><span class="n">_c</span><span class="p">)</span> <span class="p">{}</span>
-    <span class="n">bool</span> <span class="k">operator</span> <span class="o">&lt;</span> <span class="p">(</span><span class="k">const</span> <span class="n">state</span><span class="o">&amp;</span> <span class="n">t</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+    <span class="kt">bool</span> <span class="k">operator</span> <span class="o">&lt;</span> <span class="p">(</span><span class="k">const</span> <span class="n">state</span><span class="o">&amp;</span> <span class="n">t</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
         <span class="k">if</span><span class="p">(</span><span class="n">w</span> <span class="o">!=</span> <span class="n">t</span><span class="p">.</span><span class="n">w</span><span class="p">)</span> <span class="k">return</span> <span class="n">w</span> <span class="o">&gt;</span> <span class="n">t</span><span class="p">.</span><span class="n">w</span><span class="p">;</span> <span class="k">return</span> <span class="n">v</span> <span class="o">&gt;</span> <span class="n">t</span><span class="p">.</span><span class="n">v</span><span class="p">;</span> <span class="p">}</span>
 <span class="p">};</span>
 <span class="n">vector</span><span class="o">&lt;</span><span class="n">node</span><span class="o">&gt;</span> <span class="n">g</span><span class="p">[</span><span class="n">NN</span><span class="p">];</span>
@@ -656,8 +650,7 @@ blockquote p { font-size: 14px; }
     <span class="p">}</span>
     <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
-</code></pre>
-<p>#### Alex’s Problem</p>
+</code></pre></div><p>#### Alex’s Problem</p>
 
 <p><strong>[By Alex]</strong>根据所给的三个点确定平面，然后求出此平面与正方体的12条棱的交点（平行的不算），保留坐标三个值均在[-100,100]的交点，去掉重复的后就得到了需要求面积的多边形的全部顶点。此时可以根据顶点个数和位置判断界面类型，截面可能是三角形，平行四边形，梯形，五边形和六边形，然后再去算面积。这里还有一种更为简单的方法，需要用到以下定理：</p>
 
@@ -671,7 +664,7 @@ blockquote p { font-size: 14px; }
 
 <p>我们已经得到了所有的顶点，只需要把它们按多边形顺序顺时针或逆时针排序，而这件事也是很简单的，因为对于任何一个点，它的下一个点是跟它共面的。排好后按照上面的公式很容易就能求出面积了。</p>
 
-<pre class="highlight cpp"><code><span class="cp">#include &lt;cstdlib&gt;
+<div class="highlight"><pre class="highlight cpp"><code><span class="cp">#include &lt;cstdlib&gt;
 #include &lt;cstring&gt;
 #include &lt;cstdio&gt;
 #include &lt;cmath&gt;
@@ -691,7 +684,7 @@ blockquote p { font-size: 14px; }
         <span class="n">x</span> <span class="o">=</span> <span class="n">a</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">b</span><span class="p">,</span> <span class="n">z</span> <span class="o">=</span> <span class="n">c</span><span class="p">;</span>
     <span class="p">}</span>
 
-    <span class="n">bool</span> <span class="k">operator</span><span class="o">&lt;</span><span class="p">(</span><span class="k">const</span> <span class="n">point3</span> <span class="n">p</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+    <span class="kt">bool</span> <span class="k">operator</span><span class="o">&lt;</span><span class="p">(</span><span class="k">const</span> <span class="n">point3</span> <span class="n">p</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
         <span class="k">if</span> <span class="p">(</span><span class="n">fabs</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="n">x</span> <span class="o">-</span> <span class="n">x</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">eps</span><span class="p">)</span>
             <span class="k">return</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="n">p</span><span class="p">.</span><span class="n">x</span><span class="p">;</span>
         <span class="k">if</span> <span class="p">(</span><span class="n">fabs</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="n">y</span> <span class="o">-</span> <span class="n">y</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">eps</span><span class="p">)</span>
@@ -701,7 +694,7 @@ blockquote p { font-size: 14px; }
         <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
     <span class="p">}</span>
 
-    <span class="n">bool</span> <span class="k">operator</span><span class="o">==</span><span class="p">(</span><span class="k">const</span> <span class="n">point3</span> <span class="n">p</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+    <span class="kt">bool</span> <span class="k">operator</span><span class="o">==</span><span class="p">(</span><span class="k">const</span> <span class="n">point3</span> <span class="n">p</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
         <span class="k">return</span> <span class="n">fabs</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="n">x</span> <span class="o">-</span> <span class="n">x</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">eps</span> <span class="o">&amp;&amp;</span> <span class="n">fabs</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="n">y</span> <span class="o">-</span> <span class="n">y</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">eps</span> <span class="o">&amp;&amp;</span> <span class="n">fabs</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="n">z</span> <span class="o">-</span> <span class="n">z</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">eps</span><span class="p">;</span>
     <span class="p">}</span>
 <span class="p">};</span>
@@ -760,7 +753,7 @@ blockquote p { font-size: 14px; }
     <span class="k">return</span> <span class="n">xmult</span><span class="p">(</span><span class="n">subt</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">a</span><span class="p">,</span> <span class="n">s</span><span class="p">.</span><span class="n">b</span><span class="p">),</span> <span class="n">subt</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">b</span><span class="p">,</span> <span class="n">s</span><span class="p">.</span><span class="n">c</span><span class="p">));</span>
 <span class="p">}</span>
 
-<span class="n">bool</span> <span class="nf">parallel</span><span class="p">(</span><span class="n">line3</span> <span class="n">l</span><span class="p">,</span> <span class="n">plane3</span> <span class="n">s</span><span class="p">)</span> <span class="p">{</span>
+<span class="kt">bool</span> <span class="nf">parallel</span><span class="p">(</span><span class="n">line3</span> <span class="n">l</span><span class="p">,</span> <span class="n">plane3</span> <span class="n">s</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">return</span> <span class="n">zero</span><span class="p">(</span><span class="n">dmult</span><span class="p">(</span><span class="n">subt</span><span class="p">(</span><span class="n">l</span><span class="p">.</span><span class="n">a</span><span class="p">,</span> <span class="n">l</span><span class="p">.</span><span class="n">b</span><span class="p">),</span> <span class="n">pvec</span><span class="p">(</span><span class="n">s</span><span class="p">)));</span>
 <span class="p">}</span>
 
@@ -857,8 +850,7 @@ blockquote p { font-size: 14px; }
     <span class="p">}</span>
     <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
-</code></pre>
-
+</code></pre></div>
 <h4 id="zhou-yi-ii">Zhou Yi II</h4>
 
 <p>系列题，可以参考<a href="http://acm.hit.edu.cn/judge/show.php?Proid=2989">这里</a></p>
@@ -890,7 +882,7 @@ var disqus_shortname = 'yjliu'; // required: replace example with your forum sho
   </div>
 
   <footer class="text-center">
-    &copy; <a href="http://yjliu.net/">Static Oneplus</a> 2010 - 2015 |
+    &copy; <a href="http://yjliu.net/">Static Oneplus</a> 2010 - 2017 |
     This site is built by <a href="http://middlemanapp.com/" target="_blank">Middleman</a> and
     <a href="http://getbootstrap.com/">bootstrap</a>.
   </footer>

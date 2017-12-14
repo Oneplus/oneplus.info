@@ -117,11 +117,10 @@ o。保存之后，站点会暂时坏掉。不过把wordpress相关的文件移�
 
 <p>这里要用到前面说过的比较麻烦的<code>mod_rewrite</code>。做法是在web根目录下的.htaccess中添加重写条件和重写规则。现在我对feed的重写规则是这样的</p>
 
-<pre class="highlight plaintext"><code>RewriteCond %{HTTP_HOST} ^blog.oneplus.info$
+<div class="highlight"><pre class="highlight plaintext"><code>RewriteCond %{HTTP_HOST} ^blog.oneplus.info$
 RewriteCond %{REQUEST_URI} ^/feed$ [NC]
 RewriteRule .* http://blog.oneplus.info/feed [NC,L,R=301]
-</code></pre>
-<p>它的含义是把所有主机名为blog.oneplus.info，URI为/feed的请求都重定向到blog.oneplus.info/feed下。</p>
+</code></pre></div><p>它的含义是把所有主机名为blog.oneplus.info，URI为/feed的请求都重定向到blog.oneplus.info/feed下。</p>
 
 <p>添加完重写规则后可以通过访问blog.oneplus.info/feed来测试一下重写规则是否生效。
 还有一些其他网站提供mod_rewrite的测试，比如说<a href="http://martinmelin.se/rewrite-rule-tester/">这里</a>，重定向失败的话可以把.htaccess投到这个网站中，找些样例测试一下。</p>
@@ -142,7 +141,7 @@ RewriteRule .* http://blog.oneplus.info/feed [NC,L,R=301]
 
 <p>起初，我想了好久如何在query.php上做cache，后来才发现，最应该做cache的是主页这一端。所以在主页中添加了下面的代码：</p>
 
-<pre class="highlight plaintext"><code>$cache = new Cache(3600, &amp;quot;some_path&amp;quot;);
+<div class="highlight"><pre class="highlight plaintext"><code>$cache = new Cache(3600, &amp;quot;some_path&amp;quot;);
 
 $key = &amp;quot;last_post&amp;quot;;
 $values = $cache-&amp;gt;get( $key );
@@ -162,8 +161,7 @@ if ($values == false) {
 } else {
 	echo $values;
 }
-</code></pre>
-
+</code></pre></div>
 <p>对于主页的请求，先去看看cache过没过期，没过期就直接返回cache的结果，这样可以减少不少网络传输。其中，cache类我是参考<a href="http://www.mangguo.org/the-simple-php-cache-class/">这篇</a>的。</p>
 
 <h3 id="section-1">总结</h3>
@@ -191,7 +189,7 @@ var disqus_shortname = 'yjliu'; // required: replace example with your forum sho
   </div>
 
   <footer class="text-center">
-    &copy; <a href="http://yjliu.net/">Static Oneplus</a> 2010 - 2015 |
+    &copy; <a href="http://yjliu.net/">Static Oneplus</a> 2010 - 2017 |
     This site is built by <a href="http://middlemanapp.com/" target="_blank">Middleman</a> and
     <a href="http://getbootstrap.com/">bootstrap</a>.
   </footer>

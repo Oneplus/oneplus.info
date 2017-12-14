@@ -47,34 +47,28 @@ blockquote p { font-size: 14px; }
 <div>
   <h3 id="section">匹配不符合模式的字符串</h3>
 
-<pre class="highlight shell"><code>grep -v <span class="s2">"pattern"</span> file
-</code></pre>
-
+<div class="highlight"><pre class="highlight shell"><code><span class="nb">grep</span> <span class="nt">-v</span> <span class="s2">"pattern"</span> file
+</code></pre></div>
 <h3 id="t">模板中含有\t</h3>
 
-<pre class="highlight shell"><code>grep -P <span class="s2">"^</span><span class="se">\t</span><span class="s2">"</span> file
-</code></pre>
-
+<div class="highlight"><pre class="highlight shell"><code><span class="nb">grep</span> <span class="nt">-P</span> <span class="s2">"^</span><span class="se">\t</span><span class="s2">"</span> file
+</code></pre></div>
 <h3 id="btxt-atxt">两文件差集（B.txt-A.txt）</h3>
 
-<pre class="highlight shell"><code>grep -F -v -f A.txt B.txt
-</code></pre>
-
+<div class="highlight"><pre class="highlight shell"><code><span class="nb">grep</span> <span class="nt">-F</span> <span class="nt">-v</span> <span class="nt">-f</span> A.txt B.txt
+</code></pre></div>
 <h3 id="atxtbtxt">用A.txt文件中的词表查B.txt</h3>
 
-<pre class="highlight plaintext"><code>grep -f A.txt B.txt
-</code></pre>
-
+<div class="highlight"><pre class="highlight plaintext"><code>grep -f A.txt B.txt
+</code></pre></div>
 <p>与Pipe配合</p>
 
-<pre class="highlight plaintext"><code>cat B.txt | grep -f A.txt
-</code></pre>
-
+<div class="highlight"><pre class="highlight plaintext"><code>cat B.txt | grep -f A.txt
+</code></pre></div>
 <p>还有</p>
 
-<pre class="highlight plaintext"><code>cat A.txt | grep -f - B.txt
-</code></pre>
-
+<div class="highlight"><pre class="highlight plaintext"><code>cat A.txt | grep -f - B.txt
+</code></pre></div>
 <h3 id="section-1">参考</h3>
 
 <ul>
@@ -102,7 +96,7 @@ var disqus_shortname = 'yjliu'; // required: replace example with your forum sho
   </div>
 
   <footer class="text-center">
-    &copy; <a href="http://yjliu.net/">Static Oneplus</a> 2010 - 2015 |
+    &copy; <a href="http://yjliu.net/">Static Oneplus</a> 2010 - 2017 |
     This site is built by <a href="http://middlemanapp.com/" target="_blank">Middleman</a> and
     <a href="http://getbootstrap.com/">bootstrap</a>.
   </footer>

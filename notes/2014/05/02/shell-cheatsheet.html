@@ -54,26 +54,23 @@ blockquote p { font-size: 14px; }
 
 <p>Input example</p>
 
-<pre class="highlight plaintext"><code>a b  c   d
-</code></pre>
-
+<div class="highlight"><pre class="highlight plaintext"><code>a b  c   d
+</code></pre></div>
 <p>Output example</p>
 
-<pre class="highlight plaintext"><code>a
+<div class="highlight"><pre class="highlight plaintext"><code>a
 b
 c
 d
-</code></pre>
-
+</code></pre></div>
 <h4 id="summary">Summary</h4>
 
 <p><code>sed</code> is the best solution.</p>
 
 <h4 id="solution">Solution</h4>
 
-<pre class="highlight plaintext"><code>sed -r -e 's/[[:space:]]/\n/g'
-</code></pre>
-
+<div class="highlight"><pre class="highlight plaintext"><code>sed -r -e 's/[[:space:]]/\n/g'
+</code></pre></div>
 <h3 id="sort-the-unordered-word-list-with-duplication-by-frequency">2. Sort the unordered word list (with duplication) by frequency</h3>
 
 <h4 id="summary-1">Summary</h4>
@@ -82,9 +79,8 @@ d
 
 <h4 id="solution-1">Solution</h4>
 
-<pre class="highlight plaintext"><code>sort | uniq -c | sort -rn
-</code></pre>
-
+<div class="highlight"><pre class="highlight plaintext"><code>sort | uniq -c | sort -rn
+</code></pre></div>
 <h3 id="awk-print-line-without-first-column">3. Awk print line without first column</h3>
 
 <h4 id="summary-2">Summary</h4>
@@ -93,9 +89,8 @@ d
 
 <h4 id="solution-2">Solution</h4>
 
-<pre class="highlight plaintext"><code>awk '{$1=""; print $0}'
-</code></pre>
-
+<div class="highlight"><pre class="highlight plaintext"><code>awk '{$1=""; print $0}'
+</code></pre></div>
 <h3 id="show-the-longest-line-in-the-file">4. Show the longest line in the file</h3>
 
 <h4 id="summary-3">Summary</h4>
@@ -104,18 +99,16 @@ d
 
 <h4 id="solution-3">Solution</h4>
 
-<pre class="highlight plaintext"><code>awk '{print $0" "length}' | sort -k2 -nr | head -1
-</code></pre>
-
+<div class="highlight"><pre class="highlight plaintext"><code>awk '{print $0" "length}' | sort -k2 -nr | head -1
+</code></pre></div>
 <h3 id="ignore-line-that-match-some-pattern">5. Ignore line that match some pattern</h3>
 
 <h4 id="summary-and-solution">Summary and Solution</h4>
 
 <p>Using</p>
 
-<pre class="highlight plaintext"><code>grep -v
-</code></pre>
-
+<div class="highlight"><pre class="highlight plaintext"><code>grep -v
+</code></pre></div>
 <h3 id="batchly-replace-namespace">6. Batchly replace namespace</h3>
 
 <h4 id="summary-4">Summary</h4>
@@ -124,9 +117,8 @@ d
 
 <h4 id="solution-4">Solution</h4>
 
-<pre class="highlight plaintext"><code>for f in `find ./src -type f`; do sed -i 's/oldnamespace/newnamespace' $f; done
-</code></pre>
-
+<div class="highlight"><pre class="highlight plaintext"><code>for f in `find ./src -type f`; do sed -i 's/oldnamespace/newnamespace' $f; done
+</code></pre></div>
 <h3 id="generate-02--24-sequence">7. Generate 02, …, 24 sequence</h3>
 
 <h4 id="summary-5">Summary</h4>
@@ -135,25 +127,22 @@ d
 
 <h4 id="solution-5">Solution</h4>
 
-<pre class="highlight plaintext"><code>perl -e 'for{$i=2;$i&lt;=24;$i++}{printf("%02d\n", $i)}'
-</code></pre>
-
+<div class="highlight"><pre class="highlight plaintext"><code>perl -e 'for{$i=2;$i&lt;=24;$i++}{printf("%02d\n", $i)}'
+</code></pre></div>
 <h3 id="command-line-calculator">8. Command line calculator</h3>
 
 <h4 id="awk-solution">Awk Solution</h4>
 
-<pre class="highlight plaintext"><code>awk '{print 1/10}'
-</code></pre>
-
+<div class="highlight"><pre class="highlight plaintext"><code>awk '{print 1/10}'
+</code></pre></div>
 <p>and additional enter is needed</p>
 
 <h4 id="perl-solution">Perl Solution</h4>
 
 <p>More flexiable (with formatting).</p>
 
-<pre class="highlight plaintext"><code>perl -e 'printf("%f\n", 1./10);'
-</code></pre>
-
+<div class="highlight"><pre class="highlight plaintext"><code>perl -e 'printf("%f\n", 1./10);'
+</code></pre></div>
 </div>
 
 <div id="disqus_thread"></div>
@@ -172,7 +161,7 @@ var disqus_shortname = 'yjliu'; // required: replace example with your forum sho
   </div>
 
   <footer class="text-center">
-    &copy; <a href="http://yjliu.net/">Static Oneplus</a> 2010 - 2015 |
+    &copy; <a href="http://yjliu.net/">Static Oneplus</a> 2010 - 2017 |
     This site is built by <a href="http://middlemanapp.com/" target="_blank">Middleman</a> and
     <a href="http://getbootstrap.com/">bootstrap</a>.
   </footer>
